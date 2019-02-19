@@ -829,15 +829,25 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new person |
+|`* * *` |user |create new flashcard folders | 
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |user |add flashcards to folders |
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |user |delete flashcards |remove flashcards I no longer need
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |user |view my flashcards | 
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |user |test myself on each flashcard folder |know which topics i need more work on. 
+
+
+
+|`* *` |As a user with multiple friends using different devices |import and export flashcards |share my content with everyone.
+
+|`* *` |As a user with multiple flashcards |search for individual flashcards or folders|easier time finding what I need.
+
+|`* *` |user |sort flashcards by score |know which questions i have more trouble answering. 
+
+|`*` |user |different template designs for my flashcards |have a nicer experience revising 
 |=======================================================================
 
 _{More to be added}_
