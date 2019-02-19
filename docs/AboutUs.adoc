@@ -13,7 +13,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Au Liang Jun
 image::damithc.jpg[width="150", align="left"]
-{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/afterdusk[github]] [<<johndoe#, portfolio>>]
 
 Role: Project Advisor
 
@@ -21,7 +21,7 @@ Role: Project Advisor
 
 === Donald Lee Qian Siang
 image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/dlqs[github]] [<<johndoe#, portfolio>>]
 
 Role: Team Lead +
 Responsibilities: UI
@@ -30,7 +30,7 @@ Responsibilities: UI
 
 === Kerryn Eer
 image::yijinl.jpg[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/KerrynEer[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Data
@@ -39,7 +39,7 @@ Responsibilities: Data
 
 === Matthew Low Min De
 image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/mmdlow[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Dev Ops + Threading
@@ -48,7 +48,7 @@ Responsibilities: Dev Ops + Threading
 
 === Ong Yi Chong
 image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/yichong96[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
 Responsibilities: UI
