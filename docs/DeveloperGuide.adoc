@@ -829,15 +829,15 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |create new flashcard folders | 
+|`* * *` |user |create new flashcard folders |
 
 |`* * *` |user |add flashcards to folders |
 
 |`* * *` |user |delete flashcards |remove flashcards I no longer need
 
-|`* * *` |user |view my flashcards | 
+|`* * *` |user |view my flashcards |
 
-|`* * *` |user |test myself on each flashcard folder |know which topics i need more work on. 
+|`* * *` |user |test myself on each flashcard folder |know which topics i need more work on.
 
 
 
@@ -845,9 +845,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |As a user with multiple flashcards |search for individual flashcards or folders|easier time finding what I need.
 
-|`* *` |user |sort flashcards by score |know which questions i have more trouble answering. 
+|`* *` |user |sort flashcards by score |know which questions i have more trouble answering.
 
-|`*` |user |different template designs for my flashcards |have a nicer experience revising 
+|`*` |user |different template designs for my flashcards |have a nicer experience revising
 |=======================================================================
 
 _{More to be added}_
@@ -870,11 +870,11 @@ _{More to be added}_
 6. Repeat steps 2-4 until all the flashcards in the folder are tested
 +
 Use case ends
-   
+
 *Extensions*
 
 [none]
-* 3a. Student doesn’t know the answer and wants to see the answer without attempting 
+* 3a. Student doesn’t know the answer and wants to see the answer without attempting
 [none]
 ** 3a1. Student uses the reveal command
 ** 3a2. Answer is displayed to the student
