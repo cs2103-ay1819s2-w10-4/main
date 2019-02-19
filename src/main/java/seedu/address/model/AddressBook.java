@@ -126,20 +126,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void deleteTagFromEveryone(Tag tag){
         persons.forEach(person -> deleteTagFromPerson(tag, person));
     }
-    
+
     /**
      * Deletes tag from Person
      */
     private void deleteTagFromPerson(Tag tag, Person person) {
         Set<Tag> updatedTags = new HashSet<>(person.getTags());
-        
+
         if (updatedTags.contains(tag)) {
             updatedTags.remove(tag);
             Person updatedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), updatedTags);
             setPerson(person, updatedPerson);
         }
     }
-    
 
     //// util methods
 

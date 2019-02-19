@@ -128,7 +128,7 @@ public interface Model {
      * Sets the selected person in the filtered person list.
      */
     void setSelectedPerson(Person person);
-    
+
     /**
      * Deletes the specified tag from everyone in the addressbook
      */

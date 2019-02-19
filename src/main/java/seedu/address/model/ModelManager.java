@@ -237,7 +237,5 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons)
                 && Objects.equals(selectedPerson.get(), other.selectedPerson.get());
     }
-    
-
 
 }
