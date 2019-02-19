@@ -855,35 +855,35 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is `Know-It-All` and the *Actor* is the `Student`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== UC01 Test flashcards
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Student begins a test session
+2. System presents the question on the lowest-performing flashcard first
+3. Student inputs his/her answer
+4. System indicates whether student’s answer is correct or wrong and shows the answer of the flashcard
+5. Student navigates to next flashcard
+6. Repeat steps 2-4 until all the flashcards in the folder are tested
 +
-Use case ends.
-
+Use case ends
+   
 *Extensions*
 
 [none]
-* 2a. The list is empty.
-+
-Use case ends.
-
-* 3a. The given index is invalid.
-+
+* 3a. Student doesn’t know the answer and wants to see the answer without attempting 
 [none]
-** 3a1. AddressBook shows an error message.
-+
-Use case resumes at step 2.
+** 3a1. Student uses the reveal command
+** 3a2. Answer is displayed to the student
 
-_{More to be added}_
+
+
+
+
+
 
 [appendix]
 == Non Functional Requirements
