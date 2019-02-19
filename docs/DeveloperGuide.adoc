@@ -879,8 +879,16 @@ Use case ends
 ** 3a1. Student uses the reveal command
 ** 3a2. Answer is displayed to the student
 
+[discrete]
+=== UC02 Add flashcards
 
+*MSS*
 
+1. Student enters a folder that he wants to add a flashcard to
+2. Student inputs question and answer to be stored as flashcard
+3. System stores the details as a flashcard under the current folder
++
+Use case ends
 
 
 
