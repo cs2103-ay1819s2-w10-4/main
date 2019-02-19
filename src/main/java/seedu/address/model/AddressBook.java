@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tag.Tag;
 
 /**
  * Wraps all data at the address-book level
@@ -116,6 +117,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     protected void indicateModified() {
         invalidationListenerManager.callListeners(this);
     }
+
+    /**
+     * Deletes tag from every Person in the addressbook
+     */
+    public void deleteTagFromEveryone(Tag tag){}
+    
 
     //// util methods
 
