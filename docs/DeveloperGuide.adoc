@@ -1,4 +1,4 @@
-= Know-It-All - Developer Guide  
+= Know-It-All - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -837,15 +837,15 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |view my flashcards |
 
-|`* * *` |user |test myself on each flashcard folder |know which topics i need more work on.
+|`* * *` |user |test myself on each flashcard folder |know which topics i need more work on
 
 
 
-|`* *` |As a user with multiple friends using different devices |import and export flashcards |share my content with everyone.
+|`* *` |As a user with multiple friends using different devices |import and export flashcards |share my content with everyone
 
-|`* *` |As a user with multiple flashcards |search for individual flashcards or folders|easier time finding what I need.
+|`* *` |As a user with multiple flashcards |search for individual flashcards or folders|easier time finding what I need
 
-|`* *` |user |sort flashcards by score |know which questions i have more trouble answering.
+|`* *` |user |sort flashcards by score |know which questions i have more trouble answering
 
 |`*` |user |different template designs for my flashcards |have a nicer experience revising
 |=======================================================================
