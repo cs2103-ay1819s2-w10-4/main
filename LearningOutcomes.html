@@ -322,7 +322,7 @@ class gives some examples of how to use <em>Equivalence Partitions</em>, <em>Bou
 <div class="ulist">
 <ul>
 <li>
-<p>Test methods <code>prefsReadSave()</code> and <code>addressBookReadSave()</code> are integration tests. Note how they simply test if The <code>StorageManager</code> class is correctly wired to its dependencies.</p>
+<p>Test methods <code>prefsReadSave()</code> and <code>cardFolderReadSave()</code> are integration tests. Note how they simply test if The <code>StorageManager</code> class is correctly wired to its dependencies.</p>
 </li>
 <li>
 <p>Test method <code>handleAddressBookChangedEvent_exceptionThrown_eventRaised()</code> is a unit test because it uses <em>dependency injection</em> to isolate the SUT <code>StorageManager#handleAddressBookChangedEvent(&#8230;&#8203;)</code> from its dependencies.</p>
@@ -450,7 +450,7 @@ When the value represented by the <code>ObservableValue</code> changes, it will 
 <p><code>Model</code> component contains the 'Model'. However, note that it is possible to view the <code>Logic</code> as the model because it hides the <code>Model</code> behind it and the view has to go through the <code>Logic</code> to access the <code>Model</code>.</p>
 </li>
 <li>
-<p>Sub classes of <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/ui/UiPart.java"><code>UiPart</code></a> (e.g. <code>PersonListPanel</code> ) act as 'Controllers', each controlling some part of the UI and communicating with the 'Model' (via the <code>Logic</code> component which sits between the 'Controller' and the 'Model').</p>
+<p>Sub classes of <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/ui/UiPart.java"><code>UiPart</code></a> (e.g. <code>CardListPanel</code> ) act as 'Controllers', each controlling some part of the UI and communicating with the 'Model' (via the <code>Logic</code> component which sits between the 'Controller' and the 'Model').</p>
 </li>
 </ul>
 </div>
@@ -549,4 +549,4 @@ When the value represented by the <code>ObservableValue</code> changes, it will 
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-02-23 07:33:10 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-02-24 02:56:23 UTC</div></div></div></body></html>
