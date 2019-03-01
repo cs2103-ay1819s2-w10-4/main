@@ -15,20 +15,20 @@ import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 
-public class FindCommandSystemTest extends CardFolderSystemTest {
+public class SearchCommandSystemTest extends CardFolderSystemTest {
 
     @Test
     public void find() {
         /* Case: find multiple cards in card folder, command with leading spaces and trailing spaces
          * -> 2 cards found
          */
-        String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER + "   ";
+        String command = "   " + SearchCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER + "   ";
         Model expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, BENSON, DANIEL); // first names of Benson and Daniel are "Meier"
         assertCommandSuccess(command, expectedModel);
@@ -37,36 +37,36 @@ public class FindCommandSystemTest extends CardFolderSystemTest {
         /* Case: repeat previous find command where card list is displaying the cards we are finding
          * -> 2 cards found
          */
-        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
+        command = SearchCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find card where card list is not displaying the card we are finding -> 1 card found */
-        command = FindCommand.COMMAND_WORD + " Carl";
+        command = SearchCommand.COMMAND_WORD + " Carl";
         ModelHelper.setFilteredList(expectedModel, CARL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find multiple cards in card folder, 2 keywords -> 2 cards found */
-        command = FindCommand.COMMAND_WORD + " Benson Daniel";
+        command = SearchCommand.COMMAND_WORD + " Benson Daniel";
         ModelHelper.setFilteredList(expectedModel, BENSON, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find multiple cards in card folder, 2 keywords in reversed order -> 2 cards found */
-        command = FindCommand.COMMAND_WORD + " Daniel Benson";
+        command = SearchCommand.COMMAND_WORD + " Daniel Benson";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find multiple cards in card folder, 2 keywords with 1 repeat -> 2 cards found */
-        command = FindCommand.COMMAND_WORD + " Daniel Benson Daniel";
+        command = SearchCommand.COMMAND_WORD + " Daniel Benson Daniel";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find multiple cards in card folder, 2 matching keywords and 1 non-matching keyword
          * -> 2 cards found
          */
-        command = FindCommand.COMMAND_WORD + " Daniel Benson NonMatchingKeyWord";
+        command = SearchCommand.COMMAND_WORD + " Daniel Benson NonMatchingKeyWord";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -83,52 +83,52 @@ public class FindCommandSystemTest extends CardFolderSystemTest {
         /* Case: find same cards in card folder after deleting 1 of them -> 1 card found */
         executeCommand(DeleteCommand.COMMAND_WORD + " 1");
         assertFalse(getModel().getActiveCardFolder().getCardList().contains(BENSON));
-        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
+        command = SearchCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find card in card folder, keyword is same as question but of different case -> 1 card found */
-        command = FindCommand.COMMAND_WORD + " MeIeR";
+        command = SearchCommand.COMMAND_WORD + " MeIeR";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find card in card folder, keyword is substring of question -> 0 cards found */
-        command = FindCommand.COMMAND_WORD + " Mei";
+        command = SearchCommand.COMMAND_WORD + " Mei";
         ModelHelper.setFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find card in card folder, question is substring of keyword -> 0 cards found */
-        command = FindCommand.COMMAND_WORD + " Meiers";
+        command = SearchCommand.COMMAND_WORD + " Meiers";
         ModelHelper.setFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find card not in card folder -> 0 cards found */
-        command = FindCommand.COMMAND_WORD + " Mark";
+        command = SearchCommand.COMMAND_WORD + " Mark";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find answer number of card in card folder -> 0 cards found */
-        command = FindCommand.COMMAND_WORD + " " + DANIEL.getAnswer().value;
+        command = SearchCommand.COMMAND_WORD + " " + DANIEL.getAnswer().value;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find address of card in card folder -> 0 cards found */
-        command = FindCommand.COMMAND_WORD + " " + DANIEL.getAddress().value;
+        command = SearchCommand.COMMAND_WORD + " " + DANIEL.getAddress().value;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find email of card in card folder -> 0 cards found */
-        command = FindCommand.COMMAND_WORD + " " + DANIEL.getEmail().value;
+        command = SearchCommand.COMMAND_WORD + " " + DANIEL.getEmail().value;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find tags of card in card folder -> 0 cards found */
         List<Tag> tags = new ArrayList<>(DANIEL.getTags());
-        command = FindCommand.COMMAND_WORD + " " + tags.get(0).tagName;
+        command = SearchCommand.COMMAND_WORD + " " + tags.get(0).tagName;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -137,14 +137,14 @@ public class FindCommandSystemTest extends CardFolderSystemTest {
         selectCard(Index.fromOneBased(1));
         assertFalse(
                 getCardListPanel().getHandleToSelectedCard().getQuestion().equals(DANIEL.getQuestion().fullQuestion));
-        command = FindCommand.COMMAND_WORD + " Daniel";
+        command = SearchCommand.COMMAND_WORD + " Daniel";
         ModelHelper.setFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardDeselected();
 
         /* Case: find card in empty card folder -> 0 cards found */
         deleteAllCards();
-        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
+        command = SearchCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);

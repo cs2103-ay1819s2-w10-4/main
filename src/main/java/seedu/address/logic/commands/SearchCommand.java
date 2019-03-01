@@ -11,18 +11,19 @@ import seedu.address.model.card.QuestionContainsKeywordsPredicate;
  * Finds and lists all cards in card folder whose question contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindCommand extends Command {
+public class SearchCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = "search";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all cards whose questions contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all cards or folders whose questions "
+            + "or names contain any of the specified keywords (case-insensitive) and "
+            + "displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
     private final QuestionContainsKeywordsPredicate predicate;
 
-    public FindCommand(QuestionContainsKeywordsPredicate predicate) {
+    public SearchCommand(QuestionContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -37,7 +38,7 @@ public class FindCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FindCommand // instanceof handles nulls
-                && predicate.equals(((FindCommand) other).predicate)); // state check
+                || (other instanceof SearchCommand // instanceof handles nulls
+                && predicate.equals(((SearchCommand) other).predicate)); // state check
     }
 }
