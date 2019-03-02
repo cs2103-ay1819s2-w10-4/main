@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HINT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
 
 import java.util.Collections;
@@ -25,7 +25,8 @@ import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Email;
 import seedu.address.model.card.Question;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.card.Score;
+import seedu.address.model.hint.Hint;
 
 /**
  * Edits the details of an existing card in the card folder.
@@ -42,7 +43,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ANSWER + "ANSWER] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_HINT + "HINT]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ANSWER + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -99,9 +100,11 @@ public class EditCommand extends Command {
         Answer updatedAnswer = editCardDescriptor.getAnswer().orElse(cardToEdit.getAnswer());
         Email updatedEmail = editCardDescriptor.getEmail().orElse(cardToEdit.getEmail());
         Address updatedAddress = editCardDescriptor.getAddress().orElse(cardToEdit.getAddress());
-        Set<Tag> updatedTags = editCardDescriptor.getTags().orElse(cardToEdit.getTags());
+        // Score cannot be edited, so copy original
+        Score originalScore = cardToEdit.getScore();
+        Set<Hint> updatedHints = editCardDescriptor.getHints().orElse(cardToEdit.getHints());
 
-        return new Card(updatedQuestion, updatedAnswer, updatedEmail, updatedAddress, updatedTags);
+        return new Card(updatedQuestion, updatedAnswer, updatedEmail, updatedAddress, originalScore, updatedHints);
     }
 
     @Override
@@ -123,35 +126,35 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the card with. Each non-empty field value will replace the
-     * corresponding field value of the card.
+     * Stores the details to edit the card with. Each non-empty field fullAnswer will replace the
+     * corresponding field fullAnswer of the card.
      */
     public static class EditCardDescriptor {
         private Question question;
         private Answer answer;
         private Email email;
         private Address address;
-        private Set<Tag> tags;
+        private Set<Hint> hints;
 
         public EditCardDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code hints} is used internally.
          */
         public EditCardDescriptor(EditCardDescriptor toCopy) {
             setQuestion(toCopy.question);
             setAnswer(toCopy.answer);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setHints(toCopy.hints);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(question, answer, email, address, tags);
+            return CollectionUtil.isAnyNonNull(question, answer, email, address, hints);
         }
 
         public void setQuestion(Question question) {
@@ -187,20 +190,20 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code hints} to this object's {@code hints}.
+         * A defensive copy of {@code hints} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setHints(Set<Hint> hints) {
+            this.hints = (hints != null) ? new HashSet<>(hints) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable hint set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code hints} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Hint>> getHints() {
+            return (hints != null) ? Optional.of(Collections.unmodifiableSet(hints)) : Optional.empty();
         }
 
         @Override
@@ -222,7 +225,7 @@ public class EditCommand extends Command {
                     && getAnswer().equals(e.getAnswer())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getHints().equals(e.getHints());
         }
     }
 }

@@ -10,10 +10,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Answer {
 
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Answer numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
-    public final String value;
+    public static final String MESSAGE_CONSTRAINTS = "Answers can take any values, and should not be blank";
+    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public final String fullAnswer;
 
     /**
      * Constructs a {@code Answer}.
@@ -23,7 +22,7 @@ public class Answer {
     public Answer(String answer) {
         requireNonNull(answer);
         checkArgument(isValidAnswer(answer), MESSAGE_CONSTRAINTS);
-        value = answer;
+        fullAnswer = answer;
     }
 
     /**
@@ -35,19 +34,19 @@ public class Answer {
 
     @Override
     public String toString() {
-        return value;
+        return fullAnswer;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Answer // instanceof handles nulls
-                && value.equals(((Answer) other).value)); // state check
+                && fullAnswer.equals(((Answer) other).fullAnswer)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return fullAnswer.hashCode();
     }
 
 }

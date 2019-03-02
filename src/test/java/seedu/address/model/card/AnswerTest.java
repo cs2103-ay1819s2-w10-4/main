@@ -28,10 +28,6 @@ public class AnswerTest {
         // invalid answer numbers
         assertFalse(Answer.isValidAnswer("")); // empty string
         assertFalse(Answer.isValidAnswer(" ")); // spaces only
-        assertFalse(Answer.isValidAnswer("91")); // less than 3 numbers
-        assertFalse(Answer.isValidAnswer("answer")); // non-numeric
-        assertFalse(Answer.isValidAnswer("9011p041")); // alphabets within digits
-        assertFalse(Answer.isValidAnswer("9312 1534")); // spaces within digits
 
         // valid answer numbers
         assertTrue(Answer.isValidAnswer("911")); // exactly 3 numbers

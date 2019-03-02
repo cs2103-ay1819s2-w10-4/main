@@ -7,8 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HINT_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.Test;
 
@@ -52,8 +52,8 @@ public class EditCardDescriptorTest {
         editedAmy = new EditCardDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different tags -> returns false
-        editedAmy = new EditCardDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        // different hint -> returns false
+        editedAmy = new EditCardDescriptorBuilder(DESC_AMY).withHint(VALID_HINT_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }

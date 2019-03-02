@@ -98,7 +98,7 @@ public class LogicManagerTest {
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + QUESTION_DESC_AMY + ANSWER_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY;
-        Card expectedCard = new CardBuilder(AMY).withTags().build();
+        Card expectedCard = new CardBuilder(AMY).withHint().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addCard(expectedCard);
         expectedModel.commitCardFolder();

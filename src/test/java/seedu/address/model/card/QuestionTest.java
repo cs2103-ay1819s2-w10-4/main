@@ -28,8 +28,6 @@ public class QuestionTest {
         // invalid question
         assertFalse(Question.isValidQuestion("")); // empty string
         assertFalse(Question.isValidQuestion(" ")); // spaces only
-        assertFalse(Question.isValidQuestion("^")); // only non-alphanumeric characters
-        assertFalse(Question.isValidQuestion("peter*")); // contains non-alphanumeric characters
 
         // valid question
         assertTrue(Question.isValidQuestion("peter jack")); // alphabets only

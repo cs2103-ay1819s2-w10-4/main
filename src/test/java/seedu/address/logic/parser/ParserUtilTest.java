@@ -19,22 +19,22 @@ import seedu.address.model.card.Address;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Email;
 import seedu.address.model.card.Question;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.hint.Hint;
 import seedu.address.testutil.Assert;
 
 public class ParserUtilTest {
-    private static final String INVALID_QUESTION = "R@chel";
-    private static final String INVALID_ANSWER = "+651234";
+    private static final String INVALID_QUESTION = " ";
+    private static final String INVALID_ANSWER = " ";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_HINT = "#friend";
 
     private static final String VALID_QUESTION = "Rachel Walker";
     private static final String VALID_ANSWER = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_HINT_1 = "friend";
+    private static final String VALID_HINT_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -156,52 +156,52 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() throws Exception {
+    public void parseHint_null_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        ParserUtil.parseTag(null);
+        ParserUtil.parseHint(null);
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() throws Exception {
+    public void parseHint_invalidValue_throwsParseException() throws Exception {
         thrown.expect(ParseException.class);
-        ParserUtil.parseTag(INVALID_TAG);
+        ParserUtil.parseHint(INVALID_HINT);
     }
 
     @Test
-    public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+    public void parseHint_validValueWithoutWhitespace_returnsTag() throws Exception {
+        Hint expectedHint = new Hint(VALID_HINT_1);
+        assertEquals(expectedHint, ParserUtil.parseHint(VALID_HINT_1));
     }
 
     @Test
-    public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+    public void parseHint_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
+        String tagWithWhitespace = WHITESPACE + VALID_HINT_1 + WHITESPACE;
+        Hint expectedHint = new Hint(VALID_HINT_1);
+        assertEquals(expectedHint, ParserUtil.parseHint(tagWithWhitespace));
     }
 
     @Test
-    public void parseTags_null_throwsNullPointerException() throws Exception {
+    public void parseHints_null_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        ParserUtil.parseTags(null);
+        ParserUtil.parseHints(null);
     }
 
     @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() throws Exception {
+    public void parseHints_collectionWithInvalidTags_throwsParseException() throws Exception {
         thrown.expect(ParseException.class);
-        ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG));
+        ParserUtil.parseHints(Arrays.asList(VALID_HINT_1, INVALID_HINT));
     }
 
     @Test
-    public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
+    public void parseHints_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseHints(Collections.emptyList()).isEmpty());
     }
 
     @Test
-    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+    public void parseHints_collectionWithValidTags_returnsTagSet() throws Exception {
+        Set<Hint> actualHintSet = ParserUtil.parseHints(Arrays.asList(VALID_HINT_1, VALID_HINT_2));
+        Set<Hint> expectedHintSet = new HashSet<Hint>(Arrays.asList(new Hint(VALID_HINT_1), new Hint(VALID_HINT_2)));
 
-        assertEquals(expectedTagSet, actualTagSet);
+        assertEquals(expectedHintSet, actualHintSet);
     }
 }

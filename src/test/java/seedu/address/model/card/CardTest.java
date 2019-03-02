@@ -4,9 +4,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HINT_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalCards.ALICE;
 import static seedu.address.testutil.TypicalCards.BOB;
 
@@ -24,7 +23,7 @@ public class CardTest {
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Card card = new CardBuilder().build();
         thrown.expect(UnsupportedOperationException.class);
-        card.getTags().remove(0);
+        card.getHints().remove(0);
     }
 
     @Test
@@ -35,8 +34,8 @@ public class CardTest {
         // null -> returns false
         assertFalse(ALICE.isSameCard(null));
 
-        // different answer and email -> returns false
-        Card editedAlice = new CardBuilder(ALICE).withAnswer(VALID_ANSWER_BOB).withEmail(VALID_EMAIL_BOB).build();
+        // different answer -> returns false
+        Card editedAlice = new CardBuilder(ALICE).withAnswer(VALID_ANSWER_BOB).build();
         assertFalse(ALICE.isSameCard(editedAlice));
 
         // different question -> returns false
@@ -44,17 +43,17 @@ public class CardTest {
         assertFalse(ALICE.isSameCard(editedAlice));
 
         // same question, same answer, different attributes -> returns true
-        editedAlice = new CardBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new CardBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+                .withHint(VALID_HINT_HUSBAND).build();
         assertTrue(ALICE.isSameCard(editedAlice));
 
-        // same question, same email, different attributes -> returns true
+        // same question, different answer, different attributes -> returns false
         editedAlice = new CardBuilder(ALICE).withAnswer(VALID_ANSWER_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSameCard(editedAlice));
+                .withHint(VALID_HINT_HUSBAND).build();
+        assertFalse(ALICE.isSameCard(editedAlice));
 
-        // same question, same answer, same email, different attributes -> returns true
-        editedAlice = new CardBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        // same question, same answer, different attributes -> returns true
+        editedAlice = new CardBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withHint(VALID_HINT_HUSBAND).build();
         assertTrue(ALICE.isSameCard(editedAlice));
     }
 
@@ -84,16 +83,12 @@ public class CardTest {
         editedAlice = new CardBuilder(ALICE).withAnswer(VALID_ANSWER_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different email -> returns false
-        editedAlice = new CardBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
         // different address -> returns false
         editedAlice = new CardBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
-        editedAlice = new CardBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        // different hint -> returns false
+        editedAlice = new CardBuilder(ALICE).withHint(VALID_HINT_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }

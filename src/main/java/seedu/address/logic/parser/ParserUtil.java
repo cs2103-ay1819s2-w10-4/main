@@ -13,7 +13,7 @@ import seedu.address.model.card.Address;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Email;
 import seedu.address.model.card.Question;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.hint.Hint;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -96,29 +96,29 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String hint} into a {@code Hint}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code hint} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Hint parseHint(String hint) throws ParseException {
+        requireNonNull(hint);
+        String trimmedHint = hint.trim();
+        if (!Hint.isValidHintName(trimmedHint)) {
+            throw new ParseException(Hint.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Hint(trimmedHint);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> hints} into a {@code Set<Hint>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<Hint> parseHints(Collection<String> hints) throws ParseException {
+        requireNonNull(hints);
+        final Set<Hint> hintSet = new HashSet<>();
+        for (String hintName : hints) {
+            hintSet.add(parseHint(hintName));
         }
-        return tagSet;
+        return hintSet;
     }
 }

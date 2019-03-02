@@ -19,7 +19,7 @@ import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.hint.Hint;
 
 public class SearchCommandSystemTest extends CardFolderSystemTest {
 
@@ -112,7 +112,7 @@ public class SearchCommandSystemTest extends CardFolderSystemTest {
         assertSelectedCardUnchanged();
 
         /* Case: find answer number of card in card folder -> 0 cards found */
-        command = SearchCommand.COMMAND_WORD + " " + DANIEL.getAnswer().value;
+        command = SearchCommand.COMMAND_WORD + " " + DANIEL.getAnswer().fullAnswer;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -126,9 +126,9 @@ public class SearchCommandSystemTest extends CardFolderSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find tags of card in card folder -> 0 cards found */
-        List<Tag> tags = new ArrayList<>(DANIEL.getTags());
-        command = SearchCommand.COMMAND_WORD + " " + tags.get(0).tagName;
+        /* Case: find hints of card in card folder -> 0 cards found */
+        List<Hint> hints = new ArrayList<>(DANIEL.getHints());
+        command = SearchCommand.COMMAND_WORD + " " + hints.get(0).hintName;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 

@@ -19,14 +19,14 @@ public class CardThumbnailHandle extends NodeHandle<Node> {
     private static final String ADDRESS_FIELD_ID = "#address";
     private static final String ANSWER_FIELD_ID = "#answer";
     private static final String EMAIL_FIELD_ID = "#email";
-    private static final String TAGS_FIELD_ID = "#tags";
+    private static final String HINTS_FIELD_ID = "#hints";
 
     private final Label idLabel;
     private final Label questionLabel;
     private final Label addressLabel;
     private final Label answerLabel;
     private final Label emailLabel;
-    private final List<Label> tagLabels;
+    private final List<Label> hintLabel;
 
     public CardThumbnailHandle(Node cardNode) {
         super(cardNode);
@@ -37,8 +37,8 @@ public class CardThumbnailHandle extends NodeHandle<Node> {
         answerLabel = getChildNode(ANSWER_FIELD_ID);
         emailLabel = getChildNode(EMAIL_FIELD_ID);
 
-        Region tagsContainer = getChildNode(TAGS_FIELD_ID);
-        tagLabels = tagsContainer
+        Region hintContainer = getChildNode(HINTS_FIELD_ID);
+        hintLabel = hintContainer
                 .getChildrenUnmodifiable()
                 .stream()
                 .map(Label.class::cast)
@@ -65,8 +65,8 @@ public class CardThumbnailHandle extends NodeHandle<Node> {
         return emailLabel.getText();
     }
 
-    public List<String> getTags() {
-        return tagLabels
+    public List<String> getHint() {
+        return hintLabel
                 .stream()
                 .map(Label::getText)
                 .collect(Collectors.toList());
@@ -78,10 +78,10 @@ public class CardThumbnailHandle extends NodeHandle<Node> {
     public boolean equals(Card card) {
         return getQuestion().equals(card.getQuestion().fullQuestion)
                 && getAddress().equals(card.getAddress().value)
-                && getAnswer().equals(card.getAnswer().value)
+                && getAnswer().equals(card.getAnswer().fullAnswer)
                 && getEmail().equals(card.getEmail().value)
-                && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(card.getTags().stream()
-                        .map(tag -> tag.tagName)
+                && ImmutableMultiset.copyOf(getHint()).equals(ImmutableMultiset.copyOf(card.getHints().stream()
+                        .map(hint -> hint.hintName)
                         .collect(Collectors.toList())));
     }
 }

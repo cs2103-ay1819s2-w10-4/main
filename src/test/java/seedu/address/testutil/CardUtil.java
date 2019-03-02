@@ -3,15 +3,15 @@ package seedu.address.testutil;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HINT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.card.Card;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.hint.Hint;
 
 /**
  * A utility class for Card.
@@ -31,10 +31,10 @@ public class CardUtil {
     public static String getCardDetails(Card card) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_QUESTION + card.getQuestion().fullQuestion + " ");
-        sb.append(PREFIX_ANSWER + card.getAnswer().value + " ");
+        sb.append(PREFIX_ANSWER + card.getAnswer().fullAnswer + " ");
         sb.append(PREFIX_EMAIL + card.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + card.getAddress().value + " ");
-        card.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
+        card.getHints().stream().forEach(s -> sb.append(PREFIX_HINT + s.hintName + " "));
         return sb.toString();
     }
 
@@ -45,15 +45,15 @@ public class CardUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getQuestion().ifPresent(question -> sb.append(PREFIX_QUESTION)
                 .append(question.fullQuestion).append(" "));
-        descriptor.getAnswer().ifPresent(answer -> sb.append(PREFIX_ANSWER).append(answer.value).append(" "));
+        descriptor.getAnswer().ifPresent(answer -> sb.append(PREFIX_ANSWER).append(answer.fullAnswer).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+        if (descriptor.getHints().isPresent()) {
+            Set<Hint> hints = descriptor.getHints().get();
+            if (hints.isEmpty()) {
+                sb.append(PREFIX_HINT);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                hints.forEach(s -> sb.append(PREFIX_HINT).append(s.hintName).append(" "));
             }
         }
         return sb.toString();

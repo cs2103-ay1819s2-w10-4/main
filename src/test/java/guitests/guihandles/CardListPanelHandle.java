@@ -136,7 +136,7 @@ public class CardListPanelHandle extends NodeHandle<ListView<Card>> {
     }
 
     /**
-     * Returns true if the selected {@code CardThumbnail} is different from the value remembered by the most recent
+     * Returns true if the selected {@code CardThumbnail} is different from the fullAnswer remembered by the most recent
      * {@code rememberSelectedCardCard()} call.
      */
     public boolean isSelectedCardCardChanged() {

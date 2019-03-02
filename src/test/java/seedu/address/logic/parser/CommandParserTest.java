@@ -34,11 +34,11 @@ import seedu.address.testutil.CardBuilder;
 import seedu.address.testutil.CardUtil;
 import seedu.address.testutil.EditCardDescriptorBuilder;
 
-public class CardFolderParserTest {
+public class CommandParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final CardFolderParser parser = new CardFolderParser();
+    private final CommandParser parser = new CommandParser();
 
     @Test
     public void parseCommand_add() throws Exception {

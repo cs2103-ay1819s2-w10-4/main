@@ -131,4 +131,9 @@ public interface Model {
      * Sets the selected card in the filtered card list.
      */
     void setSelectedCard(Card card);
+
+    /**
+     * Enters a test session using the specified card folder.
+     */
+    Card testCardFolder(ReadOnlyCardFolder cardFolder);
 }

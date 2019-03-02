@@ -16,17 +16,17 @@ public class CardThumbnailTest extends GuiUnitTest {
 
     @Test
     public void display() {
-        // no tags
-        Card cardWithNoTags = new CardBuilder().withTags(new String[0]).build();
-        CardThumbnail cardThumbnail = new CardThumbnail(cardWithNoTags, 1);
+        // no hint
+        Card cardWithNoHint = new CardBuilder().withHint(new String[0]).build();
+        CardThumbnail cardThumbnail = new CardThumbnail(cardWithNoHint, 1);
         uiPartRule.setUiPart(cardThumbnail);
-        assertCardDisplay(cardThumbnail, cardWithNoTags, 1);
+        assertCardDisplay(cardThumbnail, cardWithNoHint, 1);
 
-        // with tags
-        Card cardWithTags = new CardBuilder().build();
-        cardThumbnail = new CardThumbnail(cardWithTags, 2);
+        // with hint
+        Card cardWithHint = new CardBuilder().build();
+        cardThumbnail = new CardThumbnail(cardWithHint, 2);
         uiPartRule.setUiPart(cardThumbnail);
-        assertCardDisplay(cardThumbnail, cardWithTags, 2);
+        assertCardDisplay(cardThumbnail, cardWithHint, 2);
     }
 
     @Test

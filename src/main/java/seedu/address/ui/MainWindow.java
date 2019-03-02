@@ -8,6 +8,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -16,6 +17,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.card.Card;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -35,9 +37,8 @@ public class MainWindow extends UiPart<Stage> {
     private CardListPanel cardListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-
-    @FXML
-    private StackPane browserPlaceholder;
+    private TestSession testSessionScreen;
+    private CardMainScreen cardMainScreen;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -46,13 +47,13 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane cardListPanelPlaceholder;
-
-    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane fullScreenPlaceholder;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -79,7 +80,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
+     * @param keyCombination the KeyCombination fullAnswer of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
@@ -111,13 +112,6 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(logic.selectedCardProperty());
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
-
-        cardListPanel = new CardListPanel(logic.getFilteredCardList(), logic.selectedCardProperty(),
-                logic::setSelectedCard);
-        cardListPanelPlaceholder.getChildren().add(cardListPanel.getRoot());
-
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -126,6 +120,15 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand, logic.getHistory());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        testSessionScreen = new TestSession();
+        fullScreenPlaceholder.getChildren().add(testSessionScreen.getRoot());
+
+        browserPanel = new BrowserPanel(logic.selectedCardProperty());
+        cardListPanel = new CardListPanel(logic.getFilteredCardList(), logic.selectedCardProperty(),
+                logic::setSelectedCard);
+        cardMainScreen = new CardMainScreen(cardListPanel, browserPanel);
+        fullScreenPlaceholder.getChildren().add(cardMainScreen.getRoot());
     }
 
     /**
@@ -168,6 +171,16 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    private void handleStartTestSession(Card card) {
+        fullScreenPlaceholder.getChildren().get(fullScreenPlaceholder.getChildren().size() - 1).toBack();
+        Region testSessionRegion = (new TestSession(card)).getRoot();
+        fullScreenPlaceholder.getChildren().set(0, testSessionRegion);
+    }
+
+    private void handleEndTestSession() {
+        fullScreenPlaceholder.getChildren().get(fullScreenPlaceholder.getChildren().size() - 1).toBack();
+    }
+
     public CardListPanel getCardListPanel() {
         return cardListPanel;
     }
@@ -189,6 +202,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isTestSession()) {
+                handleStartTestSession(commandResult.getTestSessionCard());
             }
 
             return commandResult;

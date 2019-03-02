@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.tag.Tag;
+import seedu.address.model.hint.Hint;
 
 /**
  * Represents a Card in the card folder.
@@ -22,18 +22,20 @@ public class Card {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Score score;
+    private final Set<Hint> hints = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Card(Question question, Answer answer, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(question, answer, email, address, tags);
+    public Card(Question question, Answer answer, Email email, Address address, Score score, Set<Hint> hints) {
+        requireAllNonNull(question, answer, email, address, score, hints);
         this.question = question;
         this.answer = answer;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.score = score;
+        this.hints.addAll(hints);
     }
 
     public Question getQuestion() {
@@ -52,16 +54,20 @@ public class Card {
         return address;
     }
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Score getScore() {
+        return score;
     }
 
     /**
-     * Returns true if both cards of the same question have at least one other identity field that is the same.
+     * Returns an immutable hint set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Hint> getHints() {
+        return Collections.unmodifiableSet(hints);
+    }
+
+    /**
+     * Returns true if both cards of the same question also have the same answer, but not necessarily the same hint.
      * This defines a weaker notion of equality between two cards.
      */
     public boolean isSameCard(Card otherCard) {
@@ -71,7 +77,7 @@ public class Card {
 
         return otherCard != null
                 && otherCard.getQuestion().equals(getQuestion())
-                && (otherCard.getAnswer().equals(getAnswer()) || otherCard.getEmail().equals(getEmail()));
+                && (otherCard.getAnswer().equals(getAnswer()));
     }
 
     /**
@@ -91,15 +97,15 @@ public class Card {
         Card otherCard = (Card) other;
         return otherCard.getQuestion().equals(getQuestion())
                 && otherCard.getAnswer().equals(getAnswer())
-                && otherCard.getEmail().equals(getEmail())
                 && otherCard.getAddress().equals(getAddress())
-                && otherCard.getTags().equals(getTags());
+                && otherCard.getScore().equals(getScore())
+                && otherCard.getHints().equals(getHints());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(question, answer, email, address, tags);
+        return Objects.hash(question, answer, email, address, score, hints);
     }
 
     @Override
@@ -108,12 +114,12 @@ public class Card {
         builder.append(getQuestion())
                 .append(" Answer: ")
                 .append(getAnswer())
-                .append(" Email: ")
-                .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+                .append(" Score: ")
+                .append(getScore())
+                .append(" Hints: ");
+        getHints().forEach(builder::append);
         return builder.toString();
     }
 

@@ -48,7 +48,7 @@ public class BrowserPanelHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Returns true if the current {@code URL} is different from the value remembered by the most recent
+     * Returns true if the current {@code URL} is different from the fullAnswer remembered by the most recent
      * {@code rememberUrl()} call.
      */
     public boolean isUrlChanged() {

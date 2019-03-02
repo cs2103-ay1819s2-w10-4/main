@@ -125,6 +125,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Card testCardFolder(ReadOnlyCardFolder cardFolderToTest) {
+        //TODO: Remove hardcoding, enter card folder and get the list of cards, enter test session mode
+        Card cardToTest = cardFolderToTest.getCardList().get(0);
+        return cardToTest;
+    }
+
+    @Override
     public boolean hasCard(Card card) {
         requireNonNull(card);
 
@@ -236,7 +243,7 @@ public class ModelManager implements Model {
             boolean wasSelectedCardReplaced = change.wasReplaced() && change.getAddedSize() == change.getRemovedSize()
                     && change.getRemoved().contains(selectedCard.getValue());
             if (wasSelectedCardReplaced) {
-                // Update selectedCard to its new value.
+                // Update selectedCard to its new fullAnswer.
                 int index = change.getRemoved().indexOf(selectedCard.getValue());
                 selectedCard.setValue(change.getAddedSubList().get(index));
                 continue;

@@ -11,7 +11,7 @@ import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Email;
 import seedu.address.model.card.Question;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.hint.Hint;
 
 /**
  * A utility class to help with building EditCardDescriptor objects.
@@ -37,7 +37,7 @@ public class EditCardDescriptorBuilder {
         descriptor.setAnswer(card.getAnswer());
         descriptor.setEmail(card.getEmail());
         descriptor.setAddress(card.getAddress());
-        descriptor.setTags(card.getTags());
+        descriptor.setHints(card.getHints());
     }
 
     /**
@@ -73,12 +73,12 @@ public class EditCardDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditCardDescriptor}
+     * Parses the {@code hint} into a {@code Set<Hint>} and set it to the {@code EditCardDescriptor}
      * that we are building.
      */
-    public EditCardDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditCardDescriptorBuilder withHint(String... hint) {
+        Set<Hint> hintSet = Stream.of(hint).map(Hint::new).collect(Collectors.toSet());
+        descriptor.setHints(hintSet);
         return this;
     }
 

@@ -45,7 +45,7 @@ module Slim::Helpers
 
   ##
   # Creates an HTML tag with the given name and optionally attributes. Can take
-  # a block that will run between the opening and closing tags.
+  # a block that will run between the opening and closing hints.
   #
   # @param name [#to_s] the name of the tag.
   # @param attributes [Hash]
@@ -207,11 +207,11 @@ module Slim::Helpers
     %(<meta name="#{name}" content="#{content}">) if content
   end
 
-  # Returns formatted style/link and script tags for header.
+  # Returns formatted style/link and script hints for header.
   def styles_and_scripts
     scripts = []
     styles = []
-    tags = []
+    hints = []
 
     stylesheet = attr :stylesheet
     stylesdir = attr :stylesdir, ''
@@ -280,21 +280,21 @@ module Slim::Helpers
 
     styles.each do |item|
       if item.key?(:text)
-        tags << html_tag(:style, {}, item[:text])
+        hints << html_tag(:style, {}, item[:text])
       else
-        tags << html_tag(:link, rel: 'stylesheet', href: urlize(*item[:href]))
+        hints << html_tag(:link, rel: 'stylesheet', href: urlize(*item[:href]))
       end
     end
 
     scripts.each do |item|
       if item.key? :text
-        tags << html_tag(:script, {type: item[:type]}, item[:text])
+        hints << html_tag(:script, {type: item[:type]}, item[:text])
       else
-        tags << html_tag(:script, type: item[:type], src: urlize(*item[:src]))
+        hints << html_tag(:script, type: item[:type], src: urlize(*item[:src]))
       end
     end
 
-    tags.join "\n"
+    hints.join "\n"
   end
 
 end

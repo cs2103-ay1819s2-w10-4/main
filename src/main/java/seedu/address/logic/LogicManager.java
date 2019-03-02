@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.CardFolderParser;
+import seedu.address.logic.parser.CommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyCardFolder;
@@ -28,14 +28,14 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final CommandHistory history;
-    private final CardFolderParser cardFolderParser;
+    private final CommandParser commandParser;
     private boolean cardFolderModified;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
         history = new CommandHistory();
-        cardFolderParser = new CardFolderParser();
+        commandParser = new CommandParser();
 
         // Set cardFolderModified to true whenever the models' card folder is modified.
         model.getActiveCardFolder().addListener(observable -> cardFolderModified = true);
@@ -48,7 +48,7 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         try {
-            Command command = cardFolderParser.parseCommand(commandText);
+            Command command = commandParser.parseCommand(commandText);
             commandResult = command.execute(model, history);
         } finally {
             history.add(commandText);
