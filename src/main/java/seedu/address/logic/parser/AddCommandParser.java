@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HINT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
 
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -19,6 +18,7 @@ import seedu.address.model.card.Email;
 import seedu.address.model.card.Question;
 import seedu.address.model.card.Score;
 import seedu.address.model.hint.Hint;
+
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -35,7 +35,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(
                         args, PREFIX_QUESTION, PREFIX_ANSWER, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_HINT);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_QUESTION, PREFIX_ADDRESS, PREFIX_ANSWER, PREFIX_EMAIL)
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_QUESTION, PREFIX_ADDRESS, PREFIX_ANSWER, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -53,12 +53,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         return new AddCommand(card);
     }
 
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
+
 
 }
