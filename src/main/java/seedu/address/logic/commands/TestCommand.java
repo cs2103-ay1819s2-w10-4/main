@@ -41,9 +41,13 @@ public class TestCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_FOLDER_DISPLAYED_INDEX);
         }
 
+        if (model.checkIfInsideTestSession()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_INSIDE_TEST_SESSION);
+        }
+
         ReadOnlyCardFolder cardFolderToTest = cardFoldersList.get(targetIndex.getZeroBased());
         Card cardToTest = model.testCardFolder(cardFolderToTest);
-        return new CommandResult(MESSAGE_ENTER_TEST_FOLDER_SUCCESS, false, false, cardToTest);
+        return new CommandResult(MESSAGE_ENTER_TEST_FOLDER_SUCCESS, false, false, cardToTest, false);
     }
 
     @Override

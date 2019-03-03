@@ -156,4 +156,15 @@ public interface Model extends Observable {
      * Enters a test session using the specified card folder.
      */
     Card testCardFolder(ReadOnlyCardFolder cardFolder);
+
+    /**
+     * Returns true if user is in a test session
+     * false user is not.
+     */
+    boolean checkIfInsideTestSession();
+
+    /**
+     * End the current test session.
+     */
+    void endTestSession();
 }

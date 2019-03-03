@@ -171,14 +171,19 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Start test session UI.
+     */
     private void handleStartTestSession(Card card) {
-        fullScreenPlaceholder.getChildren().get(fullScreenPlaceholder.getChildren().size() - 1).toBack();
         Region testSessionRegion = (new TestSession(card)).getRoot();
-        fullScreenPlaceholder.getChildren().set(0, testSessionRegion);
+        fullScreenPlaceholder.getChildren().add(testSessionRegion);
     }
 
+    /**
+     * End test session and display back card main screen.
+     */
     private void handleEndTestSession() {
-        fullScreenPlaceholder.getChildren().get(fullScreenPlaceholder.getChildren().size() - 1).toBack();
+        fullScreenPlaceholder.getChildren().remove(fullScreenPlaceholder.getChildren().size() - 1);
     }
 
     public CardListPanel getCardListPanel() {
@@ -206,6 +211,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isTestSession()) {
                 handleStartTestSession(commandResult.getTestSessionCard());
+            }
+
+            if (commandResult.isEndTestSession()) {
+                handleEndTestSession();
             }
 
             return commandResult;

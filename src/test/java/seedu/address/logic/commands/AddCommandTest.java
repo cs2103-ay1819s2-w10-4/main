@@ -151,6 +151,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean checkIfInsideTestSession() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void endTestSession() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasCard(Card card) {
             throw new AssertionError("This method should not be called.");
         }

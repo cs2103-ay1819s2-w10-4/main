@@ -35,6 +35,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final List<FilteredList<Card>> filteredCardsList;
     private final SimpleObjectProperty<Card> selectedCard = new SimpleObjectProperty<>();
+    private boolean insideTestSession = false;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     /**
@@ -144,7 +145,18 @@ public class ModelManager implements Model {
     public Card testCardFolder(ReadOnlyCardFolder cardFolderToTest) {
         //TODO: Remove hardcoding, enter card folder and get the list of cards, enter test session mode
         Card cardToTest = cardFolderToTest.getCardList().get(0);
+        insideTestSession = true;
         return cardToTest;
+    }
+
+    @Override
+    public boolean checkIfInsideTestSession() {
+        return insideTestSession;
+    }
+
+    @Override
+    public void endTestSession() {
+        insideTestSession = false;
     }
 
     @Override

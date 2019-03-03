@@ -22,14 +22,19 @@ public class CommandResult {
     /** The application should enter a test session. */
     private final Card testSessionCard;
 
+    /** The current test session should end. */
+    private final boolean endTestSession;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Card testSessionCard) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Card testSessionCard,
+                         boolean endTestSession) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.testSessionCard = testSessionCard;
+        this.endTestSession = endTestSession;
     }
 
     /**
@@ -37,7 +42,7 @@ public class CommandResult {
      * and other fields set to their default fullAnswer.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, null);
+        this(feedbackToUser, false, false, null, false);
     }
 
     public String getFeedbackToUser() {
@@ -50,6 +55,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isEndTestSession() {
+        return endTestSession;
     }
 
     /**
@@ -86,7 +95,7 @@ public class CommandResult {
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, testSessionCard);
+        return Objects.hash(feedbackToUser, showHelp, exit, testSessionCard, endTestSession);
     }
 
 }
