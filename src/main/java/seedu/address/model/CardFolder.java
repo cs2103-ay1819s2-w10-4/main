@@ -31,13 +31,14 @@ public class CardFolder implements ReadOnlyCardFolder {
         cards = new UniqueCardList();
     }
 
-    public CardFolder() {}
+    public CardFolder(String folderName) {
+        setFolderName(folderName);
+    }
 
     /**
      * Creates an CardFolder using the Cards in the {@code toBeCopied}
      */
     public CardFolder(ReadOnlyCardFolder toBeCopied) {
-        this();
         resetData(toBeCopied);
     }
 
@@ -145,16 +146,19 @@ public class CardFolder implements ReadOnlyCardFolder {
         return folderName;
     }
 
-    // TODO: Check for folder equivalence with folderName instead
+    /**
+     * Equivalence of {@code CardFolder} is determined by folderName and cards.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof CardFolder // instanceof handles nulls
+                && folderName.equals(((CardFolder) other).folderName)
                 && cards.equals(((CardFolder) other).cards));
     }
 
     @Override
     public int hashCode() {
-        return cards.hashCode();
+        return folderName.hashCode();
     }
 }

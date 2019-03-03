@@ -85,7 +85,7 @@ public class EditCommand extends Command {
 
         model.setCard(cardToEdit, editedCard);
         model.updateFilteredCard(PREDICATE_SHOW_ALL_CARDS);
-        model.commitCardFolder();
+        model.commitActiveCardFolder();
         return new CommandResult(String.format(MESSAGE_EDIT_CARD_SUCCESS, editedCard));
     }
 

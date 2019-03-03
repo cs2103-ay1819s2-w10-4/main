@@ -18,8 +18,9 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.setCardFolder(new CardFolder());
-        model.commitCardFolder();
+        // Name of CardFolder is preserved in clear operation
+        model.setCardFolder(new CardFolder(model.getActiveCardFolder().getFolderName()));
+        model.commitActiveCardFolder();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

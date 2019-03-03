@@ -43,7 +43,7 @@ public class StorageManagerTest {
     @Test
     public void prefsReadSave() throws Exception {
         /*
-         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * Note: This is an integration test that verifies the Storage Manager is properly wired to the
          * {@link JsonUserPrefsStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonUserPrefsStorageTest} class.
          */
@@ -62,8 +62,8 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link JsonCardFolderStorageTest} class.
          */
         CardFolder original = getTypicalCardFolder();
-        storageManager.saveCardFolder(original);
-        // TODO: Address hardcoding in the following line
+        // TODO: Address hardcoding in the following lines
+        storageManager.saveCardFolder(original, 0);
         ReadOnlyCardFolder retrieved = storageManager.readCardFolders().get(0);
         assertEquals(original, new CardFolder(retrieved));
     }

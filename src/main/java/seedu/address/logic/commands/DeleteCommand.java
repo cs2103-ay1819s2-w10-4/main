@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
 
         Card cardToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteCard(cardToDelete);
-        model.commitCardFolder();
+        model.commitActiveCardFolder();
         return new CommandResult(String.format(MESSAGE_DELETE_CARD_SUCCESS, cardToDelete));
     }
 

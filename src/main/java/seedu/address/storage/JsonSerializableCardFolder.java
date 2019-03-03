@@ -50,7 +50,7 @@ class JsonSerializableCardFolder {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public CardFolder toModelType() throws IllegalValueException {
-        CardFolder cardFolder = new CardFolder();
+        CardFolder cardFolder = new CardFolder(folderName);
         for (JsonAdaptedCard jsonAdaptedCard : cards) {
             Card card = jsonAdaptedCard.toModelType();
             if (cardFolder.hasCard(card)) {
@@ -58,7 +58,6 @@ class JsonSerializableCardFolder {
             }
             cardFolder.addCard(card);
         }
-        cardFolder.setFolderName(folderName);
         return cardFolder;
     }
 

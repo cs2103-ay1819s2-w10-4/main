@@ -24,23 +24,23 @@ public class RedoCommandTest {
         // set up of both models' undo/redo history
         deleteFirstCard(model);
         deleteFirstCard(model);
-        model.undoCardFolder();
-        model.undoCardFolder();
+        model.undoActiveCardFolder();
+        model.undoActiveCardFolder();
 
         deleteFirstCard(expectedModel);
         deleteFirstCard(expectedModel);
-        expectedModel.undoCardFolder();
-        expectedModel.undoCardFolder();
+        expectedModel.undoActiveCardFolder();
+        expectedModel.undoActiveCardFolder();
     }
 
     @Test
     public void execute() {
         // multiple redoable states in model
-        expectedModel.redoCardFolder();
+        expectedModel.redoActiveCardFolder();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // single redoable state in model
-        expectedModel.redoCardFolder();
+        expectedModel.redoActiveCardFolder();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // no redoable state in model

@@ -50,7 +50,7 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(Collections.singletonList(new CardFolder(model.getActiveCardFolder())),
                 new UserPrefs());
         expectedModel.setCard(model.getFilteredCards().get(0), editedCard);
-        expectedModel.commitCardFolder();
+        expectedModel.commitActiveCardFolder();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -73,7 +73,7 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(Collections.singletonList(new CardFolder(model.getActiveCardFolder())),
                 new UserPrefs());
         expectedModel.setCard(lastCard, editedCard);
-        expectedModel.commitCardFolder();
+        expectedModel.commitActiveCardFolder();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -87,7 +87,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(Collections.singletonList(new CardFolder(model.getActiveCardFolder())),
                 new UserPrefs());
-        expectedModel.commitCardFolder();
+        expectedModel.commitActiveCardFolder();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -106,7 +106,7 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(Collections.singletonList(new CardFolder(model.getActiveCardFolder())),
                 new UserPrefs());
         expectedModel.setCard(model.getFilteredCards().get(0), editedCard);
-        expectedModel.commitCardFolder();
+        expectedModel.commitActiveCardFolder();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -168,17 +168,17 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(Collections.singletonList(new CardFolder(model.getActiveCardFolder())),
                 new UserPrefs());
         expectedModel.setCard(cardToEdit, editedCard);
-        expectedModel.commitCardFolder();
+        expectedModel.commitActiveCardFolder();
 
         // edit -> first card edited
         editCommand.execute(model, commandHistory);
 
         // undo -> reverts cardfolder back to previous state and filtered card list to show all cards
-        expectedModel.undoCardFolder();
+        expectedModel.undoActiveCardFolder();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first card edited again
-        expectedModel.redoCardFolder();
+        expectedModel.redoActiveCardFolder();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -215,18 +215,18 @@ public class EditCommandTest {
         showCardAtIndex(model, INDEX_SECOND_CARD);
         Card cardToEdit = model.getFilteredCards().get(INDEX_FIRST_CARD.getZeroBased());
         expectedModel.setCard(cardToEdit, editedCard);
-        expectedModel.commitCardFolder();
+        expectedModel.commitActiveCardFolder();
 
         // edit -> edits second card in unfiltered card list / first card in filtered card list
         editCommand.execute(model, commandHistory);
 
         // undo -> reverts cardfolder back to previous state and filtered card list to show all cards
-        expectedModel.undoCardFolder();
+        expectedModel.undoActiveCardFolder();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(model.getFilteredCards().get(INDEX_FIRST_CARD.getZeroBased()), cardToEdit);
         // redo -> edits same second card in unfiltered card list
-        expectedModel.redoCardFolder();
+        expectedModel.redoActiveCardFolder();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

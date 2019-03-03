@@ -86,4 +86,11 @@ public class JsonCardFolderStorage implements CardFolderStorage {
         JsonUtil.saveJsonFile(new JsonSerializableCardFolder(cardFolder), filePath);
     }
 
+    @Override
+    public void deleteCardFolder(Path filePath) throws IOException {
+        requireNonNull(filePath);
+
+        FileUtil.deleteFile(filePath);
+    }
+
 }

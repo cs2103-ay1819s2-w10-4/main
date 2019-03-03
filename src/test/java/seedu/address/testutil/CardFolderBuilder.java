@@ -13,7 +13,7 @@ public class CardFolderBuilder {
     private CardFolder cardFolder;
 
     public CardFolderBuilder() {
-        cardFolder = new CardFolder();
+        cardFolder = new CardFolder(this.getClass().getName());
     }
 
     public CardFolderBuilder(CardFolder cardFolder) {

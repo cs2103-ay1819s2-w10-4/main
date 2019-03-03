@@ -11,6 +11,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.testutil.TypicalCards;
 
 public class ClearCommandSystemTest extends CardFolderSystemTest {
 
@@ -33,7 +34,8 @@ public class ClearCommandSystemTest extends CardFolderSystemTest {
         /* Case: redo clearing card folder -> cleared */
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
-        assertCommandSuccess(command, expectedResultMessage, new ModelManager());
+        assertCommandSuccess(command, expectedResultMessage,
+                new ModelManager(defaultModel.getActiveCardFolder().getFolderName()));
         assertSelectedCardUnchanged();
 
         /* Case: selects first card in card list and clears card folder -> cleared and no card selected */
@@ -65,7 +67,8 @@ public class ClearCommandSystemTest extends CardFolderSystemTest {
      * @see CardFolderSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command) {
-        assertCommandSuccess(command, ClearCommand.MESSAGE_SUCCESS, new ModelManager());
+        assertCommandSuccess(command, ClearCommand.MESSAGE_SUCCESS,
+                new ModelManager(TypicalCards.getTypicalFolderName()));
     }
 
     /**

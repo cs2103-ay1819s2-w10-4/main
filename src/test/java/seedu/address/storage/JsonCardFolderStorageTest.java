@@ -110,6 +110,7 @@ public class JsonCardFolderStorageTest {
     private void saveCardFolder(ReadOnlyCardFolder cardFolder, String filePath) {
         try {
             new JsonCardFolderStorage(Paths.get(filePath))
+
                     .saveCardFolder(cardFolder, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
@@ -119,6 +120,6 @@ public class JsonCardFolderStorageTest {
     @Test
     public void saveCardFolder_nullFilePath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        saveCardFolder(new CardFolder(), null);
+        saveCardFolder(new CardFolder(this.getClass().getName()), null);
     }
 }

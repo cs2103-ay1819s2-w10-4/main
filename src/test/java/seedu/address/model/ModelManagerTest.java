@@ -29,13 +29,12 @@ public class ModelManagerTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private ModelManager modelManager = new ModelManager();
+    private ModelManager modelManager = new ModelManager(this.getClass().getName());
 
     @Test
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new CardFolder(), new CardFolder(modelManager.getActiveCardFolder()));
         assertEquals(null, modelManager.getSelectedCard());
     }
 
@@ -152,7 +151,7 @@ public class ModelManagerTest {
     @Test
     public void equals() {
         CardFolder cardFolder = new CardFolderBuilder().withCard(ALICE).withCard(BENSON).build();
-        CardFolder differentCardFolder = new CardFolder();
+        CardFolder differentCardFolder = new CardFolder(this.getClass().getName());
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true

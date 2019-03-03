@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Predicate;
 
+import javafx.beans.Observable;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -12,7 +13,7 @@ import seedu.address.model.card.Card;
 /**
  * The API of the Model component.
  */
-public interface Model {
+public interface Model extends Observable {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Card> PREDICATE_SHOW_ALL_CARDS = unused -> true;
 
@@ -81,6 +82,25 @@ public interface Model {
      */
     void setCard(Card target, Card editedCard);
 
+    // TODO: Implement hasFolder and setFolder
+
+    /**
+     * Deletes the folder at the given index.
+     * The folder must exist.
+     */
+    void deleteFolder(int index);
+
+    /**
+     * Adds the given folder.
+     * {@code cardFolder} must not already exist.
+     */
+    void addFolder(CardFolder cardFolder);
+
+    /**
+     * Gets the index of the current active {@code CardFolder}.
+     */
+    int getActiveCardFolderIndex();
+
     /** Returns an unmodifiable view of the filtered card list */
     ObservableList<Card> getFilteredCards();
 
@@ -93,27 +113,27 @@ public interface Model {
     /**
      * Returns true if the model has previous card folder states to restore.
      */
-    boolean canUndoCardFolder();
+    boolean canUndoActiveCardFolder();
 
     /**
      * Returns true if the model has undone card folder states to restore.
      */
-    boolean canRedoCardFolder();
+    boolean canRedoActiveCardFolder();
 
     /**
      * Restores the model's card folder to its previous state.
      */
-    void undoCardFolder();
+    void undoActiveCardFolder();
 
     /**
      * Restores the model's card folder to its previously undone state.
      */
-    void redoCardFolder();
+    void redoActiveCardFolder();
 
     /**
      * Saves the current card folder state for undo/redo.
      */
-    void commitCardFolder();
+    void commitActiveCardFolder();
 
     /**
      * Selected card in the filtered card list.

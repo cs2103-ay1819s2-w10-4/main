@@ -827,30 +827,45 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |create new flashcard folders |
+|`* * *`|student|have flashcards with questions and answers|have an easier time memorising content
 
-|`* * *` |user |add flashcards to folders |
+|`* * *`|student|create and delete my own flashcards|
 
-|`* * *` |user |delete flashcards |remove flashcards I no longer need
+|`* * *`|student|edit the content of my flashcards|add on more content or correct any errors
 
-|`* * *` |user |view my flashcards |
+|`* * *`|student|have folders to store flashcards|logically group flashcards of the same topic
 
-|`* * *` |user |test myself on each flashcard folder |know which topics i need more work on
+|`* * *`|student|navigate in and out of folders|see one folder's cards at each point of time
 
+|`* * *` |student|test myself on each flashcard folder|better learn the content
 
+|`* * *`|student|attempt keying in answers before flashcards reveal them|have a more engaging experience
 
-|`* *` |As a user with multiple friends using different devices |import and export flashcards |share my content with everyone
+|`* * *`|student|view the answers of questions directly|proceed even when I do not remember the answer
 
-|`* *` |As a user with multiple flashcards |search for individual flashcards or folders|easier time finding what I need
+|`* *`|student|know how well I've been performing on each flashcard|know my overall progress
 
-|`* *` |user |sort flashcards by score |know which questions i have more trouble answering
+|`* *`|student|view a progress report by folder|know my performance for each topic
 
-|`*` |user |different template designs for my flashcards |have a nicer experience revising
+|`* *` |student|sort flashcards by score |know which questions i have more trouble answering
+
+|`* *`|student|import and export flashcards|share content
+
+|`* *`|student|search flash cards in a folder|save time looking for a particular card
+
+|`* *`|student|search folders|save time looking for a particular folder
+
+|`* *`|student|move flashcards from one folder to another|better manage my flashcards
+
+|`*` |student|add hints that I can toggle on/off|get help with more difficult cards
+
+|`*`|student|add pictures to certain flashcards|better represent topics that heavily feature topics and diagrams
+
+|`*`|student|have a question that expects more than one answer|test myself more complex questions
+
+|`*` |student|different template designs for my flashcards|have a personalised experience while revising
 |=======================================================================
-
-_{More to be added}_
 
 [appendix]
 == Use Cases

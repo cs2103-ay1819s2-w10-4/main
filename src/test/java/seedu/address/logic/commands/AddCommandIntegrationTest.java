@@ -33,7 +33,7 @@ public class AddCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getCardFolders(), new UserPrefs());
         expectedModel.addCard(validCard);
-        expectedModel.commitCardFolder();
+        expectedModel.commitActiveCardFolder();
 
         assertCommandSuccess(new AddCommand(validCard), model, commandHistory,
                 String.format(AddCommand.MESSAGE_SUCCESS, validCard), expectedModel);

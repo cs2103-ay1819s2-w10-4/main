@@ -20,11 +20,11 @@ public class RedoCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (!model.canRedoCardFolder()) {
+        if (!model.canRedoActiveCardFolder()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        model.redoCardFolder();
+        model.redoActiveCardFolder();
         model.updateFilteredCard(PREDICATE_SHOW_ALL_CARDS);
         return new CommandResult(MESSAGE_SUCCESS);
     }

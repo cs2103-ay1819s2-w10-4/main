@@ -3,7 +3,6 @@ package seedu.address;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -18,7 +17,6 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.CardFolder;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyCardFolder;
@@ -89,11 +87,11 @@ public class MainApp extends Application {
                 initialCardFolders.add(SampleDataUtil.getSampleCardFolder());
             }
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty CardFolder");
-            initialCardFolders = Collections.singletonList(new CardFolder());
+            logger.warning("Data file not in the correct format. Will not be starting with any CardFolder");
+            return new ModelManager(userPrefs);
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty CardFolder");
-            initialCardFolders = Collections.singletonList(new CardFolder());
+            logger.warning("Problem while reading from the file. Will not be starting with any CardFolder");
+            return new ModelManager(userPrefs);
         }
 
         return new ModelManager(initialCardFolders, userPrefs);

@@ -30,6 +30,7 @@ public class LogicManager implements Logic {
     private final CommandHistory history;
     private final CommandParser commandParser;
     private boolean cardFolderModified;
+    private boolean modelModified;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
@@ -38,13 +39,19 @@ public class LogicManager implements Logic {
         commandParser = new CommandParser();
 
         // Set cardFolderModified to true whenever the models' card folder is modified.
-        model.getActiveCardFolder().addListener(observable -> cardFolderModified = true);
+        for (ReadOnlyCardFolder cardFolder : model.getCardFolders()) {
+            cardFolder.addListener(observable -> cardFolderModified = true);
+        }
+
+        // Set modelModified whenever the models' card folders are modified
+        model.addListener(observable -> modelModified = true);
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         cardFolderModified = false;
+        modelModified = false;
 
         CommandResult commandResult;
         try {
@@ -57,7 +64,16 @@ public class LogicManager implements Logic {
         if (cardFolderModified) {
             logger.info("card folder modified, saving to file.");
             try {
-                storage.saveCardFolder(model.getActiveCardFolder());
+                storage.saveCardFolder(model.getActiveCardFolder(), model.getActiveCardFolderIndex());
+            } catch (IOException ioe) {
+                throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+            }
+        }
+
+        if (modelModified) {
+            logger.info("model is modified, saving to file");
+            try {
+                storage.saveCardFolders(model.getCardFolders());
             } catch (IOException ioe) {
                 throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
             }

@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -75,18 +76,26 @@ public class StorageManager implements Storage {
         return cardFolderStorageList.get(0).readCardFolder(filePath);
     }
 
-
-    @Override
-    public void saveCardFolder(ReadOnlyCardFolder cardFolder) throws IOException {
-        saveCardFolder(cardFolder, cardFolderStorageList.get(0).getcardFolderFilesPath());
-    }
-
     /**
      * Saves the CardFolder to the specified filePath
      */
-    public void saveCardFolder(ReadOnlyCardFolder cardFolder, Path filePath) throws IOException {
+    @Override
+    public void saveCardFolder(ReadOnlyCardFolder cardFolder, int index) throws IOException {
+        // TODO: Handle IOOB exception
+        Path filePath = cardFolderStorageList.get(index).getcardFolderFilesPath();
         logger.fine("Attempting to write to data file: " + filePath);
-        cardFolderStorageList.get(0).saveCardFolder(cardFolder, filePath);
+        cardFolderStorageList.get(index).saveCardFolder(cardFolder, filePath);
     }
 
+    @Override
+    public void saveCardFolders(List<ReadOnlyCardFolder> cardFolders) throws IOException {
+        cardFolderStorageList.clear();
+        for (ReadOnlyCardFolder cardFolder : cardFolders) {
+            // TODO: Address hardcoding and add check for orphaned folders
+            Path filePath = Paths.get("data\\" + cardFolder.getFolderName());
+            CardFolderStorage cardFolderStorage = new JsonCardFolderStorage(filePath);
+            cardFolderStorageList.add(cardFolderStorage);
+            cardFolderStorage.saveCardFolder(cardFolder);
+        }
+    }
 }

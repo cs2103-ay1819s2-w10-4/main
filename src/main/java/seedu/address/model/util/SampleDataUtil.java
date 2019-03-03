@@ -42,11 +42,15 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyCardFolder getSampleCardFolder() {
-        CardFolder sampleAb = new CardFolder();
+        CardFolder sampleAb = new CardFolder(getSampleFolderName());
         for (Card sampleCard : getSampleCards()) {
             sampleAb.addCard(sampleCard);
         }
         return sampleAb;
+    }
+
+    public static String getSampleFolderName() {
+        return "Sample Folder";
     }
 
     /**

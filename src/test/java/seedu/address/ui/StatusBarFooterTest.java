@@ -29,7 +29,7 @@ public class StatusBarFooterTest extends GuiUnitTest {
     private static final Clock injectedClock = Clock.fixed(Instant.now(), ZoneId.systemDefault());
 
     private StatusBarFooterHandle statusBarFooterHandle;
-    private final CardFolder cardFolder = new CardFolder();
+    private final CardFolder cardFolder = new CardFolder(this.getClass().getName());
 
     @BeforeClass
     public static void setUpBeforeClass() {

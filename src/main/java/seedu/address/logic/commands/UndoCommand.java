@@ -20,11 +20,11 @@ public class UndoCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (!model.canUndoCardFolder()) {
+        if (!model.canUndoActiveCardFolder()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        model.undoCardFolder();
+        model.undoActiveCardFolder();
         model.updateFilteredCard(PREDICATE_SHOW_ALL_CARDS);
         return new CommandResult(MESSAGE_SUCCESS);
     }

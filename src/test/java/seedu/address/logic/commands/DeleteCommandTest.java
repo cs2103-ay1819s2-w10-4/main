@@ -38,7 +38,7 @@ public class DeleteCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getCardFolders(), new UserPrefs());
         expectedModel.deleteCard(cardToDelete);
-        expectedModel.commitCardFolder();
+        expectedModel.commitActiveCardFolder();
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -62,7 +62,7 @@ public class DeleteCommandTest {
 
         Model expectedModel = new ModelManager(model.getCardFolders(), new UserPrefs());
         expectedModel.deleteCard(cardToDelete);
-        expectedModel.commitCardFolder();
+        expectedModel.commitActiveCardFolder();
         showNoCard(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -87,17 +87,17 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CARD);
         Model expectedModel = new ModelManager(model.getCardFolders(), new UserPrefs());
         expectedModel.deleteCard(cardToDelete);
-        expectedModel.commitCardFolder();
+        expectedModel.commitActiveCardFolder();
 
         // delete -> first card deleted
         deleteCommand.execute(model, commandHistory);
 
         // undo -> reverts cardfolder back to previous state and filtered card list to show all cards
-        expectedModel.undoCardFolder();
+        expectedModel.undoActiveCardFolder();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first card deleted again
-        expectedModel.redoCardFolder();
+        expectedModel.redoActiveCardFolder();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -129,18 +129,18 @@ public class DeleteCommandTest {
         showCardAtIndex(model, INDEX_SECOND_CARD);
         Card cardToDelete = model.getFilteredCards().get(INDEX_FIRST_CARD.getZeroBased());
         expectedModel.deleteCard(cardToDelete);
-        expectedModel.commitCardFolder();
+        expectedModel.commitActiveCardFolder();
 
         // delete -> deletes second card in unfiltered card list / first card in filtered card list
         deleteCommand.execute(model, commandHistory);
 
         // undo -> reverts cardfolder back to previous state and filtered card list to show all cards
-        expectedModel.undoCardFolder();
+        expectedModel.undoActiveCardFolder();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(cardToDelete, model.getFilteredCards().get(INDEX_FIRST_CARD.getZeroBased()));
         // redo -> deletes same second card in unfiltered card list
-        expectedModel.redoCardFolder();
+        expectedModel.redoActiveCardFolder();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

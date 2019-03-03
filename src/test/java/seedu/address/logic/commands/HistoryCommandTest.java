@@ -10,8 +10,8 @@ import seedu.address.model.ModelManager;
 
 public class HistoryCommandTest {
     private CommandHistory history = new CommandHistory();
-    private Model model = new ModelManager();
-    private Model expectedModel = new ModelManager();
+    private Model model = new ModelManager(this.getClass().getName());
+    private Model expectedModel = new ModelManager(this.getClass().getName());
 
     @Test
     public void execute() {

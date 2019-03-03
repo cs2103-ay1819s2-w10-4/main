@@ -31,7 +31,7 @@ public class CardFolderTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final CardFolder cardFolder = new CardFolder();
+    private final CardFolder cardFolder = new CardFolder(this.getClass().getName());
 
     @Test
     public void constructor() {

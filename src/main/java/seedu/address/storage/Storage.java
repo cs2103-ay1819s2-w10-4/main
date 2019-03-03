@@ -15,9 +15,14 @@ import seedu.address.model.UserPrefs;
  */
 public interface Storage {
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
-    void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
-    Path getcardFolderFilesPath();
-    List<ReadOnlyCardFolder> readCardFolders() throws DataConversionException, IOException;
-    void saveCardFolder(ReadOnlyCardFolder cardFolder) throws IOException;
 
+    void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
+
+    Path getcardFolderFilesPath();
+
+    List<ReadOnlyCardFolder> readCardFolders() throws DataConversionException, IOException;
+
+    void saveCardFolder(ReadOnlyCardFolder cardFolder, int index) throws IOException;
+
+    void saveCardFolders(List<ReadOnlyCardFolder> cardFolders) throws IOException;
 }

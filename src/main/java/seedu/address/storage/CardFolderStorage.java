@@ -49,4 +49,9 @@ public interface CardFolderStorage {
      */
     void saveCardFolder(ReadOnlyCardFolder cardFolder, Path filePath) throws IOException;
 
+    /**
+     * Deletes the CardFolder at the {@code filePath}.
+     */
+    void deleteCardFolder(Path filePath) throws IOException;
+
 }
