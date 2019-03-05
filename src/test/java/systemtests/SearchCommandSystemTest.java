@@ -110,7 +110,7 @@ public class SearchCommandSystemTest extends CardFolderSystemTest {
         command = SearchCommand.COMMAND_WORD + " Mark";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
-        
+
         /* Case: find answer number of card in card folder -> 0 cards found */
         command = SearchCommand.COMMAND_WORD + " " + DANIEL.getAnswer().fullAnswer;
         assertCommandSuccess(command, expectedModel);

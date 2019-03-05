@@ -12,7 +12,7 @@ public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": imports a file containing card folders stored in "
             + ".Json format to the application. "
-            + "File imported must be in .json format.\n"
+            + "File imported must have a .json extension.\n"
             + "Parameters: JSON_FILE_NAME\n "
             + "Example: " + COMMAND_WORD + "alice.json";
 
