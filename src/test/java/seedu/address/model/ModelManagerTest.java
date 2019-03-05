@@ -3,7 +3,7 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_BOB;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
 import static seedu.address.testutil.TypicalCards.ALICE;
 import static seedu.address.testutil.TypicalCards.BENSON;
@@ -123,7 +123,7 @@ public class ModelManagerTest {
     public void setCard_cardIsSelected_selectedCardUpdated() {
         modelManager.addCard(ALICE);
         modelManager.setSelectedCard(ALICE);
-        Card updatedAlice = new CardBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        Card updatedAlice = new CardBuilder(ALICE).withAnswer(VALID_ANSWER_BOB).build();
         modelManager.setCard(ALICE, updatedAlice);
         assertEquals(updatedAlice, modelManager.getSelectedCard());
     }

@@ -1,26 +1,16 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ANSWER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ANSWER_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.HINT_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.HINT_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ANSWER_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_HINT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUESTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.QUESTION_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HINT_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HINT_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_AMY;
@@ -35,9 +25,7 @@ import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.card.Address;
 import seedu.address.model.card.Answer;
-import seedu.address.model.card.Email;
 import seedu.address.model.card.Question;
 import seedu.address.model.hint.Hint;
 import seedu.address.testutil.EditCardDescriptorBuilder;
@@ -82,12 +70,7 @@ public class EditCommandParserTest {
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_QUESTION_DESC, Question.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_ANSWER_DESC, Answer.MESSAGE_CONSTRAINTS); // invalid answer
-        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1" + INVALID_HINT_DESC, Hint.MESSAGE_CONSTRAINTS); // invalid hint
-
-        // invalid answer followed by valid email
-        assertParseFailure(parser, "1" + INVALID_ANSWER_DESC + EMAIL_DESC_AMY, Answer.MESSAGE_CONSTRAINTS);
 
         // valid answer followed by invalid answer. The test case for invalid answer followed by valid answer
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
@@ -99,21 +82,20 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + HINT_DESC_FRIEND + TAG_EMPTY + HINT_DESC_HUSBAND, Hint.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + TAG_EMPTY + HINT_DESC_FRIEND + HINT_DESC_HUSBAND, Hint.MESSAGE_CONSTRAINTS);
 
-        // multiple invalid values, but only the first invalid fullAnswer is captured
+        // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser,
-                "1" + INVALID_QUESTION_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_ANSWER_AMY,
+                "1" + INVALID_QUESTION_DESC + INVALID_HINT_DESC + VALID_ANSWER_AMY,
                 Question.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_CARD;
-        String userInput = targetIndex.getOneBased() + ANSWER_DESC_BOB + HINT_DESC_HUSBAND
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + QUESTION_DESC_AMY + HINT_DESC_FRIEND;
+        String userInput = targetIndex.getOneBased() + ANSWER_DESC_BOB + HINT_DESC_HUSBAND + QUESTION_DESC_AMY
+                + HINT_DESC_FRIEND;
 
         EditCommand.EditCardDescriptor descriptor = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_AMY)
-                .withAnswer(VALID_ANSWER_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withHint(VALID_HINT_HUSBAND, VALID_HINT_FRIEND).build();
+                .withAnswer(VALID_ANSWER_BOB).withHint(VALID_HINT_HUSBAND, VALID_HINT_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -122,10 +104,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_CARD;
-        String userInput = targetIndex.getOneBased() + ANSWER_DESC_BOB + EMAIL_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + ANSWER_DESC_BOB;
 
         EditCommand.EditCardDescriptor descriptor = new EditCardDescriptorBuilder().withAnswer(VALID_ANSWER_BOB)
-                .withEmail(VALID_EMAIL_AMY).build();
+                .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -147,18 +129,6 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // email
-        userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
-        descriptor = new EditCardDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
-        // address
-        userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
-        descriptor = new EditCardDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
         // tags
         userInput = targetIndex.getOneBased() + HINT_DESC_FRIEND;
         descriptor = new EditCardDescriptorBuilder().withHint(VALID_HINT_FRIEND).build();
@@ -169,14 +139,11 @@ public class EditCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_CARD;
-        String userInput = targetIndex.getOneBased() + ANSWER_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
-                + HINT_DESC_FRIEND + ANSWER_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + HINT_DESC_FRIEND
-                + ANSWER_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + HINT_DESC_HUSBAND;
+        String userInput = targetIndex.getOneBased() + ANSWER_DESC_AMY + HINT_DESC_FRIEND + ANSWER_DESC_AMY
+                + HINT_DESC_FRIEND + ANSWER_DESC_BOB + HINT_DESC_HUSBAND;
 
         EditCommand.EditCardDescriptor descriptor = new EditCardDescriptorBuilder().withAnswer(VALID_ANSWER_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withHint(VALID_HINT_FRIEND,
-                        VALID_HINT_HUSBAND)
-                .build();
+                .withHint(VALID_HINT_FRIEND, VALID_HINT_HUSBAND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -193,10 +160,8 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + EMAIL_DESC_BOB + INVALID_ANSWER_DESC + ADDRESS_DESC_BOB
-                + ANSWER_DESC_BOB;
-        descriptor = new EditCardDescriptorBuilder().withAnswer(VALID_ANSWER_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).build();
+        userInput = targetIndex.getOneBased() + INVALID_ANSWER_DESC + ANSWER_DESC_BOB;
+        descriptor = new EditCardDescriptorBuilder().withAnswer(VALID_ANSWER_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

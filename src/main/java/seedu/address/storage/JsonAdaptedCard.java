@@ -10,10 +10,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.card.Address;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
-import seedu.address.model.card.Email;
 import seedu.address.model.card.Question;
 import seedu.address.model.card.Score;
 import seedu.address.model.hint.Hint;
@@ -27,8 +25,6 @@ class JsonAdaptedCard {
 
     private final String question;
     private final String answer;
-    private final String email;
-    private final String address;
     private final String score;
     private final List<JsonAdaptedHint> hintList = new ArrayList<>();
 
@@ -37,12 +33,9 @@ class JsonAdaptedCard {
      */
     @JsonCreator
     public JsonAdaptedCard(@JsonProperty("question") String question, @JsonProperty("answer") String answer,
-                           @JsonProperty("email") String email, @JsonProperty("address") String address,
                            @JsonProperty("score") String score, @JsonProperty("hint") List<JsonAdaptedHint> hintList) {
         this.question = question;
         this.answer = answer;
-        this.email = email;
-        this.address = address;
         this.score = score;
         if (hintList != null) {
             this.hintList.addAll(hintList);
@@ -55,8 +48,6 @@ class JsonAdaptedCard {
     public JsonAdaptedCard(Card source) {
         question = source.getQuestion().fullQuestion;
         answer = source.getAnswer().fullAnswer;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
         score = source.getScore().toString();
         hintList.addAll(source.getHints().stream()
                 .map(JsonAdaptedHint::new)
@@ -91,22 +82,6 @@ class JsonAdaptedCard {
         }
         final Answer modelAnswer = new Answer(answer);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelEmail = new Email(email);
-
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
-
         if (score == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Score.class.getSimpleName()));
         }
@@ -116,7 +91,7 @@ class JsonAdaptedCard {
         final Score modelScore = new Score(score);
 
         final Set<Hint> modelHints = new HashSet<>(cardHints);
-        return new Card(modelQuestion, modelAnswer, modelEmail, modelAddress, modelScore, modelHints);
+        return new Card(modelQuestion, modelAnswer, modelScore, modelHints);
     }
 
 }

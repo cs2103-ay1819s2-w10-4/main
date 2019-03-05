@@ -18,22 +18,18 @@ public class Card {
     // Identity fields
     private final Question question;
     private final Answer answer;
-    private final Email email;
 
     // Data fields
-    private final Address address;
     private final Score score;
     private final Set<Hint> hints = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Card(Question question, Answer answer, Email email, Address address, Score score, Set<Hint> hints) {
-        requireAllNonNull(question, answer, email, address, score, hints);
+    public Card(Question question, Answer answer, Score score, Set<Hint> hints) {
+        requireAllNonNull(question, answer, score, hints);
         this.question = question;
         this.answer = answer;
-        this.email = email;
-        this.address = address;
         this.score = score;
         this.hints.addAll(hints);
     }
@@ -44,14 +40,6 @@ public class Card {
 
     public Answer getAnswer() {
         return answer;
-    }
-
-    public Email getEmail() {
-        return email;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     public Score getScore() {
@@ -97,7 +85,6 @@ public class Card {
         Card otherCard = (Card) other;
         return otherCard.getQuestion().equals(getQuestion())
                 && otherCard.getAnswer().equals(getAnswer())
-                && otherCard.getAddress().equals(getAddress())
                 && otherCard.getScore().equals(getScore())
                 && otherCard.getHints().equals(getHints());
     }
@@ -105,7 +92,7 @@ public class Card {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(question, answer, email, address, score, hints);
+        return Objects.hash(question, answer, score, hints);
     }
 
     @Override
@@ -114,8 +101,6 @@ public class Card {
         builder.append(getQuestion())
                 .append(" Answer: ")
                 .append(getAnswer())
-                .append(" Address: ")
-                .append(getAddress())
                 .append(" Score: ")
                 .append(getScore())
                 .append(" Hints: ");

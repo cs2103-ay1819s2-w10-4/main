@@ -6,10 +6,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditCardDescriptor;
-import seedu.address.model.card.Address;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
-import seedu.address.model.card.Email;
 import seedu.address.model.card.Question;
 import seedu.address.model.hint.Hint;
 
@@ -35,8 +33,6 @@ public class EditCardDescriptorBuilder {
         descriptor = new EditCommand.EditCardDescriptor();
         descriptor.setQuestion(card.getQuestion());
         descriptor.setAnswer(card.getAnswer());
-        descriptor.setEmail(card.getEmail());
-        descriptor.setAddress(card.getAddress());
         descriptor.setHints(card.getHints());
     }
 
@@ -53,22 +49,6 @@ public class EditCardDescriptorBuilder {
      */
     public EditCardDescriptorBuilder withAnswer(String answer) {
         descriptor.setAnswer(new Answer(answer));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Email} of the {@code EditCardDescriptor} that we are building.
-     */
-    public EditCardDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code EditCardDescriptor} that we are building.
-     */
-    public EditCardDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
         return this;
     }
 

@@ -3,15 +3,11 @@
   "cards": [ {
     "question": "Alice Pauline",
     "answer": "94351253",
-    "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
     "score": "1/2",
     "hint": [ "friends" ]
   }, {
     "question": "Alice Pauline",
     "answer": "94351253",
-    "email": "pauline@example.com",
-    "address": "4th street",
     "score": "3/4"
 
   } ]

@@ -110,21 +110,12 @@ public class SearchCommandSystemTest extends CardFolderSystemTest {
         command = SearchCommand.COMMAND_WORD + " Mark";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
-
+        
         /* Case: find answer number of card in card folder -> 0 cards found */
         command = SearchCommand.COMMAND_WORD + " " + DANIEL.getAnswer().fullAnswer;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find address of card in card folder -> 0 cards found */
-        command = SearchCommand.COMMAND_WORD + " " + DANIEL.getAddress().value;
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
-
-        /* Case: find email of card in card folder -> 0 cards found */
-        command = SearchCommand.COMMAND_WORD + " " + DANIEL.getEmail().value;
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
 
         /* Case: find hints of card in card folder -> 0 cards found */
         List<Hint> hints = new ArrayList<>(DANIEL.getHints());
