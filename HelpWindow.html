@@ -20,11 +20,11 @@
 <li><a href="#deleting-a-flashcard-code-delete-code">3.5. Deleting a flashcard : <code>delete</code></a></li>
 <li><a href="#create-new-folder-code-addfolder-code">3.6. Create new folder : <code>addfolder</code></a></li>
 <li><a href="#remove-folder-code-removefolder-code">3.7. Remove folder : <code>removefolder</code></a></li>
-<li><a href="#enter-folder-code-change-code">3.8. Enter folder : <code>change</code></a></li>
-<li><a href="#exit-folder-code-change-code">3.9. Exit folder : <code>change ..</code></a></li>
-<li><a href="#view-flashcards-in-a-folder-code-view-code">3.10. View flashcards in a folder : <code>view</code></a></li>
+<li><a href="#report-user-performance-for-folder-code-report-code">3.8. Report user performance for folder : <code>report</code></a></li>
+<li><a href="#enter-folder-code-change-code">3.9. Enter folder : <code>change</code></a></li>
+<li><a href="#exit-folder-code-change-code">3.10. Exit folder : <code>change ..</code></a></li>
 <li><a href="#test-flashcards-in-a-folder-code-test-code">3.11. Test flashcards in a folder : <code>test</code></a></li>
-<li><a href="#sort-cards-by-level-within-a-folder-sort">3.12. Sort cards by level within a folder : sort</a></li>
+<li><a href="#sort-cards-by-level-within-a-folder-code-sort-code">3.12. Sort cards by level within a folder : <code>sort</code></a></li>
 <li><a href="#search-by-keywords-code-search-code">3.13. Search by keywords : <code>search</code></a></li>
 <li><a href="#list-flashcards-code-list-code">3.14. List flashcards : <code>list</code></a></li>
 <li><a href="#import-flashcards-code-import-code">3.15. Import flashcards : <code>import</code></a></li>
@@ -100,7 +100,7 @@ Format: <code>edit i/INDEX [q/QUESTION] [a/ANSWER]</code></p>
 <div class="sect2">
 <h3 id="selecting-a-flashcard-code-select-code"><a class="link" href="#selecting-a-flashcard-code-select-code">3.4. Selecting a flashcard : <code>select</code></a></h3>
 <div class="paragraph">
-<p>Displays flashcard (question only) upon selection by index.<br>
+<p>Displays flashcard details(question, answer, hint, user performance) on the right panel on selection by index.<br>
 Format: <code>select INDEX</code></p>
 </div>
 </div>
@@ -126,45 +126,24 @@ Format: <code>removefolder FOLDER_INDEX</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="enter-folder-code-change-code"><a class="link" href="#enter-folder-code-change-code">3.8. Enter folder : <code>change</code></a></h3>
+<h3 id="report-user-performance-for-folder-code-report-code"><a class="link" href="#report-user-performance-for-folder-code-report-code">3.8. Report user performance for folder : <code>report</code></a></h3>
 <div class="paragraph">
-<p>Changes to the folder specified by index.<br>
+<p>Displays user performance on the right panel for the folder specified by index.<br>
+Format: <code>report FOLDER_INDEX</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enter-folder-code-change-code"><a class="link" href="#enter-folder-code-change-code">3.9. Enter folder : <code>change</code></a></h3>
+<div class="paragraph">
+<p>Changes to the folder specified by index. Left panel will display the list of cards in that folder.<br>
 Format: <code>change FOLDER_INDEX</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exit-folder-code-change-code"><a class="link" href="#exit-folder-code-change-code">3.9. Exit folder : <code>change ..</code></a></h3>
+<h3 id="exit-folder-code-change-code"><a class="link" href="#exit-folder-code-change-code">3.10. Exit folder : <code>change ..</code></a></h3>
 <div class="paragraph">
-<p>Return to the root directory (exit the current folder).<br>
+<p>Return to the root directory (exit the current folder). Left panel will display the list of folders.<br>
 Format: <code>change ..</code></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="view-flashcards-in-a-folder-code-view-code"><a class="link" href="#view-flashcards-in-a-folder-code-view-code">3.10. View flashcards in a folder : <code>view</code></a></h3>
-<div class="paragraph">
-<p>Begins a view session, where the display area enters a fullscreen and flashcards in a folder are queued to be displayed one by one. Both questions and answers for the flashcard can be seen.<br>
-Format: <code>view [FOLDER_INDEX]</code></p>
-</div>
-<div class="sect3">
-<h4 id="go-to-previous-flashcard-code-prev-code"><a class="link" href="#go-to-previous-flashcard-code-prev-code">3.10.1. Go to previous flashcard : <code>prev</code></a></h4>
-<div class="paragraph">
-<p>Goes back to the previous flashcard in this current view session.<br>
-Format: <code>prev</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="go-to-next-flashcard-code-next-code"><a class="link" href="#go-to-next-flashcard-code-next-code">3.10.2. Go to next flashcard : <code>next</code></a></h4>
-<div class="paragraph">
-<p>Presents the next flashcard in this current view session.<br>
-Format: <code>next</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="end-the-current-session-code-end-code"><a class="link" href="#end-the-current-session-code-end-code">3.10.3. End the current session : <code>end</code></a></h4>
-<div class="paragraph">
-<p>Quits the current view session.<br>
-Format: <code>end</code></p>
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -209,7 +188,7 @@ Format: <code>ans ANSWER</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="end-the-current-session-code-end-code-2"><a class="link" href="#end-the-current-session-code-end-code-2">3.11.3. End the current session : <code>end</code></a></h4>
+<h4 id="end-the-current-session-code-end-code"><a class="link" href="#end-the-current-session-code-end-code">3.11.3. End the current session : <code>end</code></a></h4>
 <div class="paragraph">
 <p>Quits the current test session.<br>
 Format: <code>end</code></p>
@@ -217,9 +196,9 @@ Format: <code>end</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="sort-cards-by-level-within-a-folder-sort"><a class="link" href="#sort-cards-by-level-within-a-folder-sort">3.12. Sort cards by level within a folder : sort</a></h3>
+<h3 id="sort-cards-by-level-within-a-folder-code-sort-code"><a class="link" href="#sort-cards-by-level-within-a-folder-code-sort-code">3.12. Sort cards by level within a folder : <code>sort</code></a></h3>
 <div class="paragraph">
-<p>Displays all flashcards sorted such that the lowest level cards are at the top.<br>
+<p>Displays all flashcards sorted such that the lowest user performing cards are at the top temporarily.<br>
 Format: <code>sort</code></p>
 </div>
 </div>
@@ -240,14 +219,14 @@ Format: <code>list</code></p>
 <div class="sect2">
 <h3 id="import-flashcards-code-import-code"><a class="link" href="#import-flashcards-code-import-code">3.15. Import flashcards : <code>import</code></a></h3>
 <div class="paragraph">
-<p>Searches for a file with the specified filename in the program directory and parses the file to generate a flashcard folder.<br>
+<p>Searches for a json file with the specified filename in the program directory and parses the file to generate a flashcard folder.<br>
 Format: <code>import FILENAME</code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="export-flashcards-code-export-code"><a class="link" href="#export-flashcards-code-export-code">3.16. Export flashcards : <code>export</code></a></h3>
 <div class="paragraph">
-<p>Creates a file containing the flashcards from the specified folder, which can later be imported.<br>
+<p>Creates a json file containing the flashcards from the specified folder, which can later be imported.<br>
 Format: <code>export FOLDER_INDEX FILENAME</code></p>
 </div>
 </div>
@@ -259,4 +238,4 @@ Format: <code>exit</code></p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-05 06:55:21 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-05 07:47:49 UTC</div></div></div></body></html>
