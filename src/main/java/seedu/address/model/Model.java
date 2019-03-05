@@ -167,4 +167,9 @@ public interface Model extends Observable {
      * End the current test session.
      */
     void endTestSession();
+
+    /**
+     * Checks whether list of card folder names specified is found inside model
+     */
+    boolean checkValidCardFolders(List<String> cardFolers);
 }

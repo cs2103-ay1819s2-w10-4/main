@@ -160,6 +160,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean checkValidCardFolders(List<String> cardFolers) {
+        return false;
+    }
+
+    @Override
     public boolean hasCard(Card card) {
         requireNonNull(card);
 

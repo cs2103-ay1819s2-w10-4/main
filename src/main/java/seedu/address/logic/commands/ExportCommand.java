@@ -30,6 +30,8 @@ public class ExportCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        return null;
+        // check whether model contains the card folders desired
+        // Retrieve card folders from model to be passed on to storage
+
     }
 }
