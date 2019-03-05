@@ -10,10 +10,11 @@ import seedu.address.model.Model;
 public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": imports a file containing card folders stored in "
-            + ".Json format to the application. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": imports a .json file containing "
+            + "card folders information.\n"
             + "File imported must have a .json extension.\n"
-            + "Parameters: JSON_FILE_NAME\n "
+            + "Default file path if not specified will be in ./data folder\n"
+            + "Parameters: JSON_FILE_NAME\n"
             + "Example: " + COMMAND_WORD + "alice.json";
 
 
