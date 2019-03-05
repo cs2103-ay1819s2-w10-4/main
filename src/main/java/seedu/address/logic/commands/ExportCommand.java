@@ -23,15 +23,26 @@ public class ExportCommand extends Command {
             + PREFIX_FOLDERNAME + "CARD_FOLDER_NAME [MORE CARD_FOLDER_NAMES]..."
             + PREFIX_FILENAME + "Filename.json\n"
             + "Example: " + COMMAND_WORD + "f/Human_anatomy f/Bone_structure n/myfilename.json";
+
     public static final String MESSAGE_SUCCESS = "Successfully exported card folders to: $1%s";
 
-    public ExportCommand(List<String> folderNames, String filename) {
+    public static final String MESSAGE_MISSING_CARD_FOLDERS = "Could not find one or more specified card folders";
+
+    private List<String> cardFolders;
+    private String filename;
+
+    public ExportCommand(List<String> cardFolders, String filename) {
+        this.cardFolders = cardFolders;
+        this.filename = filename;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         // check whether model contains the card folders desired
+        if (!model.checkValidCardFolders(cardFolders)) {
+            throw new CommandException(MESSAGE_MISSING_CARD_FOLDERS);
+        }
         // Retrieve card folders from model to be passed on to storage
-
+        return null;
     }
 }
