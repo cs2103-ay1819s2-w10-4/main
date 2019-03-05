@@ -101,8 +101,6 @@ public class CommandParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
-
-
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
