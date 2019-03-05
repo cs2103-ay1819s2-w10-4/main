@@ -12,15 +12,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ImportCommandParser implements Parser<ImportCommand> {
 
+
     @Override
     public ImportCommand parse(String userInput) throws ParseException {
-        String trimmedArgs = userInput.trim();
-        if (trimmedArgs.isEmpty()) {
+        String filename = userInput.trim();
+        if (filename.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
         }
-        // check for correct file extension
-        return null;
-
+        return new ImportCommand(userInput);
     }
 }
