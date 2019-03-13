@@ -87,14 +87,49 @@
 <h3 id="adding-a-flashcard-code-add-code"><a class="link" href="#adding-a-flashcard-code-add-code">3.2. Adding a flashcard : <code>add</code></a></h3>
 <div class="paragraph">
 <p>Adds a flashcard to the current folder.<br>
-Format: <code>add q/QUESTION a/ANSWER</code></p>
+Format: <code>add q/QUESTION a/ANSWER [h/HINT]&#8230;&#8203;</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+A card can have at most 1 hint (including 0)
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
 <h3 id="editing-a-flashcard-code-edit-code"><a class="link" href="#editing-a-flashcard-code-edit-code">3.3. Editing a flashcard : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>Edits the flashcard specified by the index in the current folder.<br>
-Format: <code>edit i/INDEX [q/QUESTION] [a/ANSWER]</code></p>
+Format: <code>edit i/INDEX [q/QUESTION] [a/ANSWER] [h/HINT]&#8230;&#8203;</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the card at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed card list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+<li>
+<p>When editing hints, the existing hint of the person will be removed i.e adding of hints is not cumulative.</p>
+</li>
+<li>
+<p>You can remove the card&#8217;s hint by typing <code>h/</code> without specifying any hint after it.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -238,4 +273,4 @@ Format: <code>exit</code></p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-13 04:30:07 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-13 09:21:10 UTC</div></div></div></body></html>
