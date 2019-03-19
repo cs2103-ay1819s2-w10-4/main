@@ -137,17 +137,98 @@
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="sort-feature"><a class="link" href="#sort-feature">Sort feature</a></h3>
+<h3 id="score-feature"><a class="link" href="#score-feature">Score feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
-<p>To implement the sort command, a method was added to sort the <code>internalList</code> of cards.
-The sort command by default sorts by providing a Comparator for Score, but any comparator can be provided to sort cards in the desired manner.</p>
-</div>
-<div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#sortFilteredCard()</code>.</p>
+<p>To implement tracking of the number of correct and incorrect attempts, a new attribute <code>Score</code> was added to <code>Card</code>.
+Score keeps track of both numbers.
+This attribute is encapsulated in the <code>Score</code> class.</p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-to-represent-score"><a class="link" href="#aspect-how-to-represent-score">Aspect: How to represent score</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Track total number of correct attempts and total number of attempts</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Simple to implement. Most semantically correct.</p>
+</li>
+<li>
+<p>Cons: Score will be rolling average. If the question is answered wrongly even once, the score can never be 100%.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Track only last X attempts.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: An improvement in performance will be more obvious.</p>
+</li>
+<li>
+<p>Cons: Uses more memory. Have to delete the X+1th score every time a new score is added.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-19 13:59:00 UTC</div></div></div></body></html>
+<div class="sect4">
+<h5 id="aspect-how-to-read-write-score-from-file"><a class="link" href="#aspect-how-to-read-write-score-from-file">Aspect: How to read/write score from file</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Read/write as <code>String</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: `String`s are easier to read/write to file.</p>
+</li>
+<li>
+<p>Cons: There must be strict checks when instantiating score from strings as they are prone to many kinds of formatting errors.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Read/write as a double.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: A <code>double</code> can represent both numbers with just one, which then can be converted to <code>String</code>.</p>
+</li>
+<li>
+<p>Cons: When instantiating score from double, it might be simplified.
+For example, 2 correct attempts and 4 total attempts becomes 0.5. When instantiating from double, it is interpreted as 1 correct attempt and 2 total attempts.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Read and write both numbers as integers.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Most correct implementation.</p>
+</li>
+<li>
+<p>Cons: Reading/writing to file now needs to take into account this fact. The <code>toString()</code> method cannot be used to write to file.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-19 14:15:54 UTC</div></div></div></body></html>
