@@ -42,32 +42,37 @@
 <li><a href="#design-considerations">3.1.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#score-feature">3.2. Score feature</a>
+<li><a href="#cards">3.2. Cards</a>
 <ul class="sectlevel3">
 <li><a href="#current-implementation-2">3.2.1. Current Implementation</a></li>
-<li><a href="#design-considerations-2">3.2.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#import-export-feature">3.3. Import/Export feature</a>
+<li><a href="#score-feature">3.3. Score feature</a>
 <ul class="sectlevel3">
 <li><a href="#current-implementation-3">3.3.1. Current Implementation</a></li>
+<li><a href="#design-considerations-2">3.3.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#test-session-feature">3.4. Test Session feature</a>
+<li><a href="#import-export-feature">3.4. Import/Export feature</a>
 <ul class="sectlevel3">
 <li><a href="#current-implementation-4">3.4.1. Current Implementation</a></li>
-<li><a href="#test-end-command">3.4.2. Test / End Command</a></li>
-<li><a href="#answer-command">3.4.3. Answer Command</a></li>
 </ul>
 </li>
-<li><a href="#folders">3.5. Folders</a>
+<li><a href="#test-session-feature">3.5. Test Session feature</a>
 <ul class="sectlevel3">
 <li><a href="#current-implementation-5">3.5.1. Current Implementation</a></li>
-<li><a href="#design-considerations-3">3.5.2. Design Considerations</a></li>
+<li><a href="#test-end-command">3.5.2. Test / End Command</a></li>
+<li><a href="#answer-command">3.5.3. Answer Command</a></li>
 </ul>
 </li>
-<li><a href="#logging">3.6. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.7. Configuration</a></li>
+<li><a href="#folders">3.6. Folders</a>
+<ul class="sectlevel3">
+<li><a href="#current-implementation-6">3.6.1. Current Implementation</a></li>
+<li><a href="#design-considerations-3">3.6.2. Design Considerations</a></li>
+</ul>
+</li>
+<li><a href="#logging">3.7. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.8. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -812,9 +817,74 @@ If the <code>currentStatePointer</code> is at index <code>cardFolderStateList.si
 </div>
 </div>
 <div class="sect2">
-<h3 id="score-feature"><a class="link" href="#score-feature">3.2. Score feature</a></h3>
+<h3 id="cards"><a class="link" href="#cards">3.2. Cards</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The <code>Card</code> is one of the core aspects of the application. Cards are the result of morphing of the <code>Person</code> class from the original AddressBook model. The implementation incorporates the <code>Logic</code> and <code>Model</code> components.</p>
+</div>
+<h4 id="model" class="discrete">Model</h4>
+<div class="paragraph">
+<p>To allow users to manage Cards, the following methods are available via the <code>Model</code> component:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ModelManager#addCard(Card card)</code> - Adds a new card to the currently active <code>VersionedCardFolder</code> folder</p>
+</li>
+<li>
+<p><code>ModelManager#setCard(Card target, Card editedCard)</code> - Edits the information of a target card in the currently active folder</p>
+</li>
+<li>
+<p><code>ModelManager#deleteCard(Card target)</code> - Deletes the target card from the currently active folder</p>
+</li>
+<li>
+<p><code>ModelManager#hasCard(Card card)</code> - Checks if a card is already present in the currently active folder</p>
+</li>
+</ul>
+</div>
+<h4 id="example-usage" class="discrete">Example Usage</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User is in the <code>Organs</code> folder and wants to add a new card, with question 'What is the largest organ?' and answer 'Skin'. This is done by typing <code>add q/What is the largest organ? a/Skin</code>.</p>
+<div class="literalblock">
+<div class="content">
+<pre>picture of command box with user inputs</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Upon execution, the <code>AddCommand</code> checks if the card to be added is already present in the current folder. If so, an exception is thrown.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The <code>AddCommand</code> then calls the <code>ModelManager#addCard(Card card)</code> method.</p>
+</li>
+<li>
+<p>The new card will then be added to the active <code>VersionedCardFolder</code>.</p>
+<div class="literalblock">
+<div class="content">
+<pre>picture of main window with updated card thumbnail list</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sequence diagram showing how add command works</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="score-feature"><a class="link" href="#score-feature">3.3. Score feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>To implement tracking of the number of correct and incorrect attempts, a new attribute <code>Score</code> was added to <code>Card</code>.
 Score keeps track of both numbers.
@@ -822,7 +892,7 @@ This attribute is encapsulated in the <code>Score</code> class.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.3.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-to-represent-score"><a class="link" href="#aspect-how-to-represent-score">Aspect: How to represent score</a></h5>
 <div class="ulist">
@@ -906,9 +976,9 @@ For example, 2 correct attempts and 4 total attempts becomes 0.5. When instantia
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-export-feature"><a class="link" href="#import-export-feature">3.3. Import/Export feature</a></h3>
+<h3 id="import-export-feature"><a class="link" href="#import-export-feature">3.4. Import/Export feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The Import and Export feature is facilitated by the addition of 3 new classes inside the csvmanager package defined under storage component.</p>
 </div>
@@ -932,7 +1002,7 @@ For example, 2 correct attempts and 4 total attempts becomes 0.5. When instantia
 <div class="paragraph">
 <p>CsvManager&#8217;s API’s are exposed in the model interface as  <code>Model#ExportCardFolders</code> and <code>Model#ImportCardFolders</code> method</p>
 </div>
-<h4 id="example-usage" class="discrete">Example Usage</h4>
+<h4 id="example-usage-2" class="discrete">Example Usage</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -977,13 +1047,13 @@ Contains the list of card folders present in the model</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="test-session-feature"><a class="link" href="#test-session-feature">3.4. Test Session feature</a></h3>
+<h3 id="test-session-feature"><a class="link" href="#test-session-feature">3.5. Test Session feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>This feature mainly involves <code>UI</code>, <code>Logic</code> and <code>Model</code> components.</p>
 </div>
-<h5 id="model" class="discrete">Model:</h5>
+<h5 id="model-2" class="discrete">Model:</h5>
 <div class="paragraph">
 <p>The following variables in <code>ModelManager</code> are introduced to keep track of the current state in a test session. The related methods are exposed in the <code>Model</code> interface.</p>
 </div>
@@ -1059,8 +1129,8 @@ Contains the list of card folders present in the model</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="test-end-command"><a class="link" href="#test-end-command">3.4.2. Test / End Command</a></h4>
-<h5 id="model-2" class="discrete">Model</h5>
+<h4 id="test-end-command"><a class="link" href="#test-end-command">3.5.2. Test / End Command</a></h4>
+<h5 id="model-3" class="discrete">Model</h5>
 <div class="paragraph">
 <p>The main logic for  <code>test</code> and <code>end</code> command is carried out inside the ModelManager with the following methods:</p>
 </div>
@@ -1119,7 +1189,7 @@ is now presented to the user.</p>
 </li>
 </ul>
 </div>
-<h5 id="example-usage-2" class="discrete">Example Usage</h5>
+<h5 id="example-usage-3" class="discrete">Example Usage</h5>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1197,8 +1267,8 @@ will then invoke <code>MainWindow#handleEndTestSession()</code> in the <code>UI<
 </div>
 </div>
 <div class="sect3">
-<h4 id="answer-command"><a class="link" href="#answer-command">3.4.3. Answer Command</a></h4>
-<h5 id="model-3" class="discrete">Model</h5>
+<h4 id="answer-command"><a class="link" href="#answer-command">3.5.3. Answer Command</a></h4>
+<h5 id="model-4" class="discrete">Model</h5>
 <div class="paragraph">
 <p>To facilitate the marking of attempted answer, <code>#markAttemptedAnswer()</code> method is introduced in <code>ModelManager</code> which compares the attempted answer and the correct answer obtained from the current card.</p>
 </div>
@@ -1220,9 +1290,9 @@ Comparison is not case-sensitive
 </div>
 </div>
 <div class="sect2">
-<h3 id="folders"><a class="link" href="#folders">3.5. Folders</a></h3>
+<h3 id="folders"><a class="link" href="#folders">3.6. Folders</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.6.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>A folder is another layer of abstraction over a <code>CardFolder</code>. Where we dealt with a single <code>CardFolder</code> in previous iterations, we now have multiple <code>CardFolders</code> that each have their own set of <code>Cards</code>. Users are able to manage each <code>CardFolder</code> independently.</p>
 </div>
@@ -1230,7 +1300,7 @@ Comparison is not case-sensitive
 <p>Folders in the application are achieved via enhancements from the AddressBook implementation. The changes span across all four components (UI, Logic, Model and Storage).</p>
 </div>
 <div class="sect4">
-<h5 id="model-4"><a class="link" href="#model-4">Model</a></h5>
+<h5 id="model-5"><a class="link" href="#model-5">Model</a></h5>
 <div class="paragraph">
 <p>Previously, an instance of <code>ModelManager</code> contains only a single <code>VersionedCardFolder</code>, holding the current and previous state of the <code>CardFolder</code>. To support multiple folders, <code>ModelManager</code> now holds an <code>ObservableList</code> of <code>CardFolders</code>. The change is illustrated in the figure below, with the original implementation on the left and new implementation on the right.</p>
 </div>
@@ -1294,7 +1364,7 @@ Comparison is not case-sensitive
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.6.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-multiple-folders-are-represented"><a class="link" href="#aspect-how-multiple-folders-are-represented">Aspect: How multiple folders are represented</a></h5>
 <div class="ulist">
@@ -1364,14 +1434,14 @@ Comparison is not case-sensitive
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.7. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.7, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.8, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1402,7 +1472,7 @@ Comparison is not case-sensitive
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.7. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.8. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2960,4 +3030,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-19 14:34:16 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-19 15:27:40 UTC</div></div></div></body></html>

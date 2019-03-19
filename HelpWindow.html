@@ -46,8 +46,13 @@
 <li><a href="#search-by-keywords-code-search-code">3.4.1. Search by keywords : <code>search</code></a></li>
 <li><a href="#import-flashcards-code-import-code">3.4.2. Import flashcards : <code>import</code></a></li>
 <li><a href="#export-flashcards-code-export-code">3.4.3. Export flashcards : <code>export</code></a></li>
-<li><a href="#viewing-help-code-help-code">3.4.4. Viewing help : <code>help</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.4.5. Exiting the program : <code>exit</code></a></li>
+</ul>
+</li>
+<li><a href="#undoing-previous-command-code-undo-code">3.5. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.6. Redoing the previously undone command : <code>redo</code></a>
+<ul class="sectlevel3">
+<li><a href="#viewing-help-code-help-code">3.6.1. Viewing help : <code>help</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.6.2. Exiting the program : <code>exit</code></a></li>
 </ul>
 </li>
 </ul>
@@ -181,6 +186,19 @@ The commands in this section can only be executed when the user is within a fold
 </div>
 </div>
 </div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add q/Hello? a/World</code></p>
+</li>
+<li>
+<p><code>add q/The cat <em>_</em> on the mat a/sat h/poetry</code></p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="editing-a-flashcard-code-edit-code"><a class="link" href="#editing-a-flashcard-code-edit-code">3.1.2. Editing a flashcard : <code>edit</code></a></h4>
@@ -213,6 +231,21 @@ The commands in this section can only be executed when the user is within a fold
 </div>
 </div>
 </div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit 1 a/Skin h/</code><br>
+Edits the answer of the 1st card to be 'Skin' and removes the hint associated, if any.</p>
+</li>
+<li>
+<p><code>edit 2 h/history q/Who discovered Penicillin? a/Alexander Fleming</code><br>
+Edits the hint, question and answer of the 2nd card respectively.</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="selecting-a-flashcard-code-select-code"><a class="link" href="#selecting-a-flashcard-code-select-code">3.1.3. Selecting a flashcard : <code>select</code></a></h4>
@@ -228,8 +261,9 @@ The commands in this section can only be executed when the user is within a fold
 <div class="ulist">
 <ul>
 <li>
-<p><code>select  2</code><br>
-Selects the 2nd flashcard in the folder.</p>
+<p><code>list</code><br>
+<code>select 2</code><br>
+Selects the 2nd card in the current folder</p>
 </li>
 </ul>
 </div>
@@ -241,6 +275,32 @@ Selects the 2nd flashcard in the folder.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>delete INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the card at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed card list.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>delete 2</code><br>
+Deletes the 2nd card in the address book.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
@@ -634,14 +694,91 @@ There is no backtracking in the current session so there is no <code>prev</code>
 <p>Format: <code>export FOLDER_INDEX FILENAME</code></p>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.5. Undoing previous command : <code>undo</code></a></h3>
+<div class="paragraph">
+<p>Restores the application to the state before the previous <em>undoable</em> command was executed.<br>
+Format: <code>undo</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Undoable commands: those commands that modify the card folder&#8217;s content (<code>add</code>, <code>delete</code> and <code>edit</code>).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>delete 1</code><br>
+<code>list</code><br>
+<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+</li>
+<li>
+<p><code>select 1</code><br>
+<code>list</code><br>
+<code>undo</code><br>
+The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
+</li>
+<li>
+<p><code>delete 1</code><br>
+<code>clear</code><br>
+<code>undo</code> (reverses the <code>clear</code> command)<br>
+<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.6. Redoing the previously undone command : <code>redo</code></a></h3>
+<div class="paragraph">
+<p>Reverses the most recent <code>undo</code> command.<br>
+Format: <code>redo</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>delete 1</code><br>
+<code>undo</code> (reverses the <code>delete 1</code> command)<br>
+<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
+</li>
+<li>
+<p><code>delete 1</code><br>
+<code>redo</code><br>
+The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
+</li>
+<li>
+<p><code>delete 1</code><br>
+<code>clear</code><br>
+<code>undo</code> (reverses the <code>clear</code> command)<br>
+<code>undo</code> (reverses the <code>delete 1</code> command)<br>
+<code>redo</code> (reapplies the <code>delete 1</code> command)<br>
+<code>redo</code> (reapplies the <code>clear</code> command)<br></p>
+</li>
+</ul>
+</div>
 <div class="sect3">
-<h4 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.4.4. Viewing help : <code>help</code></a></h4>
+<h4 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.6.1. Viewing help : <code>help</code></a></h4>
 <div class="paragraph">
 <p>Format: <code>help</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.4.5. Exiting the program : <code>exit</code></a></h4>
+<h4 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.6.2. Exiting the program : <code>exit</code></a></h4>
 <div class="paragraph">
 <p>Exits the program.</p>
 </div>
@@ -755,4 +892,4 @@ Within a folder, user can search for flashcards inside the current folder using 
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-19 14:34:16 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-19 15:27:40 UTC</div></div></div></body></html>
