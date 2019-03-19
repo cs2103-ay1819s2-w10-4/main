@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">AddressBook-Level4</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link active" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level4"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Know-It-All - User Guide</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>By: <code>Team W10-4</code>      Since: <code>Feb 2019</code>      Licence: <code>MIT</code></p>
+<p>By: <code>CS2103-AY2018/19s2-W10-4 Team</code>      Since: <code>Mar 2019</code>      Licence: <code>MIT</code></p>
 </div>
 </div>
 <div id="toc" class="toc">
@@ -49,8 +49,55 @@
 <div class="sect1">
 <h2 id="quick-start"><a class="link" href="#quick-start">2. Quick Start</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Coming in v2.0</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Ensure you have Java version <code>9</code> or later installed in your Computer.</p>
+</li>
+<li>
+<p>Download the latest <code>know-it-all.jar</code> here (to be coming in v2.0).</p>
+</li>
+<li>
+<p>Copy the file to the folder you want to use as the home folder for <strong>Know-It-All</strong>.</p>
+</li>
+<li>
+<p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/Ui.png" alt="Ui" width="790">
+</div>
+</div>
+</li>
+<li>
+<p>Type the command in the command box and press <kbd>Enter</kbd> to execute it.<br>
+e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> will open the help window.</p>
+</li>
+<li>
+<p>Some example commands you can try:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><code>change</code></strong> <code>1</code> : enter the 1st flashcard folder</p>
+</li>
+<li>
+<p><strong><code>list</code></strong> : lists all flashcards in that folder</p>
+</li>
+<li>
+<p><strong><code>add</code></strong><code>q/How many chambers are there in a heart? a/Four</code> : adds a new flashcard to the current folder.</p>
+</li>
+<li>
+<p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd flashcard shown in the current folder</p>
+</li>
+<li>
+<p><strong><code>exit</code></strong> : exits the app</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Refer to <a href="#Features">Section 3, &#8220;Features&#8221;</a> for details of each command.</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -86,8 +133,10 @@
 <div class="sect2">
 <h3 id="adding-a-flashcard-code-add-code"><a class="link" href="#adding-a-flashcard-code-add-code">3.2. Adding a flashcard : <code>add</code></a></h3>
 <div class="paragraph">
-<p>Adds a flashcard to the current folder.<br>
-Format: <code>add q/QUESTION a/ANSWER [h/HINT]&#8230;&#8203;</code></p>
+<p>Adds a flashcard to the current folder.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>add q/QUESTION a/ANSWER [h/HINT]&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -105,8 +154,10 @@ A card can have at most 1 hint (including 0)
 <div class="sect2">
 <h3 id="editing-a-flashcard-code-edit-code"><a class="link" href="#editing-a-flashcard-code-edit-code">3.3. Editing a flashcard : <code>edit</code></a></h3>
 <div class="paragraph">
-<p>Edits the flashcard specified by the index in the current folder.<br>
-Format: <code>edit i/INDEX [q/QUESTION] [a/ANSWER] [h/HINT]&#8230;&#8203;</code></p>
+<p>Edits the flashcard specified by the index in the current folder.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>edit i/INDEX [q/QUESTION] [a/ANSWER] [h/HINT]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -135,57 +186,82 @@ Format: <code>edit i/INDEX [q/QUESTION] [a/ANSWER] [h/HINT]&#8230;&#8203;</code>
 <div class="sect2">
 <h3 id="selecting-a-flashcard-code-select-code"><a class="link" href="#selecting-a-flashcard-code-select-code">3.4. Selecting a flashcard : <code>select</code></a></h3>
 <div class="paragraph">
-<p>Displays flashcard details(question, answer, hint, user performance) on the right panel on selection by index.<br>
-Format: <code>select INDEX</code></p>
+<p>Displays flashcard details(question, answer, hint, user performance) on the right panel on selection by index.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>select INDEX</code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="deleting-a-flashcard-code-delete-code"><a class="link" href="#deleting-a-flashcard-code-delete-code">3.5. Deleting a flashcard : <code>delete</code></a></h3>
 <div class="paragraph">
-<p>Deletes the flashcard identified by index from the current folder.<br>
-Format: <code>delete INDEX</code></p>
+<p>Deletes the flashcard identified by index from the current folder.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>delete INDEX</code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="create-new-folder-code-addfolder-code"><a class="link" href="#create-new-folder-code-addfolder-code">3.6. Create new folder : <code>addfolder</code></a></h3>
 <div class="paragraph">
-<p>Creates a new flashcard folder with the specified question.<br>
-Format: <code>addfolder FOLDER_NAME</code></p>
+<p>Creates a new flashcard folder with the specified question.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>addfolder FOLDER_NAME</code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="remove-folder-code-removefolder-code"><a class="link" href="#remove-folder-code-removefolder-code">3.7. Remove folder : <code>removefolder</code></a></h3>
 <div class="paragraph">
-<p>Removes the flashcard folder specified by index.<br>
-Format: <code>removefolder FOLDER_INDEX</code></p>
+<p>Removes the flashcard folder specified by index.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>removefolder FOLDER_INDEX</code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="report-user-performance-for-folder-code-report-code"><a class="link" href="#report-user-performance-for-folder-code-report-code">3.8. Report user performance for folder : <code>report</code></a></h3>
 <div class="paragraph">
-<p>Displays user performance on the right panel for the folder specified by index.<br>
-Format: <code>report FOLDER_INDEX</code></p>
+<p>Displays user performance on the right panel for the folder specified by index.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>report FOLDER_INDEX</code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="enter-folder-code-change-code"><a class="link" href="#enter-folder-code-change-code">3.9. Enter folder : <code>change</code></a></h3>
 <div class="paragraph">
-<p>Changes to the folder specified by index. Left panel will display the list of cards in that folder.<br>
-Format: <code>change FOLDER_INDEX</code></p>
+<p>Changes to the folder specified by index. Left panel will display the list of cards in that folder.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>change FOLDER_INDEX</code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="exit-folder-code-change-code"><a class="link" href="#exit-folder-code-change-code">3.10. Exit folder : <code>change ..</code></a></h3>
 <div class="paragraph">
-<p>Return to the root directory (exit the current folder). Left panel will display the list of folders.<br>
-Format: <code>change ..</code></p>
+<p>Return to the root directory (exit the current folder). Left panel will display the list of folders.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>change ..</code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="test-flashcards-in-a-folder-code-test-code"><a class="link" href="#test-flashcards-in-a-folder-code-test-code">3.11. Test flashcards in a folder : <code>test</code></a></h3>
 <div class="paragraph">
-<p>Begins a test session, where the display area enters a fullscreen and flashcards in a folder are queued to be displayed one by one. Only questions are presented and users are required to either input an attempt or the command to reveal the answer.<br>
-Format: <code>test [FOLDER_INDEX]</code></p>
+<p>As medical students, loads of time are spent memorising the content of these flashcards. It is time to test how much information have been internalised and retained in a timed setting.</p>
+</div>
+<div class="paragraph">
+<p>This command begins a test session, where the display area enters a fullscreen (see figure below). Only questions and
+hints are presented and users are required to either input an attempt or the command to reveal the answer within 20 seconds. When the 20 seconds is up before the question is answered, this attempt will be marked as wrong. Internally, flashcards in a folder are queued to be displayed one by one in the order of lowest existing score to highest existing score. The next card will only be presented when the next command is carried out.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/startTestSessionPage.png" alt="startTestSessionPage" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p>Format: <code>test [FOLDER_INDEX]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -193,22 +269,32 @@ Format: <code>test [FOLDER_INDEX]</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>test 1</code> (starts a session by displaying a flashcard from the 1st folder)</p>
+<p><code>test 1</code><br>
+Starts a session by displaying a flashcard (both question and hint) from the 1st folder where 20 seconds is given to each card to be answered.</p>
 </li>
 </ul>
 </div>
-<div class="sect3">
-<h4 id="reveal-answer-to-a-flashcard-code-reveal-code"><a class="link" href="#reveal-answer-to-a-flashcard-code-reveal-code">3.11.1. Reveal answer to a flashcard : <code>reveal</code></a></h4>
 <div class="paragraph">
-<p>Allows user to see the answer to the currently displayed card without keying in any answer.<br>
-Format: <code>reveal</code></p>
+<p><strong>Hint Toggle On / Off Feature</strong> <code>To be coming in v2.0</code></p>
 </div>
+<div class="paragraph">
+<p>When extra help is needed and familiarity with the content is not yet established hints can be toggled on during a test session when a ‘-hint’ is added on at the end of the test command. Hint will be displayed along with the question when the card is presented.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>test [FOLDER_INDEX] [-hint]</code></p>
 </div>
 <div class="sect3">
-<h4 id="keying-in-answer-to-a-flashcard-code-ans-code"><a class="link" href="#keying-in-answer-to-a-flashcard-code-ans-code">3.11.2. Keying in answer to a flashcard: <code>ans</code></a></h4>
+<h4 id="keying-in-answer-to-a-flashcard-code-ans-code"><a class="link" href="#keying-in-answer-to-a-flashcard-code-ans-code">3.11.1. Keying in answer to a flashcard: <code>ans</code></a></h4>
 <div class="paragraph">
-<p>Allows user to input an answer for the currently displayed card. An ans command is only considered valid if a user is currently running an active test session and/or a card is currently being displayed.<br>
-Format: <code>ans ANSWER</code></p>
+<p>To reinforce learning and enable a more engaging experience with Know-It-All, one can input an answer for the
+currently displayed flashcard question. Know-It-All compares the attempt with the correct answer in that card and
+shows if it is correct or wrong.</p>
+</div>
+<div class="paragraph">
+<p>The total number of attempts will be incremented. If the answer is correct, the number of correct attempts will also be incremented.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>ans ANSWER</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -216,32 +302,109 @@ Format: <code>ans ANSWER</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>(Card question: What is the powerhouse of the cell?)<br>
-<code>ans Mitochondria</code></p>
+<p><code>ans Mitochondrion</code><br>
+in response to the card question: What is the powerhouse of the cell?</p>
 </li>
 </ul>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Answer matching is case insensitive.<br>
+This command is only considered valid if a card question is currently being
+displayed in an active test session.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect3">
-<h4 id="end-the-current-session-code-end-code"><a class="link" href="#end-the-current-session-code-end-code">3.11.3. End the current session : <code>end</code></a></h4>
+<h4 id="reveal-answer-to-a-flashcard-code-reveal-code"><a class="link" href="#reveal-answer-to-a-flashcard-code-reveal-code">3.11.2. Reveal answer to a flashcard : <code>reveal</code></a></h4>
 <div class="paragraph">
-<p>Quits the current test session.<br>
-Format: <code>end</code></p>
+<p>As busy students, there is no need to wait for the full 20 seconds to be up to be presented with the correct answer.</p>
+</div>
+<div class="paragraph">
+<p>See the answer to the currently displayed card without keying in any answer. This is equivalent to a wrong answer, so there is no addition to the correct attempts of this card.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>reveal</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+This command is only considered valid if a card question is currently being displayed in an active test session.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="go-to-next-flashcard-code-next-code"><a class="link" href="#go-to-next-flashcard-code-next-code">3.11.3. Go to next flashcard : <code>next</code></a></h4>
+<div class="paragraph">
+<p>Presents the next lowest score flashcard in this current test session and the 20 seconds starts running again before the answer is revealed.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>next</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+This command is only considered valid if a card question and answer is currently being displayed  (has already done answering the question or revealed the answer) in an active test session. In other words, a flashcard cannot be skipped.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+There is no backtracking in the current session so there is no <code>prev</code> command.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="end-the-current-session-code-end-code"><a class="link" href="#end-the-current-session-code-end-code">3.11.4. End the current session : <code>end</code></a></h4>
+<div class="paragraph">
+<p>Quits the current test session.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>end</code></p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="sort-cards-by-level-within-a-folder-code-sort-code"><a class="link" href="#sort-cards-by-level-within-a-folder-code-sort-code">3.12. Sort cards by level within a folder : <code>sort</code></a></h3>
 <div class="paragraph">
-<p>Displays all flashcards sorted such that the lowest scoring cards are at the top temporarily.<br>
-Format: <code>sort</code></p>
+<p>Displays all flashcards sorted such that the lowest scoring cards are at the top temporarily.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>sort</code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="search-by-keywords-code-search-code"><a class="link" href="#search-by-keywords-code-search-code">3.13. Search by keywords : <code>search</code></a></h3>
 <div class="paragraph">
-<p>At the root directory, searches for folders using keywords in folder names. Within a folder, user can search for flashcards inside the current folder using keywords in flashcard questions.<br>
-Format: <code>search KEYWORDS [MORE_KEYWORDS]</code></p>
+<p>At the root directory, searches for folders using keywords in folder names. Within a folder, user can search for flashcards inside the current folder using keywords in flashcard questions.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>search KEYWORDS [MORE_KEYWORDS]</code></p>
 </div>
 </div>
 <div class="sect2">
@@ -261,16 +424,20 @@ Format: <code>import FILENAME</code></p>
 <div class="sect2">
 <h3 id="export-flashcards-code-export-code"><a class="link" href="#export-flashcards-code-export-code">3.16. Export flashcards : <code>export</code></a></h3>
 <div class="paragraph">
-<p>Creates a json file containing the flashcards from the specified folder, which can later be imported.<br>
-Format: <code>export FOLDER_INDEX FILENAME</code></p>
+<p>Creates a json file containing the flashcards from the specified folder, which can later be imported.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>export FOLDER_INDEX FILENAME</code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.17. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
-<p>Exits the program.<br>
-Format: <code>exit</code></p>
+<p>Exits the program.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>exit</code></p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-19 05:42:14 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-19 11:16:16 UTC</div></div></div></body></html>
