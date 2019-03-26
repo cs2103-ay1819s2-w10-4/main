@@ -177,10 +177,11 @@ The commands in this section can only be executed when the user is within a fold
 <div class="sect3">
 <h4 id="adding-a-flashcard-code-add-code"><a class="link" href="#adding-a-flashcard-code-add-code">4.1.1. Adding a flashcard : <code>add</code></a></h4>
 <div class="paragraph">
-<p>Adds a flashcard to the current folder.</p>
+<p>Adds a flashcard to the current folder. Know-It-All supports 2 types of flashcards: <strong>Single answer cards</strong> and <strong>MCQ</strong> cards.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>add q/QUESTION a/ANSWER [h/HINT]</code></p>
+<p>Format <strong>(Single answer)</strong>: <code>add q/QUESTION a/ANSWER [h/HINT]</code><br>
+Format <strong>(MCQ)</strong>: <code>add q/QUESTION a/ANSWER [i/INCORRECT_OPTION]&#8230;&#8203; [h/HINT]</code></p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -188,6 +189,12 @@ The commands in this section can only be executed when the user is within a fold
 <ul>
 <li>
 <p>A card can have at most 1 hint (including 0)</p>
+</li>
+<li>
+<p>A card can have any number of incorrect options to denote an MCQ card</p>
+</li>
+<li>
+<p>A card with 0 incorrect options will automatically be denoted as a Single answer card</p>
 </li>
 </ul>
 </div>
@@ -203,6 +210,9 @@ The commands in this section can only be executed when the user is within a fold
 </li>
 <li>
 <p><code>add q/The cat <em>_</em> on the mat a/sat h/poetry</code></p>
+</li>
+<li>
+<p><code>add q/What is the powerhouse of the cell? a/mitochondria i/cell wall i/nucleus h/biology</code></p>
 </li>
 </ul>
 </div>
@@ -229,7 +239,7 @@ The commands in this section can only be executed when the user is within a fold
 <p>Existing values will be updated to the input values.</p>
 </li>
 <li>
-<p>When editing hints, the existing hint of the person will be removed i.e adding of hints is not cumulative.</p>
+<p><strong>(MCQ cards)</strong> When editing incorrect options, the existing incorrect options of the card will be removed i.e adding of options is not cumulative.</p>
 </li>
 <li>
 <p>You can remove the card&#8217;s hint by typing <code>h/</code> without specifying any hint after it.</p>
@@ -925,4 +935,4 @@ Within a folder, user can search for flashcards inside the current folder using 
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-26 09:51:21 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-26 15:59:40 UTC</div></div></div></body></html>
