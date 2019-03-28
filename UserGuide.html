@@ -39,7 +39,7 @@
 <li><a href="#keying-in-answer-to-a-flashcard-code-ans-code">4.3.2. Keying in answer to a flashcard: <code>ans</code></a></li>
 <li><a href="#reveal-answer-to-a-flashcard-code-reveal-code">4.3.3. Reveal answer to a flashcard : <code>reveal</code></a></li>
 <li><a href="#go-to-next-flashcard-code-next-code">4.3.4. Go to next flashcard : <code>next</code></a></li>
-<li><a href="#end-the-current-session-code-end-code">4.3.5. End the current session : <code>end</code></a></li>
+<li><a href="#end-the-current-test-or-report-session-code-end-code">4.3.5. End the current test or report session : <code>end</code></a></li>
 </ul>
 </li>
 <li><a href="#global-operations">4.4. Global Operations</a>
@@ -459,10 +459,22 @@ Deletes the second folder in the folder list, along with its cards, on the home 
 <div class="sect3">
 <h4 id="report-user-performance-for-folder-code-report-code"><a class="link" href="#report-user-performance-for-folder-code-report-code">4.2.3. Report user performance for folder : <code>report</code></a></h4>
 <div class="paragraph">
-<p>Displays user performance on the right panel for the folder specified by index.</p>
+<p>Displays user performance in a fullscreen for the current card folder.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>report FOLDER_INDEX</code></p>
+<p>Format: <code>report</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This command is only considered valid inside a card folder.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect3">
@@ -670,9 +682,9 @@ There is no backtracking in the current session so there is no <code>prev</code>
 </div>
 </div>
 <div class="sect3">
-<h4 id="end-the-current-session-code-end-code"><a class="link" href="#end-the-current-session-code-end-code">4.3.5. End the current session : <code>end</code></a></h4>
+<h4 id="end-the-current-test-or-report-session-code-end-code"><a class="link" href="#end-the-current-test-or-report-session-code-end-code">4.3.5. End the current test or report session : <code>end</code></a></h4>
 <div class="paragraph">
-<p>Quits the current test session.</p>
+<p>Quits the current test or report session.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>end</code></p>
@@ -682,7 +694,7 @@ There is no backtracking in the current session so there is no <code>prev</code>
 <div class="sect2">
 <h3 id="global-operations"><a class="link" href="#global-operations">4.4. Global Operations</a></h3>
 <div class="paragraph">
-<p>The commands shown in this section are applicable irregardless of whether the user is inside a folder or at the home directory.</p>
+<p>The commands shown in this section are applicable regardless of whether the user is inside a folder or at the home directory.</p>
 </div>
 <div class="sect3">
 <h4 id="search-by-keywords-code-search-code"><a class="link" href="#search-by-keywords-code-search-code">4.4.1. Search by keywords : <code>search</code></a></h4>
@@ -888,8 +900,8 @@ questions displayed. The user is required to key in an answer for each question.
 <td class="tableblock halign-left valign-top"><p class="tableblock">Removes the flashcard folder specified by index.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>report FOLDER_INDEX</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Displays user performance on the right panel for the folder specified by index.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>report</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Displays user performance on the right panel for the current folder.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>test FOLDER_INDEX</code></p></td>
@@ -935,4 +947,4 @@ Within a folder, user can search for flashcards inside the current folder using 
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-27 03:09:55 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-28 05:59:09 UTC</div></div></div></body></html>
