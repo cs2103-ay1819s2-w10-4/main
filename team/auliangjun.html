@@ -425,15 +425,671 @@ Within a folder, user can search for flashcards inside the current folder using 
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>exit</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Exits the application.</p>
-<p class="tableblock">=======================================================================</p>
-<p class="tableblock">== Contributions to the Developer Guide</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">===</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exits the application.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-30 17:46:19 UTC</div></div></div></body></html>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="folders"><a class="link" href="#folders">Folders</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="paragraph">
+<p>A folder is another layer of abstraction over a <code>CardFolder</code>. Where we dealt with a single <code>CardFolder</code> in previous iterations, we now have multiple <code>CardFolders</code> that each have their own set of <code>Cards</code>. Users are able to manage each <code>CardFolder</code> independently.</p>
+</div>
+<div class="paragraph">
+<p>Folders in the application are achieved via enhancements from the AddressBook implementation. The changes span across all four components (UI, Logic, Model and Storage).</p>
+</div>
+<div class="sect4">
+<h5 id="model"><a class="link" href="#model">Model</a></h5>
+<div class="paragraph">
+<p>Previously, an instance of <code>ModelManager</code> contains only a single <code>VersionedCardFolder</code>, holding the current and previous state of the <code>CardFolder</code>. To support multiple folders, <code>ModelManager</code> now holds an <code>ObservableList</code> of <code>CardFolders</code>. The change is illustrated in the figure below, with the original implementation on the left and new implementation on the right.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ModelEnhancementDiagram.png" alt="ModelEnhancementDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>To allow users to operate on multiple <code>CardFolders</code>, the following notable methods were also introduced:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ModelManager#addFolder(CardFolder cardfolder)</code> - Adds a specified cardfolder to the <code>ModelManager</code>’s list</p>
+</li>
+<li>
+<p><code>ModelManager#deleteFolder(int index)</code> - Deletes the <code>CardFolder</code> at the specified index in the <code>ModelManager&#8217;s</code> list</p>
+</li>
+<li>
+<p><code>ModelManager#getActiveCardFolderIndex()</code> - Gets the index of the current active <code>CardFolder</code></p>
+</li>
+<li>
+<p><code>ModelManager#enterFolder(int index)</code> - Specifies the active <code>CardFolder</code> for operations to be performed on via the index in <code>ModelManager</code>’s list and sets the boolean <code>inFolder</code> to <code>true</code> to denote that user is inside a folder.</p>
+</li>
+<li>
+<p><code>ModelManager#exitFolderToHome()</code> - Sets the boolean <code>inFolder</code> to <code>false</code> to indicate that the user is at the home directory.</p>
+</li>
+<li>
+<p><code>ModelManager#renameFolder(int index, String newName)</code> - Renames the folder at the specified index in the <code>ModelManager&#8217;s</code> list to the new name.</p>
+</li>
+<li>
+<p><code>ModelManager#isInFolder()</code> - Returns true if the <code>ModelManager</code> is currently inside a folder.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="storage"><a class="link" href="#storage">Storage</a></h5>
+<div class="paragraph">
+<p>Similarly, the <code>StorageManager</code> needs to represent each <code>CardFolder</code> separately. In the same manner as in the Model component, we introduce a list of <code>JsonCardFolderStorages</code>. The change is illustrated in the figure below, with the original implementation on the left and new implementation on the right.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/StorageEnhancementDiagram.png" alt="StorageEnhancementDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Notable new methods:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>StorageManager#readCardFolders()</code> - Reads in all <code>CardFolders</code> from all <code>CardFolderStorage</code> objects in the list.</p>
+</li>
+<li>
+<p><code>StorageManager#saveCardFolders(List&lt;ReadOnlyCardFolder&gt; cardFolders)</code> - Saves all <code>CardFolders</code> provided in the argument to the user&#8217;s data directory.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="logic"><a class="link" href="#logic">Logic</a></h5>
+<div class="paragraph">
+<p>The existing implementation of the Logic component propagates changes in a Model&#8217;s <code>CardFolder</code> to the Storage component. With listeners, it is informed when a <code>CardFolder</code> is modified (e.g. a new card is added) so that it can invoke the appropriate Storage methods.</p>
+</div>
+<div class="paragraph">
+<p>The same principle was applied to propagate changes regarding <code>CardFolders</code> themselves (and not their stored cards) to Storage: e.g. adding a new folder. Model is now an <code>Observable</code>, and changes to a Model’s <code>CardFolders</code> will inform the <code>LogicManager</code>, which in turn invokes <code>StorageManager#saveCardFolders(List&lt;ReadOnlyCardFolder&gt; cardFolders)</code>.</p>
+</div>
+<div class="paragraph">
+<p>To illustrate how the Model, Storage and Logic components interact, below is a walkthrough of a typical usage scenario of the <code>addfolder</code> command. <a href="#addfoldersequencediagram">Component interactions for an <code>addfolder</code> command</a> is a sequence diagram that summarises the example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Step 1. The <code>addfolder</code> command is executed. For example, <code>addfolder f</code>.</p>
+</li>
+<li>
+<p>Step 2. As with every command, the command parser reads the input and generates the relevant <code>Command</code> object, in this case an <code>AddFolderCommand</code>. The object is returned to the <code>LogicManager</code>.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the input is invalid (e.g. user did not provide a folder name), Step 2 would not proceed and an error message is displayed. The Model and Storage components will not be modified.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Step 3. The <code>LogicManager</code> executes the <code>AddFolderCommand</code>, storing the result and then transferring control to the Model component with the <code>ModelManager#addFolder()</code> method.</p>
+</li>
+<li>
+<p>Step 4. The <code>ModelManager</code> creates a <code>VersionedCardFolder</code> to represent the newly created folder, storing a reference to its currently empty list of cards. Before returning control to the Logic component, <code>ModelManager#indicateModified()</code> is invoked to notify listeners in the <code>LogicManager</code> that the list of <code>CardFolders</code> have changed.</p>
+</li>
+<li>
+<p>Step 5. The Logic component takes over control and checks if the <code>ModelManager</code> is modified. In the case of <code>addfolder</code> the object is indeed modified (as a result of Step 4) and thus the component proceeds to save the Model&#8217;s <code>CardFolders</code> to Storage.</p>
+</li>
+<li>
+<p>Step 6. Before handing over control to Storage, the <code>LogicManager</code> obtains the information to save and the path to save to with <code>ModelManager#getCardFolders()</code> and <code>ModelManager#getCardFoldersFilesPath()</code> respectively. It then passes these objects as parameters when it calls <code>StorageManager#saveCardFolders()</code>.</p>
+</li>
+<li>
+<p>Step 7. The Storage component receives control, with the <code>StorageManager</code> clearing the directory at the specified path and creating <code>JsonCardFolderStorage</code> objects with path names equivalent to the names of the folders it has received. It then proceeds to invoke <code>JsonCardFolderStorage#saveCardFolder()</code> on all the <code>JsonCardFolderStorage</code> to save all the folders before returning to the <code>LogicManager</code>.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the path provided by the Model Component is invalid, the Storage component throws an exception and an error message is displayed. The changes made to Model are not saved and the command does not execute successfully.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Step 8. The <code>LogicManager</code> terminates and returns the result of the command to the calling method.</p>
+</li>
+</ul>
+</div>
+<div id="addfoldersequencediagram" class="imageblock">
+<div class="content">
+<img src="../images/AddFolderSequenceDiagram.png" alt="AddFolderSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 1. Component interactions for an <code>addfolder</code> command</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="ui"><a class="link" href="#ui">UI</a></h5>
+<div class="paragraph">
+<p>As folders are a layer of abstraction over the cards, there is a need for the GUI to represent this abstraction for greater clarity and ease of use for the user. This is done by introducing the <code>FolderListPanel</code> class, which displays a list of all folders that the user has.</p>
+</div>
+<div class="paragraph">
+<p>The <code>fullScreenPlaceholder:StackPane</code> object houses the content in the main window of our application. Depending on whether the user is in the home directory or within a folder, different UI objects are placed within <code>fullScreenPlaceholder</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>When the user is in the home directory, <code>fullScreenPlaceholder</code> holds a <code>FolderListPanel</code> to display all the folders in a list inside the main window.</p>
+</li>
+<li>
+<p>When the user is within a folder, <code>fullScreenPlaceholder</code> holds a <code>CardMainScreen</code> object, which is composed of a <code>CardListPanel</code> and <code>BrowserPanel</code>. These represent the list of cards on the scrolling sidebar, as well as the card viewer on the right. The content within the <code>CardMainScreen</code> depends on the particular folder the user has navigated into, as different folders hold different cards.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To better understand how the UI is updated, below is a walkthrough of what happens when the user enters a folder. Refer to the sequence diagram in <a href="#enterfoldersequencediagram">UI behaviour when user enters folder</a> for a visual representation:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Step 1. The Logic component informs the UI component that the user has entered a folder. The UI component responds by invoking <code>MainWindow#handleEnterFolder()</code>.</p>
+</li>
+<li>
+<p>Step 2. UI retrieves the list of cards belonging to the entered folder from the <code>LogicManager</code>.</p>
+</li>
+<li>
+<p>Step 3. A new <code>CardListPanel</code> is created with the information obtained in Step 2.</p>
+</li>
+<li>
+<p>Step 4. The new <code>CardListPanel</code> from Step 3, together with the existing <code>BrowserPanel</code>, are used to create a new <code>CardMainScreen</code> object.</p>
+</li>
+<li>
+<p>Step 5. The content held by <code>fullScreenPlaceholder</code> is replaced with the newly generated <code>CardMainScreen</code>.</p>
+</li>
+</ul>
+</div>
+<div id="enterfoldersequencediagram" class="imageblock">
+<div class="content">
+<img src="../images/EnterFolderGUISequenceDiagram.png" alt="EnterFolderGUISequenceDiagram" width="800">
+</div>
+<div class="title">Figure 2. UI behaviour when user enters folder</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-multiple-folders-are-represented-in-model"><a class="link" href="#aspect-how-multiple-folders-are-represented-in-model">Aspect: How multiple folders are represented in Model</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice)</strong>: List of structures representing individual folders</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Scalable and better follows OOP principles.</p>
+</li>
+<li>
+<p>Cons: Hard to implement, alters fundamental architecture of components.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2</strong>: A single structure containing Cards with information on their folder membership (folder operations performed by iterating over all cards)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Not scalable, will be computationally expensive to perform folder operations when there are many cards and/or folders.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-folder-identification"><a class="link" href="#aspect-folder-identification">Aspect: Folder identification</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1</strong>: Use a unique folder name</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement.</p>
+</li>
+<li>
+<p>Cons: The undo/redo feature would not be compatible with this approach, as checking equality between different versions of a folder across time necessarily requires the comparison of cards.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2</strong>: Identify a folder by its cards</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: There can be no folders with identical cards, preventing redundancy.</p>
+</li>
+<li>
+<p>Cons: Two folders could have identical names as long as the cards are different, which is potentially confusing.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3 (current choice)</strong>: Mixed approach, use Alternative 1 for comparing different folders and Alternative 2 for comparing the same folder across time</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Reaps the benefits of both approaches without the disadvantages.</p>
+</li>
+<li>
+<p>Cons: Difficult to implement and for future developers to grasp the difference between the two types of comparisons.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-storage-file-name-and-folder-name"><a class="link" href="#aspect-storage-file-name-and-folder-name">Aspect: Storage file name and folder name</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1</strong>: Let folder name be the file name of the storage file</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Less ambiguity as to how file name is related to folder name, able to find storage file path with folder name.</p>
+</li>
+<li>
+<p>Cons: Harder to retrieve folder name from the file as it requires parsing the path, more prone to data corruption as file name could be modified when application is running.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (current choice)</strong>: Let file name be independent of folder name, which is stored inside the storage file itself</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement and avoids dependency on existing storage files after application starts.</p>
+</li>
+<li>
+<p>Cons: When saving folders from Model, it is difficult to match folders with existing storage files. Hence, rather than saving the modified folder, it is more feasible to clear the directory and save all folders. This is computationally expensive and may not be scalable beyond a certain size.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-what-folders-to-generate-in-the-event-corrupted-storage-files-are-encountered"><a class="link" href="#aspect-what-folders-to-generate-in-the-event-corrupted-storage-files-are-encountered">Aspect: What folders to generate in the event corrupted storage files are encountered</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1</strong>: Display a sample folder</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement, guaranteed that application will not be empty with no folders displayed.</p>
+</li>
+<li>
+<p>Cons: Non-corrupted folders will not be displayed and will potentially be overwritten.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2</strong>: Display non-corrupted folders</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Non-corrupted data is preserved.</p>
+</li>
+<li>
+<p>Cons: If all data is corrupted, an empty application is presented to the user.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3 (current choice)</strong>: Mixed approach, display all non-corrupted folders unless all data is corrupted, in which case display sample folder</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Has the advantages but not the disadvantages of Alternatives 1 and 2.</p>
+</li>
+<li>
+<p>Cons: Challenging to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="navigating-folders"><a class="link" href="#navigating-folders">Navigating folders</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
+<div class="sect4">
+<h5 id="navigation-state"><a class="link" href="#navigation-state">Navigation State</a></h5>
+<div class="paragraph">
+<p>The state of the application with regard to navigation (i.e. whether a user is inside of a folder or at the home directory) affects the types of commands available to the user.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The commands that affect cards (e.g. adding a card, editing a card) are executed within folders and are known as <strong>Card Operations</strong>.</p>
+</li>
+<li>
+<p>Commands that affect folders (e.g. adding a folder, deleting a folder) are only executable at the home directory and are known as <strong>Folder Operations</strong>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Please refer to the User Guide for the full list of commands under both categories.</p>
+</div>
+<div class="paragraph">
+<p>To keep track of navigation state, a boolean <code>inFolder</code> is maintained by the <code>ModelManager</code>. Other components may retrieve the current state with <code>ModelManager#isInFolder()</code>. This is also how the <code>Command</code> objects determines whether the command is executable in the present navigation state.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="change-command"><a class="link" href="#change-command">Change Command</a></h5>
+<div class="paragraph">
+<p>Folder navigation is achieved by the user through the use of the <code>change</code> command. As navigating folders do not actually modify folders and their cards, folder navigation does not involve the Storage Component.</p>
+</div>
+<div class="paragraph">
+<p>The change command has the following formats:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>change ..</code> - Returns the user to the home directory. This command can only be executed when the user is inside a folder.</p>
+</li>
+<li>
+<p><code>change FOLDER_INDEX</code> - Enters the folder specified by <code>FOLDER_INDEX</code>. This command can only be executed from the home directory, when the user is not in any folder.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>When a <code>change</code> command is executed, the Logic component parses the command and creates a <code>ChangeCommand</code> object. If the command is of the first format, <code>ChangeCommand()</code> is invoked without any arguments and the boolean <code>isExitingFolder</code> is set to <code>true</code>. If the command is of the second format, the overloaded constructor <code>ChangeCommand(FOLDER_INDEX)</code> is instead called and <code>isExitingFolder</code> is set to <code>false</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>ChangeCommand#execute()</code> is then invoked. The value of <code>isExitingFolder</code> will determine the corresponding methods in <code>ModelManager</code> that are called (<code>exitFoldersToHome()</code> or <code>enterFolder()</code>). The sequence diagram in <a href="#changecommandsequencediagram">Component interactions for <code>change</code> command</a> illustrates this conditional choice and the interactions involved with each option.</p>
+</div>
+<div id="changecommandsequencediagram" class="imageblock">
+<div class="content">
+<img src="../images/ChangeCommandSequenceDiagram.png" alt="ChangeCommandSequenceDiagram" width="600">
+</div>
+<div class="title">Figure 3. Component interactions for <code>change</code> command</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-command-format-to-enter-and-exit-folders"><a class="link" href="#aspect-command-format-to-enter-and-exit-folders">Aspect: Command format to enter and exit folders</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice)</strong>: Use variations of the same command (e.g. <code>change ..</code> and <code>change INDEX</code> )</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More intuitive and akin to other Command Line applications.</p>
+</li>
+<li>
+<p>Cons: Harder to implement as the logic for parsing the command is different from that of existing commands.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2</strong>: Use distinct commands (e.g. <code>home</code> and <code>enter INDEX</code>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Commands would function similar to other commands in the application.</p>
+</li>
+<li>
+<p>Cons: Harder for the user to get acquainted with as there are two separate commands with logically similar functionality; introduces redundancy.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="uc03-add-folder" class="discrete">UC03 Add folder</h3>
+<div class="paragraph">
+<p><strong>Guarantees</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A folder of the desired name is created.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Student navigates to home directory</p>
+</li>
+<li>
+<p>Student inputs the name of the folder he wants to create</p>
+</li>
+<li>
+<p>System creates a folder of the desired name and shows it on the home directory</p>
+<div class="paragraph">
+<p>Use case ends</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. Student inputs a name that already exists.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. System displays an error message prompting the user to use a folder name that is not taken.</p>
+<div class="paragraph">
+<p>Use case resumes from step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="uc04-edit-folder-name" class="discrete">UC04 Edit folder name</h3>
+<div class="paragraph">
+<p><strong>Guarantees</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A particular folder as selected by the student is renamed to the desired name</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Student navigates to home directory</p>
+</li>
+<li>
+<p>Student indicates the folder he wants to rename, as well as the new name.</p>
+</li>
+<li>
+<p>System renames the folder to the new name and shows it on the home directory</p>
+<div class="paragraph">
+<p>Use case ends</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. Student inputs a name that already exists.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. System displays an error message prompting the user to use a folder name that is not taken.</p>
+<div class="paragraph">
+<p>Use case resumes from step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2b. Student chooses a folder that does not exist.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2b1. System displays an error message prompting the user to choose a valid folder.</p>
+<div class="paragraph">
+<p>Use case resumes from step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2c. Student enters a blank as the desired new folder name.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2c1. System displays an error message informing that the folder name cannot be a blank.</p>
+<div class="paragraph">
+<p>Use case resumes from step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="uc05-navigating-into-folders" class="discrete">UC05 Navigating into folders</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Student indicates the folder he wants to enter.</p>
+</li>
+<li>
+<p>System enters the folder and displays the folder content.</p>
+<div class="paragraph">
+<p>Use case ends</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. Student chooses a folder that does not exist.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. System displays an error message prompting the user to choose a valid folder.</p>
+<div class="paragraph">
+<p>Use case resumes from step 1.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b. Student is already inside a folder.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b1. System displays an error message informing that the user can only navigate into the folder when he is at the home directory.</p>
+</li>
+<li>
+<p>1b2. Student navigates back to home directory.</p>
+<div class="paragraph">
+<p>Use case resumes from step 1.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-30 18:14:04 UTC</div></div></div></body></html>
