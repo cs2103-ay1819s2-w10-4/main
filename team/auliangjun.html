@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Au Liang Jun - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">AddressBook-Level4</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level4"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Au Liang Jun - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Know-It-All</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/cs2103-ay1819s2-w10-4/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Au Liang Jun - Project Portfolio</h1></div><div id="content"><div class="sect1">
 <h2 id="project-know-it-all"><a class="link" href="#project-know-it-all">PROJECT: Know-It-All</a></h2>
 <div class="sectionbody">
 <hr>
@@ -299,6 +299,13 @@ sub-folders.</p>
 questions displayed. The user is required to key in an answer for each question.</p>
 </li>
 <li>
+<p><a id="cardscore"></a>  <strong>Card Score</strong>: The number of correct answers divided by the number of attempts for a single card. When the user is tested on a card,
+this number is automatically calculated and recorded.</p>
+</li>
+<li>
+<p><a id="folderscore"></a> <strong>Folder Score</strong>: The average of all <a href="#cardscore">card scores</a> in a folder after a test session. This number is automatically recorded after each test session.</p>
+</li>
+<li>
 <p><a id="homedirectory"></a> <strong>Home Directory</strong>: The home page where all the folders are listed. From here, users can enter folders to view cards.</p>
 </li>
 <li>
@@ -333,7 +340,7 @@ questions displayed. The user is required to key in an answer for each question.
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>select INDEX</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Displays flashcard details (question, answer, hint, user performance) on the right panel on selection by index.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Displays flashcard details (question, answer, hint, card score) on the right panel on selection by index.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete INDEX</code></p></td>
@@ -349,7 +356,7 @@ questions displayed. The user is required to key in an answer for each question.
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>report</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Displays user performance on the right panel for the current folder.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Display a folder score report for the current folder</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>undo</code></p></td>
@@ -397,7 +404,7 @@ questions displayed. The user is required to key in an answer for each question.
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>end</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Quits the current test session.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quits the current test session or report display.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>search KEYWORDS [MORE_KEYWORDS]</code></p></td>
@@ -429,4 +436,4 @@ Within a folder, user can search for flashcards inside the current folder using 
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-30 07:50:47 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-30 17:46:19 UTC</div></div></div></body></html>
