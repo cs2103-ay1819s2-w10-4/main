@@ -22,15 +22,18 @@
 <li><a href="#deleting-a-flashcard-code-delete-code">4.1.4. Deleting a flashcard : <code>delete</code></a></li>
 <li><a href="#sort-flashcards-by-score-within-a-folder-code-sort-code">4.1.5. Sort flashcards by score within a folder : <code>sort</code></a></li>
 <li><a href="#list-flashcards-code-list-code">4.1.6. List flashcards : <code>list</code></a></li>
-<li><a href="#exit-folder-code-change-code">4.1.7. Exit folder : <code>change ..</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">4.1.7. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">4.1.8. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#exit-folder-code-change-code">4.1.9. Exit folder : <code>change ..</code></a></li>
 </ul>
 </li>
 <li><a href="#folder-operations">4.2. Folder Operations</a>
 <ul class="sectlevel3">
 <li><a href="#create-new-folder-code-addfolder-code">4.2.1. Create new folder : <code>addfolder</code></a></li>
 <li><a href="#remove-folder-code-deletefolder-code">4.2.2. Remove folder : <code>deletefolder</code></a></li>
-<li><a href="#report-user-performance-for-folder-code-report-code">4.2.3. Report user performance for folder : <code>report</code></a></li>
-<li><a href="#enter-folder-code-change-code">4.2.4. Enter folder : <code>change</code></a></li>
+<li><a href="#rename-folder-code-editfolder-code">4.2.3. Rename folder : <code>editfolder</code></a></li>
+<li><a href="#report-user-performance-for-folder-code-report-code">4.2.4. Report user performance for folder : <code>report</code></a></li>
+<li><a href="#enter-folder-code-change-code">4.2.5. Enter folder : <code>change</code></a></li>
 </ul>
 </li>
 <li><a href="#test-operations">4.3. Test Operations</a>
@@ -47,10 +50,8 @@
 <li><a href="#search-by-keywords-code-search-code">4.4.1. Search by keywords : <code>search</code></a></li>
 <li><a href="#import-flashcards-code-import-code">4.4.2. Import flashcards : <code>import</code></a></li>
 <li><a href="#export-flashcards-code-export-code">4.4.3. Export flashcards : <code>export</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">4.4.4. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">4.4.5. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#viewing-help-code-help-code">4.4.6. Viewing help : <code>help</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">4.4.7. Exiting the program : <code>exit</code></a></li>
+<li><a href="#viewing-help-code-help-code">4.4.4. Viewing help : <code>help</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">4.4.5. Exiting the program : <code>exit</code></a></li>
 </ul>
 </li>
 </ul>
@@ -64,7 +65,7 @@
 <h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Know-It-All</strong> is a flashcard application that helps users store and organise their learning material. With an easy to use interface and a storage solution that supports content sharing, <strong>Know-It-All</strong> is designed to help students perform rote learning more efficiently. From cramming in between lessons to focused study, the in-built test session boosts the effectiveness of repetition and recall for memorisation. <strong>Know-It-All</strong> targets medicine students in NUS as their studies involve a considerable amount of memory work, and deals with content that is suitable for the bite-sized flashcard format.</p>
+<p><strong>Know-It-All</strong> is a flashcard application that helps users store and organise their learning material. With an easy to use interface and a storage solution that supports content sharing, <strong>Know-It-All</strong> is designed to help students perform rote learning more efficiently. From cramming in between lessons to focused study, the in-built test session boosts the effectiveness of repetition and recall for memorisation. <strong>Know-It-All</strong> targets medicine students as their studies involve a considerable amount of memory work, and deals with content that is suitable for the bite-sized flashcard format.</p>
 </div>
 </div>
 </div>
@@ -350,9 +351,112 @@ Deletes the 2nd card in the address book.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="exit-folder-code-change-code"><a class="link" href="#exit-folder-code-change-code">4.1.7. Exit folder : <code>change ..</code></a></h4>
+<h4 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.1.7. Undoing previous command : <code>undo</code></a></h4>
 <div class="paragraph">
-<p>Return to the root directory (exit the current folder). Side panel on the left will display the list of folders.</p>
+<p>Restores the cards in a particular card folder to the state before the previous <em>undoable</em> command was executed.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>undo</code></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>This command is performed with respect to the present folder you are in. For example, if you perform an <code>add</code> operation in folder A and enter folder B, invoking the <code>undo</code> command will undo the previous <em>undoable</em> command performed in folder B and not the aforementioned <code>add</code> operation.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Undoable commands: commands that modify a card folder&#8217;s content (<code>add</code>, <code>delete</code> and <code>edit</code>).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>delete 1</code><br>
+<code>list</code><br>
+<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+</li>
+<li>
+<p><code>select 1</code><br>
+<code>list</code><br>
+<code>undo</code><br>
+The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
+</li>
+<li>
+<p><code>delete 1</code><br>
+<code>clear</code><br>
+<code>undo</code> (reverses the <code>clear</code> command)<br>
+<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.1.8. Redoing the previously undone command : <code>redo</code></a></h4>
+<div class="paragraph">
+<p>Reverses the most recent <code>undo</code> command performed in a folder.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>redo</code></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>As with the <code>undo</code> command, this command is performed with respect to the present folder you are in. For example, if you perform an <code>undo</code> operation in folder A and enter folder B, invoking the <code>redo</code> command will redo the previous <code>undo</code> command performed in folder B and not the one in folder A.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>delete 1</code><br>
+<code>undo</code> (reverses the <code>delete 1</code> command)<br>
+<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
+</li>
+<li>
+<p><code>delete 1</code><br>
+<code>redo</code><br>
+The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
+</li>
+<li>
+<p><code>delete 1</code><br>
+<code>clear</code><br>
+<code>undo</code> (reverses the <code>clear</code> command)<br>
+<code>undo</code> (reverses the <code>delete 1</code> command)<br>
+<code>redo</code> (reapplies the <code>delete 1</code> command)<br>
+<code>redo</code> (reapplies the <code>clear</code> command)<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="exit-folder-code-change-code"><a class="link" href="#exit-folder-code-change-code">4.1.9. Exit folder : <code>change ..</code></a></h4>
+<div class="paragraph">
+<p>Return to the root directory (exit the current folder). A list of folders will be displayed</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>change ..</code></p>
@@ -365,7 +469,7 @@ Deletes the 2nd card in the address book.</p>
 <li>
 <p><code>change 2</code><br>
 <code>change ..</code><br>
-The first command enters the second folder in the folder list on the <a href="#homedirectory">home directory</a>. The second command then returns the user back to the home directory by exiting the folder.</p>
+The first command enters the second folder in the folder list on the <a href="#homedirectory">home directory</a>. The second command then returns you back to the home directory by exiting the folder.</p>
 </li>
 </ul>
 </div>
@@ -383,7 +487,7 @@ The first command enters the second folder in the folder list on the <a href="#h
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The commands in this section can only be executed when the user is at the home directory, outside of any folder
+The commands in this section can only be executed when you are at the home directory, outside of any folder
 </td>
 </tr>
 </table>
@@ -404,7 +508,7 @@ The commands in this section can only be executed when the user is at the home d
 <p>The newly created folder will not contain any cards.</p>
 </li>
 <li>
-<p>Folder names must be unique. Attempting to add a folder with the same name as an existing folder will result in an error.</p>
+<p>Folder names must be unique and non-blank. Attempting to add a folder with the same name as an existing folder will result in an error.</p>
 </li>
 <li>
 <p>Each folder and its cards are stored independently in the directory specified in <code>preferences.json</code>. By default, this is the <code>data/</code> directory.</p>
@@ -457,7 +561,38 @@ Deletes the second folder in the folder list, along with its cards, on the home 
 </div>
 </div>
 <div class="sect3">
-<h4 id="report-user-performance-for-folder-code-report-code"><a class="link" href="#report-user-performance-for-folder-code-report-code">4.2.3. Report user performance for folder : <code>report</code></a></h4>
+<h4 id="rename-folder-code-editfolder-code"><a class="link" href="#rename-folder-code-editfolder-code">4.2.3. Rename folder : <code>editfolder</code></a></h4>
+<div class="paragraph">
+<p>Renames the flashcard folder specified by index.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>editfolder FOLDER_INDEX NEW_FOLDER_NAME</code></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The new name of the folder cannot be the same as an existing folder.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>editfolder 2 Circulatory System</code><br>
+Renames the second folder in the folder list to "Circulatory System".</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="report-user-performance-for-folder-code-report-code"><a class="link" href="#report-user-performance-for-folder-code-report-code">4.2.4. Report user performance for folder : <code>report</code></a></h4>
 <div class="paragraph">
 <p>Displays user performance in a fullscreen for the current card folder.</p>
 </div>
@@ -478,9 +613,9 @@ This command is only considered valid inside a card folder.
 </div>
 </div>
 <div class="sect3">
-<h4 id="enter-folder-code-change-code"><a class="link" href="#enter-folder-code-change-code">4.2.4. Enter folder : <code>change</code></a></h4>
+<h4 id="enter-folder-code-change-code"><a class="link" href="#enter-folder-code-change-code">4.2.5. Enter folder : <code>change</code></a></h4>
 <div class="paragraph">
-<p>Enters the folder specified by index. Side panel on the left will display the list of cards in that folder.</p>
+<p>Enters the folder specified by index. Panel on the left will display the list of cards in that folder.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>change FOLDER_INDEX</code></p>
@@ -724,90 +859,13 @@ There is no backtracking in the current session so there is no <code>prev</code>
 </div>
 </div>
 <div class="sect3">
-<h4 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.4.4. Undoing previous command : <code>undo</code></a></h4>
-<div class="paragraph">
-<p>Restores the application to the state before the previous <em>undoable</em> command was executed.<br>
-Format: <code>undo</code></p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Undoable commands: those commands that modify the card folder&#8217;s content (<code>add</code>, <code>delete</code> and <code>edit</code>).</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>delete 1</code><br>
-<code>list</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
-</li>
-<li>
-<p><code>select 1</code><br>
-<code>list</code><br>
-<code>undo</code><br>
-The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.4.5. Redoing the previously undone command : <code>redo</code></a></h4>
-<div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.<br>
-Format: <code>redo</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>redo</code><br>
-The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>clear</code> command)<br></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.4.6. Viewing help : <code>help</code></a></h4>
+<h4 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.4.4. Viewing help : <code>help</code></a></h4>
 <div class="paragraph">
 <p>Format: <code>help</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.4.7. Exiting the program : <code>exit</code></a></h4>
+<h4 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.4.5. Exiting the program : <code>exit</code></a></h4>
 <div class="paragraph">
 <p>Exits the program.</p>
 </div>
@@ -884,12 +942,20 @@ questions displayed. The user is required to key in an answer for each question.
 <td class="tableblock halign-left valign-top"><p class="tableblock">Display a list of the flashcards in the current folder</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>undo</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Undoes the previous undoable command.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>redo</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Redoes the last <code>undo</code>.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>change ..</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Return to the root directory (exit the current folder). Side panel on the left will display the list of folders.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Return to the root directory (exit the current folder). A list of folders will be displayed.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>change FOLDER_INDEX</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enters the folder specified by index. Side panel on the left will display the list of cards in that folder.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enters the folder specified by index. Panel on the left will display the list of cards in that folder.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>addfolder FOLDER_NAME</code></p></td>
@@ -900,11 +966,15 @@ questions displayed. The user is required to key in an answer for each question.
 <td class="tableblock halign-left valign-top"><p class="tableblock">Removes the flashcard folder specified by index.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>editfolder FOLDER_INDEX NEW_FOLDER_NAME</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Renames the flashcard folder specified by index to the new name specified.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>report</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Displays user performance on the right panel for the current folder.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>test FOLDER_INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>test</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">This command begins a test session, where the display area enters a fullscreen.</p></td>
 </tr>
 <tr>
@@ -942,9 +1012,10 @@ Within a folder, user can search for flashcards inside the current folder using 
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>exit</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Exits the application.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exits the application.</p>
+<p class="tableblock">=======================================================================</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-29 17:48:01 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-30 05:28:25 UTC</div></div></div></body></html>
