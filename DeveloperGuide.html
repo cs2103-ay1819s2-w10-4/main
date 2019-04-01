@@ -39,30 +39,31 @@
 <li><a href="#cards">3.1. Cards</a>
 <ul class="sectlevel3">
 <li><a href="#current-implementation">3.1.1. Current Implementation</a></li>
+<li><a href="#design-considerations">3.1.2. Design Considerations</a></li>
 </ul>
 </li>
 <li><a href="#score-feature">3.2. Score feature</a>
 <ul class="sectlevel3">
 <li><a href="#current-implementation-2">3.2.1. Current Implementation</a></li>
-<li><a href="#design-considerations">3.2.2. Design Considerations</a></li>
+<li><a href="#design-considerations-2">3.2.2. Design Considerations</a></li>
 </ul>
 </li>
 <li><a href="#import-export-feature">3.3. Import/Export feature</a>
 <ul class="sectlevel3">
 <li><a href="#csv-file-structure">3.3.1. CSV file structure</a></li>
-<li><a href="#design-considerations-2">3.3.2. Design Considerations</a></li>
+<li><a href="#design-considerations-3">3.3.2. Design Considerations</a></li>
 </ul>
 </li>
 <li><a href="#folders">3.4. Folders</a>
 <ul class="sectlevel3">
 <li><a href="#current-implementation-4">3.4.1. Current Implementation</a></li>
-<li><a href="#design-considerations-3">3.4.2. Design Considerations</a></li>
+<li><a href="#design-considerations-4">3.4.2. Design Considerations</a></li>
 </ul>
 </li>
 <li><a href="#navigating-folders">3.5. Navigating folders</a>
 <ul class="sectlevel3">
 <li><a href="#current-implementation-5">3.5.1. Current Implementation</a></li>
-<li><a href="#design-considerations-4">3.5.2. Design Considerations</a></li>
+<li><a href="#design-considerations-5">3.5.2. Design Considerations</a></li>
 </ul>
 </li>
 <li><a href="#test-session-feature">3.6. Test Session feature</a>
@@ -77,7 +78,7 @@
 <li><a href="#undo-redo-feature">3.7. Undo/Redo feature</a>
 <ul class="sectlevel3">
 <li><a href="#current-implementation-9">3.7.1. Current Implementation</a></li>
-<li><a href="#design-considerations-7">3.7.2. Design Considerations</a></li>
+<li><a href="#design-considerations-8">3.7.2. Design Considerations</a></li>
 </ul>
 </li>
 <li><a href="#logging">3.8. Logging</a></li>
@@ -546,6 +547,20 @@ The following class plays an important role at the architecture level:</p>
 </li>
 </ul>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+As a more OOP model, we can change the <code>Card</code> implementation to be that of a parent class, from which 2 subclasses, <code>SingleAnswerCard</code> and <code>McqCard</code> can inherit from. This would eliminate the need for the <code>Card</code> class to maintain a Set of MCQ <code>Options</code> even if it is a Single-answer card. An example of how such a model may look like is given below.<br>
+<br>
+<span class="image"><img src="images/ModelClassBetterOopDiagram.png" alt="ModelClassBetterOopDiagram" width="800"></span>
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="Design-Storage"><a class="link" href="#Design-Storage">2.5. Storage component</a></h3>
@@ -618,25 +633,69 @@ The following class plays an important role at the architecture level:</p>
 <ol class="arabic">
 <li>
 <p>User is in the <code>Organs</code> folder and wants to add a new card, with question 'What is the largest organ?' and answer 'Skin'. This is done by typing <code>add q/What is the largest organ? a/Skin</code>.</p>
-</li>
-</ol>
+<div class="paragraph">
+<p><span class="image"><img src="images/CardImplementationAddExample.png" alt="CardImplementationAddExample" width="800"></span></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p>Upon execution, the <code>AddCommand</code> checks if the card to be added is already present in the current folder. If so, an exception is thrown.</p>
-<div class="olist arabic">
-<ol class="arabic">
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p>The <code>AddCommand</code> then calls the <code>ModelManager#addCard(Card card)</code> method.</p>
 </li>
 <li>
 <p>The new card will then be added to the active <code>VersionedCardFolder</code>.</p>
 </li>
+<li>
+<p>If the user is not inside a folder, or if the card to add already exists inside the current folder, the <code>addCommand</code> will throw a <code>CommandException</code>.</p>
+</li>
 </ol>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram demonstrates how <code>AddCommand</code> works.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/AddCommandSequenceDiagram.png" alt="AddCommandSequenceDiagram" width="800"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-to-represent-options-for-mcq-cards"><a class="link" href="#aspect-how-to-represent-options-for-mcq-cards">Aspect: How to represent options for MCQ cards</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Maintain a set of <code>Option</code> objects to represent incorrect options, separate from the <code>Answer</code> field of each <code>Card</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Simple to implement, easy to convert the card type between MCQ and Single-answer, requires the least amount of implementation changes to <code>Card</code>.</p>
+</li>
+<li>
+<p>Cons: Single-answer cards still have to maintain an empty <code>Option</code> set.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Maintain 2 separate subclasses of <code>Card</code>, one for Single-answer and another for MCQ.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More correct implementation.</p>
+</li>
+<li>
+<p>Cons: Harder to implement.</p>
+</li>
+</ul>
 </div>
 </li>
 </ul>
+</div>
 </div>
 </div>
 </div>
@@ -651,7 +710,7 @@ This attribute is encapsulated in the <code>Score</code> class.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.2.2. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-to-represent-score"><a class="link" href="#aspect-how-to-represent-score">Aspect: How to represent score</a></h5>
 <div class="ulist">
@@ -874,7 +933,7 @@ Headers have to be present in the csv file for import.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.3.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
 <div class="sect5">
 <h6 id="aspect-which-component-responsible-for-import-export-logic"><a class="link" href="#aspect-which-component-responsible-for-import-export-logic">Aspect: Which component responsible for import/export logic</a></h6>
 <div class="ulist">
@@ -1228,7 +1287,7 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-multiple-folders-are-represented-in-model"><a class="link" href="#aspect-how-multiple-folders-are-represented-in-model">Aspect: How multiple folders are represented in Model</a></h5>
 <div class="ulist">
@@ -1448,7 +1507,7 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-command-format-to-enter-and-exit-folders"><a class="link" href="#aspect-command-format-to-enter-and-exit-folders">Aspect: Command format to enter and exit folders</a></h5>
 <div class="ulist">
@@ -1821,7 +1880,7 @@ back (the screen the user was seeing before entering the test session) to the us
 </div>
 </div>
 <div class="sect4">
-<h5 id="design-considerations-5"><a class="link" href="#design-considerations-5">Design Considerations</a></h5>
+<h5 id="design-considerations-6"><a class="link" href="#design-considerations-6">Design Considerations</a></h5>
 <div class="sect5">
 <h6 id="aspect-way-to-execute-a-test-end-command"><a class="link" href="#aspect-way-to-execute-a-test-end-command">Aspect: Way to execute a test/end command</a></h6>
 <div class="ulist">
@@ -2123,7 +2182,7 @@ to the user.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="design-considerations-6"><a class="link" href="#design-considerations-6">Design Considerations</a></h5>
+<h5 id="design-considerations-7"><a class="link" href="#design-considerations-7">Design Considerations</a></h5>
 <div class="sect5">
 <h6 id="aspect-behavior-of-next-command-executed-on-the-last-card"><a class="link" href="#aspect-behavior-of-next-command-executed-on-the-last-card">Aspect: Behavior of next command executed on the last card</a></h6>
 <div class="ulist">
@@ -2309,7 +2368,7 @@ If the <code>currentStatePointer</code> is at index <code>cardFolderStateList.si
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.7.2. Design Considerations</a></h4>
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.7.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -3294,27 +3353,39 @@ user experience is more engaging and scoring is more accurate as it is based on 
 <h2 id="glossary"><a class="link" href="#glossary">Appendix E: Glossary</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><a id="mainstream-os"></a><strong>Mainstream OS</strong>: Windows, Linux, Unix, OS-X</p>
+<p><a id="cardanswer"></a> <strong>Card Answer</strong>: The correct answer of a card.</p>
 </div>
 <div class="paragraph">
-<p><a id="flashcard"></a><strong>Flashcard/Card</strong>: An object containing a single question and answer, and optionally hints.</p>
+<p><a id="cardhint"></a> <strong>Card Hint</strong>: The optional hint of a card.</p>
+</div>
+<div class="paragraph">
+<p><a id="cardoption"></a> <strong>Card Option</strong>: An incorrect option for an MCQ card.</p>
+</div>
+<div class="paragraph">
+<p><a id="cardquestion"></a> <strong>Card Question</strong>: The question of a card.</p>
+</div>
+<div class="paragraph">
+<p><a id="cardscore"></a>  <strong>Card Score</strong>: The number of correct answers divided by the number of attempts for a single card. When the user is tested on a card, this number is automatically calculated and recorded.</p>
+</div>
+<div class="paragraph">
+<p><a id="flashcard"></a><strong>Flashcard/Card</strong>: An object containing a single question and answer, and optionally, hints. There are 2 types of cards, Single-answer and MCQ. MCQ cards feature incorrect options in addition to the card answer, while Single-answer cards do not.</p>
 </div>
 <div class="paragraph">
 <p><a id="folder"></a> <strong>Folder</strong>: A collections of flashcards, grouped topically. There are no
 sub-folders.</p>
 </div>
 <div class="paragraph">
-<p><a id="testsession"></a> <strong>Test Session</strong>: A session where all flashcards in a folder are queued to have their
-questions displayed. The user is required to key in an answer for each question.</p>
-</div>
-<div class="paragraph">
-<p><a id="cardscore"></a>  <strong>Card Score</strong>: The number of correct answers divided by the number of attempts for a single card. When the user is tested on a card, this number is automatically calculated and recorded.</p>
-</div>
-<div class="paragraph">
 <p><a id="folderscore"></a> <strong>Folder Score</strong>: The average of all <a href="#cardscore">card scores</a> in a folder after a test session. This number is automatically recorded after each test session.</p>
 </div>
 <div class="paragraph">
 <p><a id="homedirectory"></a> <strong>Home Directory</strong>: The home page where all the folders are listed. From here, users can enter folders to view cards.</p>
+</div>
+<div class="paragraph">
+<p><a id="mainstream-os"></a><strong>Mainstream OS</strong>: Windows, Linux, Unix, OS-X</p>
+</div>
+<div class="paragraph">
+<p><a id="testsession"></a> <strong>Test Session</strong>: A session where all flashcards in a folder are queued to have their
+questions displayed. The user is required to key in an answer for each question.</p>
 </div>
 </div>
 </div>
@@ -3427,4 +3498,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-01 03:58:08 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-01 06:31:15 UTC</div></div></div></body></html>
