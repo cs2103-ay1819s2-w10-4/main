@@ -36,48 +36,48 @@
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a>
+<li><a href="#cards">3.1. Cards</a>
 <ul class="sectlevel3">
 <li><a href="#current-implementation">3.1.1. Current Implementation</a></li>
-<li><a href="#design-considerations">3.1.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#cards">3.2. Cards</a>
+<li><a href="#score-feature">3.2. Score feature</a>
 <ul class="sectlevel3">
 <li><a href="#current-implementation-2">3.2.1. Current Implementation</a></li>
+<li><a href="#design-considerations">3.2.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#score-feature">3.3. Score feature</a>
+<li><a href="#import-export-feature">3.3. Import/Export feature</a>
 <ul class="sectlevel3">
-<li><a href="#current-implementation-3">3.3.1. Current Implementation</a></li>
+<li><a href="#csv-file-structure">3.3.1. CSV file structure</a></li>
 <li><a href="#design-considerations-2">3.3.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#import-export-feature">3.4. Import/Export feature</a>
+<li><a href="#folders">3.4. Folders</a>
 <ul class="sectlevel3">
-<li><a href="#csv-file-structure">3.4.1. CSV file structure</a></li>
+<li><a href="#current-implementation-4">3.4.1. Current Implementation</a></li>
 <li><a href="#design-considerations-3">3.4.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#folders">3.5. Folders</a>
+<li><a href="#navigating-folders">3.5. Navigating folders</a>
 <ul class="sectlevel3">
 <li><a href="#current-implementation-5">3.5.1. Current Implementation</a></li>
 <li><a href="#design-considerations-4">3.5.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#navigating-folders">3.6. Navigating folders</a>
+<li><a href="#test-session-feature">3.6. Test Session feature</a>
 <ul class="sectlevel3">
-<li><a href="#current-implementation-6">3.6.1. Current Implementation</a></li>
-<li><a href="#design-considerations-5">3.6.2. Design Considerations</a></li>
+<li><a href="#overall-current-implementation">3.6.1. Overall Current Implementation</a></li>
+<li><a href="#overall-design-considerations">3.6.2. Overall Design Considerations</a></li>
+<li><a href="#test-end-command">3.6.3. Test / End Command</a></li>
+<li><a href="#answer-command">3.6.4. Answer Command</a></li>
+<li><a href="#next-command">3.6.5. Next Command</a></li>
 </ul>
 </li>
-<li><a href="#test-session-feature">3.7. Test Session feature</a>
+<li><a href="#undo-redo-feature">3.7. Undo/Redo feature</a>
 <ul class="sectlevel3">
-<li><a href="#overall-current-implementation">3.7.1. Overall Current Implementation</a></li>
-<li><a href="#overall-design-considerations">3.7.2. Overall Design Considerations</a></li>
-<li><a href="#test-end-command">3.7.3. Test / End Command</a></li>
-<li><a href="#answer-command">3.7.4. Answer Command</a></li>
-<li><a href="#next-command">3.7.5. Next Command</a></li>
+<li><a href="#current-implementation-9">3.7.1. Current Implementation</a></li>
+<li><a href="#design-considerations-7">3.7.2. Design Considerations</a></li>
 </ul>
 </li>
 <li><a href="#logging">3.8. Logging</a></li>
@@ -111,28 +111,16 @@
 <li><a href="#managing-dependencies">6.6. Managing Dependencies</a></li>
 </ul>
 </li>
-<li><a href="#GetStartedProgramming">Appendix A: Suggested Programming Tasks to Get Started</a>
+<li><a href="#product-scope">Appendix A: Product Scope</a></li>
+<li><a href="#user-stories">Appendix B: User Stories</a></li>
+<li><a href="#use-cases">Appendix C: Use Cases</a></li>
+<li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
+<li><a href="#glossary">Appendix E: Glossary</a></li>
+<li><a href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
-<li><a href="#GetStartedProgramming-EachComponent">A.1. Improving each component</a></li>
-<li><a href="#GetStartedProgramming-RemarkCommand">A.2. Creating a new command: <code>remark</code></a>
-<ul class="sectlevel3">
-<li><a href="#description">A.2.1. Description</a></li>
-<li><a href="#step-by-step-instructions">A.2.2. Step-by-step Instructions</a></li>
-<li><a href="#full-solution">A.2.3. Full Solution</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#product-scope">Appendix B: Product Scope</a></li>
-<li><a href="#user-stories">Appendix C: User Stories</a></li>
-<li><a href="#use-cases">Appendix D: Use Cases</a></li>
-<li><a href="#non-functional-requirements">Appendix E: Non Functional Requirements</a></li>
-<li><a href="#glossary">Appendix F: Glossary</a></li>
-<li><a href="#instructions-for-manual-testing">Appendix G: Instructions for Manual Testing</a>
-<ul class="sectlevel2">
-<li><a href="#launch-and-shutdown">G.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-card">G.2. Deleting a card</a></li>
-<li><a href="#saving-data">G.3. Saving data</a></li>
+<li><a href="#launch-and-shutdown">F.1. Launch and Shutdown</a></li>
+<li><a href="#deleting-a-card">F.2. Deleting a card</a></li>
+<li><a href="#saving-data">F.3. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -233,7 +221,7 @@ This will generate all resources required by the application and tests.</p>
 </div>
 </li>
 <li>
-<p>Repeat this for the test folder as well (e.g. check <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/test/java/seedu/knowitall/ui/HelpWindowTest.java"><code>HelpWindowTest.java</code></a> for code errors, and if so, resolve it the same way)</p>
+<p>Repeat this for the test <a href="#folder">folder</a> as well (e.g. check <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/test/java/seedu/knowitall/ui/HelpWindowTest.java"><code>HelpWindowTest.java</code></a> for code errors, and if so, resolve it the same way)</p>
 </li>
 </ol>
 </div>
@@ -345,17 +333,7 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 <div class="sect3">
 <h4 id="getting-started-with-coding"><a class="link" href="#getting-started-with-coding">1.4.4. Getting started with coding</a></h4>
 <div class="paragraph">
-<p>When you are ready to start coding,</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Get some sense of the overall design by reading <a href="#Design-Architecture">Section 2.1, &#8220;Architecture&#8221;</a>.</p>
-</li>
-<li>
-<p>Take a look at <a href="#GetStartedProgramming">Appendix A, <em>Suggested Programming Tasks to Get Started</em></a>.</p>
-</li>
-</ol>
+<p>When you are ready to start coding, get some sense of the overall design by reading <a href="#Design-Architecture">Section 2.1, &#8220;Architecture&#8221;</a>.</p>
 </div>
 </div>
 </div>
@@ -558,29 +536,15 @@ The following class plays an important role at the architecture level:</p>
 <p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
 </li>
 <li>
-<p>stores the card folder data.</p>
+<p>stores a list of <code>VersionedCardFolders</code> representing the folders that the user has.</p>
 </li>
 <li>
-<p>exposes an unmodifiable <code>ObservableList&lt;Card&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+<p>exposes unmodifiable instances of <code>FilteredList&lt;Card&gt;</code> and <code>FilteredList&lt;VersionedCardFolder&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
 </li>
 <li>
 <p>does not depend on any of the other three components.</p>
 </li>
 </ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-As a more OOP model, we can store a <code>Tag</code> list in <code>card folder</code>, which <code>Card</code> can reference. This would allow <code>card folder</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Card</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
-<br>
-<span class="image"><img src="images/ModelClassBetterOopDiagram.png" alt="ModelClassBetterOopDiagram" width="800"></span>
-</td>
-</tr>
-</table>
 </div>
 </div>
 <div class="sect2">
@@ -603,7 +567,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>card folder</
 <p>can save <code>UserPref</code> objects in json format and read it back.</p>
 </li>
 <li>
-<p>can save the card folder data in json format and read it back.</p>
+<p>can save <code>CardFolder</code> data in json format and read it back.</p>
 </li>
 </ul>
 </div>
@@ -623,211 +587,9 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>card folder</
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.1. Undo/Redo feature</a></h3>
+<h3 id="cards"><a class="link" href="#cards">3.1. Cards</a></h3>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.1. Current Implementation</a></h4>
-<div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedCardFolder</code>.
-It extends <code>CardFolder</code> with an undo/redo history, stored internally as an <code>cardFolderStateList</code> and <code>currentStatePointer</code>.
-Additionally, it implements the following operations:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>VersionedCardFolder#commit()</code>&#8201;&#8212;&#8201;Saves the current card folder state in its history.</p>
-</li>
-<li>
-<p><code>VersionedCardFolder#undo()</code>&#8201;&#8212;&#8201;Restores the previous card folder state from its history.</p>
-</li>
-<li>
-<p><code>VersionedCardFolder#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone card folder state from its history.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitCardFolder()</code>, <code>Model#undoCardFolder()</code> and <code>Model#redoCardFolder()</code> respectively.</p>
-</div>
-<div class="paragraph">
-<p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
-</div>
-<div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedCardFolder</code> will be initialized with the initial card folder state, and the <code>currentStatePointer</code> pointing to that single card folder state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoStartingStateListDiagram.png" alt="UndoRedoStartingStateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th card in the card folder. The <code>delete</code> command calls <code>Model#commitCardFolder()</code>, causing the modified state of the card folder after the <code>delete 5</code> command executes to be saved in the <code>cardFolderStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted card folder state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoNewCommand1StateListDiagram.png" alt="UndoRedoNewCommand1StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 3. The user executes <code>add q/Some question &#8230;&#8203;</code> to add a new card. The <code>add</code> command also calls <code>Model#commitCardFolder()</code>, causing another modified card folder state to be saved into the <code>cardFolderStateList</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoNewCommand2StateListDiagram.png" alt="UndoRedoNewCommand2StateListDiagram" width="800">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If a command fails its execution, it will not call <code>Model#commitCardFolder()</code>, so the card folder state will not be saved into the <code>cardFolderStateList</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 4. The user now decides that adding the card was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoCardFolder()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous card folder state, and restores the card folder to that state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoExecuteUndoStateListDiagram.png" alt="UndoRedoExecuteUndoStateListDiagram" width="800">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial card folder state, then there are no previous card folder states to restore. The <code>undo</code> command uses <code>Model#canUndoCardFolder()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The following sequence diagram shows how the undo operation works:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoCardFolder()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the card folder to that state.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index <code>cardFolderStateList.size() - 1</code>, pointing to the latest card folder state, then there are no undone card folder states to restore. The <code>redo</code> command uses <code>Model#canRedoCardFolder()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the card folder, such as <code>list</code>, will usually not call <code>Model#commitCardFolder()</code>, <code>Model#undoCardFolder()</code> or <code>Model#redoCardFolder()</code>. Thus, the <code>cardFolderStateList</code> remains unchanged.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoNewCommand3StateListDiagram.png" alt="UndoRedoNewCommand3StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitCardFolder()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>cardFolderStateList</code>, all card folder states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add q/Some question &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoNewCommand4StateListDiagram.png" alt="UndoRedoNewCommand4StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The following activity diagram summarizes what happens when a user executes a new command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
-<div class="sect4">
-<h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire card folder.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement.</p>
-</li>
-<li>
-<p>Cons: May have performance issues in terms of memory usage.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the card being deleted).</p>
-</li>
-<li>
-<p>Cons: We must ensure that the implementation of each individual command are correct.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-undo-redo-commands"><a class="link" href="#aspect-data-structure-to-support-the-undo-redo-commands">Aspect: Data structure to support the undo/redo commands</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of card folder states.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
-</li>
-<li>
-<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>VersionedCardFolder</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.</p>
-</li>
-<li>
-<p>Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="cards"><a class="link" href="#cards">3.2. Cards</a></h3>
-<div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The <code>Card</code> is one of the core aspects of the application. Cards are the result of morphing of the <code>Person</code> class from the original AddressBook model. The implementation incorporates the <code>Logic</code> and <code>Model</code> components.</p>
 </div>
@@ -856,43 +618,32 @@ If the <code>currentStatePointer</code> is at index <code>cardFolderStateList.si
 <ol class="arabic">
 <li>
 <p>User is in the <code>Organs</code> folder and wants to add a new card, with question 'What is the largest organ?' and answer 'Skin'. This is done by typing <code>add q/What is the largest organ? a/Skin</code>.</p>
-<div class="literalblock">
-<div class="content">
-<pre>picture of command box with user inputs</pre>
-</div>
+</li>
+</ol>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p>Upon execution, the <code>AddCommand</code> checks if the card to be added is already present in the current folder. If so, an exception is thrown.</p>
-</li>
-</ul>
-</div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>The <code>AddCommand</code> then calls the <code>ModelManager#addCard(Card card)</code> method.</p>
 </li>
 <li>
 <p>The new card will then be added to the active <code>VersionedCardFolder</code>.</p>
-<div class="literalblock">
-<div class="content">
-<pre>picture of main window with updated card thumbnail list</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>sequence diagram showing how add command works</pre>
-</div>
-</div>
 </li>
 </ol>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="score-feature"><a class="link" href="#score-feature">3.3. Score feature</a></h3>
+<h3 id="score-feature"><a class="link" href="#score-feature">3.2. Score feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>To implement tracking of the number of correct and incorrect attempts, a new attribute <code>Score</code> was added to <code>Card</code>.
 Score keeps track of both numbers.
@@ -900,7 +651,7 @@ This attribute is encapsulated in the <code>Score</code> class.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.3.2. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.2.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-to-represent-score"><a class="link" href="#aspect-how-to-represent-score">Aspect: How to represent score</a></h5>
 <div class="ulist">
@@ -984,8 +735,8 @@ For example, 2 correct attempts and 4 total attempts becomes 0.5. When instantia
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-export-feature"><a class="link" href="#import-export-feature">3.4. Import/Export feature</a></h3>
-<h4 id="current-implementation-4" class="discrete">Current Implementation</h4>
+<h3 id="import-export-feature"><a class="link" href="#import-export-feature">3.3. Import/Export feature</a></h3>
+<h4 id="current-implementation-3" class="discrete">Current Implementation</h4>
 <div class="paragraph">
 <p>The Import and Export feature is facilitated by the Logic and model components, together
 with the addition of 2 new classes inside the csvmanager package defined under
@@ -1040,14 +791,11 @@ Draw export command object diagram with set&lt;CardFolderExport&gt; and CsvFile 
 </li>
 <li>
 <p>Logic unit executes the command. The execute command calls <code>Model#exportCardFolders</code> method.</p>
-<div class="literalblock">
-<div class="content">
-<pre>show list of VersionedCardFolders
-arrow up
-Contains the list of card folders present in the model</pre>
-</div>
-</div>
 </li>
+</ol>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Model checks that all card folders specified by user exists inside the list of card folders.
 Throws <code>CardFolderNotFound</code> Exception if user specified card folder does not exist in the application.</p>
@@ -1057,12 +805,11 @@ Throws <code>CardFolderNotFound</code> Exception if user specified card folder d
 File exported will be created in the project root directory.
 File will be named after the name of the cardfolder.
 i.e <code>Human Anatomy.csv</code> and <code>Nervous System.csv</code></p>
-<div class="literalblock">
-<div class="content">
-<pre>Sequence diagram</pre>
-</div>
-</div>
 </li>
+</ol>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>User wants to import <code>Human Anatomy.csv</code> file.
 <code>Human Anatomy.csv</code> file contains flashcards represented in csv file format.
@@ -1096,7 +843,7 @@ Both Imported and Exported files have to be placed in the project root directory
 </table>
 </div>
 <div class="sect3">
-<h4 id="csv-file-structure"><a class="link" href="#csv-file-structure">3.4.1. CSV file structure</a></h4>
+<h4 id="csv-file-structure"><a class="link" href="#csv-file-structure">3.3.1. CSV file structure</a></h4>
 <div class="paragraph">
 <p>Example of a common cardfolder csv file<br></p>
 </div>
@@ -1127,7 +874,7 @@ Headers have to be present in the csv file for import.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.3.2. Design Considerations</a></h4>
 <div class="sect5">
 <h6 id="aspect-which-component-responsible-for-import-export-logic"><a class="link" href="#aspect-which-component-responsible-for-import-export-logic">Aspect: Which component responsible for import/export logic</a></h6>
 <div class="ulist">
@@ -1282,9 +1029,9 @@ since 1 cardfolder = 1 csv file.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="folders"><a class="link" href="#folders">3.5. Folders</a></h3>
+<h3 id="folders"><a class="link" href="#folders">3.4. Folders</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>A folder is another layer of abstraction over a <code>CardFolder</code>. Where we dealt with a single <code>CardFolder</code> in previous iterations, we now have multiple <code>CardFolders</code> that each have their own set of <code>Cards</code>. Users are able to manage each <code>CardFolder</code> independently.</p>
 </div>
@@ -1481,7 +1228,7 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-multiple-folders-are-represented-in-model"><a class="link" href="#aspect-how-multiple-folders-are-represented-in-model">Aspect: How multiple folders are represented in Model</a></h5>
 <div class="ulist">
@@ -1643,9 +1390,9 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </div>
 <div class="sect2">
-<h3 id="navigating-folders"><a class="link" href="#navigating-folders">3.6. Navigating folders</a></h3>
+<h3 id="navigating-folders"><a class="link" href="#navigating-folders">3.5. Navigating folders</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.6.1. Current Implementation</a></h4>
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
 <div class="sect4">
 <h5 id="navigation-state"><a class="link" href="#navigation-state">Navigation State</a></h5>
 <div class="paragraph">
@@ -1701,7 +1448,7 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.5.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-command-format-to-enter-and-exit-folders"><a class="link" href="#aspect-command-format-to-enter-and-exit-folders">Aspect: Command format to enter and exit folders</a></h5>
 <div class="ulist">
@@ -1738,9 +1485,9 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </div>
 <div class="sect2">
-<h3 id="test-session-feature"><a class="link" href="#test-session-feature">3.7. Test Session feature</a></h3>
+<h3 id="test-session-feature"><a class="link" href="#test-session-feature">3.6. Test Session feature</a></h3>
 <div class="sect3">
-<h4 id="overall-current-implementation"><a class="link" href="#overall-current-implementation">3.7.1. Overall Current Implementation</a></h4>
+<h4 id="overall-current-implementation"><a class="link" href="#overall-current-implementation">3.6.1. Overall Current Implementation</a></h4>
 <div class="paragraph">
 <p>This big feature mainly involves <code>UI</code>, <code>Logic</code> and <code>Model</code> components.</p>
 </div>
@@ -1841,7 +1588,7 @@ otherwise.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="overall-design-considerations"><a class="link" href="#overall-design-considerations">3.7.2. Overall Design Considerations</a></h4>
+<h4 id="overall-design-considerations"><a class="link" href="#overall-design-considerations">3.6.2. Overall Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-usage-of-an-extra-card-variable-to-keep-track-of-the-current-card-in-test-session"><a class="link" href="#aspect-usage-of-an-extra-card-variable-to-keep-track-of-the-current-card-in-test-session">Aspect: Usage of an extra card variable to keep track of the current card in test session</a></h5>
 <div class="ulist">
@@ -1886,9 +1633,9 @@ knowledge of that object.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="test-end-command"><a class="link" href="#test-end-command">3.7.3. Test / End Command</a></h4>
+<h4 id="test-end-command"><a class="link" href="#test-end-command">3.6.3. Test / End Command</a></h4>
 <div class="sect4">
-<h5 id="current-implementation-7"><a class="link" href="#current-implementation-7">Current Implementation</a></h5>
+<h5 id="current-implementation-6"><a class="link" href="#current-implementation-6">Current Implementation</a></h5>
 <h6 id="model-4" class="discrete">Model</h6>
 <div class="paragraph">
 <p>The main logic for  <code>test</code> and <code>end</code> command is carried out in <code>ModelManager</code> with the following methods:</p>
@@ -2019,11 +1766,6 @@ set <code>testSessionCard</code> in <code>CommandResult</code> to <code>c</code>
 <code>MainWindow#handleStartTestSession(currentTestedCard)</code> to display the <code>currentTestedCard</code> question and hints to the
 user.</p>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>insert sequence diagram for UI for test command?</pre>
-</div>
-</div>
 <h6 id="exampleusageofendcommand" class="discrete">Example Usage of end command</h6>
 <div class="paragraph">
 <p>Step 1. User is currently in a test session and executes the command <code>end</code>.</p>
@@ -2079,7 +1821,7 @@ back (the screen the user was seeing before entering the test session) to the us
 </div>
 </div>
 <div class="sect4">
-<h5 id="design-considerations-6"><a class="link" href="#design-considerations-6">Design Considerations</a></h5>
+<h5 id="design-considerations-5"><a class="link" href="#design-considerations-5">Design Considerations</a></h5>
 <div class="sect5">
 <h6 id="aspect-way-to-execute-a-test-end-command"><a class="link" href="#aspect-way-to-execute-a-test-end-command">Aspect: Way to execute a test/end command</a></h6>
 <div class="ulist">
@@ -2126,9 +1868,9 @@ Also, user being able to see the questions before the test session is not a big 
 </div>
 </div>
 <div class="sect3">
-<h4 id="answer-command"><a class="link" href="#answer-command">3.7.4. Answer Command</a></h4>
+<h4 id="answer-command"><a class="link" href="#answer-command">3.6.4. Answer Command</a></h4>
 <div class="sect4">
-<h5 id="current-implementation-8"><a class="link" href="#current-implementation-8">Current Implementation</a></h5>
+<h5 id="current-implementation-7"><a class="link" href="#current-implementation-7">Current Implementation</a></h5>
 <h6 id="model-5" class="discrete">Model</h6>
 <div class="paragraph">
 <p>To facilitate the marking of attempted answer, we introduce the following method in <code>ModelManager</code>.</p>
@@ -2232,11 +1974,6 @@ cardToMark, boolean markCorrect)</code> followed by <code>model#setCard(cardToMa
 <p>Step 6. To complete the update in the change in score, model#updateFilteredCard(PREDICATE_SHOW_ALL_CARDS) and
 model#commitActiveCardFolder() are invoked.</p>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>To elaborate further?</pre>
-</div>
-</div>
 <div class="paragraph">
 <p>Step 7. <code>AnswerCommand</code> now creates a <code>CommandResult</code> object, <code>r</code> with either type <code>ANSWER_CORRECT</code> or <code>ANSWER_WRONG</code>
  depending on the outcome of the attempt.</p>
@@ -2262,17 +1999,12 @@ model#commitActiveCardFolder() are invoked.</p>
 If <code>MainWindow</code> sees that <code>CommandResult</code> object <code>r</code> has the type <code>ANSWER_WRONG</code>, it invokes
 <code>MainWindow#handleWrongAnswer()</code> to display the wrong attempt <code>TestSession</code> page to the user.</p>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>insert sequence diagram for UI for answer command?</pre>
-</div>
-</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="next-command"><a class="link" href="#next-command">3.7.5. Next Command</a></h4>
+<h4 id="next-command"><a class="link" href="#next-command">3.6.5. Next Command</a></h4>
 <div class="sect4">
-<h5 id="current-implementation-9"><a class="link" href="#current-implementation-9">Current Implementation</a></h5>
+<h5 id="current-implementation-8"><a class="link" href="#current-implementation-8">Current Implementation</a></h5>
 <h6 id="model-6" class="discrete">Model</h6>
 <div class="paragraph">
 <p>The following method is introduced in <code>ModelManager</code> to display to the user the next card in the test session.</p>
@@ -2391,7 +2123,7 @@ to the user.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="design-considerations-7"><a class="link" href="#design-considerations-7">Design Considerations</a></h5>
+<h5 id="design-considerations-6"><a class="link" href="#design-considerations-6">Design Considerations</a></h5>
 <div class="sect5">
 <h6 id="aspect-behavior-of-next-command-executed-on-the-last-card"><a class="link" href="#aspect-behavior-of-next-command-executed-on-the-last-card">Aspect: Behavior of next command executed on the last card</a></h6>
 <div class="ulist">
@@ -2428,6 +2160,220 @@ to the user.</p>
 <p>Evaluation of the two alternatives:
 With our target audience in mind, alternative 1 is the more user friendly and intuitive way to handle this scenario.</p>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.7. Undo/Redo feature</a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The following section details a feature implemented in the earlier iteration of the application. As such, the diagrams still refer to <code>AddressBook</code>, which has since replaced with <code>CardFolder</code>. The outdated diagrams here will be updated by <code>v2.0</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-9"><a class="link" href="#current-implementation-9">3.7.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The undo/redo mechanism is facilitated by <code>VersionedCardFolder</code>.
+It extends <code>CardFolder</code> with an undo/redo history, stored internally as an <code>cardFolderStateList</code> and <code>currentStatePointer</code>.
+Additionally, it implements the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>VersionedCardFolder#commit()</code>&#8201;&#8212;&#8201;Saves the current card folder state in its history.</p>
+</li>
+<li>
+<p><code>VersionedCardFolder#undo()</code>&#8201;&#8212;&#8201;Restores the previous card folder state from its history.</p>
+</li>
+<li>
+<p><code>VersionedCardFolder#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone card folder state from its history.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitCardFolder()</code>, <code>Model#undoCardFolder()</code> and <code>Model#redoCardFolder()</code> respectively.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user launches the application for the first time. The <code>VersionedCardFolder</code> will be initialized with the initial card folder state, and the <code>currentStatePointer</code> pointing to that single card folder state.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoStartingStateListDiagram.png" alt="UndoRedoStartingStateListDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th card in the card folder. The <code>delete</code> command calls <code>Model#commitCardFolder()</code>, causing the modified state of the card folder after the <code>delete 5</code> command executes to be saved in the <code>cardFolderStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted card folder state.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoNewCommand1StateListDiagram.png" alt="UndoRedoNewCommand1StateListDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 3. The user executes <code>add q/Some question &#8230;&#8203;</code> to add a new card. The <code>add</code> command also calls <code>Model#commitCardFolder()</code>, causing another modified card folder state to be saved into the <code>cardFolderStateList</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoNewCommand2StateListDiagram.png" alt="UndoRedoNewCommand2StateListDiagram" width="800">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If a command fails its execution, it will not call <code>Model#commitCardFolder()</code>, so the card folder state will not be saved into the <code>cardFolderStateList</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Step 4. The user now decides that adding the card was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoCardFolder()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous card folder state, and restores the card folder to that state.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoExecuteUndoStateListDiagram.png" alt="UndoRedoExecuteUndoStateListDiagram" width="800">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the <code>currentStatePointer</code> is at index 0, pointing to the initial card folder state, then there are no previous card folder states to restore. The <code>undo</code> command uses <code>Model#canUndoCardFolder()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the undo operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoCardFolder()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the card folder to that state.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the <code>currentStatePointer</code> is at index <code>cardFolderStateList.size() - 1</code>, pointing to the latest card folder state, then there are no undone card folder states to restore. The <code>redo</code> command uses <code>Model#canRedoCardFolder()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the card folder, such as <code>list</code>, will usually not call <code>Model#commitCardFolder()</code>, <code>Model#undoCardFolder()</code> or <code>Model#redoCardFolder()</code>. Thus, the <code>cardFolderStateList</code> remains unchanged.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoNewCommand3StateListDiagram.png" alt="UndoRedoNewCommand3StateListDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitCardFolder()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>cardFolderStateList</code>, all card folder states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add q/Some question &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoNewCommand4StateListDiagram.png" alt="UndoRedoNewCommand4StateListDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The following activity diagram summarizes what happens when a user executes a new command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.7.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Saves the entire card folder.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: May have performance issues in terms of memory usage.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the card being deleted).</p>
+</li>
+<li>
+<p>Cons: We must ensure that the implementation of each individual command are correct.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-data-structure-to-support-the-undo-redo-commands"><a class="link" href="#aspect-data-structure-to-support-the-undo-redo-commands">Aspect: Data structure to support the undo/redo commands</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of card folder states.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
+</li>
+<li>
+<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>VersionedCardFolder</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.</p>
+</li>
+<li>
+<p>Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -2878,723 +2824,7 @@ e.g. <code>seedu.knowitall.logic.LogicManagerTest</code></p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="GetStartedProgramming"><a class="link" href="#GetStartedProgramming">Appendix A: Suggested Programming Tasks to Get Started</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Suggested path for new programmers:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>First, add small local-impact (i.e. the impact of the change does not go beyond the component) enhancements to one component at a time. Some suggestions are given in <a href="#GetStartedProgramming-EachComponent">Section A.1, &#8220;Improving each component&#8221;</a>.</p>
-</li>
-<li>
-<p>Next, add a feature that touches multiple components to learn how to implement an end-to-end feature across all components. <a href="#GetStartedProgramming-RemarkCommand">Section A.2, &#8220;Creating a new command: <code>remark</code>&#8221;</a> explains how to go about adding such a feature.</p>
-</li>
-</ol>
-</div>
-<div class="sect2">
-<h3 id="GetStartedProgramming-EachComponent"><a class="link" href="#GetStartedProgramming-EachComponent">A.1. Improving each component</a></h3>
-<div class="paragraph">
-<p>Each individual exercise in this section is component-based (i.e. you would not need to modify the other components to get it to work).</p>
-</div>
-<h4 id="code-logic-code-component" class="discrete"><code>Logic</code> component</h4>
-<div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>logic</code>. During dog-fooding, your team realize that it is troublesome for the user to type the whole command in order to execute a command. Your team devise some strategies to help cut down the amount of typing necessary, and one of the suggestions was to implement aliases for the command words. Your job is to implement such aliases.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Do take a look at <a href="#Design-Logic">Section 2.3, &#8220;Logic component&#8221;</a> before attempting to modify the <code>Logic</code> component.
-</td>
-</tr>
-</table>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a shorthand equivalent alias for each of the individual commands. For example, besides typing <code>clear</code>, the user can also type <code>c</code> to remove all cards in the list.</p>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Hints</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Just like we store each individual command word constant <code>COMMAND_WORD</code> inside <code>*Command.java</code> (e.g.  <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/logic/commands/FindCommand.java"><code>FindCommand#COMMAND_WORD</code></a>, <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/logic/commands/DeleteCommand.java"><code>DeleteCommand#COMMAND_WORD</code></a>), you need a new constant for aliases as well (e.g. <code>FindCommand#COMMAND_ALIAS</code>).</p>
-</li>
-<li>
-<p><a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/logic/parser/CardFolderParser.java"><code>CardFolderParser</code></a> is responsible for analyzing command words.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Solution</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Modify the switch statement in <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/logic/parser/CardFolderParser.java"><code>CardFolderParser#parseCommand(String)</code></a> such that both the proper command word and alias can be used to execute the same intended command.</p>
-</li>
-<li>
-<p>Add new tests for each of the aliases that you have added.</p>
-</li>
-<li>
-<p>Update the user guide to document the new aliases.</p>
-</li>
-<li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/785">PR</a> for the full solution.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<h4 id="code-model-code-component" class="discrete"><code>Model</code> component</h4>
-<div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>model</code>. One day, the <code>logic</code>-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the card folder, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Do take a look at <a href="#Design-Model">Section 2.4, &#8220;Model component&#8221;</a> before attempting to modify the <code>Model</code> component.
-</td>
-</tr>
-</table>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a <code>removeTag(Tag)</code> method. The specified tag will be removed from everyone in the card folder.</p>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Hints</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/model/Model.java"><code>Model</code></a> and the <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/model/CardFolder.java"><code>CardFolder</code></a> API need to be updated.</p>
-</li>
-<li>
-<p>Think about how you can use SLAP to design the method. Where should we place the main logic of deleting hints?</p>
-</li>
-<li>
-<p>Find out which of the existing API methods in  <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/model/CardFolder.java"><code>CardFolder</code></a> and <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/model/card/Card.java"><code>Card</code></a> classes can be used to implement the tag removal logic. <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/model/CardFolder.java"><code>CardFolder</code></a> allows you to update a card, and <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/model/card/Card.java"><code>Card</code></a> allows you to update the hints.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Solution</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Implement a <code>removeTag(Tag)</code> method in <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/model/CardFolder.java"><code>CardFolder</code></a>. Loop through each card, and remove the <code>tag</code> from each card.</p>
-</li>
-<li>
-<p>Add a new API method <code>deleteTag(Tag)</code> in <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/model/ModelManager.java"><code>ModelManager</code></a>. Your <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/model/ModelManager.java"><code>ModelManager</code></a> should call <code>CardFolder#removeTag(Tag)</code>.</p>
-</li>
-<li>
-<p>Add new tests for each of the new public methods that you have added.</p>
-</li>
-<li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/790">PR</a> for the full solution.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<h4 id="code-ui-code-component" class="discrete"><code>Ui</code> component</h4>
-<div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>ui</code>. During a beta testing session, your team is observing how the users use your card folder application. You realize that one of the users occasionally tries to delete non-existent hints from a contact, because the hints all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn&#8217;t prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last card in the list. Your job is to implement improvements to the UI to solve all these problems.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</a> before attempting to modify the <code>UI</code> component.
-</td>
-</tr>
-</table>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Use different colors for different hints inside card cards. For example, <code>friends</code> hints can be all in brown, and <code>colleagues</code> hints can be all in yellow.</p>
-<div class="paragraph">
-<p><strong>Before</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/getting-started-ui-tag-before.png" alt="getting started ui tag before" width="300">
-</div>
-</div>
-<div class="paragraph">
-<p><strong>After</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/getting-started-ui-tag-after.png" alt="getting started ui tag after" width="300">
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Hints</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The tag labels are created inside <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/ui/CardCard.java">the <code>CardCard</code> constructor</a> (<code>new Label(tag.hintName)</code>). <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html">JavaFX&#8217;s <code>Label</code> class</a> allows you to modify the style of each Label, such as changing its color.</p>
-</li>
-<li>
-<p>Use the .css attribute <code>-fx-background-color</code> to add a color.</p>
-</li>
-<li>
-<p>You may wish to modify <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/resources/view/DarkTheme.css"><code>DarkTheme.css</code></a> to include some pre-defined colors using css, especially if you have experience with web-based css.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Solution</p>
-<div class="ulist">
-<ul>
-<li>
-<p>You can modify the existing test methods for <code>CardThumbnail</code> 's to include testing the tag&#8217;s color as well.</p>
-</li>
-<li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/798">PR</a> for the full solution.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The PR uses the hash code of the tag names to generate a color. This is deliberately designed to ensure consistent colors each time the application runs. You may wish to expand on this design to include additional features, such as allowing users to set their own tag colors, and directly saving the colors to storage, so that hints retain their colors even if the hash code algorithm changes.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>Modify <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/commons/events/ui/NewResultAvailableEvent.java"><code>NewResultAvailableEvent</code></a> such that <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/ui/ResultDisplay.java"><code>ResultDisplay</code></a> can show a different style on error (currently it shows the same regardless of errors).</p>
-<div class="paragraph">
-<p><strong>Before</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/getting-started-ui-result-before.png" alt="getting started ui result before" width="200">
-</div>
-</div>
-<div class="paragraph">
-<p><strong>After</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/getting-started-ui-result-after.png" alt="getting started ui result after" width="200">
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Hints</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/commons/events/ui/NewResultAvailableEvent.java"><code>NewResultAvailableEvent</code></a> is raised by <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/ui/CommandBox.java"><code>CommandBox</code></a> which also knows whether the result is a success or failure, and is caught by <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/ui/ResultDisplay.java"><code>ResultDisplay</code></a> which is where we want to change the style to.</p>
-</li>
-<li>
-<p>Refer to <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/ui/CommandBox.java"><code>CommandBox</code></a> for an example on how to display an error.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Solution</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Modify <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/commons/events/ui/NewResultAvailableEvent.java"><code>NewResultAvailableEvent</code></a> 's constructor so that users of the event can indicate whether an error has occurred.</p>
-</li>
-<li>
-<p>Modify <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/ui/ResultDisplay.java"><code>ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)</code></a> to react to this event appropriately.</p>
-</li>
-<li>
-<p>You can write two different kinds of tests to ensure that the functionality works:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The unit tests for <code>ResultDisplay</code> can be modified to include verification of the color.</p>
-</li>
-<li>
-<p>The system tests <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/test/java/systemtests/CardFolderSystemTest.java"><code>CardFolderSystemTest#assertCommandBoxShowsDefaultStyle() and CardFolderSystemTest#assertCommandBoxShowsErrorStyle()</code></a> to include verification for <code>ResultDisplay</code> as well.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/799">PR</a> for the full solution.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Do read the commits one at a time if you feel overwhelmed.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>Modify the <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> to show the total number of people in the card folder.</p>
-<div class="paragraph">
-<p><strong>Before</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/getting-started-ui-status-before.png" alt="getting started ui status before" width="500">
-</div>
-</div>
-<div class="paragraph">
-<p><strong>After</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/getting-started-ui-status-after.png" alt="getting started ui status after" width="500">
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Hints</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/resources/view/StatusBarFooter.fxml"><code>StatusBarFooter.fxml</code></a> will need a new <code>StatusBar</code>. Be sure to set the <code>GridPane.columnIndex</code> properly for each <code>StatusBar</code> to avoid misalignment!</p>
-</li>
-<li>
-<p><a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> needs to initialize the status bar on application start, and to update it accordingly whenever the card folder is updated.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Solution</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Modify the constructor of <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> to take in the number of cards when the application just started.</p>
-</li>
-<li>
-<p>Use <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/ui/StatusBarFooter.java"><code>StatusBarFooter#handleCardFolderChangedEvent(CardFolderChangedEvent)</code></a> to update the number of cards whenever there are new changes to the knowitall.</p>
-</li>
-<li>
-<p>For tests, modify <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/test/java/guitests/guihandles/StatusBarFooterHandle.java"><code>StatusBarFooterHandle</code></a> by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.</p>
-</li>
-<li>
-<p>For system tests, modify <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/test/java/systemtests/CardFolderSystemTest.java"><code>CardFolderSystemTest</code></a> to also verify the new total number of cards status bar.</p>
-</li>
-<li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/803">PR</a> for the full solution.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<h4 id="code-storage-code-component" class="discrete"><code>Storage</code> component</h4>
-<div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>storage</code>. For your next project milestone, your team plans to implement a new feature of saving the card folder to the cloud. However, the current implementation of the application constantly saves the card folder after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the card folder storage.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Do take a look at <a href="#Design-Storage">Section 2.5, &#8220;Storage component&#8221;</a> before attempting to modify the <code>Storage</code> component.
-</td>
-</tr>
-</table>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a new method <code>backupCardFolder(ReadOnlyCardFolder)</code>, so that the card folder can be saved in a fixed temporary location.</p>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Hint</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Add the API method in <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/storage/CardFolderStorage.java"><code>CardFolderStorage</code></a> interface.</p>
-</li>
-<li>
-<p>Implement the logic in <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/storage/StorageManager.java"><code>StorageManager</code></a> and <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/storage/JsonCardFolderStorage.java"><code>JsonCardFolderStorage</code></a> class.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Solution</p>
-<div class="ulist">
-<ul>
-<li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/594">PR</a> for the full solution.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="GetStartedProgramming-RemarkCommand"><a class="link" href="#GetStartedProgramming-RemarkCommand">A.2. Creating a new command: <code>remark</code></a></h3>
-<div class="paragraph">
-<p>By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.</p>
-</div>
-<div class="paragraph">
-<p><strong>Scenario:</strong> You are a software maintainer for <code>cardfolder</code>, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible <code>remark</code> field for each contact, rather than relying on hints alone. After designing the specification for the <code>remark</code> command, you are convinced that this feature is worth implementing. Your job is to implement the <code>remark</code> command.</p>
-</div>
-<div class="sect3">
-<h4 id="description"><a class="link" href="#description">A.2.1. Description</a></h4>
-<div class="paragraph">
-<p>Edits the remark for a card specified in the <code>INDEX</code>.<br>
-Format: <code>remark INDEX r/[REMARK]</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>remark 1 r/Likes to drink coffee.</code><br>
-Edits the remark for the first card to <code>Likes to drink coffee.</code></p>
-</li>
-<li>
-<p><code>remark 1 r/</code><br>
-Removes the remark for the first card.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="step-by-step-instructions"><a class="link" href="#step-by-step-instructions">A.2.2. Step-by-step Instructions</a></h4>
-<div class="sect4">
-<h5 id="step-1-logic-teach-the-app-to-accept-remark-which-does-nothing"><a class="link" href="#step-1-logic-teach-the-app-to-accept-remark-which-does-nothing">[Step 1] Logic: Teach the app to accept 'remark' which does nothing</a></h5>
-<div class="paragraph">
-<p>Let&#8217;s start by teaching the application how to parse a <code>remark</code> command. We will add the logic of <code>remark</code> later.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a <code>RemarkCommand</code> that extends <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/logic/commands/Command.java"><code>Command</code></a>. Upon execution, it should just throw an <code>Exception</code>.</p>
-</li>
-<li>
-<p>Modify <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/logic/parser/CardFolderParser.java"><code>CardFolderParser</code></a> to accept a <code>RemarkCommand</code>.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add <code>RemarkCommandTest</code> that tests that <code>execute()</code> throws an Exception.</p>
-</li>
-<li>
-<p>Add new test method to <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/test/java/seedu/knowitall/logic/parser/CardFolderParserTest.java"><code>CardFolderParserTest</code></a>, which tests that typing "remark" returns an instance of <code>RemarkCommand</code>.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-2-logic-teach-the-app-to-accept-remark-arguments"><a class="link" href="#step-2-logic-teach-the-app-to-accept-remark-arguments">[Step 2] Logic: Teach the app to accept 'remark' arguments</a></h5>
-<div class="paragraph">
-<p>Let&#8217;s teach the application to parse arguments that our <code>remark</code> command will accept. E.g. <code>1 r/Likes to drink coffee.</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Modify <code>RemarkCommand</code> to take in an <code>Index</code> and <code>String</code> and print those two parameters as the error message.</p>
-</li>
-<li>
-<p>Add <code>RemarkCommandParser</code> that knows how to parse two arguments, one index and one with prefix 'r/'.</p>
-</li>
-<li>
-<p>Modify <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/logic/parser/CardFolderParser.java"><code>CardFolderParser</code></a> to use the newly implemented <code>RemarkCommandParser</code>.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Modify <code>RemarkCommandTest</code> to test the <code>RemarkCommand#equals()</code> method.</p>
-</li>
-<li>
-<p>Add <code>RemarkCommandParserTest</code> that tests different boundary values
-for <code>RemarkCommandParser</code>.</p>
-</li>
-<li>
-<p>Modify <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/test/java/seedu/knowitall/logic/parser/CardFolderParserTest.java"><code>CardFolderParserTest</code></a> to test that the correct command is generated according to the user input.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-3-ui-add-a-placeholder-for-remark-in-code-cardcard-code"><a class="link" href="#step-3-ui-add-a-placeholder-for-remark-in-code-cardcard-code">[Step 3] Ui: Add a placeholder for remark in <code>CardCard</code></a></h5>
-<div class="paragraph">
-<p>Let&#8217;s add a placeholder on all our <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/ui/CardCard.java"><code>CardCard</code></a> s to display a remark for each card later.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a <code>Label</code> with any random text inside <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/resources/view/CardListThumbnail.fxml"><code>CardListThumbnail.fxml</code></a>.</p>
-</li>
-<li>
-<p>Add FXML annotation in <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/ui/CardCard.java"><code>CardCard</code></a> to tie the variable to the actual label.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Modify <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/test/java/guitests/guihandles/CardCardHandle.java"><code>CardCardHandle</code></a> so that future tests can read the contents of the remark label.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-4-model-add-code-remark-code-class"><a class="link" href="#step-4-model-add-code-remark-code-class">[Step 4] Model: Add <code>Remark</code> class</a></h5>
-<div class="paragraph">
-<p>We have to properly encapsulate the remark in our <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/model/card/Card.java"><code>Card</code></a> class. Instead of just using a <code>String</code>, let&#8217;s follow the conventional class structure that the codebase already uses by adding a <code>Remark</code> class.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add <code>Remark</code> to model component (you can copy from <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/model/card/Address.java"><code>Address</code></a>, remove the regex and change the questions accordingly).</p>
-</li>
-<li>
-<p>Modify <code>RemarkCommand</code> to now take in a <code>Remark</code> instead of a <code>String</code>.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add test for <code>Remark</code>, to test the <code>Remark#equals()</code> method.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-5-model-modify-code-card-code-to-support-a-code-remark-code-field"><a class="link" href="#step-5-model-modify-code-card-code-to-support-a-code-remark-code-field">[Step 5] Model: Modify <code>Card</code> to support a <code>Remark</code> field</a></h5>
-<div class="paragraph">
-<p>Now we have the <code>Remark</code> class, we need to actually use it inside <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/model/card/Card.java"><code>Card</code></a>.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add <code>getRemark()</code> in <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/model/card/Card.java"><code>Card</code></a>.</p>
-</li>
-<li>
-<p>You may assume that the user will not be able to use the <code>add</code> and <code>edit</code> commands to modify the remarks field (i.e. the card will be created without a remark).</p>
-</li>
-<li>
-<p>Modify <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/model/util/SampleDataUtil.java/"><code>SampleDataUtil</code></a> to add remarks for the sample data (delete your <code>data/cardfolder.json</code> so that the application will load the sample data when you launch it.)</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-6-storage-add-code-remark-code-field-to-code-jsonadaptedcard-code-class"><a class="link" href="#step-6-storage-add-code-remark-code-field-to-code-jsonadaptedcard-code-class">[Step 6] Storage: Add <code>Remark</code> field to <code>JsonAdaptedCard</code> class</a></h5>
-<div class="paragraph">
-<p>We now have <code>Remark</code> s for <code>Card</code> s, but they will be gone when we exit the application. Let&#8217;s modify <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/storage/JsonAdaptedCard.java"><code>JsonAdaptedCard</code></a> to include a <code>Remark</code> field so that it will be saved.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a new JSON field for <code>Remark</code>.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Fix <code>invalidAndValidCardCardFolder.json</code>, <code>typicalCardsCardFolder.json</code>, <code>validCardFolder.json</code> etc., such that the JSON tests will not fail due to a missing <code>remark</code> field.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-6b-test-add-withremark-for-code-cardbuilder-code"><a class="link" href="#step-6b-test-add-withremark-for-code-cardbuilder-code">[Step 6b] Test: Add withRemark() for <code>CardBuilder</code></a></h5>
-<div class="paragraph">
-<p>Since <code>Card</code> can now have a <code>Remark</code>, we should add a helper method to <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/test/java/seedu/knowitall/testutil/CardBuilder.java"><code>CardBuilder</code></a>, so that users are able to create remarks when building a <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/model/card/Card.java"><code>Card</code></a>.</p>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a new method <code>withRemark()</code> for <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/test/java/seedu/knowitall/testutil/CardBuilder.java"><code>CardBuilder</code></a>. This method will create a new <code>Remark</code> for the card that it is currently building.</p>
-</li>
-<li>
-<p>Try and use the method on any sample <code>Card</code> in <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/test/java/seedu/knowitall/testutil/TypicalCards.java"><code>TypicalCards</code></a>.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-7-ui-connect-code-remark-code-field-to-code-cardcard-code"><a class="link" href="#step-7-ui-connect-code-remark-code-field-to-code-cardcard-code">[Step 7] Ui: Connect <code>Remark</code> field to <code>CardCard</code></a></h5>
-<div class="paragraph">
-<p>Our remark label in <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/ui/CardCard.java"><code>CardCard</code></a> is still a placeholder. Let&#8217;s bring it to life by binding it with the actual <code>remark</code> field.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Modify <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/ui/CardCard.java"><code>CardCard</code></a>'s constructor to bind the <code>Remark</code> field to the <code>Card</code> 's remark.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Modify <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/test/java/seedu/knowitall/ui/testutil/GuiTestAssert.java"><code>GuiTestAssert#assertCardDisplaysCard(&#8230;&#8203;)</code></a> so that it will compare the now-functioning remark label.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-8-logic-implement-code-remarkcommand-execute-code-logic"><a class="link" href="#step-8-logic-implement-code-remarkcommand-execute-code-logic">[Step 8] Logic: Implement <code>RemarkCommand#execute()</code> logic</a></h5>
-<div class="paragraph">
-<p>We now have everything set up&#8230;&#8203; but we still can&#8217;t modify the remarks. Let&#8217;s finish it up by adding in actual logic for our <code>remark</code> command.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Replace the logic in <code>RemarkCommand#execute()</code> (that currently just throws an <code>Exception</code>), with the actual logic to modify the remarks of a card.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Update <code>RemarkCommandTest</code> to test that the <code>execute()</code> logic works.</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="full-solution"><a class="link" href="#full-solution">A.2.3. Full Solution</a></h4>
-<div class="paragraph">
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/599">PR</a> for the step-by-step solution.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="product-scope"><a class="link" href="#product-scope">Appendix B: Product Scope</a></h2>
+<h2 id="product-scope"><a class="link" href="#product-scope">Appendix A: Product Scope</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong>Target user profile</strong>:</p>
@@ -3629,7 +2859,7 @@ user experience is more engaging and scoring is more accurate as it is based on 
 </div>
 </div>
 <div class="sect1">
-<h2 id="user-stories"><a class="link" href="#user-stories">Appendix C: User Stories</a></h2>
+<h2 id="user-stories"><a class="link" href="#user-stories">Appendix B: User Stories</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p>
@@ -3769,7 +2999,7 @@ user experience is more engaging and scoring is more accurate as it is based on 
 </div>
 </div>
 <div class="sect1">
-<h2 id="use-cases"><a class="link" href="#use-cases">Appendix D: Use Cases</a></h2>
+<h2 id="use-cases"><a class="link" href="#use-cases">Appendix C: Use Cases</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>(For all use cases below, the <strong>System</strong> is <code>Know-It-All</code> and the <strong>Actor</strong> is the <code>Student</code>, unless specified otherwise)</p>
@@ -4037,7 +3267,7 @@ user experience is more engaging and scoring is more accurate as it is based on 
 </div>
 </div>
 <div class="sect1">
-<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix E: Non Functional Requirements</a></h2>
+<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -4061,24 +3291,35 @@ user experience is more engaging and scoring is more accurate as it is based on 
 </div>
 </div>
 <div class="sect1">
-<h2 id="glossary"><a class="link" href="#glossary">Appendix F: Glossary</a></h2>
+<h2 id="glossary"><a class="link" href="#glossary">Appendix E: Glossary</a></h2>
 <div class="sectionbody">
-<div class="dlist">
-<dl>
-<dt class="hdlist1"><a id="mainstream-os"></a> Mainstream OS</dt>
-<dd>
-<p>Windows, Linux, Unix, OS-X</p>
-</dd>
-<dt class="hdlist1"><a id="private-contact-detail"></a> Private contact detail</dt>
-<dd>
-<p>A contact detail that is not meant to be shared with others</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p><a id="mainstream-os"></a><strong>Mainstream OS</strong>: Windows, Linux, Unix, OS-X</p>
+</div>
+<div class="paragraph">
+<p><a id="flashcard"></a><strong>Flashcard/Card</strong>: An object containing a single question and answer, and optionally hints.</p>
+</div>
+<div class="paragraph">
+<p><a id="folder"></a> <strong>Folder</strong>: A collections of flashcards, grouped topically. There are no
+sub-folders.</p>
+</div>
+<div class="paragraph">
+<p><a id="testsession"></a> <strong>Test Session</strong>: A session where all flashcards in a folder are queued to have their
+questions displayed. The user is required to key in an answer for each question.</p>
+</div>
+<div class="paragraph">
+<p><a id="cardscore"></a>  <strong>Card Score</strong>: The number of correct answers divided by the number of attempts for a single card. When the user is tested on a card, this number is automatically calculated and recorded.</p>
+</div>
+<div class="paragraph">
+<p><a id="folderscore"></a> <strong>Folder Score</strong>: The average of all <a href="#cardscore">card scores</a> in a folder after a test session. This number is automatically recorded after each test session.</p>
+</div>
+<div class="paragraph">
+<p><a id="homedirectory"></a> <strong>Home Directory</strong>: The home page where all the folders are listed. From here, users can enter folders to view cards.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix G: Instructions for Manual Testing</a></h2>
+<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Given below are instructions to test the app manually.</p>
@@ -4096,7 +3337,7 @@ These instructions only provide a starting point for testers to work on; testers
 </table>
 </div>
 <div class="sect2">
-<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">G.1. Launch and Shutdown</a></h3>
+<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">F.1. Launch and Shutdown</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4130,11 +3371,11 @@ Expected: The most recent window size and location is retained.</p>
 </ol>
 </div>
 <div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
+<p><em>{ more test cases to be added &#8230;&#8203; }</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-card"><a class="link" href="#deleting-a-card">G.2. Deleting a card</a></h3>
+<h3 id="deleting-a-card"><a class="link" href="#deleting-a-card">F.2. Deleting a card</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4162,11 +3403,11 @@ Expected: Similar to previous.</p>
 </ol>
 </div>
 <div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
+<p><em>{ more test cases to be added &#8230;&#8203; }</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">G.3. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">F.3. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4182,8 +3423,8 @@ Expected: Similar to previous.</p>
 </ol>
 </div>
 <div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
+<p><em>{ more test cases to be added &#8230;&#8203; }</em></p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-01 02:31:12 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-01 03:58:08 UTC</div></div></div></body></html>
