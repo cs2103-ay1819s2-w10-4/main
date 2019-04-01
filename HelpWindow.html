@@ -956,7 +956,19 @@ There must be at least two test attempts for a graph to be drawn.
 <div class="sect3">
 <h4 id="import-flashcards-code-import-code"><a class="link" href="#import-flashcards-code-import-code">4.5.2. Import flashcards : <code>import</code></a></h4>
 <div class="paragraph">
-<p>Searches for a json file with the specified csvFile in the program directory and parses the file to generate a flashcard folder.</p>
+<p>Searches for a csv file in the root project directory and parses the file to generate a flashcard folder.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The csv file imported should follow the format below
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Format: <code>import FILENAME</code></p>
@@ -965,10 +977,11 @@ There must be at least two test attempts for a graph to be drawn.
 <div class="sect3">
 <h4 id="export-flashcards-code-export-code"><a class="link" href="#export-flashcards-code-export-code">4.5.3. Export flashcards : <code>export</code></a></h4>
 <div class="paragraph">
-<p>Creates a json file containing the flashcards from the specified folder, which can later be imported.</p>
+<p>Creates a csv file containing the flashcards from the specified folder, which can later be imported.
+Exported card folder will be created in the project root directory.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>export FOLDER_INDEX FILENAME</code></p>
+<p>Format: <code>export FOLDER_INDEX FILENAME [MORE_INDEXES]</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1137,4 +1150,4 @@ Within a folder, user can search for flashcards inside the current folder using 
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-31 15:16:51 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-01 02:02:59 UTC</div></div></div></body></html>

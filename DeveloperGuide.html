@@ -55,7 +55,8 @@
 </li>
 <li><a href="#import-export-feature">3.4. Import/Export feature</a>
 <ul class="sectlevel3">
-<li><a href="#current-implementation-4">3.4.1. Current Implementation</a></li>
+<li><a href="#csv-file-structure">3.4.1. CSV file structure</a></li>
+<li><a href="#design-considerations-3">3.4.2. Design Considerations</a></li>
 </ul>
 </li>
 <li><a href="#test-session-feature">3.5. Test Session feature</a>
@@ -68,13 +69,13 @@
 <li><a href="#folders">3.6. Folders</a>
 <ul class="sectlevel3">
 <li><a href="#current-implementation-6">3.6.1. Current Implementation</a></li>
-<li><a href="#design-considerations-3">3.6.2. Design Considerations</a></li>
+<li><a href="#design-considerations-4">3.6.2. Design Considerations</a></li>
 </ul>
 </li>
 <li><a href="#navigating-folders">3.7. Navigating folders</a>
 <ul class="sectlevel3">
 <li><a href="#current-implementation-7">3.7.1. Current Implementation</a></li>
-<li><a href="#design-considerations-4">3.7.2. Design Considerations</a></li>
+<li><a href="#design-considerations-5">3.7.2. Design Considerations</a></li>
 </ul>
 </li>
 <li><a href="#logging">3.8. Logging</a></li>
@@ -982,10 +983,28 @@ For example, 2 correct attempts and 4 total attempts becomes 0.5. When instantia
 </div>
 <div class="sect2">
 <h3 id="import-export-feature"><a class="link" href="#import-export-feature">3.4. Import/Export feature</a></h3>
-<div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
+<h4 id="current-implementation-4" class="discrete">Current Implementation</h4>
 <div class="paragraph">
-<p>The Import and Export feature is facilitated by the addition of 3 new classes inside the csvmanager package defined under storage component.</p>
+<p>The Import and Export feature is facilitated by the Logic and model components, together
+with the addition of 2 new classes inside the csvmanager package defined under
+the storage component.</p>
+</div>
+<h5 id="logic" class="discrete">Logic</h5>
+<div class="paragraph">
+<p>Similar to how the current commands are implemented, the two new commands, the logic unit now accepts two
+new commands, <code>ImportCommand</code> and <code>ExportCommand</code>.</p>
+</div>
+<h5 id="model-2" class="discrete">Model</h5>
+<div class="paragraph">
+<p>The model component supports the addition of a new object variable <code>CsvManager</code>, that carries out the read and
+write logic of cards to files.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, model implements two new methods, <code>Model#importCardFolders</code> and <code>Model#exportCardFolders</code>.
+These two methods further call the CsvManager API to read and write card folders.</p>
+</div>
+<div class="paragraph">
+<p>Model also implements <code>Model#setTestCsvPath</code> and the <code>Model#getDefaultPath</code> which are only used during testing.</p>
 </div>
 <h5 id="csvmanager-package" class="discrete">csvmanager package:</h5>
 <div class="ulist">
@@ -994,37 +1013,28 @@ For example, 2 correct attempts and 4 total attempts becomes 0.5. When instantia
 <p>CsvManager - Main class responsible for the writing and reading of .csv files during the import and export of files</p>
 </li>
 <li>
-<p>CsvCardFolder - Wrapper class for a folder name input by user</p>
+<p>CsvFile - Wrapper class for file name input by user</p>
 </li>
 <li>
-<p>CsvFile - Wrapper class for file name input by user</p>
+<p>CsvCommands interface - API for import/export method in CsvManager</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The main logic for the import / export command is carried out inside the CsvManager class specified by it&#8217;s API <code>CsvManager#writeFoldersToCsv</code> and <code>CsvManager#readFoldersToCsv</code>.</p>
+<p>The main logic for the import / export command is carried out inside the CsvManager class specified by it&#8217;s
+API <code>CsvManager#writeFoldersToCsv</code> and <code>CsvManager#readFoldersToCsv</code>.</p>
 </div>
-<div class="paragraph">
-<p>CsvManager&#8217;s API’s are exposed in the model interface as  <code>Model#ExportCardFolders</code> and <code>Model#ImportCardFolders</code> method</p>
-</div>
-<h4 id="example-usage-2" class="discrete">Example Usage</h4>
+<h5 id="example-usage-2" class="discrete">Example Usage</h5>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User wants to export folders <code>Human Anatomy</code> and <code>Nervous System</code>. User inputs the following folders and the csvFile specified that he wants to export the folders to.</p>
-<div class="literalblock">
-<div class="content">
-<pre>picture of command box with user inputs</pre>
-</div>
-</div>
+<p>User wants to export folders <code>Human Anatomy</code> and <code>Nervous System</code>.
+Suppose that these two folders are indicated by the index 1 and 2 respectively.
+The user types <code>export 1 2</code></p>
 </li>
 <li>
-<p>Export command parser extracts prefixes and parses the corresponding folders into the CsvCardFolder and CsvFile objects. Returns an ExportCommand to be executed.</p>
-<div class="literalblock">
-<div class="content">
-<pre>Draw export command object diagram with set&lt;CardFolderExport&gt; and CsvFile file</pre>
-</div>
-</div>
+<p>The Export command parser extracts the indices, parses the indices into a <code>ExportCommand</code> object.
+Draw export command object diagram with set&lt;CardFolderExport&gt; and CsvFile file</p>
 </li>
 <li>
 <p>Logic unit executes the command. The execute command calls <code>Model#exportCardFolders</code> method.</p>
@@ -1037,17 +1047,235 @@ Contains the list of card folders present in the model</pre>
 </div>
 </li>
 <li>
-<p>Model checks that all card folders specified by user exists inside the list of card folders. Throws <code>CardFolderNotFound</code> Exception if user specified card folder does not exist in the application.</p>
+<p>Model checks that all card folders specified by user exists inside the list of card folders.
+Throws <code>CardFolderNotFound</code> Exception if user specified card folder does not exist in the application.</p>
 </li>
 <li>
-<p><code>CsvManager</code> is called to carry out the main logic of writing the cardfolders to file. File exported will be created in the root directory.</p>
+<p><code>CsvManager</code> is called to carry out the main logic of writing the cardfolders to file.
+File exported will be created in the project root directory.
+File will be named after the name of the cardfolder.
+i.e <code>Human Anatomy.csv</code> and <code>Nervous System.csv</code></p>
 <div class="literalblock">
 <div class="content">
 <pre>Sequence diagram</pre>
 </div>
 </div>
 </li>
+<li>
+<p>User wants to import <code>Human Anatomy.csv</code> file.
+<code>Human Anatomy.csv</code> file contains flashcards represented in csv file format.
+User types <code>import Blood.csv</code> command</p>
+</li>
+<li>
+<p>Import command parser extracts file name and wraps file into a <code>CsvFile</code> object and
+parses the CsvFile into an Import Command object.</p>
+</li>
+<li>
+<p>Logic unit executes the import command.
+The execute method makes a call to <code>Model#importCardFolder</code> method.</p>
+</li>
+<li>
+<p>CsvManager is called to carry out the main logic of reading cardfolders to file.
+File imported will be serialized into a <code>CardFolder</code> object and
+added to the <code>filteredFoldersList</code> variable.</p>
+</li>
 </ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Both Imported and Exported files have to be placed in the project root directory.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="csv-file-structure"><a class="link" href="#csv-file-structure">3.4.1. CSV file structure</a></h4>
+<div class="paragraph">
+<p>Example of a common cardfolder csv file<br></p>
+</div>
+<div class="paragraph">
+<p>Blood.csv</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Blood.csv.png" alt="Blood.csv" width="800">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The first line of any file contains the headers for each card.
+Headers have to be present in the csv file for import.</p>
+</li>
+<li>
+<p>Each row of the csv file represents a single flashcard.</p>
+</li>
+<li>
+<p>Options header can take more than one value or none.</p>
+</li>
+<li>
+<p>Hints header can take either 0 or 1 value.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.2. Design Considerations</a></h4>
+<div class="sect5">
+<h6 id="aspect-which-component-responsible-for-import-export-logic"><a class="link" href="#aspect-which-component-responsible-for-import-export-logic">Aspect: Which component responsible for import/export logic</a></h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Alternative 1: Implement read and write card folders in <code>StorageManager</code> class</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The most intuitive solution,
+since Storage involves read and write logic</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Model and Storage are now more coupled together.</p>
+</li>
+<li>
+<p>Storage has more than one responsibility now.
+Instead of managing the internal data of card folder, it now has to
+manage the read and write to csv files.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Alternative 2: Implement read and write card folders in <code>csvmanager</code> package class. (Current)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Separate responsibilities of both Storage and Model.<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Model class can focus on the representation of the in-memory card folders
+Storage<br></p>
+</li>
+<li>
+<p>Storage class can focus on managing the internal card folder data (.json files)</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>More code to write. Storage class could possibly call the relevant API&#8217;s
+to convert .json file  into .csv file</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="aspect-csv-file-design-structure"><a class="link" href="#aspect-csv-file-design-structure">Aspect: csv file design structure</a></h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Alternative 1: Export multiple card folders into a single file.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Saves user trouble of calling multiple import for files.
+Each card folder is separated by a new line.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Not a .csv file anymore.
+First line header would now specify cardfolder name before card headers,
+leading to unequal rows and columns</p>
+</li>
+<li>
+<p>Users will be unable to select specific card folders to import if multiple card folders
+have been exported into a single file.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Alternative 2: Export each card folder into a single file (Current)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>More flexibility for users to import desired card folders,
+since 1 cardfolder = 1 csv file.</p>
+</li>
+<li>
+<p>Files are now correctly formatted as .csv file</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Slightly more work needed to import multiple card folders.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -1058,7 +1286,7 @@ Contains the list of card folders present in the model</pre>
 <div class="paragraph">
 <p>This feature mainly involves <code>UI</code>, <code>Logic</code> and <code>Model</code> components.</p>
 </div>
-<h5 id="model-2" class="discrete">Model:</h5>
+<h5 id="model-3" class="discrete">Model:</h5>
 <div class="paragraph">
 <p>The following variables in <code>ModelManager</code> are introduced to keep track of the current state in a test session. The related methods are exposed in the <code>Model</code> interface.</p>
 </div>
@@ -1135,7 +1363,7 @@ Contains the list of card folders present in the model</pre>
 </div>
 <div class="sect3">
 <h4 id="test-end-command"><a class="link" href="#test-end-command">3.5.2. Test / End Command</a></h4>
-<h5 id="model-3" class="discrete">Model</h5>
+<h5 id="model-4" class="discrete">Model</h5>
 <div class="paragraph">
 <p>The main logic for  <code>test</code> and <code>end</code> command is carried out inside the ModelManager with the following methods:</p>
 </div>
@@ -1273,7 +1501,7 @@ will then invoke <code>MainWindow#handleEndTestSession()</code> in the <code>UI<
 </div>
 <div class="sect3">
 <h4 id="answer-command"><a class="link" href="#answer-command">3.5.3. Answer Command</a></h4>
-<h5 id="model-4" class="discrete">Model</h5>
+<h5 id="model-5" class="discrete">Model</h5>
 <div class="paragraph">
 <p>To facilitate the marking of attempted answer, <code>#markAttemptedAnswer()</code> method is introduced in <code>ModelManager</code> which compares the attempted answer and the correct answer obtained from the current card.</p>
 </div>
@@ -1305,7 +1533,7 @@ Comparison is not case-sensitive
 <p>Folders in the application are achieved via enhancements from the AddressBook implementation. The changes span across all four components (UI, Logic, Model and Storage).</p>
 </div>
 <div class="sect4">
-<h5 id="model-5"><a class="link" href="#model-5">Model</a></h5>
+<h5 id="model-6"><a class="link" href="#model-6">Model</a></h5>
 <div class="paragraph">
 <p>Previously, an instance of <code>ModelManager</code> contains only a single <code>VersionedCardFolder</code>, holding the current and previous state of the <code>CardFolder</code>. To support multiple folders, <code>ModelManager</code> now holds an <code>ObservableList</code> of <code>CardFolders</code>. The change is illustrated in the figure below, with the original implementation on the left and new implementation on the right.</p>
 </div>
@@ -1368,7 +1596,7 @@ Comparison is not case-sensitive
 </div>
 </div>
 <div class="sect4">
-<h5 id="logic"><a class="link" href="#logic">Logic</a></h5>
+<h5 id="logic-2"><a class="link" href="#logic-2">Logic</a></h5>
 <div class="paragraph">
 <p>The existing implementation of the Logic component propagates changes in a Model&#8217;s <code>CardFolder</code> to the Storage component. With listeners, it is informed when a <code>CardFolder</code> is modified (e.g. a new card is added) so that it can invoke the appropriate Storage methods.</p>
 </div>
@@ -1494,7 +1722,7 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.6.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-multiple-folders-are-represented-in-model"><a class="link" href="#aspect-how-multiple-folders-are-represented-in-model">Aspect: How multiple folders are represented in Model</a></h5>
 <div class="ulist">
@@ -1714,7 +1942,7 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.7.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.7.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-command-format-to-enter-and-exit-folders"><a class="link" href="#aspect-command-format-to-enter-and-exit-folders">Aspect: Command format to enter and exit folders</a></h5>
 <div class="ulist">
@@ -3368,6 +3596,9 @@ user experience is more engaging and scoring is more accurate as it is based on 
 <li>
 <p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.</p>
 </li>
+<li>
+<p>The user interface should be intuitive enough even for medical students to use the app.</p>
+</li>
 </ol>
 </div>
 <div class="paragraph">
@@ -3501,4 +3732,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-31 15:16:51 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-01 02:02:59 UTC</div></div></div></body></html>
