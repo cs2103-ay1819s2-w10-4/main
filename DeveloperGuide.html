@@ -59,23 +59,25 @@
 <li><a href="#design-considerations-3">3.4.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#test-session-feature">3.5. Test Session feature</a>
+<li><a href="#folders">3.5. Folders</a>
 <ul class="sectlevel3">
 <li><a href="#current-implementation-5">3.5.1. Current Implementation</a></li>
-<li><a href="#test-end-command">3.5.2. Test / End Command</a></li>
-<li><a href="#answer-command">3.5.3. Answer Command</a></li>
+<li><a href="#design-considerations-4">3.5.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#folders">3.6. Folders</a>
+<li><a href="#navigating-folders">3.6. Navigating folders</a>
 <ul class="sectlevel3">
 <li><a href="#current-implementation-6">3.6.1. Current Implementation</a></li>
-<li><a href="#design-considerations-4">3.6.2. Design Considerations</a></li>
+<li><a href="#design-considerations-5">3.6.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#navigating-folders">3.7. Navigating folders</a>
+<li><a href="#test-session-feature">3.7. Test Session feature</a>
 <ul class="sectlevel3">
-<li><a href="#current-implementation-7">3.7.1. Current Implementation</a></li>
-<li><a href="#design-considerations-5">3.7.2. Design Considerations</a></li>
+<li><a href="#overall-current-implementation">3.7.1. Overall Current Implementation</a></li>
+<li><a href="#overall-design-considerations">3.7.2. Overall Design Considerations</a></li>
+<li><a href="#test-end-command">3.7.3. Test / End Command</a></li>
+<li><a href="#answer-command">3.7.4. Answer Command</a></li>
+<li><a href="#next-command">3.7.5. Next Command</a></li>
 </ul>
 </li>
 <li><a href="#logging">3.8. Logging</a></li>
@@ -1280,252 +1282,9 @@ since 1 cardfolder = 1 csv file.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="test-session-feature"><a class="link" href="#test-session-feature">3.5. Test Session feature</a></h3>
+<h3 id="folders"><a class="link" href="#folders">3.5. Folders</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
-<div class="paragraph">
-<p>This feature mainly involves <code>UI</code>, <code>Logic</code> and <code>Model</code> components.</p>
-</div>
-<h5 id="model-3" class="discrete">Model:</h5>
-<div class="paragraph">
-<p>The following variables in <code>ModelManager</code> are introduced to keep track of the current state in a test session. The related methods are exposed in the <code>Model</code> interface.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>insideTestSession</code></p>
-<div class="ulist">
-<ul>
-<li>
-<p>A boolean variable to indicate if user is running a test session.</p>
-</li>
-<li>
-<p>Related methods:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>Model#checkIfInsideTestSession()</code></p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><code>currentTestedCard</code></p>
-<div class="ulist">
-<ul>
-<li>
-<p>The current card the user is seeing in the test session.</p>
-</li>
-<li>
-<p>Set to null if user is not inside a test session</p>
-</li>
-<li>
-<p>Related methods:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>Model#setCurrentTestedCard()</code></p>
-</li>
-<li>
-<p><code>Model#getCurrentTestedCard()</code></p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><code>cardAlreadyAnswered</code></p>
-<div class="ulist">
-<ul>
-<li>
-<p>A boolean variable to indicate if the user has already execute a valid answer command for the current card.</p>
-</li>
-<li>
-<p>Related methods:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>Model#setCardAsAlreadyAnswered()</code></p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="test-end-command"><a class="link" href="#test-end-command">3.5.2. Test / End Command</a></h4>
-<h5 id="model-4" class="discrete">Model</h5>
-<div class="paragraph">
-<p>The main logic for  <code>test</code> and <code>end</code> command is carried out inside the ModelManager with the following methods:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>#testCardFolder()</code> - begins a test session on the card folder specified (or the current card folder - to be
-implemented) and updates the three variables introduced earlier that are used to track the state of a test session
-accordingly.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>insideTestSession</code> is set to true.</p>
-</li>
-<li>
-<p><code>Model#setCurrentTestedCard()</code> is invoked to set <code>currentTestedCard</code> to the first card in the folder.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><code>#endTestSession()</code> - ends the current test session and updates the three variables accordingly.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>insideTestSession</code> is set to false.</p>
-</li>
-<li>
-<p><code>Model#setCurrentTestedCard()</code> is invoked to set <code>currentTestedCard</code> to null.</p>
-</li>
-<li>
-<p><code>cardAlreadyAnswered</code> is reset to false.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>They are exposed in the <code>model</code> interface as <code>Model#testCardFolder()</code> and <code>Model#endTestSession()</code>.</p>
-</div>
-<h5 id="ui" class="discrete">UI</h5>
-<div class="paragraph">
-<p>To update the change in the <code>UI</code> to reflect that the user is a test session (app goes to full screen with question of
-the current presented), the following methods are introduced.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>MainWindow#handleStartTestSession</code> - creates a new <code>testSession</code> page and bring it forward in front of the
-current <code>cardMainScreen</code> page.</p>
-</li>
-<li>
-<p><code>MainWindow#handleEndTestSession</code> - deletes the current <code>testSession</code> page and the <code>cardMainScreen</code> page at the back
-is now presented to the user.</p>
-</li>
-</ul>
-</div>
-<h5 id="example-usage-3" class="discrete">Example Usage</h5>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User is in the home directory and wants to enter a test session on the first folder by executing the command <code>test 1</code>.</p>
-<div class="literalblock">
-<div class="content">
-<pre>picture of command box with user inputs</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>First, the <code>logic</code> unit checks if this is a valid folder index. If it is not, an exception is thrown.</p>
-</li>
-<li>
-<p>Second, the <code>logic</code> unit also checks if the user is already in a test session using
-<code>Model#checkIfInsideTestSession()</code>. If true, this <code>test</code> command would be rendered invalid and an
-exception is thrown.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>The application enters this folder by setting <code>ActiveCardFolderIndex</code> to this current index.</p>
-</li>
-<li>
-<p>The <code>test</code> command calls <code>Model#testCardFolder()</code> method.</p>
-</li>
-<li>
-<p>The <code>currentTestedCard</code> will then be passed to <code>CommandResult</code> which checks that <code>testSessionCard</code> is not null.</p>
-<div class="literalblock">
-<div class="content">
-<pre>draw commandResult object diagram</pre>
-</div>
-</div>
-</li>
-<li>
-<p><code>CommandResult</code> invokes <code>MainWindow#handleStartTestSession()</code> in the <code>UI</code> component to display the
-<code>currentTestedCard</code> question and hints to the user.</p>
-<div class="literalblock">
-<div class="content">
-<pre>insert sequence diagram for test command</pre>
-</div>
-</div>
-</li>
-<li>
-<p>When the user executes the command <code>end</code></p>
-<div class="literalblock">
-<div class="content">
-<pre>picture of command box with the end command</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>The <code>logic</code> unit checks if the user is already in a test session using <code>Model#checkIfInsideTestSession()</code>, which if
-not, this <code>end</code> command would be rendered invalid.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>The <code>end</code> command calls Model#endTestSession().</p>
-</li>
-<li>
-<p><code>end</code> command will then construct a <code>CommandResult</code> class with <code>isEndTestSession</code> parameter set to true. <code>CommandResult</code>
-will then invoke <code>MainWindow#handleEndTestSession()</code> in the <code>UI</code> component.</p>
-<div class="literalblock">
-<div class="content">
-<pre>insert sequence diagram for end command</pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect3">
-<h4 id="answer-command"><a class="link" href="#answer-command">3.5.3. Answer Command</a></h4>
-<h5 id="model-5" class="discrete">Model</h5>
-<div class="paragraph">
-<p>To facilitate the marking of attempted answer, <code>#markAttemptedAnswer()</code> method is introduced in <code>ModelManager</code> which compares the attempted answer and the correct answer obtained from the current card.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Comparison is not case-sensitive
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Similar to other test session methods, this is exposed in the model interface as <code>Model#markAttemptedAnswer()</code>.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="folders"><a class="link" href="#folders">3.6. Folders</a></h3>
-<div class="sect3">
-<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.6.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>A folder is another layer of abstraction over a <code>CardFolder</code>. Where we dealt with a single <code>CardFolder</code> in previous iterations, we now have multiple <code>CardFolders</code> that each have their own set of <code>Cards</code>. Users are able to manage each <code>CardFolder</code> independently.</p>
 </div>
@@ -1533,7 +1292,7 @@ Comparison is not case-sensitive
 <p>Folders in the application are achieved via enhancements from the AddressBook implementation. The changes span across all four components (UI, Logic, Model and Storage).</p>
 </div>
 <div class="sect4">
-<h5 id="model-6"><a class="link" href="#model-6">Model</a></h5>
+<h5 id="model-3"><a class="link" href="#model-3">Model</a></h5>
 <div class="paragraph">
 <p>Previously, an instance of <code>ModelManager</code> contains only a single <code>VersionedCardFolder</code>, holding the current and previous state of the <code>CardFolder</code>. To support multiple folders, <code>ModelManager</code> now holds an <code>ObservableList</code> of <code>CardFolders</code>. The change is illustrated in the figure below, with the original implementation on the left and new implementation on the right.</p>
 </div>
@@ -1674,7 +1433,7 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </div>
 <div class="sect4">
-<h5 id="ui-2"><a class="link" href="#ui-2">UI</a></h5>
+<h5 id="ui"><a class="link" href="#ui">UI</a></h5>
 <div class="paragraph">
 <p>As folders are a layer of abstraction over the cards, there is a need for the GUI to represent this abstraction for greater clarity and ease of use for the user. This is done by introducing the <code>FolderListPanel</code> class, which displays a list of all folders that the user has.</p>
 </div>
@@ -1722,7 +1481,7 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.5.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-multiple-folders-are-represented-in-model"><a class="link" href="#aspect-how-multiple-folders-are-represented-in-model">Aspect: How multiple folders are represented in Model</a></h5>
 <div class="ulist">
@@ -1884,9 +1643,9 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </div>
 <div class="sect2">
-<h3 id="navigating-folders"><a class="link" href="#navigating-folders">3.7. Navigating folders</a></h3>
+<h3 id="navigating-folders"><a class="link" href="#navigating-folders">3.6. Navigating folders</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.7.1. Current Implementation</a></h4>
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.6.1. Current Implementation</a></h4>
 <div class="sect4">
 <h5 id="navigation-state"><a class="link" href="#navigation-state">Navigation State</a></h5>
 <div class="paragraph">
@@ -1942,7 +1701,7 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.7.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.6.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-command-format-to-enter-and-exit-folders"><a class="link" href="#aspect-command-format-to-enter-and-exit-folders">Aspect: Command format to enter and exit folders</a></h5>
 <div class="ulist">
@@ -1974,6 +1733,701 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </li>
 </ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="test-session-feature"><a class="link" href="#test-session-feature">3.7. Test Session feature</a></h3>
+<div class="sect3">
+<h4 id="overall-current-implementation"><a class="link" href="#overall-current-implementation">3.7.1. Overall Current Implementation</a></h4>
+<div class="paragraph">
+<p>This big feature mainly involves <code>UI</code>, <code>Logic</code> and <code>Model</code> components.</p>
+</div>
+<div class="paragraph">
+<p>There are 4 main variables in <code>ModelManager</code> introduced to keep track of the current state in a test
+session.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>currentTestedCardFolder</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>The current card folder (stored as an <code>ObservableList</code> of cards) that the user is running a test session on.</p>
+</li>
+<li>
+<p>Set to null if user is not inside a test session</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>currentTestedCard</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>The current card the user is seeing in the test session, obtained from <code>currentTestedCardFolder</code> using
+<code>currentTestedCardIndex</code>.</p>
+</li>
+<li>
+<p>Set to null if user is not inside a test session</p>
+</li>
+<li>
+<p>Related methods:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ModelManager#setCurrentTestedCard(Card card)</code> - set <code>currentTestedCard</code> to the card specified.</p>
+</li>
+<li>
+<p><code>ModelManager#getCurrentTestedCard()</code> - returns the <code>currentTestedCard</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>inTestSession</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>A boolean variable to indicate if user is running a test session.</p>
+</li>
+<li>
+<p>Related methods:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ModelManager#isInTestSession()</code> - returns true if user is in a test session and false otherwise.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>cardAlreadyAnswered</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>A boolean variable to indicate if the user has already execute a valid answer command for the current card.</p>
+</li>
+<li>
+<p>Related methods:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ModelManager#setCardAsAnswered()</code> - set <code>cardAlreadyAnswered</code> to true.</p>
+</li>
+<li>
+<p><code>ModelManager#setCardAsNotAnswered()</code> - set <code>cardAlreadyAnswered</code> to false.</p>
+</li>
+<li>
+<p><code>ModelManager#isCardAlreadyAnswered()</code> - returns true if the current card has already been answered and false
+otherwise.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="overall-design-considerations"><a class="link" href="#overall-design-considerations">3.7.2. Overall Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-usage-of-an-extra-card-variable-to-keep-track-of-the-current-card-in-test-session"><a class="link" href="#aspect-usage-of-an-extra-card-variable-to-keep-track-of-the-current-card-in-test-session">Aspect: Usage of an extra card variable to keep track of the current card in test session</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice)</strong>: Introduction of another variable, <code>currentTestedCard</code>, to store the card.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More reader friendly. Save time from accessing the list to get card at that index.</p>
+</li>
+<li>
+<p>Cons: Extra space used.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2</strong>: No introduction of <code>currentTestedCard</code> as using the <code>currentTestedCardIndex</code> suffices. Every time a
+card is needed, can reference it using <code>currentTestedCardFolder.getIndex(currentTestedCardIndex)</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: No need to store an extra variable, use less space.</p>
+</li>
+<li>
+<p>Cons: Not so reader friendly. Need to keep accessing the list at that index. Potentially lead to
+possible violation of the Law of Demeter where an object should only interact with objects that are closely related to it.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Evaluation of the 2 alternatives:
+We went with alternative 1 since not a large amount of memory is taken up with just an extra variable. As there will
+be a number of references to the <code>currentTestedCard</code>, it will be better to store them somewhere. Abiding by the Law
+of Demeter, <code>currentTestedCard</code> object will not be interacting with <code>currentTestedCardFolder</code>,  limiting its
+knowledge of that object.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="test-end-command"><a class="link" href="#test-end-command">3.7.3. Test / End Command</a></h4>
+<div class="sect4">
+<h5 id="current-implementation-7"><a class="link" href="#current-implementation-7">Current Implementation</a></h5>
+<h6 id="model-4" class="discrete">Model</h6>
+<div class="paragraph">
+<p>The main logic for  <code>test</code> and <code>end</code> command is carried out in <code>ModelManager</code> with the following methods:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ModelManager#testCardFolder()</code> - begins a test session on the current card folder user is in and implicitly sorts
+the cards in it.</p>
+</li>
+<li>
+<p><code>ModelManager#endTestSession()</code> - ends the current test session.</p>
+</li>
+</ul>
+</div>
+<h6 id="ui-2" class="discrete">UI</h6>
+<div class="paragraph">
+<p>To update the change in the <code>UI</code> to reflect that the user is a test session (app goes to full screen with question of
+the current card presented), the following methods are introduced.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>MainWindow#handleStartTestSession(Card card)</code> - creates a new <code>TestSession</code> page with the card specified and bring
+the page forward in front of the current <code>CardMainScreen</code> page.</p>
+</li>
+<li>
+<p><code>MainWindow#handleEndTestSession()</code> - deletes the current <code>TestSession</code> page and the <code>CardMainScreen</code> page at the back
+is now presented to the user.</p>
+</li>
+</ul>
+</div>
+<h6 id="example-usage-of-test-command" class="discrete">Example Usage of test command</h6>
+<div class="paragraph">
+<p>To illustrate how the <code>UI</code>, <code>Model</code> and <code>Logic</code> components interact, below is a walkthrough of a typical usage scenario of
+the test command.
+<a href="#testcommandsequencediagram">Figure 12, &#8220;Component interactions for a <code>test</code> command&#8221;</a> is a sequence diagram that summarises <code>Model</code> and <code>Logic</code> interactions, namely steps 1 to 7.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. User is inside a folder and wants to begin a test session on the current folder by executing the command
+<code>test</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. As with every command, the command parser reads the input and generates the relevant <code>Command</code> object, in
+this case a <code>TestCommand</code>. The object is returned to the <code>LogicManager</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. The <code>LogicManager</code> executes the <code>TestCommand</code>, storing the result and then transferring control to the
+Model component, with <code>ModelManager#isInFolder()</code> and <code>ModelManager#isInTestSession()</code> to check that user is inside a
+folder and is not already in a test session. (This is omitted from <a href="#testcommandsequencediagram">Figure 12, &#8220;Component interactions for a <code>test</code> command&#8221;</a> for simplicity.)</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the user is not inside a folder or is already in a test session, this <code>test</code> command would be rendered
+invalid. Step 4 would not proceed and an error message is displayed.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Step 4. After both checks have passed, <code>ModelManager#testCardFolder()</code> method is invoked, which does the following:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>currentTestedCardFolder</code> is set to the current folder the user is in, by invoking <code>getCardList()</code> from the active
+<code>VersionedCardFolder</code> in <code>folders</code>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If this folder is empty such that there is no card to present to the user, an <code>EmptyCardFolderException</code> is thrown,
+to be caught in <code>TestCommand</code>, which then throws a <code>CommandException</code> to display an error message.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>The cards in this folder is sorted in ascending scores by invoking <code>sortFilteredCard(comparator)</code>, so that
+lowest score cards will be presented first to the user in a test session.</p>
+</li>
+<li>
+<p><code>ModelManager#setCurrentTestedCard(currentTestedCardIndex)</code> is then invoked to set <code>currentTestedCard</code> to the first
+card in the folder as <code>currentTestedCardIndex</code> is set to 0.</p>
+</li>
+<li>
+<p><code>inTestSession</code> is set to true.</p>
+</li>
+<li>
+<p>No change to <code>cardAlreadyAnswered</code> as it is by default false.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Step 5. For <code>TestCommand</code> to obtain the first card to present in the test session, <code>ModelManager#getCurrentTestedCard</code> is
+invoked and the <code>Card</code>, <code>c</code>, is returned.</p>
+</div>
+<div class="paragraph">
+<p>Step 6. With control now transferred back to the logic unit, <code>TestCommand</code> creates a <code>CommandResult</code> object, <code>r</code> with the type <code>START_TEST_SESSION</code>, and
+set <code>testSessionCard</code> in <code>CommandResult</code> to <code>c</code> obtained in Step 5.</p>
+</div>
+<div class="paragraph">
+<p>Step 7. <code>r</code> is returned to <code>LogicManager</code> which then terminates and returns <code>r</code> to the calling method.</p>
+</div>
+<div id="testcommandsequencediagram" class="imageblock">
+<div class="content">
+<img src="images/TestCommandSequenceDiagram.png" alt="TestCommandSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 12. Component interactions for a <code>test</code> command</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p>Step 8. The caller method here is <code>MainWindow</code>. Control is now transferred to the UI component.</p>
+</div>
+<div class="paragraph">
+<p>Step 9. <code>MainWindow</code> sees that <code>CommandResult</code> object <code>r</code> has the type <code>START_TEST_SESSION</code>. It invokes
+<code>MainWindow#handleStartTestSession(currentTestedCard)</code> to display the <code>currentTestedCard</code> question and hints to the
+user.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>insert sequence diagram for UI for test command?</pre>
+</div>
+</div>
+<h6 id="exampleusageofendcommand" class="discrete">Example Usage of end command</h6>
+<div class="paragraph">
+<p>Step 1. User is currently in a test session and executes the command <code>end</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. An <code>EndCommand</code> object is created and <code>LogicManager</code> executes the <code>EndCommand</code>, storing the result and then
+transferring control to the Model component, with <code>ModelManager#isInTestSession()</code> to
+check that user is indeed in a test session.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the user is not in a test session, Step 3 would not proceed.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Step 3. <code>ModelManager#endTestSession()</code> method is invoked, which does the following:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>currentTestedCardFolder</code> is set to null.</p>
+</li>
+<li>
+<p><code>ModelManager#setCurrentTestedCard(null)</code> is invoked to set <code>currentTestedCard</code> to null.</p>
+</li>
+<li>
+<p><code>inTestSession</code> is set to false.</p>
+</li>
+<li>
+<p><code>ModelManager#setCardAsNotAnswered()</code> is invoked.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Step 4. As control is now transferred back to the logic unit, <code>EndCommand</code> creates a <code>CommandResult</code> object, <code>r</code> with
+the type <code>END_TEST_SESSION</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 5. <code>r</code> is returned to <code>LogicManager</code> which then terminates and returns <code>r</code> to the calling method, MainWindow.
+Control is now transferred to the UI component.</p>
+</div>
+<div class="paragraph">
+<p>Step 6. <code>MainWindow</code> sees that <code>CommandResult</code> object <code>r</code> has the type <code>END_TEST_SESSION</code>. It invokes
+<code>MainWindow#handleEndTestSession()</code> to delete the current <code>testSession</code> page, presenting <code>cardMainScreen</code> page at the
+back (the screen the user was seeing before entering the test session) to the user.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="design-considerations-6"><a class="link" href="#design-considerations-6">Design Considerations</a></h5>
+<div class="sect5">
+<h6 id="aspect-way-to-execute-a-test-end-command"><a class="link" href="#aspect-way-to-execute-a-test-end-command">Aspect: Way to execute a test/end command</a></h6>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice)</strong>: <code>test</code> is executed when inside a folder. The user does not have to specify the
+folder index and <code>test</code> would just immediately display the first card in the this current folder.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The most logical way of carrying out a test session is where user is in the folder that he or she wants to be tested on. Lesser dependency on entering and exiting folder methods.</p>
+</li>
+<li>
+<p>Cons: Requires the extra step of entering the folder before it can actually test the folder. User may actually see the questions before the test session.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2</strong>: <code>test</code> is executed when outside a folder, in the home directory. <code>test</code> command would require a
+folder index, e.g <code>test 1</code> to test the first folder. Implementation of getting the card from the folder would rely on
+enter folder command as well.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Fast way to enter test session from home directory</p>
+</li>
+<li>
+<p>Cons: Not logical for test to be called from home directory which should only allow folder operations. Test will
+then have to implicitly enter the folder to get access to the cards in it in order to display them, creating a dependency between test and enter folder command.
+Similar issue will arise for the end test session command where user will need to implicitly exit the folder.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Evaluation of the two alternatives:
+Overall, alternative 1 is a better choice following the Single Level of Abstraction Principle(SLAP) where a function should not mix different levels of abstractions. We can then better achieve higher cohesion and lower coupling.
+Also, user being able to see the questions before the test session is not a big issue since the answer will not be shown unless user selects the card.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="answer-command"><a class="link" href="#answer-command">3.7.4. Answer Command</a></h4>
+<div class="sect4">
+<h5 id="current-implementation-8"><a class="link" href="#current-implementation-8">Current Implementation</a></h5>
+<h6 id="model-5" class="discrete">Model</h6>
+<div class="paragraph">
+<p>To facilitate the marking of attempted answer, we introduce the following method in <code>ModelManager</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ModelManager#markAttemptedAnswer(Answer attemptedAnswer)</code> - returns true if attemptedAnswer is correct and
+false if attemptedAnswer is wrong. It compares the attempted answer and the correct answer obtained from the current
+card.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Comparison is not case-sensitive
+</td>
+</tr>
+</table>
+</div>
+<h6 id="logic-3" class="discrete">Logic</h6>
+<div class="paragraph">
+<p>To facilitate the update of score after marking the card, we introduce the following method in <code>AnswerCommand</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>AnswerCommand#createScoredCard(Card cardToMark, boolean markCorrect)</code> - creates a new card with the updated
+score.</p>
+</li>
+</ul>
+</div>
+<h6 id="ui-3" class="discrete">UI</h6>
+<div class="paragraph">
+<p>To update the change in the <code>UI</code> to show the user the result of the marked answer, whether it is correct or wrong, the following methods are introduced.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>MainWindow#handleCorrectAnswer()</code> - invokes <code>TestSession#handleCorrectAnswer()</code></p>
+</li>
+<li>
+<p><code>MainWindow#handleWrongAnswer()</code> - invokes <code>TestSession#handleWrongAnswer()</code></p>
+</li>
+<li>
+<p><code>TestSession#handleCorrectAnswer()</code> - updates current <code>TestSession</code> page to green colour background with correct
+answer and correct answer description</p>
+</li>
+<li>
+<p><code>TestSession#handleWrongAnswer()</code> - updates current <code>TestSession</code> page to red colour background with correct answer
+and wrong answer description</p>
+</li>
+</ul>
+</div>
+<h6 id="example-usage-of-answer-command" class="discrete">Example Usage of answer command</h6>
+<div class="paragraph">
+<p>To illustrate how the components interact, below is a walkthrough of a typical usage scenario of the answer command.
+<a href="#answercommandsequencediagram">Figure 13, &#8220;Component interactions for a answer command&#8221;</a> is a sequence diagram that summarises <code>Model</code> and <code>Logic</code> interactions, namely steps 1
+to 8.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. User is in a test session and wants to answer the question on the card currently presented by executing a <code>ans
+ four</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. An <code>AnswerCommand</code> object is created and <code>LogicManager</code> executes the <code>AnswerCommand</code>, storing the result and
+then transferring control to the Model component, with <code>ModelManager#isInTestSession()</code> and
+<code>ModelManager#isCardAlreadyAnswered()</code> to check that user is indeed in a test session and has not attempted an answer
+ already. (This is omitted from <a href="#answercommandsequencediagram">Figure 13, &#8220;Component interactions for a answer command&#8221;</a> for simplicity.)</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the user is not in a test session or already attempted an answer for the current card, this <code>ans</code> command would be
+rendered invalid. Step 3 would not proceed and an error message is displayed.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Step 3. After both checks have passed, <code>ModelManager#setCardAsAnswered()</code> is invoked.</p>
+</div>
+<div class="paragraph">
+<p>Step 4. ModelManager now marks the attempted answer by invoking <code>ModelManager#markAttemptedAnswer(attemptedAnswer)</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 5. After knowing the result of the attempt, the <code>Logic</code> unit creates a new card exactly the same as the current
+card but with the updated score and replaced the current one by invoking <code>AnswerCommand#createScoredCard(Card
+cardToMark, boolean markCorrect)</code> followed by <code>model#setCard(cardToMark, scoredCard)</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 6. To complete the update in the change in score, model#updateFilteredCard(PREDICATE_SHOW_ALL_CARDS) and
+model#commitActiveCardFolder() are invoked.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>To elaborate further?</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Step 7. <code>AnswerCommand</code> now creates a <code>CommandResult</code> object, <code>r</code> with either type <code>ANSWER_CORRECT</code> or <code>ANSWER_WRONG</code>
+ depending on the outcome of the attempt.</p>
+</div>
+<div class="paragraph">
+<p>Step 8. <code>r</code> is returned to <code>LogicManager</code> which then terminates and returns <code>r</code> to the calling method.</p>
+</div>
+<div id="answercommandsequencediagram" class="imageblock">
+<div class="content">
+<img src="images/AnswerCommandSequenceDiagram.png" alt="AnswerCommandSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 13. Component interactions for a answer command</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p>Step 9. The caller method here is <code>MainWindow</code>. Control is now transferred to the UI component.</p>
+</div>
+<div class="paragraph">
+<p>Step 10. If <code>MainWindow</code> sees that <code>CommandResult</code> object <code>r</code> has the type <code>ANSWER_CORRECT</code>, it invokes
+<code>MainWindow#handleCorrectAnswer()</code> to display the correct attempt <code>TestSession</code> page to the user.
+If <code>MainWindow</code> sees that <code>CommandResult</code> object <code>r</code> has the type <code>ANSWER_WRONG</code>, it invokes
+<code>MainWindow#handleWrongAnswer()</code> to display the wrong attempt <code>TestSession</code> page to the user.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>insert sequence diagram for UI for answer command?</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="next-command"><a class="link" href="#next-command">3.7.5. Next Command</a></h4>
+<div class="sect4">
+<h5 id="current-implementation-9"><a class="link" href="#current-implementation-9">Current Implementation</a></h5>
+<h6 id="model-6" class="discrete">Model</h6>
+<div class="paragraph">
+<p>The following method is introduced in <code>ModelManager</code> to display to the user the next card in the test session.</p>
+</div>
+<div class="paragraph">
+<p><code>ModelManager#testNextCard()</code> - returns true if it successfully finds a next card to present in the test session and
+false otherwise (if there is no more cards left to test in the folder).</p>
+</div>
+<h6 id="ui-4" class="discrete">UI</h6>
+<div class="paragraph">
+<p>To display the next card in the test session, the method below is introduced in <code>MainWindow</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>MainWindow#handleNextCardTestSession(Card card)</code> - deletes the current <code>TestSession</code> page and adds a new
+<code>TestSession</code> page with this next card specified.</p>
+</li>
+</ul>
+</div>
+<h6 id="example-usage-of-next-command" class="discrete">Example Usage of next command</h6>
+<div class="paragraph">
+<p>To illustrate how the <code>UI</code>, <code>Model</code> and <code>Logic</code> components interact, below is a walkthrough of a typical usage scenario of
+the next command.
+<a href="#nextcommandsequencediagram">Figure 14, &#8220;Component interactions for a <code>next</code> command&#8221;</a> is a sequence diagram that summarises <code>Model</code> and <code>Logic</code> interactions, namely steps 1
+to 6.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. User is in a test session and wants to move on to the next card by executing a <code>next</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. A <code>NextCommand</code> object is created and <code>LogicManager</code> executes the <code>NextCommand</code>, storing the result and
+then transferring control to the Model component, with <code>ModelManager#isInTestSession()</code> and
+<code>ModelManager#isCardAlreadyAnswered()</code> to check that user is indeed in a test session and has attempted an
+answer already. (This is omitted from <a href="#nextcommandsequencediagram">Figure 14, &#8220;Component interactions for a <code>next</code> command&#8221;</a> for simplicity.)</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the user is not in a test session or has not attempted an answer for the current card, this <code>next</code> command would be
+rendered invalid. Step 3 would not proceed and an error message is displayed.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Step 3. After both checks have passed, <code>ModelManager#testNextCard()</code> method is invoked, which does the following:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>currentTestedCardIndex</code> incremented by 1.</p>
+</li>
+<li>
+<p><code>currentTestedCardIndex</code> is then checked if it equals to the size of <code>currentTestedCardFolder</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Case 1: This check returns true.<br>
+This means <code>currentTestedCardIndex</code> is invalid and there
+is no more next card to be presented to the user. This method immediately returns false.</p>
+</li>
+<li>
+<p>Case 2: This check returns true.<br>
+This means <code>currentTestedCardIndex</code> is valid and will be used to get the next card
+ from <code>currentTestedCardFolder</code>. This card is set as the <code>currentTestedCard</code> via the <code>ModelManager#setCurrentTestedCard
+(cardToTest)</code>. <code>ModelManager#setCardAsNotAnswered</code> is then invoked to reset the value of <code>cardAlreadyAnswered</code>. This
+method returns true.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Step 4. From the result of <code>ModelManager#testNextCard()</code> method earlier:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Case 1: Method returns false.<br>
+A <code>next</code> command will be equivalent to an <code>end</code> command. <code>ModelManager#endTestSession()</code> is invoked. Step 5 does not
+proceed. Instead, step 3 and onwards of the <a href="#exampleusageofendcommand">Example Usage of end command</a> takes over.</p>
+</li>
+<li>
+<p>Case 2: Method returns true.
+For <code>NextCommand</code> to obtain the next card to present in the test session, <code>ModelManager#getCurrentTestedCard</code> is
+invoked and the <code>Card</code>, <code>c</code>, is returned.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Step 5. With control now transferred back to the logic unit, <code>NextCommand</code> creates a <code>CommandResult</code> object, <code>r</code> with
+the type <code>SHOW_NEXT_CARD</code>, and set <code>testSessionCard</code> in <code>CommandResult</code> to <code>c</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 6. <code>r</code> is returned to <code>LogicManager</code> which then terminates and returns <code>r</code> to the calling method.</p>
+</div>
+<div class="paragraph">
+<p>Step 7. The caller method here is <code>MainWindow</code>. Control is now transferred to the UI component.</p>
+</div>
+<div class="paragraph">
+<p>Step 8. <code>MainWindow</code> sees that <code>CommandResult</code> object <code>r</code> has the type <code>SHOW_NEXT_CARD</code>. It invokes
+<code>MainWindow#handleNextCardTestSession(currentTestedCard)</code> to display this new <code>currentTestedCard</code> question and hints
+to the user.</p>
+</div>
+<div id="nextcommandsequencediagram" class="imageblock">
+<div class="content">
+<img src="images/NextCommandSequenceDiagram.png" alt="NextCommandSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 14. Component interactions for a <code>next</code> command</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="design-considerations-7"><a class="link" href="#design-considerations-7">Design Considerations</a></h5>
+<div class="sect5">
+<h6 id="aspect-behavior-of-next-command-executed-on-the-last-card"><a class="link" href="#aspect-behavior-of-next-command-executed-on-the-last-card">Aspect: Behavior of next command executed on the last card</a></h6>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice)</strong>:  A <code>next</code> command will be equivalent to an <code>end</code> command</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More convenient and user-friendly. It is common sense to end the test session for the user.</p>
+</li>
+<li>
+<p>Cons: By right, it is not correct since next command is just to show the next card.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2</strong>: A <code>next</code> command will throw an exception</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Most correct way to do it since there is no next card to display.</p>
+</li>
+<li>
+<p>Cons: User may not understand. It is not user-friendly as user has to keep track of which card it is at to prevent the exception thrown.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Evaluation of the two alternatives:
+With our target audience in mind, alternative 1 is the more user friendly and intuitive way to handle this scenario.</p>
+</div>
 </div>
 </div>
 </div>
@@ -2083,7 +2537,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 12. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 15. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
@@ -3732,4 +4186,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-01 02:02:59 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-01 02:31:12 UTC</div></div></div></body></html>
