@@ -207,6 +207,12 @@ Format <strong>(MCQ)</strong>: <code>add q/QUESTION a/ANSWER [i/INCORRECT_OPTION
 <p>A card can have at most 1 hint (including 0)</p>
 </li>
 <li>
+<p>If multiple hints are included in the command, only the last hint will be added to the card</p>
+</li>
+<li>
+<p>Hints are currently restricted to alphanumerical characters and spaces only</p>
+</li>
+<li>
 <p>A card can have any number of incorrect options to denote an MCQ card</p>
 </li>
 <li>
@@ -229,6 +235,10 @@ Format <strong>(MCQ)</strong>: <code>add q/QUESTION a/ANSWER [i/INCORRECT_OPTION
 </li>
 <li>
 <p><code>add q/What is the powerhouse of the cell? a/mitochondria i/cell wall i/nucleus h/biology</code></p>
+</li>
+<li>
+<p><code>add q/The Hippocrates Oath states to Do no <em>_</em>? a/harm h/4 letters h/Rhymes with farm</code><br>
+Creates a card with <code>hint</code> "Rhymes with farm".</p>
 </li>
 </ul>
 </div>
@@ -893,7 +903,7 @@ in response to the card question: What is the powerhouse of the cell?</p>
 <ul>
 <li>
 <p><code>ans 4</code><br>
-in response to the card displayed in Figure 4, where choosing option 4 will give the right answer.</p>
+in response to the card displayed above, where choosing option 4 will give the right answer.</p>
 </li>
 </ul>
 </div>
@@ -1226,4 +1236,4 @@ this number is automatically calculated and recorded.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 04:44:32 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 06:40:20 UTC</div></div></div></body></html>
