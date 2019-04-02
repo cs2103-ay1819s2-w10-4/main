@@ -10,57 +10,87 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Know-It-All is a flashcard application that helps students manage, store, and use flash cards effectively. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p>Know-It-All is a flashcard application that helps students manage, store, and use flash cards effectively. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+My major roles included the report feature and ability to record score.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
 <div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Below is a summary of my coding, documentation, and other helpful contributions to the team project.</em></p></td>
+</tr>
+</tbody>
+</table>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to generate scoring report for a folder of cards</strong> (Coming in v1.3)</p>
+<p><strong>Major enhancement</strong>: added the <strong>ability to generate scoring report for card folder</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: Collates the scoring data of cards in the folder and generates a performance report for that folder with very statistical statistics.</p>
-</li>
-<li>
-<p>Justification: This feature improves the product significantly because a user can see the outcome of the spaced-repetition technique employed by Know-It-All. They are able to view their performance change over time.</p>
-</li>
-<li>
-<p>Highlights: This enhancement has graphs. We know graphs. We have the best graphs.</p>
+<p>What it does: Averages the card scores of all cards in the folder after a test session, called the folder score, and generates a report for that folder that shows the change in past folder scores.
+There is also a line showing percentage change in folder score as well as the lowest scoring questions in the current folder. An example is shown below.</p>
 </li>
 </ul>
 </div>
 </li>
-<li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to sort by scoring performance</strong></p>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ReportDisplay.png" alt="ReportDisplay" width="790">
+</div>
+</div>
 <div class="ulist">
 <ul>
+<li>
+<p>Justification: This feature improves the product significantly because a user can see the outcome of the spaced-repetition technique employed by Know-It-All. They are able to track their average score over time, per folder, so that
+they are able tell which folders they score well and not so well for. This lets them know which folder they need to practice more on.</p>
+</li>
+<li>
+<p>Highlights: This enhancement has a graph showing the last 10 test session scores. The color of the folder score change
+also changes based on whether it was a positive, same or negative change.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement</strong>: added <strong>the ability to sort by scoring performance</strong></p>
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p>What it does: allows the user to sort the cards by scoring performance. Other features can make use of this feature by using any appropriate comparator.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because many other features can be built on top of this one.</p>
+<p>Justification: This lets the user see which cards they scored the lowest on, so that they know which cards require more practice.
+This feature also improves the product significantly because many other features can be built on top of this one, e.g. the test session, which puts the lowest scoring cards in front.</p>
 </li>
 <li>
 <p>Highlights: This enhancement affects the existing list. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changing the way cards are naturally ordered.</p>
-</li>
-</ul>
-</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Minor enhancement</strong>: Added State to Model Component&#8217;s to represent user&#8217;s "location" in the application. This removes edge cases of commands being executed illegally, i.e. where they otherwise shouldn&#8217;t be.</p>
 </li>
 <li>
 <p><strong>Minor enhancement</strong>: added a score attribute that allows the application to track the number of correct and incorrect attempts for individual cards.</p>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/75">ability to sort</a>] [<a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/46">add score attribute</a>]</p>
+<p><strong>Code contributed</strong>: [<a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/75">ability to sort</a>] [<a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/46">add score attribute</a>][<a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/97">add report</a>]</p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
-<div class="ulist">
-<ul>
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p>Enhancements to existing features:</p>
 <div class="ulist">
@@ -76,7 +106,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Did cosmetic tweaks to the project README: <a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/36">#36</a></p>
+<p>Rewrote the project README to look like a real product: <a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/107">#107</a></p>
 </li>
 </ul>
 </div>
@@ -86,7 +116,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/57">#57</a>, <a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/49">#49</a>, <a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/72">#72</a></p>
+<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/57">#57</a>, <a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/49">#49</a>, <a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/72">#72</a>, <a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/129">#129</a></p>
 </li>
 </ul>
 </div>
@@ -97,9 +127,6 @@
 <ul>
 <li>
 <p>Integrated Github plugins Travis CI, AppVeyor and Coveralls to the team repo: <a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/2">#2</a></p>
-</li>
-</ul>
-</div>
 </li>
 </ul>
 </div>
@@ -121,24 +148,32 @@
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>I implemented a new report command as well as sort command, which required updates to the user guide so that new users
+know how to use it.</p>
+</div>
+<div class="sect2">
+<h3 id="report-operations"><a class="link" href="#report-operations">Report Operations</a></h3>
+<div class="paragraph">
+<p>After testing, you can track your how you scored against previous attempts using our report feature. Because cards
+about a particular topic are expected to be in the same folder, the <a href="#folderscore">folder scores</a> are tracked per folder.</p>
+</div>
 <div class="sect3">
-<h4 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">Undoing previous command : <code>undo</code></a></h4>
+<h4 id="display-a-folder-score-report-code-report-code"><a class="link" href="#display-a-folder-score-report-code-report-code">Display a folder score report : <code>report</code></a></h4>
 <div class="paragraph">
-<p>Restores the cards in a particular card folder to the state before the previous <em>undoable</em> command was executed.</p>
+<p>Displays a full-screen <a href="#folderscore">folder score</a> report for the current folder.
+The report comprises a graph showing the last 10 <a href="#folderscore">folder scores</a>,
+the latest score change, and the top 3 lowest scoring cards and their individual <a href="#cardscore">card scores</a>.
+An example is shown below:</p>
 </div>
-<div class="paragraph">
-<p>Format: <code>undo</code></p>
-</div>
-<div class="exampleblock">
+<div class="imageblock">
 <div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>This command is performed with respect to the present folder you are in. For example, if you perform an <code>add</code> operation in folder A and enter folder B, invoking the <code>undo</code> command will undo the previous <em>undoable</em> command performed in folder B and not the aforementioned <code>add</code> operation.</p>
-</li>
-</ul>
+<img src="../images/ReportDisplay.png" alt="ReportDisplay" width="790">
 </div>
+<div class="title">Figure 1. Report display</div>
 </div>
+<div class="paragraph">
+<p>Format: <code>report</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -147,81 +182,41 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>Undoable commands: commands that modify a card folder&#8217;s content (<code>add</code>, <code>delete</code> and <code>edit</code>).</p>
-</div>
+This command is only valid inside a folder.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>delete 1</code><br>
-<code>list</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
-</li>
-<li>
-<p><code>select 1</code><br>
-<code>list</code><br>
-<code>undo</code><br>
-The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
-</li>
-</ul>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+There must be at least two test attempts for a graph to be drawn.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect3">
-<h4 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">Redoing the previously undone command : <code>redo</code></a></h4>
+<h4 id="end-the-current-report-session-code-end-code"><a class="link" href="#end-the-current-report-session-code-end-code">End the current report session : <code>end</code></a></h4>
 <div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command performed in a folder.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>redo</code></p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>As with the <code>undo</code> command, this command is performed with respect to the present folder you are in. For example, if you perform an <code>undo</code> operation in folder A and enter folder B, invoking the <code>redo</code> command will redo the previous <code>undo</code> command performed in folder B and not the one in folder A.</p>
-</li>
-</ul>
-</div>
-</div>
+<p>Quits the current report session.</p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p>Format: <code>end</code></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>redo</code><br>
-The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>clear</code> command)<br></p>
-</li>
-</ul>
+</div>
+<div class="sect3">
+<h4 id="sort-flashcards-by-score-within-a-folder-code-sort-code"><a class="link" href="#sort-flashcards-by-score-within-a-folder-code-sort-code">Sort flashcards by score within a folder : <code>sort</code></a></h4>
+<div class="paragraph">
+<p>Displays all flashcards sorted such that the lowest <a href="#cardscore">card scores</a> are at the top temporarily.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>sort</code></p>
+</div>
 </div>
 </div>
 </div>
@@ -239,44 +234,61 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>Besides the aforementioned new features for users, I also refactored internal code which affects how other developers should contribute
+to the project, namely how to pass results from Model into Ui and Model state that the user is in.</p>
+</div>
 <div class="sect2">
-<h3 id="score-feature"><a class="link" href="#score-feature">Score feature</a></h3>
+<h3 id="report-feature"><a class="link" href="#report-feature">Report feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
-<p>To implement tracking of the number of correct and incorrect attempts, a new attribute <code>Score</code> was added to <code>Card</code>.
-Score keeps track of both numbers.
-This attribute is encapsulated in the <code>Score</code> class.</p>
+<p>The report feature is meant to provide the user with the ability to look back and compare their folder score from
+previous test sessions.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-to-represent-score"><a class="link" href="#aspect-how-to-represent-score">Aspect: How to represent score</a></h5>
+<h5 id="aspect-how-to-display-folder-scores"><a class="link" href="#aspect-how-to-display-folder-scores">Aspect: How to display folder scores</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Track total number of correct attempts and total number of attempts</p>
+<p><strong>Alternative 1 (current choice):</strong> Display previous folder scores in a graph and lowest scoring cards</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Simple to implement. Most semantically correct.</p>
+<p>Pros: Has benefits of seeing the graph as well as knowing which cards the user needs help in.</p>
 </li>
 <li>
-<p>Cons: Score will be rolling average. If the question is answered wrongly even once, the score can never be 100%.</p>
+<p>Cons: More performance and memory intensive. Screen may get messy if there are too many items.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Track only last X attempts.</p>
+<p><strong>Alternative 2:</strong> Display previous folder scores in a graph</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: An improvement in performance will be more obvious.</p>
+<p>Pros: More visual, easier to see change in folder score.</p>
 </li>
 <li>
-<p>Cons: Uses more memory. Have to delete the X+1th score every time a new score is added.</p>
+<p>Cons: More performance and memory intensive as a graph needs to be rendered. Remedy: Display only last ten.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> List the previous folder scores</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User can see more accurate numbers. They can also see the individual card scores, so that
+they can tell where they need help.</p>
+</li>
+<li>
+<p>Cons: Hard to see change from test session to test session.</p>
 </li>
 </ul>
 </div>
@@ -285,45 +297,32 @@ This attribute is encapsulated in the <code>Score</code> class.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-how-to-read-write-score-from-file"><a class="link" href="#aspect-how-to-read-write-score-from-file">Aspect: How to read/write score from file</a></h5>
+<h5 id="aspect-where-to-display-folder-scores"><a class="link" href="#aspect-where-to-display-folder-scores">Aspect: Where to display folder scores</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Read/write as <code>String</code>.</p>
+<p><strong>Alternative 1 (current choice):</strong> Display in full screen, entered from card folder</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: `String`s are easier to read/write to file.</p>
+<p>Pros: Works because the folder scores are scored by card folders.</p>
 </li>
 <li>
-<p>Cons: There must be strict checks when instantiating score from strings as they are prone to many kinds of formatting errors.</p>
+<p>Cons: Need to implement a new state for commands, because it should not be possible to do some e.g. add card while
+in fullscreen report.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Read/write as a double.</p>
+<p><strong>Alternative 2:</strong> Display in right panel, with cards on the left</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: A <code>double</code> can represent both numbers with just one, which then can be converted to <code>String</code>.</p>
+<p>Pros: User can see all their cards at the same time.</p>
 </li>
 <li>
-<p>Cons: When instantiating score from double, it might be simplified.
-For example, 2 correct attempts and 4 total attempts becomes 0.5. When instantiating from double, it is interpreted as 1 correct attempt and 2 total attempts.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 3:</strong> Read and write both numbers as integers.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Most correct implementation.</p>
-</li>
-<li>
-<p>Cons: Reading/writing to file now needs to take into account this fact. The <code>toString()</code> method cannot be used to write to file.</p>
+<p>Cons: Less space to render report details such as graph.</p>
 </li>
 </ul>
 </div>
@@ -333,5 +332,90 @@ For example, 2 correct attempts and 4 total attempts becomes 0.5. When instantia
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="state"><a class="link" href="#state">State</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
+<div class="sect4">
+<h5 id="model"><a class="link" href="#model">Model</a></h5>
+<div class="paragraph">
+<p>Previously, Model did not have a concept of state as there was only one screen where the user could be. But
+as Know-It-All grew, there are more screens that a user can be in and more commands that can only be executed in certain
+screens. Thus there is a need to manage the state in Model.</p>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 09:09:05 UTC</div></div></div></body></html>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-to-manage-state"><a class="link" href="#aspect-how-to-manage-state">Aspect: How to manage state</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use enum of States</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Fixes the states that Model can be in. By design, only one state can be true at any point in time, if state is set to type State which is a enum.</p>
+</li>
+<li>
+<p>Cons: Need to add new states to enum.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use Strings</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: No need to define new states. Trivial to change into new state: Simply set state to "folder", or "homeDir". Easy to check as well, e.g. to Check state == "folder".</p>
+</li>
+<li>
+<p>Cons: Becomes very unsafe as even a typo would mean entering a state that other parts of the application would not understand.
+e.g. Setting state to "Folder" instead of "folder".</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use boolean flags</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to manipulate. Clear when there are only two states.</p>
+</li>
+<li>
+<p>Cons: Becomes very messy when there are more states, since there is a need to ensure that only one boolean flag
+is true at any point in time. E.g., only one of inFolder, inHomeDir, inTest&#8230;&#8203; can be true.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="uc06-display-report-for-a-folder" class="discrete">UC06 Display report for a folder</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Student enters the a folder.</p>
+</li>
+<li>
+<p>Student indicates that they want to see the report for this folder.</p>
+</li>
+<li>
+<p>System displays a full-screen report.</p>
+<div class="paragraph">
+<p>Use case ends</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 13:05:58 UTC</div></div></div></body></html>

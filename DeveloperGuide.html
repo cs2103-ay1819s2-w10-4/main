@@ -48,41 +48,53 @@
 <li><a href="#design-considerations-2">3.2.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#import-export-feature">3.3. Import/Export feature</a>
+<li><a href="#report-feature">3.3. Report feature</a>
 <ul class="sectlevel3">
-<li><a href="#csv-file-structure">3.3.1. CSV file structure</a></li>
+<li><a href="#current-implementation-3">3.3.1. Current Implementation</a></li>
 <li><a href="#design-considerations-3">3.3.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#folders">3.4. Folders</a>
+<li><a href="#state">3.4. State</a>
 <ul class="sectlevel3">
 <li><a href="#current-implementation-4">3.4.1. Current Implementation</a></li>
 <li><a href="#design-considerations-4">3.4.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#navigating-folders">3.5. Navigating folders</a>
+<li><a href="#import-export-feature">3.5. Import/Export feature</a>
 <ul class="sectlevel3">
-<li><a href="#current-implementation-5">3.5.1. Current Implementation</a></li>
+<li><a href="#csv-file-structure">3.5.1. CSV file structure</a></li>
 <li><a href="#design-considerations-5">3.5.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#test-session-feature">3.6. Test Session feature</a>
+<li><a href="#folders">3.6. Folders</a>
 <ul class="sectlevel3">
-<li><a href="#overall-current-implementation">3.6.1. Overall Current Implementation</a></li>
-<li><a href="#overall-design-considerations">3.6.2. Overall Design Considerations</a></li>
-<li><a href="#test-end-command">3.6.3. Test / End Command</a></li>
-<li><a href="#answer-command">3.6.4. Answer Command</a></li>
-<li><a href="#next-command">3.6.5. Next Command</a></li>
+<li><a href="#current-implementation-6">3.6.1. Current Implementation</a></li>
+<li><a href="#design-considerations-6">3.6.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#undo-redo-feature">3.7. Undo/Redo feature</a>
+<li><a href="#navigating-folders">3.7. Navigating folders</a>
 <ul class="sectlevel3">
-<li><a href="#current-implementation-9">3.7.1. Current Implementation</a></li>
-<li><a href="#design-considerations-8">3.7.2. Design Considerations</a></li>
+<li><a href="#current-implementation-7">3.7.1. Current Implementation</a></li>
+<li><a href="#design-considerations-7">3.7.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#logging">3.8. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.9. Configuration</a></li>
+<li><a href="#test-session-feature">3.8. Test Session feature</a>
+<ul class="sectlevel3">
+<li><a href="#overall-current-implementation">3.8.1. Overall Current Implementation</a></li>
+<li><a href="#overall-design-considerations">3.8.2. Overall Design Considerations</a></li>
+<li><a href="#test-end-command">3.8.3. Test / End Command</a></li>
+<li><a href="#answer-command">3.8.4. Answer Command</a></li>
+<li><a href="#next-command">3.8.5. Next Command</a></li>
+</ul>
+</li>
+<li><a href="#undo-redo-feature">3.9. Undo/Redo feature</a>
+<ul class="sectlevel3">
+<li><a href="#current-implementation-11">3.9.1. Current Implementation</a></li>
+<li><a href="#design-considerations-10">3.9.2. Design Considerations</a></li>
+</ul>
+</li>
+<li><a href="#logging">3.10. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.11. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -794,8 +806,167 @@ For example, 2 correct attempts and 4 total attempts becomes 0.5. When instantia
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-export-feature"><a class="link" href="#import-export-feature">3.3. Import/Export feature</a></h3>
-<h4 id="current-implementation-3" class="discrete">Current Implementation</h4>
+<h3 id="report-feature"><a class="link" href="#report-feature">3.3. Report feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The report feature is meant to provide the user with the ability to look back and compare their folder score from
+previous test sessions.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-to-display-folder-scores"><a class="link" href="#aspect-how-to-display-folder-scores">Aspect: How to display folder scores</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Display previous folder scores in a graph and lowest scoring cards</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Has benefits of seeing the graph as well as knowing which cards the user needs help in.</p>
+</li>
+<li>
+<p>Cons: More performance and memory intensive. Screen may get messy if there are too many items.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Display previous folder scores in a graph</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More visual, easier to see change in folder score.</p>
+</li>
+<li>
+<p>Cons: More performance and memory intensive as a graph needs to be rendered. Remedy: Display only last ten.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> List the previous folder scores</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User can see more accurate numbers. They can also see the individual card scores, so that
+they can tell where they need help.</p>
+</li>
+<li>
+<p>Cons: Hard to see change from test session to test session.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-where-to-display-folder-scores"><a class="link" href="#aspect-where-to-display-folder-scores">Aspect: Where to display folder scores</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Display in full screen, entered from card folder</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Works because the folder scores are scored by card folders.</p>
+</li>
+<li>
+<p>Cons: Need to implement a new state for commands, because it should not be possible to do some e.g. add card while
+in fullscreen report.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Display in right panel, with cards on the left</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User can see all their cards at the same time.</p>
+</li>
+<li>
+<p>Cons: Less space to render report details such as graph.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="state"><a class="link" href="#state">3.4. State</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
+<div class="sect4">
+<h5 id="model-2"><a class="link" href="#model-2">Model</a></h5>
+<div class="paragraph">
+<p>Previously, Model did not have a concept of state as there was only one screen where the user could be. But
+as Know-It-All grew, there are more screens that a user can be in and more commands that can only be executed in certain
+screens. Thus there is a need to manage the state in Model.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-to-manage-state"><a class="link" href="#aspect-how-to-manage-state">Aspect: How to manage state</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use enum of States</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Fixes the states that Model can be in. By design, only one state can be true at any point in time, if state is set to type State which is a enum.</p>
+</li>
+<li>
+<p>Cons: Need to add new states to enum.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use Strings</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: No need to define new states. Trivial to change into new state: Simply set state to "folder", or "homeDir". Easy to check as well, e.g. to Check state == "folder".</p>
+</li>
+<li>
+<p>Cons: Becomes very unsafe as even a typo would mean entering a state that other parts of the application would not understand.
+e.g. Setting state to "Folder" instead of "folder".</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use boolean flags</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to manipulate. Clear when there are only two states.</p>
+</li>
+<li>
+<p>Cons: Becomes very messy when there are more states, since there is a need to ensure that only one boolean flag
+is true at any point in time. E.g., only one of inFolder, inHomeDir, inTest&#8230;&#8203; can be true.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="import-export-feature"><a class="link" href="#import-export-feature">3.5. Import/Export feature</a></h3>
+<h4 id="current-implementation-5" class="discrete">Current Implementation</h4>
 <div class="paragraph">
 <p>The Import and Export feature is facilitated by the Logic and model components, together
 with the addition of 2 new classes inside the csvmanager package defined under
@@ -806,7 +977,7 @@ the storage component.</p>
 <p>Similar to how the current commands are implemented, the two new commands, the logic unit now accepts two
 new commands, <code>ImportCommand</code> and <code>ExportCommand</code>.</p>
 </div>
-<h5 id="model-2" class="discrete">Model</h5>
+<h5 id="model-3" class="discrete">Model</h5>
 <div class="paragraph">
 <p>The model component supports the addition of a new object variable <code>CsvManager</code>, that carries out the read and
 write logic of cards to files.</p>
@@ -902,7 +1073,7 @@ Both Imported and Exported files have to be placed in the project root directory
 </table>
 </div>
 <div class="sect3">
-<h4 id="csv-file-structure"><a class="link" href="#csv-file-structure">3.3.1. CSV file structure</a></h4>
+<h4 id="csv-file-structure"><a class="link" href="#csv-file-structure">3.5.1. CSV file structure</a></h4>
 <div class="paragraph">
 <p>Example of a common cardfolder csv file<br></p>
 </div>
@@ -933,7 +1104,7 @@ Headers have to be present in the csv file for import.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
 <div class="sect5">
 <h6 id="aspect-which-component-responsible-for-import-export-logic"><a class="link" href="#aspect-which-component-responsible-for-import-export-logic">Aspect: Which component responsible for import/export logic</a></h6>
 <div class="ulist">
@@ -1088,9 +1259,9 @@ since 1 cardfolder = 1 csv file.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="folders"><a class="link" href="#folders">3.4. Folders</a></h3>
+<h3 id="folders"><a class="link" href="#folders">3.6. Folders</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.6.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>A folder is another layer of abstraction over a <code>CardFolder</code>. Where we dealt with a single <code>CardFolder</code> in previous iterations, we now have multiple <code>CardFolders</code> that each have their own set of <code>Cards</code>. Users are able to manage each <code>CardFolder</code> independently.</p>
 </div>
@@ -1098,7 +1269,7 @@ since 1 cardfolder = 1 csv file.</p>
 <p>Folders in the application are achieved via enhancements from the AddressBook implementation. The changes span across all four components (UI, Logic, Model and Storage).</p>
 </div>
 <div class="sect4">
-<h5 id="model-3"><a class="link" href="#model-3">Model</a></h5>
+<h5 id="model-4"><a class="link" href="#model-4">Model</a></h5>
 <div class="paragraph">
 <p>Previously, an instance of <code>ModelManager</code> contains only a single <code>VersionedCardFolder</code>, holding the current and previous state of the <code>CardFolder</code>. To support multiple folders, <code>ModelManager</code> now holds an <code>ObservableList</code> of <code>CardFolders</code>. The change is illustrated in the figure below, with the original implementation on the left and new implementation on the right.</p>
 </div>
@@ -1287,7 +1458,7 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-multiple-folders-are-represented-in-model"><a class="link" href="#aspect-how-multiple-folders-are-represented-in-model">Aspect: How multiple folders are represented in Model</a></h5>
 <div class="ulist">
@@ -1449,9 +1620,9 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </div>
 <div class="sect2">
-<h3 id="navigating-folders"><a class="link" href="#navigating-folders">3.5. Navigating folders</a></h3>
+<h3 id="navigating-folders"><a class="link" href="#navigating-folders">3.7. Navigating folders</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
+<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.7.1. Current Implementation</a></h4>
 <div class="sect4">
 <h5 id="navigation-state"><a class="link" href="#navigation-state">Navigation State</a></h5>
 <div class="paragraph">
@@ -1507,7 +1678,7 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.7.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-command-format-to-enter-and-exit-folders"><a class="link" href="#aspect-command-format-to-enter-and-exit-folders">Aspect: Command format to enter and exit folders</a></h5>
 <div class="ulist">
@@ -1544,9 +1715,9 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </div>
 <div class="sect2">
-<h3 id="test-session-feature"><a class="link" href="#test-session-feature">3.6. Test Session feature</a></h3>
+<h3 id="test-session-feature"><a class="link" href="#test-session-feature">3.8. Test Session feature</a></h3>
 <div class="sect3">
-<h4 id="overall-current-implementation"><a class="link" href="#overall-current-implementation">3.6.1. Overall Current Implementation</a></h4>
+<h4 id="overall-current-implementation"><a class="link" href="#overall-current-implementation">3.8.1. Overall Current Implementation</a></h4>
 <div class="paragraph">
 <p>This big feature mainly involves <code>UI</code>, <code>Logic</code> and <code>Model</code> components.</p>
 </div>
@@ -1647,7 +1818,7 @@ otherwise.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="overall-design-considerations"><a class="link" href="#overall-design-considerations">3.6.2. Overall Design Considerations</a></h4>
+<h4 id="overall-design-considerations"><a class="link" href="#overall-design-considerations">3.8.2. Overall Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-usage-of-an-extra-card-variable-to-keep-track-of-the-current-card-in-test-session"><a class="link" href="#aspect-usage-of-an-extra-card-variable-to-keep-track-of-the-current-card-in-test-session">Aspect: Usage of an extra card variable to keep track of the current card in test session</a></h5>
 <div class="ulist">
@@ -1692,10 +1863,10 @@ knowledge of that object.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="test-end-command"><a class="link" href="#test-end-command">3.6.3. Test / End Command</a></h4>
+<h4 id="test-end-command"><a class="link" href="#test-end-command">3.8.3. Test / End Command</a></h4>
 <div class="sect4">
-<h5 id="current-implementation-6"><a class="link" href="#current-implementation-6">Current Implementation</a></h5>
-<h6 id="model-4" class="discrete">Model</h6>
+<h5 id="current-implementation-8"><a class="link" href="#current-implementation-8">Current Implementation</a></h5>
+<h6 id="model-5" class="discrete">Model</h6>
 <div class="paragraph">
 <p>The main logic for  <code>test</code> and <code>end</code> command is carried out in <code>ModelManager</code> with the following methods:</p>
 </div>
@@ -1880,7 +2051,7 @@ back (the screen the user was seeing before entering the test session) to the us
 </div>
 </div>
 <div class="sect4">
-<h5 id="design-considerations-6"><a class="link" href="#design-considerations-6">Design Considerations</a></h5>
+<h5 id="design-considerations-8"><a class="link" href="#design-considerations-8">Design Considerations</a></h5>
 <div class="sect5">
 <h6 id="aspect-way-to-execute-a-test-end-command"><a class="link" href="#aspect-way-to-execute-a-test-end-command">Aspect: Way to execute a test/end command</a></h6>
 <div class="ulist">
@@ -1927,10 +2098,10 @@ Also, user being able to see the questions before the test session is not a big 
 </div>
 </div>
 <div class="sect3">
-<h4 id="answer-command"><a class="link" href="#answer-command">3.6.4. Answer Command</a></h4>
+<h4 id="answer-command"><a class="link" href="#answer-command">3.8.4. Answer Command</a></h4>
 <div class="sect4">
-<h5 id="current-implementation-7"><a class="link" href="#current-implementation-7">Current Implementation</a></h5>
-<h6 id="model-5" class="discrete">Model</h6>
+<h5 id="current-implementation-9"><a class="link" href="#current-implementation-9">Current Implementation</a></h5>
+<h6 id="model-6" class="discrete">Model</h6>
 <div class="paragraph">
 <p>To facilitate the marking of attempted answer, we introduce the following method in <code>ModelManager</code>.</p>
 </div>
@@ -2061,10 +2232,10 @@ If <code>MainWindow</code> sees that <code>CommandResult</code> object <code>r</
 </div>
 </div>
 <div class="sect3">
-<h4 id="next-command"><a class="link" href="#next-command">3.6.5. Next Command</a></h4>
+<h4 id="next-command"><a class="link" href="#next-command">3.8.5. Next Command</a></h4>
 <div class="sect4">
-<h5 id="current-implementation-8"><a class="link" href="#current-implementation-8">Current Implementation</a></h5>
-<h6 id="model-6" class="discrete">Model</h6>
+<h5 id="current-implementation-10"><a class="link" href="#current-implementation-10">Current Implementation</a></h5>
+<h6 id="model-7" class="discrete">Model</h6>
 <div class="paragraph">
 <p>The following method is introduced in <code>ModelManager</code> to display to the user the next card in the test session.</p>
 </div>
@@ -2182,7 +2353,7 @@ to the user.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="design-considerations-7"><a class="link" href="#design-considerations-7">Design Considerations</a></h5>
+<h5 id="design-considerations-9"><a class="link" href="#design-considerations-9">Design Considerations</a></h5>
 <div class="sect5">
 <h6 id="aspect-behavior-of-next-command-executed-on-the-last-card"><a class="link" href="#aspect-behavior-of-next-command-executed-on-the-last-card">Aspect: Behavior of next command executed on the last card</a></h6>
 <div class="ulist">
@@ -2224,7 +2395,7 @@ With our target audience in mind, alternative 1 is the more user friendly and in
 </div>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.7. Undo/Redo feature</a></h3>
+<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.9. Undo/Redo feature</a></h3>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2238,7 +2409,7 @@ The following section details a feature implemented in the earlier iteration of 
 </table>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-9"><a class="link" href="#current-implementation-9">3.7.1. Current Implementation</a></h4>
+<h4 id="current-implementation-11"><a class="link" href="#current-implementation-11">3.9.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedCardFolder</code>.
 It extends <code>CardFolder</code> with an undo/redo history, stored internally as an <code>cardFolderStateList</code> and <code>currentStatePointer</code>.
@@ -2368,7 +2539,7 @@ If the <code>currentStatePointer</code> is at index <code>cardFolderStateList.si
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.7.2. Design Considerations</a></h4>
+<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">3.9.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -2438,14 +2609,14 @@ If the <code>currentStatePointer</code> is at index <code>cardFolderStateList.si
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.8. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.10. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.9, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.11, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -2476,7 +2647,7 @@ If the <code>currentStatePointer</code> is at index <code>cardFolderStateList.si
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.9. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.11. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -3323,6 +3494,26 @@ user experience is more engaging and scoring is more accurate as it is based on 
 </li>
 </ul>
 </div>
+<h3 id="uc06-display-report-for-a-folder" class="discrete">UC06 Display report for a folder</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Student enters the a folder.</p>
+</li>
+<li>
+<p>Student indicates that they want to see the report for this folder.</p>
+</li>
+<li>
+<p>System displays a full-screen report.</p>
+<div class="paragraph">
+<p>Use case ends</p>
+</div>
+</li>
+</ol>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -3498,4 +3689,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 09:09:05 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 13:05:58 UTC</div></div></div></body></html>
