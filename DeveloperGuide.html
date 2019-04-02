@@ -970,17 +970,17 @@ is true at any point in time. E.g., only one of inFolder, inHomeDir, inTest&#823
 <div class="paragraph">
 <p>The Import and Export feature is facilitated by the Logic and model components, together
 with the addition of 2 new classes inside the csvmanager package defined under
-the storage component.</p>
+the storage package.</p>
 </div>
 <h5 id="logic" class="discrete">Logic</h5>
 <div class="paragraph">
-<p>Similar to how the current commands are implemented, the two new commands, the logic unit now accepts two
-new commands, <code>ImportCommand</code> and <code>ExportCommand</code>.</p>
+<p>Similar to how the current commands are implemented, where each specific command inherits from the abstract
+class command, the Import and Export command likewise inherit from the command class.</p>
 </div>
 <h5 id="model-3" class="discrete">Model</h5>
 <div class="paragraph">
-<p>The model component supports the addition of a new object variable <code>CsvManager</code>, that carries out the read and
-write logic of cards to files.</p>
+<p>The model component supports the addition of a new object attribute <code>CsvManager</code>, that carries out the read and
+write logic of cards to external files.</p>
 </div>
 <div class="paragraph">
 <p>Additionally, model implements two new methods, <code>Model#importCardFolders</code> and <code>Model#exportCardFolders</code>.
@@ -990,6 +990,13 @@ These two methods further call the CsvManager API to read and write card folders
 <p>Model also implements <code>Model#setTestCsvPath</code> and the <code>Model#getDefaultPath</code> which are only used during testing.</p>
 </div>
 <h5 id="csvmanager-package" class="discrete">csvmanager package:</h5>
+<div class="paragraph">
+<p>The csvmanager package contains all classes dealing with the reading and writing of cardfolders into and out to
+the model.</p>
+</div>
+<div class="paragraph">
+<p>The classes include:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -1012,41 +1019,40 @@ API <code>CsvManager#writeFoldersToCsv</code> and <code>CsvManager#readFoldersTo
 <ol class="arabic">
 <li>
 <p>User wants to export folders <code>Human Anatomy</code> and <code>Nervous System</code>.
-Suppose that these two folders are indicated by the index 1 and 2 respectively.
-The user types <code>export 1 2</code></p>
+Suppose that these two folders index as shown on the main application screen is 1 and 3 respectively.
+The user types <code>export 1 3</code></p>
 </li>
 <li>
-<p>The Export command parser extracts the indices, parses the indices into a <code>ExportCommand</code> object.
-Draw export command object diagram with set&lt;CardFolderExport&gt; and CsvFile file</p>
+<p>The Export command parser extracts the indices, parses the indices into a List&lt;Integer&gt; and
+<code>ExportCommand</code> object, which keeps track of the indices.</p>
 </li>
 <li>
-<p>Logic unit executes the command. The execute command calls <code>Model#exportCardFolders</code> method.</p>
+<p>The Export command executes, calling <code>Model#exportCardFolders</code> method.</p>
 </li>
-</ol>
+<li>
+<p>Model#exportCardFolders method checks that all card folders specified by user exists inside the list of card folders.
+With reference to the diagram below, we can see that the indices specified by the user corresponds
+to each card folder.<br>
+The method throws <code>CardFolderNotFoundException</code> if card folder index is not found in list.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/import_export_model_list1.png" alt="import export model list1" width="800">
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Model checks that all card folders specified by user exists inside the list of card folders.
-Throws <code>CardFolderNotFound</code> Exception if user specified card folder does not exist in the application.</p>
+</div>
 </li>
 <li>
 <p><code>CsvManager</code> is called to carry out the main logic of writing the cardfolders to file.
-File exported will be created in the project root directory.
-File will be named after the name of the cardfolder.
+File exported will be created in the project root directory.<br>
+Names of the files created will correspond to the names of their corresponding cardfolders.<br>
 i.e <code>Human Anatomy.csv</code> and <code>Nervous System.csv</code></p>
 </li>
-</ol>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
 <li>
 <p>User wants to import <code>Human Anatomy.csv</code> file.
 <code>Human Anatomy.csv</code> file contains flashcards represented in csv file format.
 User types <code>import Blood.csv</code> command</p>
 </li>
 <li>
-<p>Import command parser extracts file name and wraps file into a <code>CsvFile</code> object and
+<p>Import command parser extracts file name, wraps file into a <code>CsvFile</code> object and
 parses the CsvFile into an Import Command object.</p>
 </li>
 <li>
@@ -1071,6 +1077,14 @@ Both Imported and Exported files have to be placed in the project root directory
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>The below diagram shows the sequence diagram for the Import/Export commands</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/import_export_sequenceDiagram.png" alt="import export sequenceDiagram" width="1000">
+</div>
 </div>
 <div class="sect3">
 <h4 id="csv-file-structure"><a class="link" href="#csv-file-structure">3.5.1. CSV file structure</a></h4>
@@ -1105,8 +1119,8 @@ Headers have to be present in the csv file for import.</p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
-<div class="sect5">
-<h6 id="aspect-which-component-responsible-for-import-export-logic"><a class="link" href="#aspect-which-component-responsible-for-import-export-logic">Aspect: Which component responsible for import/export logic</a></h6>
+<div class="sect4">
+<h5 id="aspect-which-component-responsible-for-import-export-logic"><a class="link" href="#aspect-which-component-responsible-for-import-export-logic">Aspect: Which component responsible for import/export logic</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1184,8 +1198,8 @@ to convert .json file  into .csv file</p>
 </ul>
 </div>
 </div>
-<div class="sect5">
-<h6 id="aspect-csv-file-design-structure"><a class="link" href="#aspect-csv-file-design-structure">Aspect: csv file design structure</a></h6>
+<div class="sect4">
+<h5 id="aspect-csv-file-design-structure"><a class="link" href="#aspect-csv-file-design-structure">Aspect: csv file design structure</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -3689,4 +3703,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 13:05:58 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 14:16:12 UTC</div></div></div></body></html>

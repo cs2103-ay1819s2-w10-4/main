@@ -1,0 +1,582 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Ong Yi Chong - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Know-It-All</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/cs2103-ay1819s2-w10-4/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Ong Yi Chong - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-know-it-all"><a class="link" href="#project-know-it-all">PROJECT: Know-It-All</a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>My team and I were tasked with enhancing a basic command line interface addressbook for our
+Software Engineering project. We chose to morph it into an desktop flashcard application
+called Know-It-All. This enhanced application helps students organize their digital flashcards neatly.
+The application also comes with a test feature; allowing users to test themselves on the flashcards
+created, a report feature; allowing them to view their performance for each folder and a import and
+export feature; which allows for the sharing of flashcards.</p>
+</div>
+<div class="paragraph">
+<p>My role was to design and write the codes for the import and export features. The following sections
+illustrate these enhancements in more detail, as well as the relevant sections I have added to the
+user and developer guides in relation to these enhancements.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement</strong>: added <strong>the ability to import/export existing or new flashcards</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: The import and export command allows users to import and export flashcards as csv files.</p>
+</li>
+<li>
+<p>Justification: This feature improves the product significantly because users can now share their flashcards with
+others. The ability to import flashcards also provides a faster alternative to creating multiple flashcards in comparison
+to manually adding within the app iteself.</p>
+</li>
+<li>
+<p>Highlights: Although not technically challenging, there were many considerations that went into the design of the import/export feature. One of them was deciding
+the formatting of csv files. whether a user should be able to export multiple card folders into a single csv. Also, since commas
+were used within each card field as well, there was a need to ensure that the comma separated values are actually not
+part of the "commas" within the card field itself.</p>
+</li>
+<li>
+<p>Credits:</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=yichong96">Collated code</a>]</p>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Enhancements to existing features:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Wrote additional tests for existing features to increase coverage from 78.379% to 81.079 (Pull requests <a href="https://github.com">#105</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/60">#60</a>, <a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/2">#2</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="advanced-operations"><a class="link" href="#advanced-operations">Advanced Operations</a></h3>
+<div class="paragraph">
+<p>All the above operations described above focuses on how individual users may use the app. This section however
+describes also how you can use the app more effectively; by creating multiple flashcards even faster and sharing it
+with your friends.</p>
+</div>
+<div class="paragraph">
+<p>The following <code>Import</code> and <code>Export</code> commands describe how you can do just that.</p>
+</div>
+<div class="sect3">
+<h4 id="important-to-note"><a class="link" href="#important-to-note">Important to Note</a></h4>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The files used for Import and Export commands should be placed in the project root directory.<br>
+i.e The directory where the .jar file is located<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/project_root_dir.png" alt="project root dir" width="800">
+</div>
+<div class="title">Figure 1. project root directory / where the jar file is located.</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The current version does not support the importing and exporting of files outside of this directory
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="export-flashcards-code-export-code"><a class="link" href="#export-flashcards-code-export-code">Export flashcards : <code>export</code></a></h4>
+<div class="paragraph">
+<p>Exporting flashcards is a great way to start sharing your flashcards with others.</p>
+</div>
+<div class="paragraph">
+<p>The export command creates a csv file containing the flashcards from the specified folder in your project root
+directory.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>export FOLDER_INDEX FILENAME [MORE_INDEXES]</code></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>You should key in indices corresponding to the folder index</p>
+</li>
+<li>
+<p>Negative numbers are not allowed</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>export</code><br>
+<code>1 2 3</code><br>
+exports the first, second and third cardfolder in your home directory.
+Suppose that the first, second and third cardfolder corresponds to the card folder names :<br>
+<code>Blood</code><br>
+<code>Circulatory System</code><br>
+<code>Cardiovascular</code><br>
+Then the following files <code>Blood.csv</code>, <code>Circulatory System.csv</code> and <code>Cardiovascular.csv</code>
+will be created in the project root directory.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="import-flashcards-code-import-code"><a class="link" href="#import-flashcards-code-import-code">Import flashcards : <code>import</code></a></h4>
+<div class="paragraph">
+<p>Besides being able to import flashcards exported by others, the import command provies a faster way of
+creating multiple flashcards.</p>
+</div>
+<div class="paragraph">
+<p>You type your flashcards out on excel and later save it in your project root directory, allowing you
+to import it over to your application.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The csv file imported should follow the format below
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Blood.csv.png" alt="Blood.csv" width="800">
+</div>
+<div class="title">Figure 2. Sample format for csv file</div>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The first row of the csv file should have the following headers, Question, Answer, Options, Hints.</p>
+</li>
+<li>
+<p>Question and Answer are mandatory fields, and should not be left blank.</p>
+</li>
+<li>
+<p>Options can take 0 or many values.</p>
+</li>
+<li>
+<p>Hints can take 0 or 1 values only.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Format: <code>import FILENAME</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>import</code><br>
+<code>Blood.csv</code><br>
+Imports blood csv file into know-it-all. A new <code>Blood</code> cardfolder should be present in the home
+directory after execution of this command.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="import-export-feature"><a class="link" href="#import-export-feature">Import/Export feature</a></h3>
+<h4 id="current-implementation" class="discrete">Current Implementation</h4>
+<div class="paragraph">
+<p>The Import and Export feature is facilitated by the Logic and model components, together
+with the addition of 2 new classes inside the csvmanager package defined under
+the storage package.</p>
+</div>
+<h5 id="logic" class="discrete">Logic</h5>
+<div class="paragraph">
+<p>Similar to how the current commands are implemented, where each specific command inherits from the abstract
+class command, the Import and Export command likewise inherit from the command class.</p>
+</div>
+<h5 id="model" class="discrete">Model</h5>
+<div class="paragraph">
+<p>The model component supports the addition of a new object attribute <code>CsvManager</code>, that carries out the read and
+write logic of cards to external files.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, model implements two new methods, <code>Model#importCardFolders</code> and <code>Model#exportCardFolders</code>.
+These two methods further call the CsvManager API to read and write card folders.</p>
+</div>
+<div class="paragraph">
+<p>Model also implements <code>Model#setTestCsvPath</code> and the <code>Model#getDefaultPath</code> which are only used during testing.</p>
+</div>
+<h5 id="csvmanager-package" class="discrete">csvmanager package:</h5>
+<div class="paragraph">
+<p>The csvmanager package contains all classes dealing with the reading and writing of cardfolders into and out to
+the model.</p>
+</div>
+<div class="paragraph">
+<p>The classes include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>CsvManager - Main class responsible for the writing and reading of .csv files during the import and export of files</p>
+</li>
+<li>
+<p>CsvFile - Wrapper class for file name input by user</p>
+</li>
+<li>
+<p>CsvCommands interface - API for import/export method in CsvManager</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The main logic for the import / export command is carried out inside the CsvManager class specified by it&#8217;s
+API <code>CsvManager#writeFoldersToCsv</code> and <code>CsvManager#readFoldersToCsv</code>.</p>
+</div>
+<h5 id="example-usage" class="discrete">Example Usage</h5>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User wants to export folders <code>Human Anatomy</code> and <code>Nervous System</code>.
+Suppose that these two folders index as shown on the main application screen is 1 and 3 respectively.
+The user types <code>export 1 3</code></p>
+</li>
+<li>
+<p>The Export command parser extracts the indices, parses the indices into a List&lt;Integer&gt; and
+<code>ExportCommand</code> object, which keeps track of the indices.</p>
+</li>
+<li>
+<p>The Export command executes, calling <code>Model#exportCardFolders</code> method.</p>
+</li>
+<li>
+<p>Model#exportCardFolders method checks that all card folders specified by user exists inside the list of card folders.
+With reference to the diagram below, we can see that the indices specified by the user corresponds
+to each card folder.<br>
+The method throws <code>CardFolderNotFoundException</code> if card folder index is not found in list.</p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/import_export_model_list1.png" alt="import export model list1" width="800">
+</div>
+</div>
+</li>
+<li>
+<p><code>CsvManager</code> is called to carry out the main logic of writing the cardfolders to file.
+File exported will be created in the project root directory.<br>
+Names of the files created will correspond to the names of their corresponding cardfolders.<br>
+i.e <code>Human Anatomy.csv</code> and <code>Nervous System.csv</code></p>
+</li>
+<li>
+<p>User wants to import <code>Human Anatomy.csv</code> file.
+<code>Human Anatomy.csv</code> file contains flashcards represented in csv file format.
+User types <code>import Blood.csv</code> command</p>
+</li>
+<li>
+<p>Import command parser extracts file name, wraps file into a <code>CsvFile</code> object and
+parses the CsvFile into an Import Command object.</p>
+</li>
+<li>
+<p>Logic unit executes the import command.
+The execute method makes a call to <code>Model#importCardFolder</code> method.</p>
+</li>
+<li>
+<p>CsvManager is called to carry out the main logic of reading cardfolders to file.
+File imported will be serialized into a <code>CardFolder</code> object and
+added to the <code>filteredFoldersList</code> variable.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Both Imported and Exported files have to be placed in the project root directory.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The below diagram shows the sequence diagram for the Import/Export commands</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/import_export_sequenceDiagram.png" alt="import export sequenceDiagram" width="1000">
+</div>
+</div>
+<div class="sect3">
+<h4 id="csv-file-structure"><a class="link" href="#csv-file-structure">CSV file structure</a></h4>
+<div class="paragraph">
+<p>Example of a common cardfolder csv file<br></p>
+</div>
+<div class="paragraph">
+<p>Blood.csv</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Blood.csv.png" alt="Blood.csv" width="800">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The first line of any file contains the headers for each card.
+Headers have to be present in the csv file for import.</p>
+</li>
+<li>
+<p>Each row of the csv file represents a single flashcard.</p>
+</li>
+<li>
+<p>Options header can take more than one value or none.</p>
+</li>
+<li>
+<p>Hints header can take either 0 or 1 value.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-which-component-responsible-for-import-export-logic"><a class="link" href="#aspect-which-component-responsible-for-import-export-logic">Aspect: Which component responsible for import/export logic</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Alternative 1: Implement read and write card folders in <code>StorageManager</code> class</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The most intuitive solution,
+since Storage involves read and write logic</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Model and Storage are now more coupled together.</p>
+</li>
+<li>
+<p>Storage has more than one responsibility now.
+Instead of managing the internal data of card folder, it now has to
+manage the read and write to csv files.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Alternative 2: Implement read and write card folders in <code>csvmanager</code> package class. (Current)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Separate responsibilities of both Storage and Model.<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Model class can focus on the representation of the in-memory card folders
+Storage<br></p>
+</li>
+<li>
+<p>Storage class can focus on managing the internal card folder data (.json files)</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>More code to write. Storage class could possibly call the relevant API&#8217;s
+to convert .json file  into .csv file</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-csv-file-design-structure"><a class="link" href="#aspect-csv-file-design-structure">Aspect: csv file design structure</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Alternative 1: Export multiple card folders into a single file.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Saves user trouble of calling multiple import for files.
+Each card folder is separated by a new line.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Not a .csv file anymore.
+First line header would now specify cardfolder name before card headers,
+leading to unequal rows and columns</p>
+</li>
+<li>
+<p>Users will be unable to select specific card folders to import if multiple card folders
+have been exported into a single file.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Alternative 2: Export each card folder into a single file (Current)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>More flexibility for users to import desired card folders,
+since 1 cardfolder = 1 csv file.</p>
+</li>
+<li>
+<p>Files are now correctly formatted as .csv file</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Slightly more work needed to import multiple card folders.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 14:16:12 UTC</div></div></div></body></html>

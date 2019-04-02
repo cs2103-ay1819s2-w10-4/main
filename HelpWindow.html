@@ -53,10 +53,13 @@
 <li><a href="#end-the-current-report-session-code-end-code">4.4.2. End the current report session : <code>end</code></a></li>
 </ul>
 </li>
-<li><a href="#global-operations">4.5. Global Operations</a>
+<li><a href="#advanced-operations">4.5. Advanced Operations</a>
 <ul class="sectlevel3">
-<li><a href="#viewing-help-code-help-code">4.5.1. Viewing help : <code>help</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">4.5.2. Exiting the program : <code>exit</code></a></li>
+<li><a href="#important-to-note">4.5.1. Important to Note</a></li>
+<li><a href="#export-flashcards-code-export-code-2">4.5.2. Export flashcards : <code>export</code></a></li>
+<li><a href="#import-flashcards-code-import-code-2">4.5.3. Import flashcards : <code>import</code></a></li>
+<li><a href="#viewing-help-code-help-code">4.5.4. Viewing help : <code>help</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">4.5.5. Exiting the program : <code>exit</code></a></li>
 </ul>
 </li>
 </ul>
@@ -1042,12 +1045,161 @@ There must be at least two test attempts for a graph to be drawn.
 </div>
 </div>
 <div class="sect2">
-<h3 id="global-operations"><a class="link" href="#global-operations">4.5. Global Operations</a></h3>
+<h3 id="advanced-operations"><a class="link" href="#advanced-operations">4.5. Advanced Operations</a></h3>
 <div class="paragraph">
-<p>The commands shown in this section are applicable anywhere in the application.</p>
+<p>All the above operations described above focuses on how individual users may use the app. This section however
+describes also how you can use the app more effectively; by creating multiple flashcards even faster and sharing it
+with your friends.</p>
+</div>
+<div class="paragraph">
+<p>The following <code>Import</code> and <code>Export</code> commands describe how you can do just that.</p>
 </div>
 <div class="sect3">
-<h4 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.5.1. Viewing help : <code>help</code></a></h4>
+<h4 id="important-to-note"><a class="link" href="#important-to-note">4.5.1. Important to Note</a></h4>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The files used for Import and Export commands should be placed in the project root directory.<br>
+i.e The directory where the .jar file is located<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/project_root_dir.png" alt="project root dir" width="800">
+</div>
+<div class="title">Figure 7. project root directory / where the jar file is located.</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The current version does not support the importing and exporting of files outside of this directory
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="export-flashcards-code-export-code-2"><a class="link" href="#export-flashcards-code-export-code-2">4.5.2. Export flashcards : <code>export</code></a></h4>
+<div class="paragraph">
+<p>Exporting flashcards is a great way to start sharing your flashcards with others.</p>
+</div>
+<div class="paragraph">
+<p>The export command creates a csv file containing the flashcards from the specified folder in your project root
+directory.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>export FOLDER_INDEX FILENAME [MORE_INDEXES]</code></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>You should key in indices corresponding to the folder index</p>
+</li>
+<li>
+<p>Negative numbers are not allowed</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>export</code><br>
+<code>1 2 3</code><br>
+exports the first, second and third cardfolder in your home directory.
+Suppose that the first, second and third cardfolder corresponds to the card folder names :<br>
+<code>Blood</code><br>
+<code>Circulatory System</code><br>
+<code>Cardiovascular</code><br>
+Then the following files <code>Blood.csv</code>, <code>Circulatory System.csv</code> and <code>Cardiovascular.csv</code>
+will be created in the project root directory.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="import-flashcards-code-import-code-2"><a class="link" href="#import-flashcards-code-import-code-2">4.5.3. Import flashcards : <code>import</code></a></h4>
+<div class="paragraph">
+<p>Besides being able to import flashcards exported by others, the import command provies a faster way of
+creating multiple flashcards.</p>
+</div>
+<div class="paragraph">
+<p>You type your flashcards out on excel and later save it in your project root directory, allowing you
+to import it over to your application.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The csv file imported should follow the format below
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Blood.csv.png" alt="Blood.csv" width="800">
+</div>
+<div class="title">Figure 8. Sample format for csv file</div>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The first row of the csv file should have the following headers, Question, Answer, Options, Hints.</p>
+</li>
+<li>
+<p>Question and Answer are mandatory fields, and should not be left blank.</p>
+</li>
+<li>
+<p>Options can take 0 or many values.</p>
+</li>
+<li>
+<p>Hints can take 0 or 1 values only.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Format: <code>import FILENAME</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>import</code><br>
+<code>Blood.csv</code><br>
+Imports blood csv file into know-it-all. A new <code>Blood</code> cardfolder should be present in the home
+directory after execution of this command.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.5.4. Viewing help : <code>help</code></a></h4>
 <div class="paragraph">
 <p>Opens the User Guide in a new window.</p>
 </div>
@@ -1056,7 +1208,7 @@ There must be at least two test attempts for a graph to be drawn.
 </div>
 </div>
 <div class="sect3">
-<h4 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.5.2. Exiting the program : <code>exit</code></a></h4>
+<h4 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.5.5. Exiting the program : <code>exit</code></a></h4>
 <div class="paragraph">
 <p>Exits the program.</p>
 </div>
@@ -1204,6 +1356,18 @@ this number is automatically calculated and recorded.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Quits the current test session or report display.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>search KEYWORDS [MORE_KEYWORDS]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Searches for flashcards inside the current folder using keywords in flashcard questions.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>import FILENAME</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Imports a file with the specified name. Filename must include .csv extension</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>export FOLDER_INDEX FILENAME [MORE_INDEXES]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Creates a csv file containing the flashcards from the specified folder, which can later be imported.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>help</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Opens the User Guide in a new window.</p></td>
 </tr>
@@ -1214,4 +1378,4 @@ this number is automatically calculated and recorded.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 13:05:58 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 14:16:12 UTC</div></div></div></body></html>
