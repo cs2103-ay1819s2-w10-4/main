@@ -618,7 +618,7 @@ As a more OOP model, we can change the <code>Card</code> implementation to be th
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The <code>Card</code> is one of the core aspects of the application. Cards are the result of morphing of the <code>Person</code> class from the original AddressBook model. The implementation incorporates the <code>Logic</code> and <code>Model</code> components.</p>
+<p>The <code>Card</code> is one of the core aspects of the application. Cards are the result of morphing the <code>Person</code> class from the original AddressBook model. This implementation incorporates the <code>Model</code> and <code>Logic</code> components.</p>
 </div>
 <h4 id="model" class="discrete">Model</h4>
 <div class="paragraph">
@@ -640,7 +640,14 @@ As a more OOP model, we can change the <code>Card</code> implementation to be th
 </li>
 </ul>
 </div>
+<h4 id="logic" class="discrete">Logic</h4>
+<div class="paragraph">
+<p>As with all other commands, the <code>LogicManager#execute(String commandText)</code> method of the <code>Logic</code> component parses the user&#8217;s input, say a command to add a new card, and executes the corresponding <code>Command</code>.</p>
+</div>
 <h4 id="example-usage" class="discrete">Example Usage</h4>
+<div class="paragraph">
+<p>The following steps detail the underlying logic executed when a user does a card-related operation, say an add card operation.</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -648,13 +655,12 @@ As a more OOP model, we can change the <code>Card</code> implementation to be th
 <div class="paragraph">
 <p><span class="image"><img src="images/CardImplementationAddExample.png" alt="CardImplementationAddExample" width="800"></span></p>
 </div>
-<div class="ulist">
-<ul>
+</li>
+<li>
+<p>The command parser reads the string input (as entered by the user) and returns the corresponding <code>Command</code>, an <code>AddCommand</code> object in this instance.</p>
+</li>
 <li>
 <p>Upon execution, the <code>AddCommand</code> checks if the card to be added is already present in the current folder. If so, an exception is thrown.</p>
-</li>
-</ul>
-</div>
 </li>
 <li>
 <p>The <code>AddCommand</code> then calls the <code>ModelManager#addCard(Card card)</code> method.</p>
@@ -698,7 +704,7 @@ As a more OOP model, we can change the <code>Card</code> implementation to be th
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: More correct implementation.</p>
+<p>Pros: More object-oriented implementation.</p>
 </li>
 <li>
 <p>Cons: Harder to implement.</p>
@@ -972,7 +978,7 @@ is true at any point in time. E.g., only one of inFolder, inHomeDir, inTest&#823
 with the addition of 2 new classes inside the csvmanager package defined under
 the storage package.</p>
 </div>
-<h5 id="logic" class="discrete">Logic</h5>
+<h5 id="logic-2" class="discrete">Logic</h5>
 <div class="paragraph">
 <p>Similar to how the current commands are implemented, where each specific command inherits from the abstract
 class command, the Import and Export command likewise inherit from the command class.</p>
@@ -1346,7 +1352,7 @@ since 1 cardfolder = 1 csv file.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="logic-2"><a class="link" href="#logic-2">Logic</a></h5>
+<h5 id="logic-3"><a class="link" href="#logic-3">Logic</a></h5>
 <div class="paragraph">
 <p>The existing implementation of the Logic component propagates changes in a Model&#8217;s <code>CardFolder</code> to the Storage component. With listeners, it is informed when a <code>CardFolder</code> is modified (e.g. a new card is added) so that it can invoke the appropriate Storage methods.</p>
 </div>
@@ -2140,7 +2146,7 @@ Comparison is not case-sensitive
 </tr>
 </table>
 </div>
-<h6 id="logic-3" class="discrete">Logic</h6>
+<h6 id="logic-4" class="discrete">Logic</h6>
 <div class="paragraph">
 <p>To facilitate the update of score after marking the card, we introduce the following method in <code>AnswerCommand</code>.</p>
 </div>
@@ -3255,22 +3261,22 @@ user experience is more engaging and scoring is more accurate as it is based on 
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Student begins a test session</p>
+<p>Student begins a test session.</p>
 </li>
 <li>
-<p>System presents the question on the lowest-performing flashcard first</p>
+<p>System presents the question on the lowest-performing flashcard first.</p>
 </li>
 <li>
-<p>Student inputs his/her answer</p>
+<p>Student inputs his/her answer.</p>
 </li>
 <li>
-<p>System indicates whether student’s answer is correct or wrong and shows the answer of the flashcard</p>
+<p>System indicates whether student’s answer is correct or wrong and shows the answer of the flashcard.</p>
 </li>
 <li>
-<p>Student navigates to next flashcard</p>
+<p>Student navigates to next flashcard.</p>
 </li>
 <li>
-<p>Repeat steps 2-4 until all the flashcards in the folder are tested</p>
+<p>Repeat steps 2-4 until all the flashcards in the folder are tested.</p>
 <div class="paragraph">
 <p>Use case ends</p>
 </div>
@@ -3283,14 +3289,14 @@ user experience is more engaging and scoring is more accurate as it is based on 
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a. Student doesn’t know the answer and wants to see the answer without attempting</p>
+<p>3a. Student doesn&#8217;t know the answer and wants to see the answer without attempting.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a1. Student uses the reveal command</p>
+<p>3a1. Student uses the reveal command.</p>
 </li>
 <li>
-<p>3a2. Answer is displayed to the student</p>
+<p>3a2. Answer is displayed to the student.</p>
 </li>
 </ul>
 </div>
@@ -3304,20 +3310,97 @@ user experience is more engaging and scoring is more accurate as it is based on 
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Student enters a folder that he wants to add a flashcard to</p>
+<p>Student navigates to a folder that he wants to add a flashcard to.</p>
 </li>
 <li>
-<p>Student inputs question and answer to be stored as flashcard</p>
+<p>Student inputs question and answer to be stored as flashcard.</p>
 </li>
 <li>
-<p>System stores the details as a flashcard under the current folder</p>
+<p>System stores the details as a flashcard under the current folder.</p>
 <div class="paragraph">
 <p>Use case ends</p>
 </div>
 </li>
 </ol>
 </div>
-<h3 id="uc03-add-folder" class="discrete">UC03 Add folder</h3>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. Student only inputs a question but no answer.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. System displays an error message informing the user that the command format is invalid.</p>
+<div class="paragraph">
+<p>Use case resumes from step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="uc03-edit-flashcard-question" class="discrete">UC03 Edit flashcard question</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Student navigates to the folder that contains the flashcard to be edited.</p>
+</li>
+<li>
+<p>Student indicates the card to be edited, as well as the new question.</p>
+</li>
+<li>
+<p>System stores the updated details for the edited card.</p>
+<div class="paragraph">
+<p>Use case ends</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. Student enters a blank as the desired question.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. System displays an error message informing the user that the question cannot be a blank.</p>
+<div class="paragraph">
+<p>Use case resumes from step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2b. Student enters a card index that does not exist.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2b1. System displays an error message prompting the user to choose a valid card index.</p>
+<div class="paragraph">
+<p>Use case resumes from step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="uc04-add-folder" class="discrete">UC04 Add folder</h3>
 <div class="paragraph">
 <p><strong>Guarantees</strong></p>
 </div>
@@ -3334,13 +3417,13 @@ user experience is more engaging and scoring is more accurate as it is based on 
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Student navigates to home directory</p>
+<p>Student navigates to home directory.</p>
 </li>
 <li>
-<p>Student inputs the name of the folder he wants to create</p>
+<p>Student inputs the name of the folder he wants to create.</p>
 </li>
 <li>
-<p>System creates a folder of the desired name and shows it on the home directory</p>
+<p>System creates a folder of the desired name and shows it on the home directory.</p>
 <div class="paragraph">
 <p>Use case ends</p>
 </div>
@@ -3367,14 +3450,14 @@ user experience is more engaging and scoring is more accurate as it is based on 
 </li>
 </ul>
 </div>
-<h3 id="uc04-edit-folder-name" class="discrete">UC04 Edit folder name</h3>
+<h3 id="uc05-edit-folder-name" class="discrete">UC05 Edit folder name</h3>
 <div class="paragraph">
 <p><strong>Guarantees</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>A particular folder as selected by the student is renamed to the desired name</p>
+<p>A particular folder as selected by the student is renamed to the desired name.</p>
 </li>
 </ul>
 </div>
@@ -3384,13 +3467,13 @@ user experience is more engaging and scoring is more accurate as it is based on 
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Student navigates to home directory</p>
+<p>Student navigates to home directory.</p>
 </li>
 <li>
 <p>Student indicates the folder he wants to rename, as well as the new name.</p>
 </li>
 <li>
-<p>System renames the folder to the new name and shows it on the home directory</p>
+<p>System renames the folder to the new name and shows it on the home directory.</p>
 <div class="paragraph">
 <p>Use case ends</p>
 </div>
@@ -3451,7 +3534,7 @@ user experience is more engaging and scoring is more accurate as it is based on 
 </li>
 </ul>
 </div>
-<h3 id="uc05-navigating-into-folders" class="discrete">UC05 Navigating into folders</h3>
+<h3 id="uc06-navigating-into-folders" class="discrete">UC06 Navigating into folders</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -3703,4 +3786,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 14:16:12 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 14:19:12 UTC</div></div></div></body></html>

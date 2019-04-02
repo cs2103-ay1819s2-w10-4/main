@@ -10,7 +10,10 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Know-It-All is a flashcard application that helps users store and organise their learning material. With an easy to use interface and a storage solution that supports content sharing, Know-It-All is designed to help students perform rote learning more efficiently. From cramming in between lessons to focused study, the in-built test session boosts the effectiveness of repetition and recall for memorisation. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p>Know-It-All is a flashcard application developed as a software engineering project by a team of 5, including myself. The base application was originally an addressbook application, and my team was given the choice of either enhancing its current features, or morphing the application to suit a different purpose. We chose the latter path, which resulted in the current iteration of Know-It-All.</p>
+</div>
+<div class="paragraph">
+<p>Our application aims to assist students in their learning by proving them with an easy-to-use digital flashcard management system to create and review their own flashcards. Through components such as the in-built test session and report feature, users can learn more effectively and review their performance. Interaction is primarily done via a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
 </div>
 <div class="paragraph">
 <p>My role involved the restructuring of the <code>model</code> and <code>logic</code> components of the original addressbook application, as well as implementing flashcard creation and management for Know-It-All. A more detailed breakdown of my contributions are detailed below, together with my additions to the user and developer guides.</p>
@@ -52,7 +55,7 @@
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: implemented testing for MCQ cards</p>
+<p><strong>Minor enhancement</strong>: implemented <strong>testing for MCQ cards</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -63,6 +66,48 @@
 </li>
 <li>
 <p>Highlights: MCQ card options are randomized every time the card is tested, thus preventing users from simply memorizing the correct option number.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: updated <strong>UI display for cards within card folders and for tests</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Changed the display of the side panel for cards within card folders to display all card information to the user.</p>
+</li>
+<li>
+<p>Justification:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>For card folders, the side panel shows users all necessary information of a card at a glance whenever users select a card.</p>
+<div class="paragraph">
+<p><span class="image"><img src="../images/Ui.png" alt="Ui" width="800"></span></p>
+</div>
+</li>
+<li>
+<p>For test sessions, only relevant information is shown at the start for each card. The correct answer is displayed only after a user inputs an answer.</p>
+<div class="paragraph">
+<p><span class="image"><img src="../images/AnsweringMcqCard.png" alt="AnsweringMcqCard" width="800"></span></p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Highlights:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>In a test session, the card color changes to reflect if a user has answered correctly or not. Green signifies a correct answer, while red signifies a wrong answer.</p>
+<div class="paragraph">
+<p><span class="image"><img src="../images/ExampleMcqTest.png" alt="ExampleMcqTest" width="800"></span></p>
+</div>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -234,7 +279,7 @@ Edits the hint, question and answer of the 2nd card respectively.</p>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
-<p>The <code>Card</code> is one of the core aspects of the application. Cards are the result of morphing of the <code>Person</code> class from the original AddressBook model. The implementation incorporates the <code>Logic</code> and <code>Model</code> components.</p>
+<p>The <code>Card</code> is one of the core aspects of the application. Cards are the result of morphing the <code>Person</code> class from the original AddressBook model. This implementation incorporates the <code>Model</code> and <code>Logic</code> components.</p>
 </div>
 <h4 id="model" class="discrete">Model</h4>
 <div class="paragraph">
@@ -256,7 +301,14 @@ Edits the hint, question and answer of the 2nd card respectively.</p>
 </li>
 </ul>
 </div>
+<h4 id="logic" class="discrete">Logic</h4>
+<div class="paragraph">
+<p>As with all other commands, the <code>LogicManager#execute(String commandText)</code> method of the <code>Logic</code> component parses the user&#8217;s input, say a command to add a new card, and executes the corresponding <code>Command</code>.</p>
+</div>
 <h4 id="example-usage" class="discrete">Example Usage</h4>
+<div class="paragraph">
+<p>The following steps detail the underlying logic executed when a user does a card-related operation, say an add card operation.</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -264,13 +316,12 @@ Edits the hint, question and answer of the 2nd card respectively.</p>
 <div class="paragraph">
 <p><span class="image"><img src="../images/CardImplementationAddExample.png" alt="CardImplementationAddExample" width="800"></span></p>
 </div>
-<div class="ulist">
-<ul>
+</li>
+<li>
+<p>The command parser reads the string input (as entered by the user) and returns the corresponding <code>Command</code>, an <code>AddCommand</code> object in this instance.</p>
+</li>
 <li>
 <p>Upon execution, the <code>AddCommand</code> checks if the card to be added is already present in the current folder. If so, an exception is thrown.</p>
-</li>
-</ul>
-</div>
 </li>
 <li>
 <p>The <code>AddCommand</code> then calls the <code>ModelManager#addCard(Card card)</code> method.</p>
@@ -314,10 +365,107 @@ Edits the hint, question and answer of the 2nd card respectively.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: More correct implementation.</p>
+<p>Pros: More object-oriented implementation.</p>
 </li>
 <li>
 <p>Cons: Harder to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="uc02-add-flashcards" class="discrete">UC02 Add flashcards</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Student navigates to a folder that he wants to add a flashcard to.</p>
+</li>
+<li>
+<p>Student inputs question and answer to be stored as flashcard.</p>
+</li>
+<li>
+<p>System stores the details as a flashcard under the current folder.</p>
+<div class="paragraph">
+<p>Use case ends</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. Student only inputs a question but no answer.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. System displays an error message informing the user that the command format is invalid.</p>
+<div class="paragraph">
+<p>Use case resumes from step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="uc03-edit-flashcard-question" class="discrete">UC03 Edit flashcard question</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Student navigates to the folder that contains the flashcard to be edited.</p>
+</li>
+<li>
+<p>Student indicates the card to be edited, as well as the new question.</p>
+</li>
+<li>
+<p>System stores the updated details for the edited card.</p>
+<div class="paragraph">
+<p>Use case ends</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. Student enters a blank as the desired question.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. System displays an error message informing the user that the question cannot be a blank.</p>
+<div class="paragraph">
+<p>Use case resumes from step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2b. Student enters a card index that does not exist.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2b1. System displays an error message prompting the user to choose a valid card index.</p>
+<div class="paragraph">
+<p>Use case resumes from step 2.</p>
+</div>
 </li>
 </ul>
 </div>
@@ -368,4 +516,4 @@ sub-folders.</p>
 questions displayed. The user is required to key in an answer for each question.</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 14:16:12 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 14:19:12 UTC</div></div></div></body></html>
