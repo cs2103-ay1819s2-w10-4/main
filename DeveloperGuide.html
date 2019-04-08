@@ -1742,7 +1742,7 @@ If the path provided by the Model Component is invalid, the Storage component th
 <p>This big feature mainly involves <code>UI</code>, <code>Logic</code> and <code>Model</code> components.</p>
 </div>
 <div class="paragraph">
-<p>There are 4 main variables in <code>ModelManager</code> introduced to keep track of the current state in a test
+<p>There are 3 main variables in <code>ModelManager</code> introduced to keep track of the current state of the user in a test
 session.</p>
 </div>
 <div class="ulist">
@@ -1752,7 +1752,7 @@ session.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>The current card folder (stored as an <code>ObservableList</code> of cards) that the user is running a test session on.</p>
+<p>The current card folder that the user is running a test session on (stored as an <code>ObservableList</code> of cards) .</p>
 </li>
 <li>
 <p>Set to null if user is not inside a test session</p>
@@ -1780,26 +1780,6 @@ session.</p>
 </li>
 <li>
 <p><code>ModelManager#getCurrentTestedCard()</code> - returns the <code>currentTestedCard</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><code>inTestSession</code></p>
-<div class="ulist">
-<ul>
-<li>
-<p>A boolean variable to indicate if user is running a test session.</p>
-</li>
-<li>
-<p>Related methods:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>ModelManager#isInTestSession()</code> - returns true if user is in a test session and false otherwise.</p>
 </li>
 </ul>
 </div>
@@ -1844,7 +1824,8 @@ otherwise.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice)</strong>: Introduction of another variable, <code>currentTestedCard</code>, to store the card.</p>
+<p><strong>Alternative 1 (current choice)</strong>: Introduce another variable, <code>currentTestedCard</code>, to store the card to display
+in the test session.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1858,14 +1839,14 @@ otherwise.</p>
 </li>
 <li>
 <p><strong>Alternative 2</strong>: No introduction of <code>currentTestedCard</code> as using the <code>currentTestedCardIndex</code> suffices. Every time a
-card is needed, can reference it using <code>currentTestedCardFolder.getIndex(currentTestedCardIndex)</code>.</p>
+card is needed, can simply reference it using <code>currentTestedCardFolder.getIndex(currentTestedCardIndex)</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: No need to store an extra variable, use less space.</p>
+<p>Pros: No need to store an extra variable so this method uses less space.</p>
 </li>
 <li>
-<p>Cons: Not so reader friendly. Need to keep accessing the list at that index. Potentially lead to
+<p>Cons: Not so reader friendly. Need to keep accessing the list using the index which can potentially lead to
 possible violation of the Law of Demeter where an object should only interact with objects that are closely related to it.</p>
 </li>
 </ul>
@@ -1875,10 +1856,10 @@ possible violation of the Law of Demeter where an object should only interact wi
 </div>
 <div class="paragraph">
 <p>Evaluation of the 2 alternatives:
-We went with alternative 1 since not a large amount of memory is taken up with just an extra variable. As there will
+We went with alternative 1 since not a large amount of memory is taken up with just 1 extra card stored. As there will
 be a number of references to the <code>currentTestedCard</code>, it will be better to store them somewhere. Abiding by the Law
 of Demeter, <code>currentTestedCard</code> object will not be interacting with <code>currentTestedCardFolder</code>,  limiting its
-knowledge of that object.</p>
+knowledge of that object which is encouraged according to the Principle of Least Knowledge.</p>
 </div>
 </div>
 </div>
@@ -1925,17 +1906,17 @@ the test command.
 <a href="#testcommandsequencediagram">Figure 12, &#8220;Component interactions for a <code>test</code> command&#8221;</a> is a sequence diagram that summarises <code>Model</code> and <code>Logic</code> interactions, namely steps 1 to 7.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. User is inside a folder and wants to begin a test session on the current folder by executing the command
+<p><strong>Step 1</strong>. User is inside a folder and wants to begin a test session on the current folder by executing the command
 <code>test</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 2. As with every command, the command parser reads the input and generates the relevant <code>Command</code> object, in
+<p><strong>Step 2</strong>. As with every command, the command parser reads the input and generates the relevant <code>Command</code> object, in
 this case a <code>TestCommand</code>. The object is returned to the <code>LogicManager</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 3. The <code>LogicManager</code> executes the <code>TestCommand</code>, storing the result and then transferring control to the
-Model component, with <code>ModelManager#isInFolder()</code> and <code>ModelManager#isInTestSession()</code> to check that user is inside a
-folder and is not already in a test session. (This is omitted from <a href="#testcommandsequencediagram">Figure 12, &#8220;Component interactions for a <code>test</code> command&#8221;</a> for simplicity.)</p>
+<p><strong>Step 3</strong>. The <code>LogicManager</code> executes the <code>TestCommand</code>, storing the result and then transferring control to the
+Model component, with <code>Model#getState()</code> to check that user is inside a folder and is not already in a test session.
+(This is omitted from <a href="#testcommandsequencediagram">Figure 12, &#8220;Component interactions for a <code>test</code> command&#8221;</a> for simplicity.)</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1944,14 +1925,15 @@ folder and is not already in a test session. (This is omitted from <a href="#tes
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the user is not inside a folder or is already in a test session, this <code>test</code> command would be rendered
-invalid. Step 4 would not proceed and an error message is displayed.
+If the user is not inside a folder, this <code>test</code> command would be rendered invalid. Step 4 would not proceed and an
+error message is displayed.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Step 4. After both checks have passed, <code>ModelManager#testCardFolder()</code> method is invoked, which does the following:</p>
+<p><strong>Step 4</strong>. After checking user is in a folder, <code>ModelManager#testCardFolder()</code> method is invoked, which
+does the following:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1973,7 +1955,7 @@ to be caught in <code>TestCommand</code>, which then throws a <code>CommandExcep
 </div>
 </li>
 <li>
-<p>The cards in this folder is sorted in ascending scores by invoking <code>sortFilteredCard(comparator)</code>, so that
+<p>The cards in this folder are sorted in ascending scores by invoking <code>sortFilteredCard(comparator)</code>, so that
 lowest score cards will be presented first to the user in a test session.</p>
 </li>
 <li>
@@ -1981,7 +1963,7 @@ lowest score cards will be presented first to the user in a test session.</p>
 card in the folder as <code>currentTestedCardIndex</code> is set to 0.</p>
 </li>
 <li>
-<p><code>inTestSession</code> is set to true.</p>
+<p><code>state</code> in <code>Model</code> is set to <code>IN_TEST</code> to specify that user is in a test session from now onwards.</p>
 </li>
 <li>
 <p>No change to <code>cardAlreadyAnswered</code> as it is by default false.</p>
@@ -1989,15 +1971,23 @@ card in the folder as <code>currentTestedCardIndex</code> is set to 0.</p>
 </ol>
 </div>
 <div class="paragraph">
-<p>Step 5. For <code>TestCommand</code> to obtain the first card to present in the test session, <code>ModelManager#getCurrentTestedCard</code> is
+<p><strong>Step 5</strong>. For <code>TestCommand</code> to obtain the first card to present in the test session, <code>ModelManager#getCurrentTestedCard</code> is
 invoked and the <code>Card</code>, <code>c</code>, is returned.</p>
 </div>
 <div class="paragraph">
-<p>Step 6. With control now transferred back to the logic unit, <code>TestCommand</code> creates a <code>CommandResult</code> object, <code>r</code> with the type <code>START_TEST_SESSION</code>, and
+<p><strong>Step 6</strong>. With control now transferred back to the logic unit, <code>TestCommand</code> creates a <code>CommandResult</code> object, <code>r</code> with the type <code>START_TEST_SESSION</code>, and
 set <code>testSessionCard</code> in <code>CommandResult</code> to <code>c</code> obtained in Step 5.</p>
 </div>
 <div class="paragraph">
-<p>Step 7. <code>r</code> is returned to <code>LogicManager</code> which then terminates and returns <code>r</code> to the calling method.</p>
+<p><strong>Step 7</strong>. <code>r</code> is returned to <code>LogicManager</code> which then terminates and returns <code>r</code> to the caller method.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 8</strong>. The caller method here is in <code>MainWindow</code>. Control is now transferred to the UI component.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 9</strong>. <code>MainWindow</code> sees that <code>CommandResult</code> object <code>r</code> has the type <code>START_TEST_SESSION</code>. It invokes
+<code>MainWindow#handleStartTestSession(currentTestedCard)</code> to display the <code>currentTestedCard</code> question and hints to the
+user.</p>
 </div>
 <div id="testcommandsequencediagram" class="imageblock">
 <div class="content">
@@ -2005,25 +1995,13 @@ set <code>testSessionCard</code> in <code>CommandResult</code> to <code>c</code>
 </div>
 <div class="title">Figure 12. Component interactions for a <code>test</code> command</div>
 </div>
-<div class="paragraph">
-<p><br></p>
-</div>
-<div class="paragraph">
-<p>Step 8. The caller method here is <code>MainWindow</code>. Control is now transferred to the UI component.</p>
-</div>
-<div class="paragraph">
-<p>Step 9. <code>MainWindow</code> sees that <code>CommandResult</code> object <code>r</code> has the type <code>START_TEST_SESSION</code>. It invokes
-<code>MainWindow#handleStartTestSession(currentTestedCard)</code> to display the <code>currentTestedCard</code> question and hints to the
-user.</p>
-</div>
 <h6 id="exampleusageofendcommand" class="discrete">Example Usage of end command</h6>
 <div class="paragraph">
-<p>Step 1. User is currently in a test session and executes the command <code>end</code>.</p>
+<p><strong>Step 1</strong>. User is currently in a test session and executes the command <code>end</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 2. An <code>EndCommand</code> object is created and <code>LogicManager</code> executes the <code>EndCommand</code>, storing the result and then
-transferring control to the Model component, with <code>ModelManager#isInTestSession()</code> to
-check that user is indeed in a test session.</p>
+<p><strong>Step 2</strong>. An <code>EndCommand</code> object is created and <code>LogicManager</code> executes the <code>EndCommand</code>, storing the result and then
+transferring control to the Model component, with <code>Model#getState()</code> to check that user is indeed in a test session.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2038,7 +2016,7 @@ If the user is not in a test session, Step 3 would not proceed.
 </table>
 </div>
 <div class="paragraph">
-<p>Step 3. <code>ModelManager#endTestSession()</code> method is invoked, which does the following:</p>
+<p><strong>Step 3</strong>. <code>ModelManager#endTestSession()</code> method is invoked, which does the following:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -2049,7 +2027,7 @@ If the user is not in a test session, Step 3 would not proceed.
 <p><code>ModelManager#setCurrentTestedCard(null)</code> is invoked to set <code>currentTestedCard</code> to null.</p>
 </li>
 <li>
-<p><code>inTestSession</code> is set to false.</p>
+<p><code>state</code> in <code>Model</code> is set to <code>IN_FOLDER</code> to specify that user is back in the folder.</p>
 </li>
 <li>
 <p><code>ModelManager#setCardAsNotAnswered()</code> is invoked.</p>
@@ -2057,15 +2035,14 @@ If the user is not in a test session, Step 3 would not proceed.
 </ol>
 </div>
 <div class="paragraph">
-<p>Step 4. As control is now transferred back to the logic unit, <code>EndCommand</code> creates a <code>CommandResult</code> object, <code>r</code> with
+<p><strong>Step 4</strong>. As control is now transferred back to the logic unit, <code>EndCommand</code> creates a <code>CommandResult</code> object, <code>r</code> with
 the type <code>END_TEST_SESSION</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 5. <code>r</code> is returned to <code>LogicManager</code> which then terminates and returns <code>r</code> to the calling method, MainWindow.
-Control is now transferred to the UI component.</p>
+<p><strong>Step 5</strong>. <code>r</code> is returned to <code>LogicManager</code> which then terminates and returns <code>r</code> to the caller in <code>MainWindow</code>. Control is now transferred to the UI component.</p>
 </div>
 <div class="paragraph">
-<p>Step 6. <code>MainWindow</code> sees that <code>CommandResult</code> object <code>r</code> has the type <code>END_TEST_SESSION</code>. It invokes
+<p><strong>Step 6</strong>. <code>MainWindow</code> sees that <code>CommandResult</code> object <code>r</code> has the type <code>END_TEST_SESSION</code>. It invokes
 <code>MainWindow#handleEndTestSession()</code> to delete the current <code>testSession</code> page, presenting <code>cardMainScreen</code> page at the
 back (the screen the user was seeing before entering the test session) to the user.</p>
 </div>
@@ -2148,13 +2125,13 @@ Comparison is not case-sensitive
 </div>
 <h6 id="logic-4" class="discrete">Logic</h6>
 <div class="paragraph">
-<p>To facilitate the update of score after marking the card, we introduce the following method in <code>AnswerCommand</code>.</p>
+<p>To facilitate the update of score after marking the card, we introduce the following method in <code>ModelManager</code>.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>AnswerCommand#createScoredCard(Card cardToMark, boolean markCorrect)</code> - creates a new card with the updated
-score.</p>
+<p><code>ModelManager#AnswerCommand#createScoredCard(Card cardToMark, boolean markCorrect)</code> - creates a new card with the
+updated score.</p>
 </li>
 </ul>
 </div>
@@ -2187,12 +2164,13 @@ and wrong answer description</p>
 to 8.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. User is in a test session and wants to answer the question on the card currently presented by executing a <code>ans
+<p><strong>Step 1</strong>. User is in a test session and wants to answer the question on the card currently presented by executing a
+<code>ans
  four</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 2. An <code>AnswerCommand</code> object is created and <code>LogicManager</code> executes the <code>AnswerCommand</code>, storing the result and
-then transferring control to the Model component, with <code>ModelManager#isInTestSession()</code> and
+<p><strong>Step 2</strong>. An <code>AnswerCommand</code> object is created and <code>LogicManager</code> executes the <code>AnswerCommand</code>, storing the result and
+then transferring control to the Model component, with <code>Model#getState()</code> and
 <code>ModelManager#isCardAlreadyAnswered()</code> to check that user is indeed in a test session and has not attempted an answer
  already. (This is omitted from <a href="#answercommandsequencediagram">Figure 13, &#8220;Component interactions for a answer command&#8221;</a> for simplicity.)</p>
 </div>
@@ -2210,44 +2188,41 @@ rendered invalid. Step 3 would not proceed and an error message is displayed.
 </table>
 </div>
 <div class="paragraph">
-<p>Step 3. After both checks have passed, <code>ModelManager#setCardAsAnswered()</code> is invoked.</p>
+<p><strong>Step 3</strong>. After both checks have passed, <code>ModelManager#setCardAsAnswered()</code> is invoked.</p>
 </div>
 <div class="paragraph">
-<p>Step 4. ModelManager now marks the attempted answer by invoking <code>ModelManager#markAttemptedAnswer(attemptedAnswer)</code>.</p>
+<p><strong>Step 4</strong>. <code>ModelManager</code> now marks the attempted answer by invoking <code>ModelManager#markAttemptedAnswer(attemptedAnswer)</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 5. After knowing the result of the attempt, the <code>Logic</code> unit creates a new card exactly the same as the current
-card but with the updated score and replaced the current one by invoking <code>AnswerCommand#createScoredCard(Card
-cardToMark, boolean markCorrect)</code> followed by <code>model#setCard(cardToMark, scoredCard)</code>.</p>
+<p><strong>Step 5</strong>. Given the result of the attempt, a new card exactly the same as the current
+card but with the updated score is created and replaces the current one by invoking <code>ModelManager#createScoredCard(Card
+cardToMark, boolean markCorrect)</code> followed by <code>Model#setCard(cardToMark, scoredCard)</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 6. To complete the update in the change in score, model#updateFilteredCard(PREDICATE_SHOW_ALL_CARDS) and
-model#commitActiveCardFolder() are invoked.</p>
+<p><strong>Step 6</strong>. To complete the update in the change in score, <code>Model#updateFilteredCard(PREDICATE_SHOW_ALL_CARDS)</code> and
+<code>Model#commitActiveCardFolder()</code> are invoked.</p>
 </div>
 <div class="paragraph">
-<p>Step 7. <code>AnswerCommand</code> now creates a <code>CommandResult</code> object, <code>r</code> with either type <code>ANSWER_CORRECT</code> or <code>ANSWER_WRONG</code>
+<p><strong>Step 7</strong>. <code>AnswerCommand</code> now creates a <code>CommandResult</code> object, <code>r</code> with either type <code>ANSWER_CORRECT</code> or <code>ANSWER_WRONG</code>
  depending on the outcome of the attempt.</p>
 </div>
 <div class="paragraph">
-<p>Step 8. <code>r</code> is returned to <code>LogicManager</code> which then terminates and returns <code>r</code> to the calling method.</p>
+<p><strong>Step 8</strong>. <code>r</code> is returned to <code>LogicManager</code> which then terminates and returns <code>r</code> to the caller.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 9</strong>. The caller method is in <code>MainWindow</code>. Control is now transferred to the UI component.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 10</strong>. If <code>MainWindow</code> sees that <code>CommandResult</code> object <code>r</code> has the type <code>ANSWER_CORRECT</code>, it invokes
+<code>MainWindow#handleCorrectAnswer()</code> to display the correct attempt <code>TestSession</code> page to the user.
+If <code>MainWindow</code> sees that <code>CommandResult</code> object <code>r</code> has the type <code>ANSWER_WRONG</code>, it invokes
+<code>MainWindow#handleWrongAnswer()</code> to display the wrong attempt <code>TestSession</code> page to the user.</p>
 </div>
 <div id="answercommandsequencediagram" class="imageblock">
 <div class="content">
 <img src="images/AnswerCommandSequenceDiagram.png" alt="AnswerCommandSequenceDiagram" width="800">
 </div>
 <div class="title">Figure 13. Component interactions for a answer command</div>
-</div>
-<div class="paragraph">
-<p><br></p>
-</div>
-<div class="paragraph">
-<p>Step 9. The caller method here is <code>MainWindow</code>. Control is now transferred to the UI component.</p>
-</div>
-<div class="paragraph">
-<p>Step 10. If <code>MainWindow</code> sees that <code>CommandResult</code> object <code>r</code> has the type <code>ANSWER_CORRECT</code>, it invokes
-<code>MainWindow#handleCorrectAnswer()</code> to display the correct attempt <code>TestSession</code> page to the user.
-If <code>MainWindow</code> sees that <code>CommandResult</code> object <code>r</code> has the type <code>ANSWER_WRONG</code>, it invokes
-<code>MainWindow#handleWrongAnswer()</code> to display the wrong attempt <code>TestSession</code> page to the user.</p>
 </div>
 </div>
 </div>
@@ -2283,11 +2258,11 @@ the next command.
 to 6.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. User is in a test session and wants to move on to the next card by executing a <code>next</code>.</p>
+<p><strong>Step 1</strong>. User is in a test session and wants to move on to the next card by executing a <code>next</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 2. A <code>NextCommand</code> object is created and <code>LogicManager</code> executes the <code>NextCommand</code>, storing the result and
-then transferring control to the Model component, with <code>ModelManager#isInTestSession()</code> and
+<p><strong>Step 2</strong>. A <code>NextCommand</code> object is created and <code>LogicManager</code> executes the <code>NextCommand</code>, storing the result and
+then transferring control to the Model component, with <code>Model#getState()</code> and
 <code>ModelManager#isCardAlreadyAnswered()</code> to check that user is indeed in a test session and has attempted an
 answer already. (This is omitted from <a href="#nextcommandsequencediagram">Figure 14, &#8220;Component interactions for a <code>next</code> command&#8221;</a> for simplicity.)</p>
 </div>
@@ -2305,7 +2280,7 @@ rendered invalid. Step 3 would not proceed and an error message is displayed.
 </table>
 </div>
 <div class="paragraph">
-<p>Step 3. After both checks have passed, <code>ModelManager#testNextCard()</code> method is invoked, which does the following:</p>
+<p><strong>Step 3</strong>. After both checks have passed, <code>ModelManager#testNextCard()</code> method is invoked, which does the following:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -2334,7 +2309,7 @@ method returns true.</p>
 </ol>
 </div>
 <div class="paragraph">
-<p>Step 4. From the result of <code>ModelManager#testNextCard()</code> method earlier:</p>
+<p><strong>Step 4</strong>. From the result of <code>ModelManager#testNextCard()</code> method earlier:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2351,17 +2326,17 @@ invoked and the <code>Card</code>, <code>c</code>, is returned.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Step 5. With control now transferred back to the logic unit, <code>NextCommand</code> creates a <code>CommandResult</code> object, <code>r</code> with
+<p><strong>Step 5</strong>. With control now transferred back to the logic unit, <code>NextCommand</code> creates a <code>CommandResult</code> object, <code>r</code> with
 the type <code>SHOW_NEXT_CARD</code>, and set <code>testSessionCard</code> in <code>CommandResult</code> to <code>c</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 6. <code>r</code> is returned to <code>LogicManager</code> which then terminates and returns <code>r</code> to the calling method.</p>
+<p><strong>Step 6</strong>. <code>r</code> is returned to <code>LogicManager</code> which then terminates and returns <code>r</code> to the caller method.</p>
 </div>
 <div class="paragraph">
-<p>Step 7. The caller method here is <code>MainWindow</code>. Control is now transferred to the UI component.</p>
+<p><strong>Step 7</strong>. The caller method here is in <code>MainWindow</code>. Control is now transferred to the UI component.</p>
 </div>
 <div class="paragraph">
-<p>Step 8. <code>MainWindow</code> sees that <code>CommandResult</code> object <code>r</code> has the type <code>SHOW_NEXT_CARD</code>. It invokes
+<p><strong>Step 8</strong>. <code>MainWindow</code> sees that <code>CommandResult</code> object <code>r</code> has the type <code>SHOW_NEXT_CARD</code>. It invokes
 <code>MainWindow#handleNextCardTestSession(currentTestedCard)</code> to display this new <code>currentTestedCard</code> question and hints
 to the user.</p>
 </div>
@@ -3786,4 +3761,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-07 11:06:23 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-08 15:28:07 UTC</div></div></div></body></html>

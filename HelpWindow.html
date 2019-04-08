@@ -840,11 +840,12 @@ directory after execution of this command.</p>
 <div class="sect3">
 <h4 id="test-flashcards-in-a-folder-code-test-code"><a class="link" href="#test-flashcards-in-a-folder-code-test-code">4.3.1. Test flashcards in a folder : <code>test</code></a></h4>
 <div class="paragraph">
-<p>This command begins a test session, where the display area enters a fullscreen (see Figure 1 below).</p>
+<p>You will enter a test session, where the display area enters a fullscreen and you will be presented flashcard questions
+ one by one. (see Figure 2 below).</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/startTestSessionPage.png" alt="startTestSessionPage" width="600">
+<img src="images/startTestSessionPage.png" alt="startTestSessionPage" width="400">
 </div>
 <div class="title">Figure 2. A successful test command will display a test session page</div>
 </div>
@@ -881,17 +882,20 @@ This command is invalid if the current folder is empty as there will be no flash
 <div class="ulist">
 <ul>
 <li>
-<p>Only questions and hints are presented and users are required to either input an attempt or enter the command to
-reveal the answer.</p>
+<p>Hints will be presented along with the questions.</p>
 </li>
 <li>
-<p>(<strong>MCQ cards</strong>) the ordering of options will be randomized each time the card is tested.</p>
+<p>When presented with a question in a test session, you can either input an attempt or enter the command to reveal the
+answer.</p>
+</li>
+<li>
+<p>For <strong>MCQ cards</strong>, the ordering of options will be randomized each time the flashcard is tested.</p>
 </li>
 <li>
 <p>Internally, flashcards in a folder are queued to be displayed one by one in the order of lowest existing score to highest existing score.</p>
 </li>
 <li>
-<p>The next card will only be presented when the next command is carried out.</p>
+<p>The next flashcard will only be presented when the next command is carried out.</p>
 </li>
 </ul>
 </div>
@@ -903,8 +907,7 @@ reveal the answer.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>test</code><br>
-Starts a session by displaying a flashcard (both question and hint) from the current folder.</p>
+<p><code>test</code></p>
 </li>
 </ul>
 </div>
@@ -912,17 +915,19 @@ Starts a session by displaying a flashcard (both question and hint) from the cur
 <p><strong>Hint toggle on / off feature</strong> <code>Coming in v2.0</code></p>
 </div>
 <div class="paragraph">
-<p>When extra help is needed and familiarity with the content is not yet established hints can be toggled on during a test session when a ‘-hint’ is added on at the end of the test command. Hint will be displayed along with the question when the card is presented.</p>
+<p>If you are familiar with the content and feeling confident,
+simply toggle off hints during the test session. You can do it by specifying ‘-nohint’ at the end of the
+test command. Hint will not be displayed along with the question when the card is presented.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>test [-hint]</code></p>
+<p>Format: <code>test [-nohint]</code></p>
 </div>
 <div class="paragraph">
 <p><strong>Timer feature</strong> <code>Coming in v2.0</code></p>
 </div>
 <div class="paragraph">
-<p>If you are preparing for an exam that will require you to recall information quickly within the limited time given.
-This timer feature is just right for you! You will be given only 20 seconds to answer each question. If the 20 seconds is up before the question is answered, this attempt will be marked as wrong.</p>
+<p>If you are preparing for an exam that will require you to recall information quickly within the limited time given,
+this timer feature is just right for you! You will be given only 20 seconds to answer each question. If the 20 seconds is up before the question is answered, this attempt will be marked as wrong.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>test [-timer]</code></p>
@@ -931,28 +936,30 @@ This timer feature is just right for you! You will be given only 20 seconds to a
 <div class="sect3">
 <h4 id="keying-in-answer-to-a-flashcard-code-ans-code"><a class="link" href="#keying-in-answer-to-a-flashcard-code-ans-code">4.3.2. Keying in answer to a flashcard: <code>ans</code></a></h4>
 <div class="paragraph">
-<p>To reinforce learning and enable a more engaging experience with Know-It-All, one can input an answer for the
-currently displayed flashcard question. Know-It-All compares the attempt with the correct answer in that card and
-shows if it is correct or wrong.</p>
+<p>To reinforce learning and provide a more engaging experience with Know-It-All, you can input an answer for the
+currently displayed flashcard question. Know-It-All compares your attempt with the correct answer for that flashcard and
+tells you if you are right or wrong.</p>
 </div>
 <div class="paragraph">
-<p>If the answer has been submitted successfully and it is wrong, you will see the following page (see Figure 2).</p>
+<p>If the answer has been submitted successfully and it is correct, you will see the following page (see Figure 3).</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/WrongAnswerPage.png" alt="WrongAnswerPage" width="600">
+<img src="images/CorrectAnswerPage.png" alt="CorrectAnswerPage" width="400">
 </div>
-<div class="title">Figure 3. Wrong Answer page</div>
+<div class="title">Figure 3. Correct Answer page</div>
 </div>
 <div class="paragraph">
-<p><br>
-If the answer has been submitted successfully and it is correct, you will see the following page (see Figure 3).</p>
+<p><br></p>
+</div>
+<div class="paragraph">
+<p>If the answer has been submitted successfully and it is wrong, you will see the following page (see Figure 4).</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/CorrectAnswerPage.png" alt="CorrectAnswerPage" width="600">
+<img src="images/WrongAnswerPage.png" alt="WrongAnswerPage" width="400">
 </div>
-<div class="title">Figure 4. Correct Answer page</div>
+<div class="title">Figure 4. Wrong Answer page</div>
 </div>
 <div class="paragraph">
 <p><br>
@@ -976,10 +983,11 @@ displayed in an active test session.
 <div class="ulist">
 <ul>
 <li>
-<p>Answering a flashcard will increase the total number of attempts. If the answer is correct, the action will also increase the number of correct attempts.</p>
+<p>Answer matching is case insensitive.</p>
 </li>
 <li>
-<p>Answer matching is case insensitive.</p>
+<p>Answering a flashcard will increase the total number of attempts. If your answer is correct, this action will also
+increase the number of correct attempts.</p>
 </li>
 <li>
 <p>To answer <strong>MCQ cards</strong>, enter the number of option that you think is correct, rather than the option itself.<br>
@@ -1006,7 +1014,7 @@ in response to the card displayed below, where choosing option 4 will give the r
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AnsweringMcqCard.png" alt="AnsweringMcqCard" width="600">
+<img src="images/AnsweringMcqCard.png" alt="AnsweringMcqCard" width="400">
 </div>
 <div class="title">Figure 5. Answering an MCQ card</div>
 </div>
@@ -1014,8 +1022,8 @@ in response to the card displayed below, where choosing option 4 will give the r
 <div class="sect3">
 <h4 id="reveal-answer-to-a-flashcard-code-reveal-code-code-coming-in-v1-4-code"><a class="link" href="#reveal-answer-to-a-flashcard-code-reveal-code-code-coming-in-v1-4-code">4.3.3. Reveal answer to a flashcard : <code>reveal</code> <code>Coming in v1.4</code></a></h4>
 <div class="paragraph">
-<p>Immediately reveals the correct answer. The user will not need attempt any answer before being presented the correct
-answer.</p>
+<p>If you have no clue what the answer is, this command immediately reveals the correct answer. You will not need
+attempt any answer before being presented the correct answer.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>reveal</code></p>
@@ -1047,12 +1055,12 @@ This command is only considered valid if a card question is currently being disp
 <div class="sect3">
 <h4 id="go-to-next-flashcard-code-next-code"><a class="link" href="#go-to-next-flashcard-code-next-code">4.3.4. Go to next flashcard : <code>next</code></a></h4>
 <div class="paragraph">
-<p>Presents the next lowest score flashcard in this current test session. Upon a successful next command, you will see a
- similar page below (see Figure 4).</p>
+<p>You will be presented with the next lowest scoring flashcard in this current test session. Upon a successful next
+command, you should see a similar page below (see Figure 5).</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/NextCommandPage.png" alt="NextCommandPage" width="600">
+<img src="images/NextCommandPage.png" alt="NextCommandPage" width="400">
 </div>
 <div class="title">Figure 6. Next card question displayed upon a successful next command</div>
 </div>
@@ -1074,8 +1082,16 @@ This command is only considered valid if a card question and answer is currently
 </div>
 <div class="exampleblock">
 <div class="content">
-<div class="paragraph">
+<div class="ulist">
+<ul>
+<li>
+<p>If all cards have already been tested, a next command will be equivalent to an end command, ending the current test
+session.</p>
+</li>
+<li>
 <p>There is no backtracking in the current session so there is no <code>prev</code> command.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1083,7 +1099,13 @@ This command is only considered valid if a card question and answer is currently
 <div class="sect3">
 <h4 id="EndCommand"><a class="link" href="#EndCommand">4.3.5. End the current test session : <code>end</code></a></h4>
 <div class="paragraph">
-<p>Quits the current test session.</p>
+<p>Quits the current test session and you will be back inside the card folder (see Figure 6 below).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/EndCommandPage.png" alt="EndCommandPage" width="400">
+</div>
+<div class="title">Figure 7. A successful end command brings you back to inside the folder</div>
 </div>
 <div class="paragraph">
 <p>Format: <code>end</code></p>
@@ -1108,7 +1130,7 @@ An example is shown below:</p>
 <div class="content">
 <img src="images/ReportDisplay.png" alt="ReportDisplay" width="790">
 </div>
-<div class="title">Figure 7. Report display</div>
+<div class="title">Figure 8. Report display</div>
 </div>
 <div class="paragraph">
 <p>Format: <code>report</code></p>
@@ -1325,4 +1347,4 @@ this number is automatically calculated and recorded.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-07 11:06:23 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-08 15:28:07 UTC</div></div></div></body></html>
