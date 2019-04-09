@@ -234,16 +234,16 @@ Format <strong>(MCQ)</strong>: <code>add q/QUESTION a/ANSWER [i/INCORRECT_OPTION
 <p>A card can have at most 1 hint (including 0)</p>
 </li>
 <li>
-<p>If multiple hints are included in the command, only the last hint will be added to the card</p>
+<p>If multiple hints are included in the command, only the last hint will be added to the card.</p>
 </li>
 <li>
-<p>Hints are currently restricted to alphanumerical characters and spaces only</p>
+<p>The question, answer, incorrect option, and hint fields can take any character.</p>
 </li>
 <li>
-<p>A card can have any number of incorrect options to denote an MCQ card</p>
+<p>A card can have any number of incorrect options to denote an MCQ card.</p>
 </li>
 <li>
-<p>A card with 0 incorrect options will automatically be denoted as a Single answer card</p>
+<p>A card with 0 incorrect options will automatically be denoted as a Single answer card.</p>
 </li>
 </ul>
 </div>
@@ -269,6 +269,34 @@ Creates a card with <code>hint</code> "Rhymes with farm".</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>Adding Fill-In-The-Blanks style card</strong> <code>Coming in v2.0</code></p>
+</div>
+<div class="paragraph">
+<p>Allows the user to add a card with blanks for multiple answers to be given during a test session. Questions for such cards would include underscores "_", each signifying a blank to be filled with an answer.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>`add q/QUESTION_WITH_BLANKS a/ANSWER_1/ANSWER_2/ANSWER_3&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="paragraph">
+<p><code>add q/The quick brown _ jumps over the lazy _. a/fox/dog</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Adding images to cards</strong> <code>Coming in v2.0</code></p>
+</div>
+<div class="paragraph">
+<p>Allows the user to add images to cards to supplement the text content of the card.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>add q/QUESTION a/ANSWER [img/IMAGE_FILE_PATH]&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p>Example:
+<code>add q/Hello? a/World img/diagram.jpg</code></p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="editing-a-flashcard-code-edit-code"><a class="link" href="#editing-a-flashcard-code-edit-code">4.1.2. Editing a flashcard : <code>edit</code></a></h4>
@@ -276,7 +304,7 @@ Creates a card with <code>hint</code> "Rhymes with farm".</p>
 <p>Edits the flashcard specified by the <a href="#index">index</a> in the current folder.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>edit i/INDEX [q/QUESTION] [a/ANSWER] [h/HINT]</code></p>
+<p>Format: <code>edit INDEX [q/QUESTION] [a/ANSWER] [h/HINT]</code></p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -297,6 +325,9 @@ Creates a card with <code>hint</code> "Rhymes with farm".</p>
 <li>
 <p>You can remove the card&#8217;s hint by typing <code>h/</code> without specifying any hint after it.</p>
 </li>
+<li>
+<p>If multiple hints are specified, only the last hint input will be selected to replace the existing hint.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -313,6 +344,10 @@ Edits the answer of the 1st card to be 'Skin' and removes the hint associated, i
 <li>
 <p><code>edit 2 h/history q/Who discovered Penicillin? a/Alexander Fleming</code><br>
 Edits the hint, question and answer of the 2nd card respectively.</p>
+</li>
+<li>
+<p><code>edit 3 h/cells h/biology h/organs</code><br>
+Replaces the hint of the current card with "organs" only.</p>
 </li>
 </ul>
 </div>
@@ -1364,4 +1399,4 @@ this number is automatically calculated and recorded.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-09 14:07:56 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-09 15:58:25 UTC</div></div></div></body></html>
