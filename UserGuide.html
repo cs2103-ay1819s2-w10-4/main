@@ -712,8 +712,9 @@ directory.</p>
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-The files used for Import and Export commands should be placed in the project root directory.<br>
-i.e The directory where the .jar file is located
+The export command creates the new csv file in your project root directory.
+i.e The directory where your .jar file is located.<br>
+The <code>import command</code> imports csv files located in the same directory as well.
 </td>
 </tr>
 </table>
@@ -784,39 +785,55 @@ to import it over to your application.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The csv file imported should follow the format below
+The csv file imported should follow the format described below
 </td>
 </tr>
 </table>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/Blood.csv.png" alt="Blood.csv" width="800">
-</div>
-<div class="title">Figure 1. Sample format for csv file</div>
 </div>
 <div class="exampleblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>The first row of the csv file should have the following headers, Question, Answer, Options, Hints.</p>
+<p>The first row of the csv file should have the following headers:</p>
+<div class="paragraph">
+<p>Question, Answer, Options, Hints.</p>
+</div>
 </li>
 <li>
 <p>Question and Answer are mandatory fields, and should not be left blank.</p>
 </li>
 <li>
-<p>Options can take 0 or many values.</p>
+<p>Hints can take 0 or 1 values only.</p>
 </li>
 <li>
-<p>Hints can take 0 or 1 values only.</p>
+<p>For MCQ cards, The csv file only accepts one incorrect option for each flashcard.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Blood.png" alt="Blood" width="800">
+</div>
+<div class="title">Figure 1. Sample format for csv file</div>
+</div>
 <div class="paragraph">
 <p>Format: <code>import FILENAME</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+unlike the <code>export command</code> the importing of multiple csv files
+is not supported in Know-It-All.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -1347,4 +1364,4 @@ this number is automatically calculated and recorded.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-08 15:28:07 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-09 14:07:56 UTC</div></div></div></body></html>
