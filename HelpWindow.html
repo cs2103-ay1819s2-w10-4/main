@@ -14,28 +14,28 @@
 <li><a href="#quick-start">3. Quick Start</a></li>
 <li><a href="#Features">4. Features</a>
 <ul class="sectlevel2">
-<li><a href="#card-operations">4.1. Card Operations</a>
+<li><a href="#folder-operations">4.1. Folder Operations</a>
 <ul class="sectlevel3">
-<li><a href="#adding-a-flashcard-code-add-code">4.1.1. Adding a flashcard : <code>add</code></a></li>
-<li><a href="#editing-a-flashcard-code-edit-code">4.1.2. Editing a flashcard : <code>edit</code></a></li>
-<li><a href="#selecting-a-flashcard-code-select-code">4.1.3. Selecting a flashcard : <code>select</code></a></li>
-<li><a href="#deleting-a-flashcard-code-delete-code">4.1.4. Deleting a flashcard : <code>delete</code></a></li>
-<li><a href="#sort-flashcards-by-score-within-a-folder-code-sort-code">4.1.5. Sort flashcards by score within a folder : <code>sort</code></a></li>
-<li><a href="#search-by-keywords-code-search-code">4.1.6. Search by keywords : <code>search</code></a></li>
-<li><a href="#list-flashcards-code-list-code">4.1.7. List flashcards : <code>list</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">4.1.8. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">4.1.9. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#exit-folder-code-change-code">4.1.10. Exit folder : <code>change ..</code></a></li>
+<li><a href="#enter-folder-code-change-code">4.1.1. Enter folder : <code>change</code></a></li>
+<li><a href="#addfolder">4.1.2. Create new folder : <code>addfolder</code></a></li>
+<li><a href="#remove-folder-code-deletefolder-code">4.1.3. Remove folder : <code>deletefolder</code></a></li>
+<li><a href="#rename-folder-code-editfolder-code">4.1.4. Rename folder : <code>editfolder</code></a></li>
 </ul>
 </li>
-<li><a href="#folder-operations">4.2. Folder Operations</a>
+<li><a href="#card-operations">4.2. Card Operations</a>
 <ul class="sectlevel3">
-<li><a href="#create-new-folder-code-addfolder-code">4.2.1. Create new folder : <code>addfolder</code></a></li>
-<li><a href="#remove-folder-code-deletefolder-code">4.2.2. Remove folder : <code>deletefolder</code></a></li>
-<li><a href="#rename-folder-code-editfolder-code">4.2.3. Rename folder : <code>editfolder</code></a></li>
-<li><a href="#enter-folder-code-change-code">4.2.4. Enter folder : <code>change</code></a></li>
-<li><a href="#export-flashcards-code-export-code">4.2.5. Export flashcards : <code>export</code></a></li>
-<li><a href="#import-flashcards-code-import-code">4.2.6. Import flashcards : <code>import</code></a></li>
+<li><a href="#adding-a-flashcard-code-add-code">4.2.1. Adding a flashcard : <code>add</code></a></li>
+<li><a href="#editing-a-flashcard-code-edit-code">4.2.2. Editing a flashcard : <code>edit</code></a></li>
+<li><a href="#selecting-a-flashcard-code-select-code">4.2.3. Selecting a flashcard : <code>select</code></a></li>
+<li><a href="#deleting-a-flashcard-code-delete-code">4.2.4. Deleting a flashcard : <code>delete</code></a></li>
+<li><a href="#sort-flashcards-by-score-within-a-folder-code-sort-code">4.2.5. Sort flashcards by score within a folder : <code>sort</code></a></li>
+<li><a href="#search-by-keywords-code-search-code">4.2.6. Search by keywords : <code>search</code></a></li>
+<li><a href="#list-flashcards-code-list-code">4.2.7. List flashcards : <code>list</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">4.2.8. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">4.2.9. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#exit-folder-code-change-code">4.2.10. Exit folder : <code>change ..</code></a></li>
+<li><a href="#export-flashcards-code-export-code">4.2.11. Export flashcards : <code>export</code></a></li>
+<li><a href="#import-flashcards-code-import-code">4.2.12. Import flashcards : <code>import</code></a></li>
 </ul>
 </li>
 <li><a href="#test-operations">4.3. Test Operations</a>
@@ -179,7 +179,10 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>addfolder FOLDER_NAME</code>, <code>FOLDER_NAME</code> is a parameter which can be used as <code>add Human Anatomy</code>.</p>
 </li>
 <li>
-<p>Items in square brackets are optional e.g HINTS in <code>add q/QUESTION a/ANSWER [h/HINTS]</code>.</p>
+<p>Items in square brackets are optional e.g <code>HINTS</code> in <code>add q/QUESTION a/ANSWER [h/HINTS]</code>.</p>
+</li>
+<li>
+<p>Items with <code>…​</code> after them can be used multiple times including zero times e.g. in <code>add q/QUESTION a/ANSWER [i/INCORRECT_OPTION]&#8230;&#8203;</code>, you can include zero or more <code>i/INCORRECT_OPTIONs</code>.</p>
 </li>
 <li>
 <p>Parameters can be in any order e.g. if the command specifies <code>q/QUESTION a/ANSWER</code>, <code>a/ANSWER q/QUESTION</code> is also acceptable.</p>
@@ -189,7 +192,155 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect2">
-<h3 id="card-operations"><a class="link" href="#card-operations">4.1. Card Operations</a></h3>
+<h3 id="folder-operations"><a class="link" href="#folder-operations">4.1. Folder Operations</a></h3>
+<div class="paragraph">
+<p>Commands listed in this section affect the application and not a single folder.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The commands in this section can only be executed when you are at the home directory, outside of any folder. The commands are also not valid inside a test or report session. You can easily verify that you are at the home directory with the status bar at the bottom, which should display:<br>
+<br>
+<span class="image"><img src="images/StatusBarInHomeDirectory.png" alt="StatusBarInHomeDirectory" width="150"></span>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="enter-folder-code-change-code"><a class="link" href="#enter-folder-code-change-code">4.1.1. Enter folder : <code>change</code></a></h4>
+<div class="paragraph">
+<p>Enters the folder specified by index. Panel on the left will display the list of cards in that folder.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>change FOLDER_INDEX</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>change 2</code><br>
+Enters the second folder in the folder list on the home directory.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="addfolder"><a class="link" href="#addfolder">4.1.2. Create new folder : <code>addfolder</code></a></h4>
+<div class="paragraph">
+<p>Creates a new flashcard folder with the specified name.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>addfolder FOLDER_NAME</code></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The newly created folder will not contain any cards.</p>
+</li>
+<li>
+<p>Folder names must be unique, between 1 and 50 characters, and only contain letters, numbers and whitespace. Attempting to add a folder with any of the above rules violated will result in an error.</p>
+</li>
+<li>
+<p>Each folder and its cards are stored independently in the directory specified in <code>preferences.json</code>. By default, this is the <code>data/</code> directory.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addfolder Nervous System</code><br>
+Creates a folder with the name "Nervous System". The user can then enter the folder with the <code>change</code> command and begin adding cards.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="remove-folder-code-deletefolder-code"><a class="link" href="#remove-folder-code-deletefolder-code">4.1.3. Remove folder : <code>deletefolder</code></a></h4>
+<div class="paragraph">
+<p>Removes the flashcard folder specified by index.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>deletefolder FOLDER_INDEX</code></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>When a folder is deleted, all its cards are removed as well.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deletefolder 2</code><br>
+Deletes the second folder in the folder list, along with its cards, on the home directory.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="rename-folder-code-editfolder-code"><a class="link" href="#rename-folder-code-editfolder-code">4.1.4. Rename folder : <code>editfolder</code></a></h4>
+<div class="paragraph">
+<p>Renames the flashcard folder specified by index.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>editfolder FOLDER_INDEX NEW_FOLDER_NAME</code></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The new name of the folder cannot be the same as an existing folder, and must adhere to the rules specified in <a href="#addfolder">Section 4.1.2, &#8220;Create new folder : <code>addfolder</code>&#8221;</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>editfolder 2 Circulatory System</code><br>
+Renames the second folder in the folder list to "Circulatory System".</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Merge folders feature</strong> <code>Coming in v2.0</code></p>
+</div>
+<div class="paragraph">
+<p>This feature will enable users to join multiple folders together, reducing the number of folders and grouping two topics.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>merge FOLDER_INDEX_1 FOLDER_INDEX_1 NEW_FOLDER_NAME</code></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="card-operations"><a class="link" href="#card-operations">4.2. Card Operations</a></h3>
 <div class="paragraph">
 <p>Commands listed in this section affect the <a href="#flashcard">flashcards</a> within a single <a href="#folder">folder</a>.</p>
 </div>
@@ -200,25 +351,15 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The commands in this section can only be executed when you are within a folder
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The commands in this section are also not valid inside a test or report session.
+The commands in this section can only be executed when you are within a folder. The commands are also not valid inside a test or report session. You can easily verify you are inside a folder with the status bar at the bottom, which should display:<br>
+<br>
+<span class="image"><img src="images/StatusBarInFolder.png" alt="StatusBarInFolder" width="200"></span>
 </td>
 </tr>
 </table>
 </div>
 <div class="sect3">
-<h4 id="adding-a-flashcard-code-add-code"><a class="link" href="#adding-a-flashcard-code-add-code">4.1.1. Adding a flashcard : <code>add</code></a></h4>
+<h4 id="adding-a-flashcard-code-add-code"><a class="link" href="#adding-a-flashcard-code-add-code">4.2.1. Adding a flashcard : <code>add</code></a></h4>
 <div class="paragraph">
 <p>Adds a flashcard to the current folder. Know-It-All supports 2 types of flashcards: <strong>Single answer cards</strong> and <strong>MCQ</strong> cards.</p>
 </div>
@@ -299,7 +440,7 @@ Creates a card with <code>hint</code> "Rhymes with farm".</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="editing-a-flashcard-code-edit-code"><a class="link" href="#editing-a-flashcard-code-edit-code">4.1.2. Editing a flashcard : <code>edit</code></a></h4>
+<h4 id="editing-a-flashcard-code-edit-code"><a class="link" href="#editing-a-flashcard-code-edit-code">4.2.2. Editing a flashcard : <code>edit</code></a></h4>
 <div class="paragraph">
 <p>Edits the flashcard specified by the <a href="#index">index</a> in the current folder.</p>
 </div>
@@ -353,7 +494,7 @@ Replaces the hint of the current card with "organs" only.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="selecting-a-flashcard-code-select-code"><a class="link" href="#selecting-a-flashcard-code-select-code">4.1.3. Selecting a flashcard : <code>select</code></a></h4>
+<h4 id="selecting-a-flashcard-code-select-code"><a class="link" href="#selecting-a-flashcard-code-select-code">4.2.3. Selecting a flashcard : <code>select</code></a></h4>
 <div class="paragraph">
 <p>Displays flashcard details (question, answer, hint, card score) on the right panel on selection by index.</p>
 </div>
@@ -374,7 +515,7 @@ Selects the 2nd card in the current folder</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="deleting-a-flashcard-code-delete-code"><a class="link" href="#deleting-a-flashcard-code-delete-code">4.1.4. Deleting a flashcard : <code>delete</code></a></h4>
+<h4 id="deleting-a-flashcard-code-delete-code"><a class="link" href="#deleting-a-flashcard-code-delete-code">4.2.4. Deleting a flashcard : <code>delete</code></a></h4>
 <div class="paragraph">
 <p>Deletes the flashcard identified by index from the current folder.</p>
 </div>
@@ -409,7 +550,7 @@ Deletes the 2nd card in the address book.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="sort-flashcards-by-score-within-a-folder-code-sort-code"><a class="link" href="#sort-flashcards-by-score-within-a-folder-code-sort-code">4.1.5. Sort flashcards by score within a folder : <code>sort</code></a></h4>
+<h4 id="sort-flashcards-by-score-within-a-folder-code-sort-code"><a class="link" href="#sort-flashcards-by-score-within-a-folder-code-sort-code">4.2.5. Sort flashcards by score within a folder : <code>sort</code></a></h4>
 <div class="paragraph">
 <p>Displays all flashcards sorted such that the lowest <a href="#cardscore">card scores</a> are at the top temporarily.</p>
 </div>
@@ -418,7 +559,7 @@ Deletes the 2nd card in the address book.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="search-by-keywords-code-search-code"><a class="link" href="#search-by-keywords-code-search-code">4.1.6. Search by keywords : <code>search</code></a></h4>
+<h4 id="search-by-keywords-code-search-code"><a class="link" href="#search-by-keywords-code-search-code">4.2.6. Search by keywords : <code>search</code></a></h4>
 <div class="paragraph">
 <p>Within a folder, searches for flashcards inside the current folder using keywords in flashcard questions.</p>
 </div>
@@ -427,7 +568,7 @@ Deletes the 2nd card in the address book.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="list-flashcards-code-list-code"><a class="link" href="#list-flashcards-code-list-code">4.1.7. List flashcards : <code>list</code></a></h4>
+<h4 id="list-flashcards-code-list-code"><a class="link" href="#list-flashcards-code-list-code">4.2.7. List flashcards : <code>list</code></a></h4>
 <div class="paragraph">
 <p>Display a list of the flashcards in the current folder, where only questions can be seen, answers are hidden.</p>
 </div>
@@ -447,7 +588,7 @@ Deletes the 2nd card in the address book.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.1.8. Undoing previous command : <code>undo</code></a></h4>
+<h4 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.2.8. Undoing previous command : <code>undo</code></a></h4>
 <div class="paragraph">
 <p>Restores the cards in a particular card folder to the state before the previous <em>undoable</em> command was executed.</p>
 </div>
@@ -505,7 +646,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect3">
-<h4 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.1.9. Redoing the previously undone command : <code>redo</code></a></h4>
+<h4 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.2.9. Redoing the previously undone command : <code>redo</code></a></h4>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command performed in a folder.</p>
 </div>
@@ -550,7 +691,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect3">
-<h4 id="exit-folder-code-change-code"><a class="link" href="#exit-folder-code-change-code">4.1.10. Exit folder : <code>change ..</code></a></h4>
+<h4 id="exit-folder-code-change-code"><a class="link" href="#exit-folder-code-change-code">4.2.10. Exit folder : <code>change ..</code></a></h4>
 <div class="paragraph">
 <p>Return to the root directory (exit the current folder). A list of folders will be displayed</p>
 </div>
@@ -570,166 +711,8 @@ The first command enters the second folder in the folder list on the <a href="#h
 </ul>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="folder-operations"><a class="link" href="#folder-operations">4.2. Folder Operations</a></h3>
-<div class="paragraph">
-<p>Commands listed in this section affect the application and not a single folder.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The commands in this section can only be executed when you are at the home directory, outside of any folder
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The commands in this section are also not valid inside a test or report session.
-</td>
-</tr>
-</table>
-</div>
 <div class="sect3">
-<h4 id="create-new-folder-code-addfolder-code"><a class="link" href="#create-new-folder-code-addfolder-code">4.2.1. Create new folder : <code>addfolder</code></a></h4>
-<div class="paragraph">
-<p>Creates a new flashcard folder with the specified name.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>addfolder FOLDER_NAME</code></p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The newly created folder will not contain any cards.</p>
-</li>
-<li>
-<p>Folder names must be unique and non-blank. Attempting to add a folder with the same name as an existing folder will result in an error.</p>
-</li>
-<li>
-<p>Each folder and its cards are stored independently in the directory specified in <code>preferences.json</code>. By default, this is the <code>data/</code> directory.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>addfolder Nervous System</code><br>
-Creates a folder with the name "Nervous System". The user can then enter the folder with the <code>change</code> command and begin adding cards.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="remove-folder-code-deletefolder-code"><a class="link" href="#remove-folder-code-deletefolder-code">4.2.2. Remove folder : <code>deletefolder</code></a></h4>
-<div class="paragraph">
-<p>Removes the flashcard folder specified by index.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>deletefolder FOLDER_INDEX</code></p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>When a folder is deleted, all its cards are removed as well.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>deletefolder 2</code><br>
-Deletes the second folder in the folder list, along with its cards, on the home directory.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="rename-folder-code-editfolder-code"><a class="link" href="#rename-folder-code-editfolder-code">4.2.3. Rename folder : <code>editfolder</code></a></h4>
-<div class="paragraph">
-<p>Renames the flashcard folder specified by index.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>editfolder FOLDER_INDEX NEW_FOLDER_NAME</code></p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The new name of the folder cannot be the same as an existing folder.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>editfolder 2 Circulatory System</code><br>
-Renames the second folder in the folder list to "Circulatory System".</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="enter-folder-code-change-code"><a class="link" href="#enter-folder-code-change-code">4.2.4. Enter folder : <code>change</code></a></h4>
-<div class="paragraph">
-<p>Enters the folder specified by index. Panel on the left will display the list of cards in that folder.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>change FOLDER_INDEX</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>change 2</code><br>
-Enters the second folder in the folder list on the home directory.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><strong>Merge folders feature</strong> <code>Coming in v2.0</code></p>
-</div>
-<div class="paragraph">
-<p>This feature will enable users to join multiple folders together, reducing the number of folders and grouping two topics.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>merge FOLDER_INDEX_1 FOLDER_INDEX_1 NEW_FOLDER_NAME</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="export-flashcards-code-export-code"><a class="link" href="#export-flashcards-code-export-code">4.2.5. Export flashcards : <code>export</code></a></h4>
+<h4 id="export-flashcards-code-export-code"><a class="link" href="#export-flashcards-code-export-code">4.2.11. Export flashcards : <code>export</code></a></h4>
 <div class="paragraph">
 <p>Exporting flashcards is a great way to start sharing your flashcards with others.</p>
 </div>
@@ -804,7 +787,7 @@ will be created in the project root directory.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="import-flashcards-code-import-code"><a class="link" href="#import-flashcards-code-import-code">4.2.6. Import flashcards : <code>import</code></a></h4>
+<h4 id="import-flashcards-code-import-code"><a class="link" href="#import-flashcards-code-import-code">4.2.12. Import flashcards : <code>import</code></a></h4>
 <div class="paragraph">
 <p>Besides being able to import flashcards exported by others, the import command provies a faster way of
 creating multiple flashcards.</p>
@@ -1399,4 +1382,4 @@ this number is automatically calculated and recorded.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-11 03:15:45 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-11 07:34:23 UTC</div></div></div></body></html>

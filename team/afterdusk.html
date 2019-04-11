@@ -30,20 +30,13 @@
 <p>Justification: This feature allows the user to logically group flashcards of the same topic together, separate from flashcards of other topics. This significantly improves the product as it enables better organisation, which is crucial for efficiency and ease of use.</p>
 </li>
 <li>
-<p>Highlights: The enhancement affected all components extensively. For some components, the architecture had to be redesigned, and the multiple options to do so had to be carefull considered and assessed. The implementation was also challenging due to the tightly coupled nature of classes within each component, and the inherent and widespread changes to architecture required a deep understanding of how every component worked.</p>
+<p>Highlights: The enhancement affected all components extensively. For some components, the architecture had to be redesigned, and the multiple options to do so had to be carefully considered and assessed. The implementation was also challenging due to the tightly coupled nature of classes within each component, and the inherent and widespread changes to architecture required a deep understanding of how every component worked.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
 <p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=afterdusk">Collated code</a>]</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Wrote additional tests for existing features to increase coverage from <em><em>_% to </em>_</em>% (Pull request <a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/104">#104</a>)</p>
-</li>
-</ul>
-</div>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -171,25 +164,35 @@ Important information that should be noted.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The commands in this section can only be executed when you are at the home directory, outside of any folder
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The commands in this section are also not valid inside a test or report session.
+The commands in this section can only be executed when you are at the home directory, outside of any folder. The commands are also not valid inside a test or report session. You can easily verify that you are at the home directory with the status bar at the bottom, which should display:<br>
+<br>
+<span class="image"><img src="../images/StatusBarInHomeDirectory.png" alt="StatusBarInHomeDirectory" width="150"></span>
 </td>
 </tr>
 </table>
 </div>
 <div class="sect3">
-<h4 id="create-new-folder-code-addfolder-code"><a class="link" href="#create-new-folder-code-addfolder-code">Create new folder : <code>addfolder</code></a></h4>
+<h4 id="enter-folder-code-change-code"><a class="link" href="#enter-folder-code-change-code">Enter folder : <code>change</code></a></h4>
+<div class="paragraph">
+<p>Enters the folder specified by index. Panel on the left will display the list of cards in that folder.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>change FOLDER_INDEX</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>change 2</code><br>
+Enters the second folder in the folder list on the home directory.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="addfolder"><a class="link" href="#addfolder">Create new folder : <code>addfolder</code></a></h4>
 <div class="paragraph">
 <p>Creates a new flashcard folder with the specified name.</p>
 </div>
@@ -204,7 +207,7 @@ The commands in this section are also not valid inside a test or report session.
 <p>The newly created folder will not contain any cards.</p>
 </li>
 <li>
-<p>Folder names must be unique and non-blank. Attempting to add a folder with the same name as an existing folder will result in an error.</p>
+<p>Folder names must be unique, between 1 and 50 characters, and only contain letters, numbers and whitespace. Attempting to add a folder with any of the above rules violated will result in an error.</p>
 </li>
 <li>
 <p>Each folder and its cards are stored independently in the directory specified in <code>preferences.json</code>. By default, this is the <code>data/</code> directory.</p>
@@ -269,7 +272,7 @@ Deletes the second folder in the folder list, along with its cards, on the home 
 <div class="ulist">
 <ul>
 <li>
-<p>The new name of the folder cannot be the same as an existing folder.</p>
+<p>The new name of the folder cannot be the same as an existing folder, and must adhere to the rules specified in <a href="#addfolder">Create new folder : <code>addfolder</code></a>.</p>
 </li>
 </ul>
 </div>
@@ -283,26 +286,6 @@ Deletes the second folder in the folder list, along with its cards, on the home 
 <li>
 <p><code>editfolder 2 Circulatory System</code><br>
 Renames the second folder in the folder list to "Circulatory System".</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="enter-folder-code-change-code"><a class="link" href="#enter-folder-code-change-code">Enter folder : <code>change</code></a></h4>
-<div class="paragraph">
-<p>Enters the folder specified by index. Panel on the left will display the list of cards in that folder.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>change FOLDER_INDEX</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>change 2</code><br>
-Enters the second folder in the folder list on the home directory.</p>
 </li>
 </ul>
 </div>
@@ -485,6 +468,37 @@ this number is automatically calculated and recorded.</p>
 </tbody>
 </table>
 <div class="sect2">
+<h3 id="Design-Model"><a class="link" href="#Design-Model">Model component</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
+</div>
+<div class="title">Figure 1. Structure of the Model Component</div>
+</div>
+<div class="paragraph">
+<p><strong>API</strong> : <a href="{repoURL}/src/main/java/seedu/knowitall/model/Model.java"><code>Model.java</code></a></p>
+</div>
+<div class="paragraph">
+<p>The <code>Model</code>,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
+</li>
+<li>
+<p>stores a list of <code>VersionedCardFolders</code> representing the folders that the user has.</p>
+</li>
+<li>
+<p>exposes unmodifiable instances of <code>FilteredList&lt;Card&gt;</code> and <code>FilteredList&lt;VersionedCardFolder&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+</li>
+<li>
+<p>does not depend on any of the other three components.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
 <h3 id="folders"><a class="link" href="#folders">Folders</a></h3>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
@@ -632,7 +646,7 @@ If the path provided by the Model Component is invalid, the Storage component th
 <div class="content">
 <img src="../images/AddFolderSequenceDiagram.png" alt="AddFolderSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 1. Component interactions for an <code>addfolder</code> command</div>
+<div class="title">Figure 2. Component interactions for an <code>addfolder</code> command</div>
 </div>
 </div>
 <div class="sect4">
@@ -679,7 +693,7 @@ If the path provided by the Model Component is invalid, the Storage component th
 <div class="content">
 <img src="../images/EnterFolderGUISequenceDiagram.png" alt="EnterFolderGUISequenceDiagram" width="800">
 </div>
-<div class="title">Figure 2. UI behaviour when user enters folder</div>
+<div class="title">Figure 3. UI behaviour when user enters folder</div>
 </div>
 </div>
 </div>
@@ -899,7 +913,7 @@ If the path provided by the Model Component is invalid, the Storage component th
 <div class="content">
 <img src="../images/ChangeCommandSequenceDiagram.png" alt="ChangeCommandSequenceDiagram" width="600">
 </div>
-<div class="title">Figure 3. Component interactions for <code>change</code> command</div>
+<div class="title">Figure 4. Component interactions for <code>change</code> command</div>
 </div>
 </div>
 </div>
@@ -1132,4 +1146,4 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-11 03:15:45 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-11 07:34:23 UTC</div></div></div></body></html>
