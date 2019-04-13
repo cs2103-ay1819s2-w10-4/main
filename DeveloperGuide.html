@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Know-It-All - Developer Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">Know-It-All</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link active" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/cs2103-ay1819s2-w10-4/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Know-It-All - Developer Guide</h1></div><div id="content"><div id="preamble">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">Know-It-All</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link active" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/cs2103-ay1819s2-w10-4/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Know-It-All - Developer Guide</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>By: <code>CS2103-AY2018/19s2-W10-4 Team</code>      Since: <code>Mar 2019</code>      Licence: <code>MIT</code></p>
@@ -133,7 +133,11 @@
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">F.1. Launch and Shutdown</a></li>
 <li><a href="#deleting-a-card">F.2. Deleting a card</a></li>
-<li><a href="#saving-data">F.3. Saving data</a></li>
+<li><a href="#starting-a-test-session">F.3. Starting a test session</a></li>
+<li><a href="#answerquestionintest">F.4. Answering a question in a test session</a></li>
+<li><a href="#navigating-to-the-next-question-in-a-test-session">F.5. Navigating to the next question in a test session</a></li>
+<li><a href="#ending-a-test-session">F.6. Ending a test session</a></li>
+<li><a href="#saving-data">F.7. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -469,10 +473,14 @@ The following class plays an important role at the architecture level:</p>
 <p><strong>API</strong> : <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>CardListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p><code>UI</code> consists of a <code>MainWindow</code> made up of many parts as seen above e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>CardMainScreen</code>,
+<code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these parts, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code>
+class.</p>
 </div>
 <div class="paragraph">
-<p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
+<p>The <code>UI</code> component uses JavaFx UI framework.
+The layout of these UI parts are defined in matching <code>.fxml</code> files located in the <code>src/main/resources/view</code> folder.
+For example, the layout of the <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component,</p>
@@ -480,10 +488,10 @@ The following class plays an important role at the architecture level:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Executes user commands using the <code>Logic</code> component.</p>
+<p>Uses <code>Logic</code> component to execute user commands.</p>
 </li>
 <li>
-<p>Listens for changes to <code>Model</code> data so that the UI can be updated with the modified data.</p>
+<p>Listens for changes to <code>Model</code> data to update UI with the modified data.</p>
 </li>
 </ul>
 </div>
@@ -1855,7 +1863,7 @@ possible violation of the Law of Demeter where an object should only interact wi
 </ul>
 </div>
 <div class="paragraph">
-<p>Evaluation of the 2 alternatives:
+<p><strong>Evaluation of the 2 alternatives</strong>:
 We went with alternative 1 since not a large amount of memory is taken up with just 1 extra card stored. As there will
 be a number of references to the <code>currentTestedCard</code>, it will be better to store them somewhere. Abiding by the Law
 of Demeter, <code>currentTestedCard</code> object will not be interacting with <code>currentTestedCardFolder</code>,  limiting its
@@ -1874,7 +1882,7 @@ knowledge of that object which is encouraged according to the Principle of Least
 <div class="ulist">
 <ul>
 <li>
-<p><code>ModelManager#testCardFolder()</code> - begins a test session on the current card folder user is in and implicitly sorts
+<p><code>ModelManager#startTestSession()</code> - begins a test session on the current card folder user is in and implicitly sorts
 the cards in it.</p>
 </li>
 <li>
@@ -1932,7 +1940,7 @@ error message is displayed.
 </table>
 </div>
 <div class="paragraph">
-<p><strong>Step 4</strong>. After checking user is in a folder, <code>ModelManager#testCardFolder()</code> method is invoked, which
+<p><strong>Step 4</strong>. After checking user is in a folder, <code>ModelManager#startTestSession()</code> method is invoked, which
 does the following:</p>
 </div>
 <div class="olist arabic">
@@ -2087,7 +2095,7 @@ Similar issue will arise for the end test session command where user will need t
 </ul>
 </div>
 <div class="paragraph">
-<p>Evaluation of the two alternatives:
+<p><strong>Evaluation of the two alternatives</strong>:
 Overall, alternative 1 is a better choice following the Single Level of Abstraction Principle(SLAP) where a function should not mix different levels of abstractions. We can then better achieve higher cohesion and lower coupling.
 Also, user being able to see the questions before the test session is not a big issue since the answer will not be shown unless user selects the card.</p>
 </div>
@@ -2382,7 +2390,7 @@ to the user.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Evaluation of the two alternatives:
+<p><strong>Evaluation of the two alternatives</strong>:
 With our target audience in mind, alternative 1 is the more user friendly and intuitive way to handle this scenario.</p>
 </div>
 </div>
@@ -3236,7 +3244,7 @@ user experience is more engaging and scoring is more accurate as it is based on 
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Student begins a test session.</p>
+<p>Student is inside a folder and begins a test session.</p>
 </li>
 <li>
 <p>System presents the question on the lowest-performing flashcard first.</p>
@@ -3683,7 +3691,7 @@ These instructions only provide a starting point for testers to work on; testers
 </li>
 <li>
 <p>Double-click the jar file<br>
-Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.</p>
+Expected: Shows the GUI with a set of sample folders. The window size may not be optimum.</p>
 </li>
 </ol>
 </div>
@@ -3741,7 +3749,147 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">F.3. Saving data</a></h3>
+<h3 id="starting-a-test-session"><a class="link" href="#starting-a-test-session">F.3. Starting a test session</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Start a test session while inside a folder</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Enter a folder using the <code>cd</code> command. For example, <code>cd 1</code> will enter the first folder. All the cards
+in the folder are listed.</p>
+</li>
+<li>
+<p>Test case: <code>test</code><br>
+Expected: Enters a test session, where the display area enters a fullscreen and the lowest scoring
+flashcard question and hints (if any) will be displayed first. <code>In Test Session</code> is shown on the status message
+and status bar.</p>
+</li>
+<li>
+<p>Test case: <code>test</code> on an empty folder (this folder has no cards)<br>
+Expected: The error <code>This command is not valid on an empty folder</code> is shown in the status message. Status bar
+remains the same (still in folder).</p>
+</li>
+<li>
+<p>Test case: <code>test</code> when not inside a folder (prerequisite not fulfilled, like being in the home directory, already
+in a test session or in report display)<br>
+   Expected: The error <code>Command can only be executed in folder</code> is shown in the status message. Status bar
+   remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="answerquestionintest"><a class="link" href="#answerquestionintest">F.4. Answering a question in a test session</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Input an answer to a question inside a test session</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Enter a test session by typing <code>test</code> when inside a folder. Display area enters fullscreen and
+lowest scoring flashcard question and hints are displayed</p>
+</li>
+<li>
+<p>Test case: <code>ans x</code> where x can be anything but empty for <strong>non-MCQ cards</strong><br>
+Expected: If the correct answer to the flashcard question is <code>x</code>, a green page with correct
+attempt notification will be displayed. Otherwise, a red page with wrong answer notification will be displayed.
+For both cases, status bar remains the same to be still in test session</p>
+</li>
+<li>
+<p>Test case: <code>ans x</code> where x can be any integers for <strong>MCQ cards</strong><br>
+Expected: If the option number with the correct answer to the flashcard question is <code>x</code>, a green
+page with correct attempt notification will be displayed. Otherwise, a red page with wrong answer notification
+will be displayed. For both cases, status bar remains the same to be still in test session</p>
+</li>
+<li>
+<p>Test case: <code>ans x</code> where x is not an integer and not empty for <strong>MCQ cards</strong><br>
+Expected: The error <code>MCQ question expects option number as answer</code> is shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>ans</code> <br>
+Expected: The error <code>Invalid Command Format</code> is shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>ans x</code> and type <code>ans y</code> again where x and y can be anything for <strong>non-MCQ cards</strong><br>
+Expected: Cannot input an attempt to an already answered question. The error <code>Answer command is valid only when a
+question is displayed</code> is shown in the status message. Status bar remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="navigating-to-the-next-question-in-a-test-session"><a class="link" href="#navigating-to-the-next-question-in-a-test-session">F.5. Navigating to the next question in a test session</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Go to the next question in a test session after answering the current question</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Enter a test session by typing <code>test</code> when inside a folder. Display area enters fullscreen and
+lowest scoring flashcard question and hints are displayed. Answer the current question by following
+<a href="#answerquestionintest">Section F.4, &#8220;Answering a question in a test session&#8221;</a> or reveal the answer so the current card has already been tested.</p>
+</li>
+<li>
+<p>Test case: <code>next</code> where there are still cards left untested<br>
+Expected: Next lowest scoring question and hints (if any) are displayed. Status bar remains the same to be still
+in test session.</p>
+</li>
+<li>
+<p>Test case: <code>next</code> where there are no more cards left to test<br>
+Expected: Ends the current test session, so display area exits fullscreen and status bar changes to reflect tester
+ is back inside a folder.</p>
+</li>
+<li>
+<p>Test case: <code>next</code>  when prerequisite is not fulfilled where the current question is not yet answered or revealed<br>
+Expected: The error <code>Next command is valid only when this question has been answered</code> is shown in the status message. Status bar remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ending-a-test-session"><a class="link" href="#ending-a-test-session">F.6. Ending a test session</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Ends a current test session</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Enter a test session by typing <code>test</code> when inside a folder. Display area enters fullscreen and
+lowest scoring flashcard question and hints are displayed. Tester can also be in any state in the test session</p>
+</li>
+<li>
+<p>Test case: <code>end</code><br>
+Expected: Ends the current test session, where the display area exits fullscreen and be back inside the folder. <code>End
+Test Session</code> is shown on the status message and status bar shows that tester is back inside the folder.</p>
+</li>
+<li>
+<p>Test case: <code>end</code> when not inside a test or report (prerequisite not fulfilled, like being in the home directory or
+in a folder)<br>
+  Expected: The error <code>This command is not valid outside a test or report</code> is shown in the status message. Status bar
+  remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-data"><a class="link" href="#saving-data">F.7. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3761,4 +3909,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 06:30:23 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 16:54:41 UTC</div></div></div></body></html>
