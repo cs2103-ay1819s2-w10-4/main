@@ -16,7 +16,7 @@
 <ul class="sectlevel2">
 <li><a href="#folder-operations">4.1. Folder Operations</a>
 <ul class="sectlevel3">
-<li><a href="#enter-folder-code-change-code">4.1.1. Enter folder : <code>change</code></a></li>
+<li><a href="#enter-folder-code-cd-code">4.1.1. Enter folder : <code>cd</code></a></li>
 <li><a href="#addfolder">4.1.2. Create new folder : <code>addfolder</code></a></li>
 <li><a href="#remove-folder-code-deletefolder-code">4.1.3. Remove folder : <code>deletefolder</code></a></li>
 <li><a href="#rename-folder-code-editfolder-code">4.1.4. Rename folder : <code>editfolder</code></a></li>
@@ -33,7 +33,7 @@
 <li><a href="#list-flashcards-code-list-code">4.2.7. List flashcards : <code>list</code></a></li>
 <li><a href="#undoing-previous-command-code-undo-code">4.2.8. Undoing previous command : <code>undo</code></a></li>
 <li><a href="#redoing-the-previously-undone-command-code-redo-code">4.2.9. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#exit-folder-code-change-code">4.2.10. Exit folder : <code>change ..</code></a></li>
+<li><a href="#exit-folder-code-cd-code">4.2.10. Exit folder : <code>cd ..</code></a></li>
 <li><a href="#export-flashcards-code-export-code">4.2.11. Export flashcards : <code>export</code></a></li>
 <li><a href="#import-flashcards-code-import-code">4.2.12. Import flashcards : <code>import</code></a></li>
 </ul>
@@ -138,7 +138,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p><strong><code>change</code></strong> <code>1</code> : enter the 1st flashcard folder</p>
+<p><strong><code>cd</code></strong> <code>1</code> : enter the 1st flashcard folder</p>
 </li>
 <li>
 <p><strong><code>list</code></strong> : lists all flashcards in the current folder</p>
@@ -159,6 +159,18 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p>Refer to <a href="#Features">Section 4, &#8220;Features&#8221;</a> for details of each command.</p>
 </li>
 </ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Your data is saved in the <code>data/</code> folder by default. Like any other software application, you are not advised to modify any of the system created files located within the folder. If you do, Know-It-All may not perform right!
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -211,12 +223,12 @@ The commands in this section can only be executed when you are at the home direc
 </table>
 </div>
 <div class="sect3">
-<h4 id="enter-folder-code-change-code"><a class="link" href="#enter-folder-code-change-code">4.1.1. Enter folder : <code>change</code></a></h4>
+<h4 id="enter-folder-code-cd-code"><a class="link" href="#enter-folder-code-cd-code">4.1.1. Enter folder : <code>cd</code></a></h4>
 <div class="paragraph">
 <p>Enters the folder specified by index. Panel on the left will display the list of cards in that folder.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>change FOLDER_INDEX</code></p>
+<p>Format: <code>cd FOLDER_INDEX</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -224,7 +236,7 @@ The commands in this section can only be executed when you are at the home direc
 <div class="ulist">
 <ul>
 <li>
-<p><code>change 2</code><br>
+<p><code>cd 2</code><br>
 Enters the second folder in the folder list on the home directory.</p>
 </li>
 </ul>
@@ -262,7 +274,7 @@ Enters the second folder in the folder list on the home directory.</p>
 <ul>
 <li>
 <p><code>addfolder Nervous System</code><br>
-Creates a folder with the name "Nervous System". The user can then enter the folder with the <code>change</code> command and begin adding cards.</p>
+Creates a folder with the name "Nervous System". The user can then enter the folder with the <code>cd</code> command and begin adding cards.</p>
 </li>
 </ul>
 </div>
@@ -691,12 +703,12 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect3">
-<h4 id="exit-folder-code-change-code"><a class="link" href="#exit-folder-code-change-code">4.2.10. Exit folder : <code>change ..</code></a></h4>
+<h4 id="exit-folder-code-cd-code"><a class="link" href="#exit-folder-code-cd-code">4.2.10. Exit folder : <code>cd ..</code></a></h4>
 <div class="paragraph">
 <p>Return to the root directory (exit the current folder). A list of folders will be displayed</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>change ..</code></p>
+<p>Format: <code>cd ..</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -704,8 +716,8 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <div class="ulist">
 <ul>
 <li>
-<p><code>change 2</code><br>
-<code>change ..</code><br>
+<p><code>cd 2</code><br>
+<code>cd ..</code><br>
 The first command enters the second folder in the folder list on the <a href="#homedirectory">home directory</a>. The second command then returns you back to the home directory by exiting the folder.</p>
 </li>
 </ul>
@@ -1320,11 +1332,11 @@ this number is automatically calculated and recorded.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Redoes the last <code>undo</code>.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>change ..</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cd ..</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Return to the root directory (exit the current folder). A list of folders will be displayed.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>change FOLDER_INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cd FOLDER_INDEX</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enters the folder specified by index. Panel on the left will display the list of cards in that folder.</p></td>
 </tr>
 <tr>
@@ -1382,4 +1394,4 @@ this number is automatically calculated and recorded.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-11 07:34:23 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 04:39:38 UTC</div></div></div></body></html>

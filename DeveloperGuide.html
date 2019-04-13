@@ -1666,28 +1666,28 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </div>
 <div class="sect4">
-<h5 id="change-command"><a class="link" href="#change-command">Change Command</a></h5>
+<h5 id="change-directory-command"><a class="link" href="#change-directory-command">Change Directory Command</a></h5>
 <div class="paragraph">
 <p>Folder navigation is achieved by the user through the use of the <code>change</code> command. As navigating folders do not actually modify folders and their cards, folder navigation does not involve the Storage Component.</p>
 </div>
 <div class="paragraph">
-<p>The change command has the following formats:</p>
+<p>The change directory command has the following formats:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>change ..</code> - Returns the user to the home directory. This command can only be executed when the user is inside a folder.</p>
+<p><code>cd ..</code> - Returns the user to the home directory. This command can only be executed when the user is inside a folder.</p>
 </li>
 <li>
-<p><code>change FOLDER_INDEX</code> - Enters the folder specified by <code>FOLDER_INDEX</code>. This command can only be executed from the home directory, when the user is not in any folder.</p>
+<p><code>cd FOLDER_INDEX</code> - Enters the folder specified by <code>FOLDER_INDEX</code>. This command can only be executed from the home directory, when the user is not in any folder.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>When a <code>change</code> command is executed, the Logic component parses the command and creates a <code>ChangeCommand</code> object. If the command is of the first format, <code>ChangeCommand()</code> is invoked without any arguments and the boolean <code>isExitingFolder</code> is set to <code>true</code>. If the command is of the second format, the overloaded constructor <code>ChangeCommand(FOLDER_INDEX)</code> is instead called and <code>isExitingFolder</code> is set to <code>false</code>.</p>
+<p>When a <code>cd</code> command is executed, the Logic component parses the command and creates a <code>ChangeDirectoryCommand</code> object. If the command is of the first format, <code>ChangeDirectoryCommand()</code> is invoked without any arguments and the boolean <code>isExitingFolder</code> is set to <code>true</code>. If the command is of the second format, the overloaded constructor <code>ChangeCommand(FOLDER_INDEX)</code> is instead called and <code>isExitingFolder</code> is set to <code>false</code>.</p>
 </div>
 <div class="paragraph">
-<p><code>ChangeCommand#execute()</code> is then invoked. The value of <code>isExitingFolder</code> will determine the corresponding methods in <code>ModelManager</code> that are called (<code>exitFoldersToHome()</code> or <code>enterFolder()</code>). The sequence diagram in <a href="#changecommandsequencediagram">Figure 11, &#8220;Component interactions for <code>change</code> command&#8221;</a> illustrates this conditional choice and the interactions involved with each option.</p>
+<p><code>ChangeDirectoryCommand#execute()</code> is then invoked. The value of <code>isExitingFolder</code> will determine the corresponding methods in <code>ModelManager</code> that are called (<code>exitFoldersToHome()</code> or <code>enterFolder()</code>). The sequence diagram in <a href="#changecommandsequencediagram">Figure 11, &#8220;Component interactions for <code>change</code> command&#8221;</a> illustrates this conditional choice and the interactions involved with each option.</p>
 </div>
 <div id="changecommandsequencediagram" class="imageblock">
 <div class="content">
@@ -1704,7 +1704,7 @@ If the path provided by the Model Component is invalid, the Storage component th
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice)</strong>: Use variations of the same command (e.g. <code>change ..</code> and <code>change INDEX</code> )</p>
+<p><strong>Alternative 1 (current choice)</strong>: Use variations of the same command (e.g. <code>cd ..</code> and <code>cd INDEX</code> )</p>
 <div class="ulist">
 <ul>
 <li>
@@ -3761,4 +3761,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-11 07:34:23 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 04:39:38 UTC</div></div></div></body></html>
