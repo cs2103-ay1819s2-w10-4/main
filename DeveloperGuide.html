@@ -132,12 +132,13 @@
 <li><a href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">F.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-card">F.2. Deleting a card</a></li>
-<li><a href="#starting-a-test-session">F.3. Starting a test session</a></li>
-<li><a href="#answerquestionintest">F.4. Answering a question in a test session</a></li>
-<li><a href="#navigating-to-the-next-question-in-a-test-session">F.5. Navigating to the next question in a test session</a></li>
-<li><a href="#ending-a-test-session">F.6. Ending a test session</a></li>
-<li><a href="#saving-data">F.7. Saving data</a></li>
+<li><a href="#starting-a-test-session">F.2. Starting a test session</a></li>
+<li><a href="#answerquestionintest">F.3. Answering a question in a test session</a></li>
+<li><a href="#navigating-to-the-next-question-in-a-test-session">F.4. Navigating to the next question in a test session</a></li>
+<li><a href="#ending-a-test-session">F.5. Ending a test session</a></li>
+<li><a href="#folder-operations">F.6. Folder operations</a></li>
+<li><a href="#navigating-in-and-out-of-folders">F.7. Navigating in and out of folders</a></li>
+<li><a href="#saving-data">F.8. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -557,10 +558,13 @@ For example, the layout of the <a href="https://github.com/cs2103-ay1819s2-w10-4
 <p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
 </li>
 <li>
-<p>stores a list of <code>VersionedCardFolders</code> representing the folders that the user has.</p>
+<p>stores a list of <code>VersionedCardFolders</code> representing the folders that the user has. These <code>VersionedCardFolders</code> in turn each store a list of <code>Cards</code>. Each <code>Card</code> stores information about a single question.</p>
 </li>
 <li>
 <p>exposes unmodifiable instances of <code>FilteredList&lt;Card&gt;</code> and <code>FilteredList&lt;VersionedCardFolder&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+</li>
+<li>
+<p>exposes two instances of <code>SimpleObjectProperty&lt;Card&gt;</code>, which represent the current cards being selected and being tested, if any.</p>
 </li>
 <li>
 <p>does not depend on any of the other three components.</p>
@@ -599,10 +603,10 @@ As a more OOP model, we can change the <code>Card</code> implementation to be th
 <div class="ulist">
 <ul>
 <li>
-<p>can save <code>UserPref</code> objects in json format and read it back.</p>
+<p>can save <code>UserPref</code> objects in json format and read it back. It maintains a single instance of <code>UserPrefStorage</code>.</p>
 </li>
 <li>
-<p>can save <code>CardFolder</code> data in json format and read it back.</p>
+<p>can save <code>CardFolder</code> data in json format and read it back. It holds a list of <code>CardFolderStorage</code> objects, each handling the storage functions of a single <code>CardFolder</code>.</p>
 </li>
 </ul>
 </div>
@@ -1299,7 +1303,7 @@ since 1 cardfolder = 1 csv file.</p>
 <div class="sect4">
 <h5 id="model-4"><a class="link" href="#model-4">Model</a></h5>
 <div class="paragraph">
-<p>Previously, an instance of <code>ModelManager</code> contains only a single <code>VersionedCardFolder</code>, holding the current and previous state of the <code>CardFolder</code>. To support multiple folders, <code>ModelManager</code> now holds an <code>ObservableList</code> of <code>CardFolders</code>. The change is illustrated in the figure below, with the original implementation on the left and new implementation on the right.</p>
+<p>Previously, an instance of <code>ModelManager</code> contained only a single <code>VersionedCardFolder</code>, holding the current and previous state of the <code>CardFolder</code>. To support multiple folders, <code>ModelManager</code> now holds an <code>ObservableList</code> of <code>CardFolders</code>. The change is illustrated in the figure below, with the original implementation on the left and new implementation on the right.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1330,7 +1334,7 @@ since 1 cardfolder = 1 csv file.</p>
 <p><code>ModelManager#renameFolder(int index, String newName)</code> - Renames the folder at the specified index in the <code>ModelManager&#8217;s</code> list to the new name.</p>
 </li>
 <li>
-<p><code>ModelManager#isInFolder()</code> - Returns true if the <code>ModelManager</code> is currently inside a folder.</p>
+<p><code>ModelManager#getState()</code> - Returns the current state of the <code>ModelManager</code>. The possible states are {<code>IN_FOLDER</code>, <code>IN_HOMEDIR</code>, <code>IN_TEST</code>, <code>IN_REPORT</code>}.</p>
 </li>
 </ul>
 </div>
@@ -1387,7 +1391,7 @@ since 1 cardfolder = 1 csv file.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the input is invalid (e.g. user did not provide a folder name), Step 2 would not proceed and an error message is displayed. The Model and Storage components will not be modified.
+If the input is invalid (e.g. user did not provide a folder name or provided one that violated the constraints of folder names), Step 2 would not proceed and an error message is displayed. The Model and Storage components would not be modified.
 </td>
 </tr>
 </table>
@@ -1395,8 +1399,24 @@ If the input is invalid (e.g. user did not provide a folder name), Step 2 would 
 <div class="ulist">
 <ul>
 <li>
-<p>Step 3. The <code>LogicManager</code> executes the <code>AddFolderCommand</code>, storing the result and then transferring control to the Model component with the <code>ModelManager#addFolder()</code> method.</p>
+<p>Step 3. The <code>LogicManager</code> executes the <code>AddFolderCommand</code>, Before transferring control to the Model component with the <code>ModelManager#addFolder()</code> method, a few checks are performed to ensure that the user is inside a folder and the model does not already have a folder with the same name (not shown in sequence diagram).</p>
 </li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If any of the aforementioned checks do not success, Step 3 would end in a Command Exception being thrown and would not proceed. Model and Storage components would not be modified.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>Step 4. The <code>ModelManager</code> creates a <code>VersionedCardFolder</code> to represent the newly created folder, storing a reference to its currently empty list of cards. Before returning control to the Logic component, <code>ModelManager#indicateModified()</code> is invoked to notify listeners in the <code>LogicManager</code> that the list of <code>CardFolders</code> have changed.</p>
 </li>
@@ -1407,7 +1427,7 @@ If the input is invalid (e.g. user did not provide a folder name), Step 2 would 
 <p>Step 6. Before handing over control to Storage, the <code>LogicManager</code> obtains the information to save and the path to save to with <code>ModelManager#getCardFolders()</code> and <code>ModelManager#getCardFoldersFilesPath()</code> respectively. It then passes these objects as parameters when it calls <code>StorageManager#saveCardFolders()</code>.</p>
 </li>
 <li>
-<p>Step 7. The Storage component receives control, with the <code>StorageManager</code> clearing the directory at the specified path and creating <code>JsonCardFolderStorage</code> objects with path names equivalent to the names of the folders it has received. It then proceeds to invoke <code>JsonCardFolderStorage#saveCardFolder()</code> on all the <code>JsonCardFolderStorage</code> to save all the folders before returning to the <code>LogicManager</code>.</p>
+<p>Step 7. The Storage component receives control, with the <code>StorageManager</code> clearing the directory of data files at the specified path and creating <code>JsonCardFolderStorage</code> objects with path names equivalent to the names of the folders it has received. It then proceeds to invoke <code>JsonCardFolderStorage#saveCardFolder()</code> on all the <code>JsonCardFolderStorage</code> to save all the folders before returning to the <code>LogicManager</code>.</p>
 </li>
 </ul>
 </div>
@@ -1519,6 +1539,9 @@ If the path provided by the Model Component is invalid, the Storage component th
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>Evaluation</strong>: On the account of how computationally expensive it would be to parse through thousands of cards every card or folder operation, the first alternative was chosen and time was set aside to overcome the technical challenge of implementing the choice.</p>
+</div>
 </div>
 <div class="sect4">
 <h5 id="aspect-folder-identification"><a class="link" href="#aspect-folder-identification">Aspect: Folder identification</a></h5>
@@ -1565,6 +1588,9 @@ If the path provided by the Model Component is invalid, the Storage component th
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>Evaluation</strong>: While it was difficult the implement, Alternative 3 was chosen due to the immense limitations of the first two approaches. The third alternative had little to no downside apart from requiring time to understand and implement.</p>
+</div>
 </div>
 <div class="sect4">
 <h5 id="aspect-storage-file-name-and-folder-name"><a class="link" href="#aspect-storage-file-name-and-folder-name">Aspect: Storage file name and folder name</a></h5>
@@ -1578,7 +1604,7 @@ If the path provided by the Model Component is invalid, the Storage component th
 <p>Pros: Less ambiguity as to how file name is related to folder name, able to find storage file path with folder name.</p>
 </li>
 <li>
-<p>Cons: Harder to retrieve folder name from the file as it requires parsing the path, more prone to data corruption as file name could be modified when application is running.</p>
+<p>Cons: Harder to retrieve folder name from the file as it requires parsing the path, more prone to data corruption as file name could be modified when application is running (although this could be overcome with some OS-level syscalls to lock the file).</p>
 </li>
 </ul>
 </div>
@@ -1597,6 +1623,9 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p><strong>Evaluation</strong>: While in the long-run, the first alternative appears to better decision, time limitations make the Alternative 2 good enough for most practical use cases. The saved time was used to implement other features.</p>
 </div>
 </div>
 <div class="sect4">
@@ -1637,12 +1666,15 @@ If the path provided by the Model Component is invalid, the Storage component th
 <p>Pros: Has the advantages but not the disadvantages of Alternatives 1 and 2.</p>
 </li>
 <li>
-<p>Cons: Challenging to implement.</p>
+<p>Cons: More difficult to implement, developers will need to pay special attention to understand this behaviour.</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p><strong>Evaluation</strong>: Alternative 3 is the most logical decision because it achieves the important objectives of retaining non-corrupted user data, while always ensuring there is data for the user to work with even if he/she is starting the application for the first time.</p>
 </div>
 </div>
 </div>
@@ -1670,7 +1702,7 @@ If the path provided by the Model Component is invalid, the Storage component th
 <p>Please refer to the User Guide for the full list of commands under both categories.</p>
 </div>
 <div class="paragraph">
-<p>To keep track of navigation state, a boolean <code>inFolder</code> is maintained by the <code>ModelManager</code>. Other components may retrieve the current state with <code>ModelManager#isInFolder()</code>. This is also how the <code>Command</code> objects determines whether the command is executable in the present navigation state.</p>
+<p>To keep track of navigation state, an enum <code>State</code> is maintained by the <code>ModelManager</code>. Other components may retrieve the current state with <code>ModelManager#getState()</code>. This is also how the <code>Command</code> objects determines whether the command is executable in the present navigation state.</p>
 </div>
 </div>
 <div class="sect4">
@@ -1692,16 +1724,16 @@ If the path provided by the Model Component is invalid, the Storage component th
 </ol>
 </div>
 <div class="paragraph">
-<p>When a <code>cd</code> command is executed, the Logic component parses the command and creates a <code>ChangeDirectoryCommand</code> object. If the command is of the first format, <code>ChangeDirectoryCommand()</code> is invoked without any arguments and the boolean <code>isExitingFolder</code> is set to <code>true</code>. If the command is of the second format, the overloaded constructor <code>ChangeCommand(FOLDER_INDEX)</code> is instead called and <code>isExitingFolder</code> is set to <code>false</code>.</p>
+<p>When a <code>cd</code> command is executed, the Logic component parses the command and creates a <code>ChangeDirectoryCommand</code> object. If the command is of the first format, <code>ChangeDirectoryCommand()</code> is invoked without any arguments and the boolean <code>isExitingFolder</code> is set to <code>true</code>. If the command is of the second format, the overloaded constructor <code>ChangeDirectoryCommand(FOLDER_INDEX)</code> is instead called and <code>isExitingFolder</code> is set to <code>false</code>.</p>
 </div>
 <div class="paragraph">
-<p><code>ChangeDirectoryCommand#execute()</code> is then invoked. The value of <code>isExitingFolder</code> will determine the corresponding methods in <code>ModelManager</code> that are called (<code>exitFoldersToHome()</code> or <code>enterFolder()</code>). The sequence diagram in <a href="#changecommandsequencediagram">Figure 11, &#8220;Component interactions for <code>change</code> command&#8221;</a> illustrates this conditional choice and the interactions involved with each option.</p>
+<p><code>ChangeDirectoryCommand#execute()</code> is then invoked. The value of <code>isExitingFolder</code> will determine the corresponding methods in <code>ModelManager</code> that are called (<code>exitFoldersToHome()</code> or <code>enterFolder()</code>). The sequence diagram in <a href="#changecommandsequencediagram">Figure 11, &#8220;Component interactions for <code>cd</code> command&#8221;</a> illustrates this conditional choice and the interactions involved with each option.</p>
 </div>
 <div id="changecommandsequencediagram" class="imageblock">
 <div class="content">
 <img src="images/ChangeCommandSequenceDiagram.png" alt="ChangeCommandSequenceDiagram" width="600">
 </div>
-<div class="title">Figure 11. Component interactions for <code>change</code> command</div>
+<div class="title">Figure 11. Component interactions for <code>cd</code> command</div>
 </div>
 </div>
 </div>
@@ -1738,6 +1770,9 @@ If the path provided by the Model Component is invalid, the Storage component th
 </div>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p><strong>Evaluation</strong>: This matter is highly subjective and conflicting feedback was received during testing. However, we believe that our target audience, a user familiar with the command line, would be more used to navigation with a single command and as such would prefer Alternative 1.</p>
 </div>
 </div>
 </div>
@@ -3691,7 +3726,7 @@ These instructions only provide a starting point for testers to work on; testers
 </li>
 <li>
 <p>Double-click the jar file<br>
-Expected: Shows the GUI with a set of sample folders. The window size may not be optimum.</p>
+Expected: Shows the GUI with a sample folder. The window size may not be optimal.</p>
 </li>
 </ol>
 </div>
@@ -3712,44 +3747,9 @@ Expected: The most recent window size and location is retained.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases to be added &#8230;&#8203; }</em></p>
-</div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-card"><a class="link" href="#deleting-a-card">F.2. Deleting a card</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Deleting a card while all cards are listed</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: List all cards using the <code>list</code> command. Multiple cards in the list.</p>
-</li>
-<li>
-<p>Test case: <code>delete 1</code><br>
-Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
-</li>
-<li>
-<p>Test case: <code>delete 0</code><br>
-Expected: No card is deleted. Error details shown in the status message. Status bar remains the same.</p>
-</li>
-<li>
-<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
-Expected: Similar to previous.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><em>{ more test cases to be added &#8230;&#8203; }</em></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="starting-a-test-session"><a class="link" href="#starting-a-test-session">F.3. Starting a test session</a></h3>
+<h3 id="starting-a-test-session"><a class="link" href="#starting-a-test-session">F.2. Starting a test session</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3784,7 +3784,7 @@ in a test session or in report display)<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="answerquestionintest"><a class="link" href="#answerquestionintest">F.4. Answering a question in a test session</a></h3>
+<h3 id="answerquestionintest"><a class="link" href="#answerquestionintest">F.3. Answering a question in a test session</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3827,7 +3827,7 @@ question is displayed</code> is shown in the status message. Status bar remains 
 </div>
 </div>
 <div class="sect2">
-<h3 id="navigating-to-the-next-question-in-a-test-session"><a class="link" href="#navigating-to-the-next-question-in-a-test-session">F.5. Navigating to the next question in a test session</a></h3>
+<h3 id="navigating-to-the-next-question-in-a-test-session"><a class="link" href="#navigating-to-the-next-question-in-a-test-session">F.4. Navigating to the next question in a test session</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3837,7 +3837,7 @@ question is displayed</code> is shown in the status message. Status bar remains 
 <li>
 <p>Prerequisites: Enter a test session by typing <code>test</code> when inside a folder. Display area enters fullscreen and
 lowest scoring flashcard question and hints are displayed. Answer the current question by following
-<a href="#answerquestionintest">Section F.4, &#8220;Answering a question in a test session&#8221;</a> or reveal the answer so the current card has already been tested.</p>
+<a href="#answerquestionintest">Section F.3, &#8220;Answering a question in a test session&#8221;</a> or reveal the answer so the current card has already been tested.</p>
 </li>
 <li>
 <p>Test case: <code>next</code> where there are still cards left untested<br>
@@ -3860,7 +3860,7 @@ Expected: The error <code>Next command is valid only when this question has been
 </div>
 </div>
 <div class="sect2">
-<h3 id="ending-a-test-session"><a class="link" href="#ending-a-test-session">F.6. Ending a test session</a></h3>
+<h3 id="ending-a-test-session"><a class="link" href="#ending-a-test-session">F.5. Ending a test session</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3889,7 +3889,157 @@ in a folder)<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">F.7. Saving data</a></h3>
+<h3 id="folder-operations"><a class="link" href="#folder-operations">F.6. Folder operations</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding a folder</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: You must be at the home directory (status bar should read <code>In Home Directory</code>) and have only one folder called "Sample Folder". To get this configuration, you can delete all data files except for the jar file and relaunch the application.</p>
+</li>
+<li>
+<p>Test case: <code>addfolder Folder 1</code><br>
+Expected: A folder by the name of "Folder 1" is added. Status message confirms that the folder added, and the new folder can be found in the list of folders.</p>
+</li>
+<li>
+<p>Test case: <code>addfolder Sample Folder</code><br>
+Expected: No folder is added. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Other incorrect addfolder commands to try: <code>addfolder</code>, <code>addfolder Special/Chars</code>, <code>addfolder x</code> (where x is string longer than 50 characters)<br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Deleting a folder</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: You must be at the home directory (status bar should read <code>In Home Directory</code>) and have at least one folder.</p>
+</li>
+<li>
+<p>Test case: <code>deletefolder 1</code><br>
+Expected: The folder at index 1 is deleted. Status message confirms that the folder is deleted, and the folder can no longer be found in the list of folders.</p>
+</li>
+<li>
+<p>Test case: <code>deletefolder 0</code><br>
+Expected: No folder is deleted. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Other incorrect deletefolder commands to try: <code>deletefolder</code>, <code>deletefolder Sample Folder</code>, <code>deletefolder x</code> (where x is larger than the list length)<br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Renaming a folder</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: You must be at the home directory (status bar should read <code>In Home Directory</code>) and have at least one folder called "Sample Folder", and no folder called "New Name".</p>
+</li>
+<li>
+<p>Test case: <code>editfolder x New Name</code> (where x is the index of a folder that is not Sample Folder)<br>
+Expected: The folder at index x is renamed to "New Name". Status message confirms that renaming operation succeeded.</p>
+</li>
+<li>
+<p>Test case: <code>editfolder x Sample Folder</code> (where x is the index of Sample Folder)<br>
+Expected: The folder at index x is renamed to its original name. Status message confirms that renaming operation succeeded.</p>
+</li>
+<li>
+<p>Test case: <code>editfolder x Sample Folder</code> (where x is not the index of Sample Folder)<br>
+Expected: The folder at index x is not renamed. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Other incorrect editfolder commands to try: <code>editfolder</code>, <code>editfolder New Name 1</code>, <code>editfolder x New Name</code> (where x is larger than the list length)<br>
+Expected: No folder is renamed. Error details shown in the status message.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Persistence of folder operations</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: You must be at the home directory (status bar should read <code>In Home Directory</code>) and know where the data files are stored. By default, this will be at the <code>data/</code> directory at the path of the jar file.</p>
+</li>
+<li>
+<p>Test case: <code>addfolder x</code> (where x is the name not used by any existing folder)<br>
+Expected: A new json by the name of <code>x.json</code> appears in the data directory.</p>
+</li>
+<li>
+<p>Test case: <code>deletefolder 1</code><br>
+Expected: The json with the same file name as the deleted folder is no longer present in the data directory. No other files in the directory are affected.</p>
+</li>
+<li>
+<p>Test case: <code>editfolder 1 x</code> (where x is a name not used by any existing folder)<br>
+Expected: The json with the original name of the edited folder is no longer present in the data directory, replaced with a json with the new folder name.  No other files in the directory are affected.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="navigating-in-and-out-of-folders"><a class="link" href="#navigating-in-and-out-of-folders">F.7. Navigating in and out of folders</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Entering a folder</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: You must be at the home directory (status bar should read <code>In Home Directory</code>) and have at least one folder.</p>
+</li>
+<li>
+<p>Test case: <code>cd 1</code><br>
+Expected: Folder 1 is entered. Status message confirms this and UI is updated.</p>
+</li>
+<li>
+<p>Test case: <code>cd x</code> (where x is larger than the list length)<br>
+Expected: No folder is entered. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Other incorrect cd commands to try: <code>cd</code>, <code>cd Sample Folder</code>, <code>cd ..</code><br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Exiting a folder</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: You must be inside a folder (status bar should read <code>Inside Folder: x</code> where <code>x</code> is the name of the folder you are in).</p>
+</li>
+<li>
+<p>Test case: <code>cd ..</code><br>
+Expected: The folder is exited and you return to the home directory. Status message confirms this and UI is updated.</p>
+</li>
+<li>
+<p>Test case: <code>cd x</code> (where x is any combination of characters other than "..")<br>
+Expected: The folder is not exited. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Other incorrect cd commands to try: <code>cd</code>, <code>cd Home</code><br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-data"><a class="link" href="#saving-data">F.8. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3897,16 +4047,21 @@ in a folder)<br>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p><em>{explain how to simulate a missing/corrupted file and the expected behavior}</em></p>
+<p>Prerequisites: You must know where the data files are stored. By default, this will be at the <code>data/</code> directory at the path of the jar file.</p>
+</li>
+<li>
+<p>Test case: Delete the data directory and launch the app<br>
+Expected: A sample folder is present when the app launches.</p>
+</li>
+<li>
+<p>Test case: Insert a non-json file/corrupted json file in the data directory and launch the app<br>
+Expected: The valid json files have folders with their corresponding names present. The non-json file/corrupted json file remains unaffected.</p>
 </li>
 </ol>
 </div>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases to be added &#8230;&#8203; }</em></p>
 </div>
 </div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 17:12:25 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 03:20:42 UTC</div></div></div></body></html>
