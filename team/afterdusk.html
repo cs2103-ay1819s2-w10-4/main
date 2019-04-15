@@ -260,7 +260,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>enter</kbd> wil
 <p>The newly created folder will not contain any cards.</p>
 </li>
 <li>
-<p>Folder names must be unique, between 1 and 50 characters, and only contain letters, numbers and whitespace. Attempting to add a folder with any of the above rules violated will result in an error.</p>
+<p>Folder names must be unique, between 1 and 50 characters, and only contain letters, numbers and whitespace. Folder names with the same characters but different capitalisation are non-unique. Attempting to add a folder with any of the above rules violated will result in an error.</p>
 </li>
 <li>
 <p>Each folder and its cards are stored independently in the directory specified in <code>preferences.json</code>. By default, this is the <code>data/</code> directory.</p>
@@ -301,6 +301,9 @@ Creates a folder with the name "Nervous System". The UI should appear like the f
 <ul>
 <li>
 <p>The new name of the folder cannot be the same as an existing folder, and must adhere to the rules specified in <a href="#addfolder">Create new folder : <code>addfolder</code></a>.</p>
+</li>
+<li>
+<p>You are allowed to rename an existing folder to a different capitalisation of its own name.</p>
 </li>
 </ul>
 </div>
@@ -1102,8 +1105,8 @@ Expected: Similar to previous.</p>
 Expected: The folder at index x is renamed to "New Name". Status message confirms that renaming operation succeeded.</p>
 </li>
 <li>
-<p>Test case: <code>editfolder x Sample Folder</code> (where x is the index of Sample Folder)<br>
-Expected: The folder at index x is renamed to its original name. Status message confirms that renaming operation succeeded.</p>
+<p>Test case: <code>editfolder x sample folder</code> (where x is the index of Sample Folder)<br>
+Expected: The folder at index x is renamed to its original name (with new capitalisation). Status message confirms that renaming operation succeeded.</p>
 </li>
 <li>
 <p>Test case: <code>editfolder x Sample Folder</code> (where x is not the index of Sample Folder)<br>
@@ -1398,7 +1401,7 @@ The first command enters the second folder in the folder list on the home direct
 <p>The newly created folder will not contain any cards.</p>
 </li>
 <li>
-<p>Folder names must be unique, between 1 and 50 characters, and only contain letters, numbers and whitespace. Attempting to add a folder with any of the above rules violated will result in an error.</p>
+<p>Folder names must be unique, between 1 and 50 characters, and only contain letters, numbers and whitespace. Folder names with the same characters but different capitalisation are non-unique. Attempting to add a folder with any of the above rules violated will result in an error.</p>
 </li>
 <li>
 <p>Each folder and its cards are stored independently in the directory specified in <code>preferences.json</code>. By default, this is the <code>data/</code> directory.</p>
@@ -1470,6 +1473,9 @@ Deletes the second folder in the folder list, along with its cards, on the home 
 <ul>
 <li>
 <p>The new name of the folder cannot be the same as an existing folder, and must adhere to the rules specified in <a href="#addfolder">Create new folder : <code>addfolder</code></a>.</p>
+</li>
+<li>
+<p>You are allowed to rename an existing folder to a different capitalisation of its own name.</p>
 </li>
 </ul>
 </div>
@@ -1617,4 +1623,4 @@ Renames the second folder in the folder list to "Circulatory System".</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 14:39:08 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 14:52:53 UTC</div></div></div></body></html>
