@@ -833,16 +833,16 @@ directory.</p>
 <div class="paragraph">
 <p>Format: <code>export FOLDER_INDEX FILENAME [MORE_INDEXES]</code></p>
 </div>
-<div class="admonitionblock important">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-important" title="Important"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 The export command creates the new csv file in your project root directory.
 i.e The directory where your .jar file is located.<br>
-The <code>import command</code> imports csv files located in the same directory as well.
+The import command imports csv files located in the same directory as well.
 </td>
 </tr>
 </table>
@@ -887,10 +887,10 @@ The current version does not support the importing and exporting of files outsid
 <p><code>export 1 2 3</code><br>
 exports the first, second and third cardfolder in your home directory.
 Suppose that the first, second and third cardfolder corresponds to the card folder names :<br>
-<code>Blood</code><br>
-<code>Circulatory System</code><br>
-<code>Cardiovascular</code><br>
-Then the following files <code>Blood.csv</code>, <code>Circulatory System.csv</code> and <code>Cardiovascular.csv</code>
+Blood<br>
+Circulatory System<br>
+Cardiovascular<br>
+Then the following files Blood.csv, Circulatory System.csv and Cardiovascular.csv
 will be created in the project root directory.</p>
 </li>
 </ul>
@@ -925,7 +925,7 @@ The csv file imported should follow the format described below
 <li>
 <p>The first row of the csv file should have the following headers:</p>
 <div class="paragraph">
-<p>Question, Answer, Options, Hints.</p>
+<p>Question, Answer, Hints, Option, Option, Option.</p>
 </div>
 </li>
 <li>
@@ -935,7 +935,7 @@ The csv file imported should follow the format described below
 <p>Hints can take 0 or 1 values only.</p>
 </li>
 <li>
-<p>For MCQ cards, The csv file only accepts one incorrect option for each flashcard.</p>
+<p>For MCQ cards, The csv file accepts up to 3 incorrect options per flashcard.</p>
 </li>
 </ul>
 </div>
@@ -957,7 +957,7 @@ The csv file imported should follow the format described below
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-unlike the <code>export command</code> the importing of multiple csv files
+unlike the export command the importing of multiple csv files
 is not supported in <strong>Know-It-All</strong>.
 </td>
 </tr>
@@ -970,7 +970,7 @@ is not supported in <strong>Know-It-All</strong>.
 <ul>
 <li>
 <p><code>import Blood.csv</code><br>
-Imports blood csv file into <strong>Know-It-All</strong>. A new <code>Blood</code> cardfolder should be present in the home
+Imports blood csv file into <strong>Know-It-All</strong>. A new Blood cardfolder should be present in the home
 directory after execution of this command.</p>
 </li>
 </ul>
@@ -1422,6 +1422,9 @@ this number is automatically calculated and recorded.</p>
 <li>
 <p><a id="index"></a> <strong>Index</strong>: The unique number associated with an item in a list. The first item in a list has an index of 1.</p>
 </li>
+<li>
+<p><strong>project root directory</strong>: The directory where Know-It-All&#8217;s .jar file is located</p>
+</li>
 </ul>
 </div>
 </div>
@@ -1530,7 +1533,7 @@ this number is automatically calculated and recorded.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Imports a file with the specified name. Filename must include .csv extension</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>export FOLDER_INDEX FILENAME [MORE_INDEXES]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>export FOLDER_INDEX [MORE_INDEXES]</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Creates a csv file containing the flashcards from the specified folder, which can later be imported.</p></td>
 </tr>
 <tr>
@@ -1544,4 +1547,4 @@ this number is automatically calculated and recorded.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 12:30:15 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 12:37:58 UTC</div></div></div></body></html>

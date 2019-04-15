@@ -1060,7 +1060,7 @@ is true at any point in time. E.g., only one of inFolder, inHomeDir, inTest&#823
 <h4 id="current-implementation-5" class="discrete">Current Implementation</h4>
 <div class="paragraph">
 <p>The Import and Export feature is facilitated by the Logic and model components, together
-with the addition of 2 new classes inside the csvmanager package defined under
+with the addition of 3 new classes inside the csvmanager package defined under
 the storage package.</p>
 </div>
 <h5 id="logic-2" class="discrete">Logic</h5>
@@ -1082,7 +1082,7 @@ These two methods further call the CsvManager API to read and write card folders
 </div>
 <h5 id="csvmanager-package" class="discrete">csvmanager package:</h5>
 <div class="paragraph">
-<p>The csvmanager package contains all classes dealing with the reading and writing of cardfolders into and out to
+<p>The csvmanager package contains all classes dealing with the reading and writing of card folders into and out to
 the model.</p>
 </div>
 <div class="paragraph">
@@ -1091,13 +1091,16 @@ the model.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>CsvManager - Main class responsible for the writing and reading of .csv files during the import and export of files</p>
+<p><code>CsvManager</code> - Main class responsible for the writing and reading of .csv files during the import and export of files</p>
 </li>
 <li>
-<p>CsvFile - Wrapper class for file name input by user</p>
+<p><code>CsvFile</code> - Wrapper class for file name input by user</p>
 </li>
 <li>
-<p>CsvCommands interface - API for import/export method in CsvManager</p>
+<p><code>CsvCommands</code> interface - API for import/export method in CsvManager</p>
+</li>
+<li>
+<p><code>CsvUtils</code> - Utility class containing the default path and test paths used by the application.</p>
 </li>
 </ul>
 </div>
@@ -1109,21 +1112,22 @@ API <code>CsvManager#writeFoldersToCsv</code> and <code>CsvManager#readFoldersTo
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User wants to export folders <code>Human Anatomy</code> and <code>Nervous System</code>.
+<p>User wants to export folders Human Anatomy and Nervous System.
 Suppose that these two folders index as shown on the main application screen is 1 and 3 respectively.
 The user types <code>export 1 3</code></p>
 </li>
 <li>
-<p>The Export command parser extracts the indices, parses the indices into a List&lt;Integer&gt; and
+<p>The Export command parser extracts the indices, stores the indices into a <code>List&lt;Integer&gt;</code> and
 <code>ExportCommand</code> object, which keeps track of the indices.</p>
 </li>
 <li>
-<p>The Export command executes, calling <code>Model#exportCardFolders</code> method.</p>
+<p>The Export command calls executes, resulting in a call to the  <code>Model#exportCardFolders</code> method.</p>
 </li>
 <li>
-<p>Model#exportCardFolders method checks that all card folders specified by user exists inside the list of card folders.
-With reference to the diagram below, we can see that the indices specified by the user corresponds
-to each card folder.<br>
+<p><code>Model#exportCardFolders</code> method checks that all card folders specified by user exists within the model.
+With reference to the diagram below, we can see that the indices specified by the user (1 and 3) corresponds to the
+(i - 1) th indexes of the list of card folders in the model,
+where 1 &lt; i &#8656; no.of card folders in model.<br>
 The method throws <code>CardFolderNotFoundException</code> if card folder index is not found in list.</p>
 <div class="imageblock">
 <div class="content">
@@ -1132,9 +1136,9 @@ The method throws <code>CardFolderNotFoundException</code> if card folder index 
 </div>
 </li>
 <li>
-<p><code>CsvManager</code> is called to carry out the main logic of writing the cardfolders to file.
+<p><code>CsvManager</code> is called to carry out the main logic of writing the card folders to file.
 File exported will be created in the project root directory.<br>
-Names of the files created will correspond to the names of their corresponding cardfolders.<br>
+Names of the files created will correspond to the names of their corresponding card folders.<br>
 i.e <code>Human Anatomy.csv</code> and <code>Nervous System.csv</code></p>
 </li>
 <li>
@@ -1144,16 +1148,18 @@ User types <code>import Blood.csv</code> command</p>
 </li>
 <li>
 <p>Import command parser extracts file name, wraps file into a <code>CsvFile</code> object and
-parses the CsvFile into an Import Command object.</p>
+parses the <code>CsvFile</code> object into an Import Command object.</p>
 </li>
 <li>
 <p>Logic unit executes the import command.
-The execute method makes a call to <code>Model#importCardFolder</code> method.</p>
+The execute method makes a call to <code>Model#importCardFolder</code> method. The model checks that
+the card folder to import does not already exist within the model. Throws <code>DuplicateCardFolderException</code>
+if card folder already exists.</p>
 </li>
 <li>
-<p>CsvManager is called to carry out the main logic of reading cardfolders to file.
+<p>CsvManager is called to carry out the main logic of reading card folders to file.
 File imported will be serialized into a <code>CardFolder</code> object and
-added to the <code>filteredFoldersList</code> variable.</p>
+added to the <code>folders</code> variable in model.</p>
 </li>
 </ol>
 </div>
@@ -1180,7 +1186,7 @@ Both Imported and Exported files have to be placed in the project root directory
 <div class="sect3">
 <h4 id="csv-file-structure"><a class="link" href="#csv-file-structure">3.5.1. CSV file structure</a></h4>
 <div class="paragraph">
-<p>Example of a common cardfolder csv file<br></p>
+<p>Example of a common cardfolder csv file, opened using microsoft excel.<br></p>
 </div>
 <div class="paragraph">
 <p>Blood.csv</p>
@@ -1194,13 +1200,15 @@ Both Imported and Exported files have to be placed in the project root directory
 <ul>
 <li>
 <p>The first line of any file contains the headers for each card.
-Headers have to be present in the csv file for import.</p>
+These headers have to be present in the csv file. If not the import would not work.</p>
 </li>
 <li>
-<p>Each row of the csv file represents a single flashcard.</p>
+<p>Each row of the csv file starting from the second,
+represents a single flashcard.</p>
 </li>
 <li>
-<p>Options header can take more than one value or none.</p>
+<p>Option headers i.e (Option,Option,Option)
+can be left blank or take on 1 value.</p>
 </li>
 <li>
 <p>Hints header can take either 0 or 1 value.</p>
@@ -1215,31 +1223,19 @@ Headers have to be present in the csv file for import.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Alternative 1: Implement read and write card folders in <code>StorageManager</code> class</p>
+<p><strong>Alternative 1 (current choice)</strong>: Implement read and write card folders in StorageManager class</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The most intuitive solution,
+<p>Pros: The most intuitive solution,
 since Storage involves read and write logic</p>
 </li>
-</ul>
-</div>
-</li>
 <li>
 <p>Cons:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Model and Storage are now more coupled together.</p>
-</li>
-<li>
-<p>Storage has more than one responsibility now.
-Instead of managing the internal data of card folder, it now has to
-manage the read and write to csv files.</p>
+<p>Either Logic and Model will be more coupled with storage. Storage also has more than one responsibility now.</p>
 </li>
 </ul>
 </div>
@@ -1248,40 +1244,16 @@ manage the read and write to csv files.</p>
 </div>
 </li>
 <li>
-<p>Alternative 2: Implement read and write card folders in <code>csvmanager</code> package class. (Current)</p>
+<p><strong>Alternative 2</strong>:Implement read/write and other logic in another class. (Current)</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Separate responsibilities of both Storage and Model.<br></p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Model class can focus on the representation of the in-memory card folders
-Storage<br></p>
+<p>Pros: Separate responsibilities of both Storage and Model. Model class can focus on the representation of the in-memory card folders
+and Storage class can focus on managing the internal card folder data (.json files)</p>
 </li>
 <li>
-<p>Storage class can focus on managing the internal card folder data (.json files)</p>
-</li>
-</ol>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Cons:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>More code to write. Storage class could possibly call the relevant API&#8217;s
+<p>Cons: More code to write. Storage class could possibly call the relevant API&#8217;s
 to convert .json file  into .csv file</p>
-</li>
-</ul>
-</div>
 </li>
 </ul>
 </div>
@@ -1290,70 +1262,35 @@ to convert .json file  into .csv file</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-csv-file-design-structure"><a class="link" href="#aspect-csv-file-design-structure">Aspect: csv file design structure</a></h5>
+<h5 id="aspect-csv-file-design-structure"><a class="link" href="#aspect-csv-file-design-structure">Aspect: Csv file design structure</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p>Alternative 1: Export multiple card folders into a single file.</p>
+<p><strong>Alternative 1</strong>: Export multiple card folders into a single file.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Saves user trouble of calling multiple import for files.
+<p>Pros: Saves user trouble of calling multiple import for files.<br>
 Each card folder is separated by a new line.</p>
 </li>
-</ul>
-</div>
-</li>
 <li>
-<p>Cons:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Not a .csv file anymore.
-First line header would now specify cardfolder name before card headers,
+<p>Cons: Not a .csv file anymore. First line header would now specify cardfolder name before card headers,
 leading to unequal rows and columns</p>
 </li>
-<li>
-<p>Users will be unable to select specific card folders to import if multiple card folders
-have been exported into a single file.</p>
-</li>
-</ul>
-</div>
-</li>
 </ul>
 </div>
 </li>
 <li>
-<p>Alternative 2: Export each card folder into a single file (Current)</p>
+<p><strong>Alternative 2</strong>: Export each card folder into a single file (Current)</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>More flexibility for users to import desired card folders,
-since 1 cardfolder = 1 csv file.</p>
+<p>Pros: More flexibility for users to import desired card folders,
+since 1 cardfolder = 1 csv file. Files are also now correctly formatted as .csv file
+and Storage class can focus on managing the internal card folder data (.json files)</p>
 </li>
 <li>
-<p>Files are now correctly formatted as .csv file</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Cons:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Slightly more work needed to import multiple card folders.</p>
-</li>
-</ul>
-</div>
+<p>Cons: Slightly more work needed to import multiple card folders.</p>
 </li>
 </ul>
 </div>
@@ -4296,6 +4233,60 @@ Expected: The valid json files have folders with their corresponding names prese
 </li>
 </ol>
 </div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Importing a folder</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites:<br>
+You must be outside a folder (status bar should read <code>in home directory</code>.<br>
+Ensure that you also have the file to import in the project root directory.<br>
+file has to have a .csv extension format.<br>
+The imported file has to comply with the csv file headers.<br>
+Compulsary fields, like Question and Answer should not be left blank.</p>
+</li>
+<li>
+<p>Test case: <code>import Blood.csv</code><br>
+Prerequisites: Ensure that Blood.csv exists within the project root directory.<br>
+Expected: Command box outputs a message "Successfully imported: Blood.csv" and
+a new folder with name Blood is added to the existing folders in the home directory,
+with the corresponding flashcards added to the folder</p>
+</li>
+<li>
+<p>Other incorrect commands to try: <code>import</code>,
+<code>import Blood.json</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Exporting a folder</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: You must be outside a folder (status bar should read <code>in home directory</code>)<br>
+flashcard application</p>
+</li>
+<li>
+<p>Test case: <code>export 1</code><br>
+Prerequisities: You must have at least one folder existing in the application.<br>
+   Expected: The command box outputs a message "Successfully exported card folders" and project root directory should contain a <code>x.csv</code> file where <code>x</code> is the name of the first folder in the application.</p>
+</li>
+<li>
+<p>Test case: <code>export 1 2 3</code><br>
+Prerequisities: You must have at least 3 card folder existing in the application.<br>
+   Expected: The same message output in the command box as the previous test case and the corresponding files <code>x1.csv</code>, <code>x2.csv</code> and <code>x3.csv</code> created in project root directory, where <code>x1</code>, <code>x2</code>, <code>x3</code> corresponds to the name of the first, second and third folder</p>
+</li>
+<li>
+<p>Other incorrect cd commands to try: <code>export</code>, <code>export -1</code>, <code>export 12 13 14</code>, where <code>12</code> <code>13</code> and <code>14</code> are non existsnt card folder indexes.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 12:30:15 UTC</div></div></div></body></html>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 12:37:58 UTC</div></div></div></body></html>
