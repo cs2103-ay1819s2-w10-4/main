@@ -22,9 +22,10 @@
 <li><a href="#folder-operations">4.1. Folder Operations</a>
 <ul class="sectlevel3">
 <li><a href="#enter-folder-code-cd-code">4.1.1. Enter folder : <code>cd</code></a></li>
-<li><a href="#addfolder">4.1.2. Create new folder : <code>addfolder</code></a></li>
-<li><a href="#remove-folder-code-deletefolder-code">4.1.3. Remove folder : <code>deletefolder</code></a></li>
-<li><a href="#rename-folder-code-editfolder-code">4.1.4. Rename folder : <code>editfolder</code></a></li>
+<li><a href="#exit-folder-code-cd-code">4.1.2. Exit folder : <code>cd ..</code></a></li>
+<li><a href="#addfolder">4.1.3. Create new folder : <code>addfolder</code></a></li>
+<li><a href="#remove-folder-code-deletefolder-code">4.1.4. Remove folder : <code>deletefolder</code></a></li>
+<li><a href="#rename-folder-code-editfolder-code">4.1.5. Rename folder : <code>editfolder</code></a></li>
 </ul>
 </li>
 <li><a href="#card-operations">4.2. Card Operations</a>
@@ -38,9 +39,8 @@
 <li><a href="#list-flashcards-code-list-code">4.2.7. List flashcards : <code>list</code></a></li>
 <li><a href="#undoing-previous-command-code-undo-code">4.2.8. Undoing previous command : <code>undo</code></a></li>
 <li><a href="#redoing-the-previously-undone-command-code-redo-code">4.2.9. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#exit-folder-code-cd-code">4.2.10. Exit folder : <code>cd ..</code></a></li>
-<li><a href="#export-flashcards-code-export-code">4.2.11. Export flashcards : <code>export</code></a></li>
-<li><a href="#import-flashcards-code-import-code">4.2.12. Import flashcards : <code>import</code></a></li>
+<li><a href="#export-flashcards-code-export-code">4.2.10. Export flashcards : <code>export</code></a></li>
+<li><a href="#import-flashcards-code-import-code">4.2.11. Import flashcards : <code>import</code></a></li>
 </ul>
 </li>
 <li><a href="#test-operations">4.3. Test Operations</a>
@@ -112,7 +112,7 @@ Important information that should be noted.
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Useful tips that can help if you get stuck.
+Tips that can help if you get stuck.
 </td>
 </tr>
 </table>
@@ -160,7 +160,7 @@ Useful tips that can help if you get stuck.
 <div class="sect3">
 <h4 id="using-the-application"><a class="link" href="#using-the-application">3.2. Using the application</a></h4>
 <div class="paragraph">
-<p>In this section, we&#8217;ll walk you through the primary user interface of the application and how to create your first flashcard.</p>
+<p>In this section, we&#8217;ll walk you through the primary user interface of the application and how to create your first <a href="#flashcard">flashcard</a>.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -178,7 +178,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>enter</kbd> wil
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>When booting up the app for the first time, you should see the home directory much like the screengrab below. The first and only folder present is a sample folder.</p>
+<p>When booting up the app for the first time, you should see the home directory much like the screengrab below. The first and only <a href="#folder">folder</a> present is a sample folder.</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/AnnotatedStartupUI.png" alt="AnnotatedStartupUI" width="500">
@@ -275,7 +275,7 @@ parameter which can be something like <code>Human Anatomy</code>.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The commands in this section can only be executed when you are at the home directory, outside of any folder. The commands are also not valid inside a test or report session. You can easily verify that you are at the home directory with the status bar at the bottom, which should display:<br>
+The commands in this section, unless otherwise stated, can only be executed when you are at the home directory, outside of any folder. The commands are also not valid inside a test or report session. You can easily verify that you are at the home directory with the status bar at the bottom, which should display:<br>
 <br>
 <span class="image"><img src="images/StatusBarInHomeDirectory.png" alt="StatusBarInHomeDirectory" width="150"></span>
 </td>
@@ -303,7 +303,39 @@ Enters the second folder in the folder list on the home directory.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="addfolder"><a class="link" href="#addfolder">4.1.2. Create new folder : <code>addfolder</code></a></h4>
+<h4 id="exit-folder-code-cd-code"><a class="link" href="#exit-folder-code-cd-code">4.1.2. Exit folder : <code>cd ..</code></a></h4>
+<div class="paragraph">
+<p>Return to the root directory (exit the current folder). A list of folders will be displayed</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>cd ..</code></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>This command, unlike the rest of the commands in this section, can only be executed when inside a folder.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>cd 2</code><br>
+<code>cd ..</code><br>
+The first command enters the second folder in the folder list on the <a href="#homedirectory">home directory</a>. The second command then returns you back to the home directory by exiting the folder.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="addfolder"><a class="link" href="#addfolder">4.1.3. Create new folder : <code>addfolder</code></a></h4>
 <div class="paragraph">
 <p>Creates a new flashcard folder with the specified name.</p>
 </div>
@@ -346,7 +378,7 @@ Creates a folder with the name "Nervous System". The UI should appear like the f
 </div>
 </div>
 <div class="sect3">
-<h4 id="remove-folder-code-deletefolder-code"><a class="link" href="#remove-folder-code-deletefolder-code">4.1.3. Remove folder : <code>deletefolder</code></a></h4>
+<h4 id="remove-folder-code-deletefolder-code"><a class="link" href="#remove-folder-code-deletefolder-code">4.1.4. Remove folder : <code>deletefolder</code></a></h4>
 <div class="paragraph">
 <p>Removes the flashcard folder specified by index.</p>
 </div>
@@ -377,7 +409,7 @@ Deletes the second folder in the folder list, along with its cards, on the home 
 </div>
 </div>
 <div class="sect3">
-<h4 id="rename-folder-code-editfolder-code"><a class="link" href="#rename-folder-code-editfolder-code">4.1.4. Rename folder : <code>editfolder</code></a></h4>
+<h4 id="rename-folder-code-editfolder-code"><a class="link" href="#rename-folder-code-editfolder-code">4.1.5. Rename folder : <code>editfolder</code></a></h4>
 <div class="paragraph">
 <p>Renames the flashcard folder specified by index.</p>
 </div>
@@ -389,7 +421,7 @@ Deletes the second folder in the folder list, along with its cards, on the home 
 <div class="ulist">
 <ul>
 <li>
-<p>The new name of the folder cannot be the same as an existing folder, and must adhere to the rules specified in <a href="#addfolder">Section 4.1.2, &#8220;Create new folder : <code>addfolder</code>&#8221;</a>.</p>
+<p>The new name of the folder cannot be the same as an existing folder, and must adhere to the rules specified in <a href="#addfolder">Section 4.1.3, &#8220;Create new folder : <code>addfolder</code>&#8221;</a>.</p>
 </li>
 </ul>
 </div>
@@ -420,7 +452,7 @@ Renames the second folder in the folder list to "Circulatory System".</p>
 <div class="sect2">
 <h3 id="card-operations"><a class="link" href="#card-operations">4.2. Card Operations</a></h3>
 <div class="paragraph">
-<p>Commands listed in this section affect the <a href="#flashcard">flashcards</a> within a single <a href="#folder">folder</a>.</p>
+<p>Commands listed in this section affect the flashcards within a single folder.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -472,6 +504,9 @@ Results in the following card:<br>
 </li>
 <li>
 <p>A card with 0 incorrect options will automatically be denoted as a Single answer card.</p>
+</li>
+<li>
+<p>If the content of a card exceeds the length of the card, you can scroll/click and drag to see the rest of the content.</p>
 </li>
 </ul>
 </div>
@@ -774,28 +809,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect3">
-<h4 id="exit-folder-code-cd-code"><a class="link" href="#exit-folder-code-cd-code">4.2.10. Exit folder : <code>cd ..</code></a></h4>
-<div class="paragraph">
-<p>Return to the root directory (exit the current folder). A list of folders will be displayed</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>cd ..</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>cd 2</code><br>
-<code>cd ..</code><br>
-The first command enters the second folder in the folder list on the <a href="#homedirectory">home directory</a>. The second command then returns you back to the home directory by exiting the folder.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="export-flashcards-code-export-code"><a class="link" href="#export-flashcards-code-export-code">4.2.11. Export flashcards : <code>export</code></a></h4>
+<h4 id="export-flashcards-code-export-code"><a class="link" href="#export-flashcards-code-export-code">4.2.10. Export flashcards : <code>export</code></a></h4>
 <div class="paragraph">
 <p>Exporting flashcards is a great way to start sharing your flashcards with others.</p>
 </div>
@@ -870,7 +884,7 @@ will be created in the project root directory.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="import-flashcards-code-import-code"><a class="link" href="#import-flashcards-code-import-code">4.2.12. Import flashcards : <code>import</code></a></h4>
+<h4 id="import-flashcards-code-import-code"><a class="link" href="#import-flashcards-code-import-code">4.2.11. Import flashcards : <code>import</code></a></h4>
 <div class="paragraph">
 <p>Besides being able to import flashcards exported by others, the import command provies a faster way of
 creating multiple flashcards.</p>
@@ -1352,8 +1366,7 @@ There must be at least two test attempts for the line graph to be drawn.
 <p><a id="flashcard"></a> <strong>Flashcard/Card</strong>: An object containing a single question and answer, and optionally hints.</p>
 </li>
 <li>
-<p><a id="folder"></a> <strong>Folder</strong>: A collections of flashcards, grouped topically. There are no
-sub-folders.</p>
+<p><a id="folder"></a> <strong>Folder</strong>: A collections of flashcards. There are no sub-folders.</p>
 </li>
 <li>
 <p><a id="testsession"></a> <strong>Test Session</strong>: A session where all flashcards in a folder are queued to have their
@@ -1364,7 +1377,7 @@ questions displayed. You are required to key in an answer for each question.</p>
 this number is automatically calculated and recorded.</p>
 </li>
 <li>
-<p><a id="testscore"></a> <strong>Test score</strong>: The number of cards correctly answered over number of cards attempted during a test session. This number is automatically recorded after each test session.</p>
+<p><a id="testscore"></a> <strong>Test Score</strong>: The number of cards correctly answered over number of cards attempted during a test session. This number is automatically recorded after each test session.</p>
 </li>
 <li>
 <p><a id="homedirectory"></a> <strong>Home Directory</strong>: The home page where all the folders are listed. From here, users can enter folders to view cards.</p>
@@ -1494,4 +1507,4 @@ this number is automatically calculated and recorded.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 12:02:42 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 12:29:55 UTC</div></div></div></body></html>
