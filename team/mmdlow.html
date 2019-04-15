@@ -60,9 +60,16 @@ Useful tips that can help if you get stuck.
 <div class="sect1">
 <h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of Contributions</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>The section below shows a summary of my coding, documentation and other helpful contributions to the team project.</p>
-</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>The section below shows a summary of my coding, documentation and other helpful contributions to the team project.</em></p></td>
+</tr>
+</tbody>
+</table>
 <div class="ulist">
 <ul>
 <li>
@@ -123,15 +130,9 @@ Useful tips that can help if you get stuck.
 <ul>
 <li>
 <p>For card folders, the side panel shows users all necessary information of a card at a glance whenever users select a card.</p>
-<div class="paragraph">
-<p><span class="image"><img src="../images/Ui.png" alt="Ui" width="620"></span></p>
-</div>
 </li>
 <li>
 <p>For test sessions, only relevant information is shown at the start for each card. The correct answer is displayed only after a user inputs an answer.</p>
-<div class="paragraph">
-<p><span class="image"><img src="../images/AnsweringMcqCard.png" alt="AnsweringMcqCard" width="620"></span></p>
-</div>
 </li>
 </ul>
 </div>
@@ -143,7 +144,7 @@ Useful tips that can help if you get stuck.
 <li>
 <p>In a test session, the card color changes to reflect if a user has answered correctly or not. Green signifies a correct answer, while red signifies a wrong answer.</p>
 <div class="paragraph">
-<p><span class="image"><img src="../images/ExampleMcqTest.png" alt="ExampleMcqTest" width="620"></span></p>
+<p><span class="image"><img src="../images/ExampleMcqTest.png" alt="ExampleMcqTest" width="250"></span></p>
 </div>
 </li>
 </ul>
@@ -177,7 +178,7 @@ Useful tips that can help if you get stuck.
 <p>PRs reviewed (with non-trivial review comments): <a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/54">#54</a>, <a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/73">#73</a>, <a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/142">#142</a></p>
 </li>
 <li>
-<p>Reported bugs and issues involving our team&#8217;s application: <a href="https://github.com/cs2103-ay1819s2-w10-4/main/issues/184">#184</a></p>
+<p>Reported bugs and issues involving our team&#8217;s application: <a href="https://github.com/cs2103-ay1819s2-w10-4/main/issues/184">#184</a>, <a href="https://github.com/cs2103-ay1819s2-w10-4/main/issues/188">#188</a></p>
 </li>
 <li>
 <p>Reported bugs and issues involving other teams' applications: <a href="https://github.com/CS2103-AY1819S2-W15-2/main/issues/248">#248</a>, <a href="https://github.com/CS2103-AY1819S2-W15-2/main/issues/253">#253</a></p>
@@ -213,12 +214,12 @@ Useful tips that can help if you get stuck.
 <div class="paragraph">
 <p>Format <strong>(Single answer)</strong>: <code>add q/QUESTION a/ANSWER [h/HINT]</code><br>
 Results in the following card:<br>
-<span class="image"><img src="../images/singleAnswerCard.PNG" alt="singleAnswerCard" width="400"></span><br></p>
+<span class="image"><img src="../images/singleAnswerCard.PNG" alt="singleAnswerCard" width="250"></span><br></p>
 </div>
 <div class="paragraph">
 <p>Format <strong>(MCQ)</strong>: <code>add q/QUESTION a/ANSWER [i/INCORRECT_OPTION]&#8230;&#8203; [h/HINT]</code><br>
 Results in the following card:<br>
-<span class="image"><img src="../images/mcqCard.PNG" alt="mcqCard" width="400"></span></p>
+<span class="image"><img src="../images/mcqCard.PNG" alt="mcqCard" width="250"></span></p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -229,6 +230,9 @@ Results in the following card:<br>
 </li>
 <li>
 <p>Each question, answer, incorrect option and hint must be 256 characters or less (including spaces).</p>
+</li>
+<li>
+<p>If the card to be added has the same question and answer as an existing card, the card to be added will be considered a duplicate card, and the add attempt will be invalid.</p>
 </li>
 <li>
 <p>A card can have at most 1 hint (including 0).</p>
@@ -353,7 +357,7 @@ Replaces the hint of the current card with "organs" only.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Our team also updated the Developer Guide to reflect the new changes and enhancements made for Know-It-All. As with the section on <a href="#contributionsToUserGuide">Contributions to the User Guide</a>, some key excerpts of my contributions to the Developer Guide are detailed below. These include sections on <a href="#cards">Cards</a>, <a href="#cardUseCases">Card Use Cases</a>, and the <a href="#glossary">Glossary</a>.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Our team also updated the Developer Guide to reflect the new changes and enhancements made for Know-It-All. As with the section on <a href="#contributionsToUserGuide">Contributions to the User Guide</a>, some key excerpts of my contributions to the Developer Guide are detailed below. These include sections on <a href="#cards">Cards</a>, <a href="#cardUseCases">Card Use Cases</a>, the <a href="#glossary">Glossary</a>, and <a href="#cardManualTesting">Instructions on Manual Testing for Cards</a>.</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -601,5 +605,122 @@ sub-folders.</p>
 <p><a id="testsession"></a> <strong>Test Session</strong>: A session where all flashcards in a folder are queued to have their
 questions displayed. The user is required to key in an answer for each question.</p>
 </div>
+<div class="sect2">
+<h3 id="cardManualTesting"><a class="link" href="#cardManualTesting">Instructions on Manual Testing for Cards</a></h3>
+
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 10:00:14 UTC</div></div></div></body></html>
+<div class="sect2">
+<h3 id="card-operations"><a class="link" href="#card-operations">Card operations</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding a single-answer card</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Enter a folder using the <code>cd</code> command. For example, <code>cd 1</code> will enter the first folder. The folder may or may not be empty.</p>
+</li>
+<li>
+<p>Test case: <code>add q/What is the largest organ of the human body? a/Skin h/Anatomy</code><br>
+Expected: A new card with question "What is the largest organ of the human body?", answer "Skin" and hint "Anatomy" is created. Status message confirms this and the card list panel UI on the left updates to show the new card.</p>
+</li>
+<li>
+<p>Test case: <code>add a/Alexander Fleming q/Who discovered Penicillin?</code><br>
+Expected: A new card with question "Who discovered Penicillin?" and answer "Alexander Fleming" is created. Note that this card has no hint, as none was specified. Status message confirms this and UI is updated.</p>
+</li>
+<li>
+<p>Test case: <code>add q/ a/Some answer</code><br>
+Expected: The card is not created. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Other incorrect <code>add</code> commands to try for single-answer cards:<br>
+<code>add</code>, <code>add some question</code>, <code>add q/ a/ h/</code>, <code>add q/Some question a/</code>.<br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Adding an MCQ card</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Enter a folder using the <code>cd</code> command.</p>
+</li>
+<li>
+<p>Test case: <code>add q/What does MRI stand for? a/Magnetic Resonance Imaging i/Medical Resource Image</code><br>
+Expected: A new card with question "What does MRI stand for?", answer "Magnetic Resonance Imaging" and incorrect option "Medical Resource Image" is created. Status message confirms this and UI is updated.</p>
+</li>
+<li>
+<p>Test case: (After executing step 1c) <code>add a/Alexander Fleming q/Who discovered Penicillin? i/Hippocrates</code><br>
+Expected: The card is not created. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Other incorrect <code>add</code> commands to try for MCQ cards:<br>
+<code>add q/ a/ i/ i/</code>, <code>add q/Some question a/Some answer, i/</code>, <code>add q/question a/answer i/answer</code><br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Editing a card</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Enter a folder using the <code>cd</code> command. Ensure that cards already exist in the folder. For example, <code>select 1</code> should execute and display a card in right-side panel.</p>
+</li>
+<li>
+<p>Test case: <code>edit 1 a/Sigmund Freud h/Psychology</code><br>
+Expected: First card in the folder is edited to have answer "Sigmund Freud" and hint "Psychology".</p>
+</li>
+<li>
+<p>Test case: <code>edit 1 h/</code><br>
+Expected: First card in the folder is edited to have no hint.</p>
+</li>
+<li>
+<p>Test case: <code>edit 1 i/Hippocrates i/Carl Jung</code><br>
+Expected: First card in the folder is edited to have incorrect options "Hippocrates", "Carl Jung", and is converted to an MCQ card if it was originally a single-answer card.</p>
+</li>
+<li>
+<p>Test case: <code>edit 1 i/</code><br>
+Expected: First card in the folder is edited to have no incorrect options, and is converted back to a single-answer card.</p>
+</li>
+<li>
+<p>Test case: <code>edit 1 q/</code><br>
+Expected: The card is not edited. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Other incorrect <code>edit</code> commands to try: <code>edit x</code>, <code>edit</code>, <code>edit 1 q/ a/</code><br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Deleting a card</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Enter a folder using the <code>cd</code> command. Ensure that cards already exist in the folder.</p>
+</li>
+<li>
+<p>Test case: <code>delete 1</code><br>
+Expected: First card in the folder is deleted.</p>
+</li>
+<li>
+<p>Test case: <code>delete</code><br>
+Expected: No card is deleted. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Other incorrect <code>delete</code> commands to try: <code>delete 0</code>, <code>delete this</code><br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 10:01:17 UTC</div></div></div></body></html>

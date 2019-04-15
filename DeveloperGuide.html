@@ -132,14 +132,15 @@
 <li><a href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">F.1. Launch and Shutdown</a></li>
-<li><a href="#starting-and-ending-a-test-session">F.2. Starting and ending a test session</a></li>
-<li><a href="#answerquestionintest">F.3. Answering a question in a test session</a></li>
-<li><a href="#navigating-to-the-next-question-in-a-test-session">F.4. Navigating to the next question in a test session</a></li>
-<li><a href="#viewing-a-report-display">F.5. Viewing a report display</a></li>
-<li><a href="#sorting-the-cards">F.6. Sorting the cards</a></li>
-<li><a href="#folder-operations">F.7. Folder operations</a></li>
-<li><a href="#navigating-in-and-out-of-folders">F.8. Navigating in and out of folders</a></li>
-<li><a href="#saving-data">F.9. Saving data</a></li>
+<li><a href="#card-operations">F.2. Card operations</a></li>
+<li><a href="#starting-and-ending-a-test-session">F.3. Starting and ending a test session</a></li>
+<li><a href="#answerquestionintest">F.4. Answering a question in a test session</a></li>
+<li><a href="#navigating-to-the-next-question-in-a-test-session">F.5. Navigating to the next question in a test session</a></li>
+<li><a href="#viewing-a-report-display">F.6. Viewing a report display</a></li>
+<li><a href="#sorting-the-cards">F.7. Sorting the cards</a></li>
+<li><a href="#folder-operations">F.8. Folder operations</a></li>
+<li><a href="#navigating-in-and-out-of-folders">F.9. Navigating in and out of folders</a></li>
+<li><a href="#saving-data">F.10. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -3818,7 +3819,120 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="starting-and-ending-a-test-session"><a class="link" href="#starting-and-ending-a-test-session">F.2. Starting and ending a test session</a></h3>
+<h3 id="card-operations"><a class="link" href="#card-operations">F.2. Card operations</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding a single-answer card</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Enter a folder using the <code>cd</code> command. For example, <code>cd 1</code> will enter the first folder. The folder may or may not be empty.</p>
+</li>
+<li>
+<p>Test case: <code>add q/What is the largest organ of the human body? a/Skin h/Anatomy</code><br>
+Expected: A new card with question "What is the largest organ of the human body?", answer "Skin" and hint "Anatomy" is created. Status message confirms this and the card list panel UI on the left updates to show the new card.</p>
+</li>
+<li>
+<p>Test case: <code>add a/Alexander Fleming q/Who discovered Penicillin?</code><br>
+Expected: A new card with question "Who discovered Penicillin?" and answer "Alexander Fleming" is created. Note that this card has no hint, as none was specified. Status message confirms this and UI is updated.</p>
+</li>
+<li>
+<p>Test case: <code>add q/ a/Some answer</code><br>
+Expected: The card is not created. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Other incorrect <code>add</code> commands to try for single-answer cards:<br>
+<code>add</code>, <code>add some question</code>, <code>add q/ a/ h/</code>, <code>add q/Some question a/</code>.<br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Adding an MCQ card</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Enter a folder using the <code>cd</code> command.</p>
+</li>
+<li>
+<p>Test case: <code>add q/What does MRI stand for? a/Magnetic Resonance Imaging i/Medical Resource Image</code><br>
+Expected: A new card with question "What does MRI stand for?", answer "Magnetic Resonance Imaging" and incorrect option "Medical Resource Image" is created. Status message confirms this and UI is updated.</p>
+</li>
+<li>
+<p>Test case: (After executing step 1c) <code>add a/Alexander Fleming q/Who discovered Penicillin? i/Hippocrates</code><br>
+Expected: The card is not created. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Other incorrect <code>add</code> commands to try for MCQ cards:<br>
+<code>add q/ a/ i/ i/</code>, <code>add q/Some question a/Some answer, i/</code>, <code>add q/question a/answer i/answer</code><br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Editing a card</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Enter a folder using the <code>cd</code> command. Ensure that cards already exist in the folder. For example, <code>select 1</code> should execute and display a card in right-side panel.</p>
+</li>
+<li>
+<p>Test case: <code>edit 1 a/Sigmund Freud h/Psychology</code><br>
+Expected: First card in the folder is edited to have answer "Sigmund Freud" and hint "Psychology".</p>
+</li>
+<li>
+<p>Test case: <code>edit 1 h/</code><br>
+Expected: First card in the folder is edited to have no hint.</p>
+</li>
+<li>
+<p>Test case: <code>edit 1 i/Hippocrates i/Carl Jung</code><br>
+Expected: First card in the folder is edited to have incorrect options "Hippocrates", "Carl Jung", and is converted to an MCQ card if it was originally a single-answer card.</p>
+</li>
+<li>
+<p>Test case: <code>edit 1 i/</code><br>
+Expected: First card in the folder is edited to have no incorrect options, and is converted back to a single-answer card.</p>
+</li>
+<li>
+<p>Test case: <code>edit 1 q/</code><br>
+Expected: The card is not edited. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Other incorrect <code>edit</code> commands to try: <code>edit x</code>, <code>edit</code>, <code>edit 1 q/ a/</code><br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Deleting a card</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Enter a folder using the <code>cd</code> command. Ensure that cards already exist in the folder.</p>
+</li>
+<li>
+<p>Test case: <code>delete 1</code><br>
+Expected: First card in the folder is deleted.</p>
+</li>
+<li>
+<p>Test case: <code>delete</code><br>
+Expected: No card is deleted. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Other incorrect <code>delete</code> commands to try: <code>delete 0</code>, <code>delete this</code><br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="starting-and-ending-a-test-session"><a class="link" href="#starting-and-ending-a-test-session">F.3. Starting and ending a test session</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3875,7 +3989,7 @@ in a folder)<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="answerquestionintest"><a class="link" href="#answerquestionintest">F.3. Answering a question in a test session</a></h3>
+<h3 id="answerquestionintest"><a class="link" href="#answerquestionintest">F.4. Answering a question in a test session</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3918,7 +4032,7 @@ question is displayed</code> is shown in the status message. Status bar remains 
 </div>
 </div>
 <div class="sect2">
-<h3 id="navigating-to-the-next-question-in-a-test-session"><a class="link" href="#navigating-to-the-next-question-in-a-test-session">F.4. Navigating to the next question in a test session</a></h3>
+<h3 id="navigating-to-the-next-question-in-a-test-session"><a class="link" href="#navigating-to-the-next-question-in-a-test-session">F.5. Navigating to the next question in a test session</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3928,7 +4042,7 @@ question is displayed</code> is shown in the status message. Status bar remains 
 <li>
 <p>Prerequisites: Enter a test session by typing <code>test</code> when inside a folder. Display area enters fullscreen and
 lowest scoring flashcard question and hints are displayed. Answer the current question by following
-<a href="#answerquestionintest">Section F.3, &#8220;Answering a question in a test session&#8221;</a> or reveal the answer so the current card has already been tested.</p>
+<a href="#answerquestionintest">Section F.4, &#8220;Answering a question in a test session&#8221;</a> or reveal the answer so the current card has already been tested.</p>
 </li>
 <li>
 <p>Test case: <code>next</code> where there are still cards left untested<br>
@@ -3951,7 +4065,7 @@ Expected: The error <code>Next command is valid only when this question has been
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-a-report-display"><a class="link" href="#viewing-a-report-display">F.5. Viewing a report display</a></h3>
+<h3 id="viewing-a-report-display"><a class="link" href="#viewing-a-report-display">F.6. Viewing a report display</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3985,7 +4099,7 @@ Report Session</code> is shown on the status message and status bar shows that t
 </div>
 </div>
 <div class="sect2">
-<h3 id="sorting-the-cards"><a class="link" href="#sorting-the-cards">F.6. Sorting the cards</a></h3>
+<h3 id="sorting-the-cards"><a class="link" href="#sorting-the-cards">F.7. Sorting the cards</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4009,7 +4123,7 @@ percentage score than card B.
 </div>
 </div>
 <div class="sect2">
-<h3 id="folder-operations"><a class="link" href="#folder-operations">F.7. Folder operations</a></h3>
+<h3 id="folder-operations"><a class="link" href="#folder-operations">F.8. Folder operations</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4108,7 +4222,7 @@ Expected: The json with the original name of the edited folder is no longer pres
 </div>
 </div>
 <div class="sect2">
-<h3 id="navigating-in-and-out-of-folders"><a class="link" href="#navigating-in-and-out-of-folders">F.8. Navigating in and out of folders</a></h3>
+<h3 id="navigating-in-and-out-of-folders"><a class="link" href="#navigating-in-and-out-of-folders">F.9. Navigating in and out of folders</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4159,7 +4273,7 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">F.9. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">F.10. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4184,4 +4298,4 @@ Expected: The valid json files have folders with their corresponding names prese
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 10:00:14 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 10:01:17 UTC</div></div></div></body></html>
