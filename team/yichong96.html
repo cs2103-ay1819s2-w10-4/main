@@ -271,7 +271,8 @@ The csv file imported should follow the format described below
 </td>
 <td class="content">
 unlike the export command the importing of multiple csv files
-is not supported in <strong>Know-It-All</strong>.
+is not supported in <strong>Know-It-All</strong>.<br>
+Filename imported is case insensitive.
 </td>
 </tr>
 </table>
@@ -476,7 +477,8 @@ You must be outside a folder (status bar should read <code>in home directory</co
 Ensure that you also have the file to import in the project root directory.<br>
 file has to have a .csv extension format.<br>
 The imported file has to comply with the csv file headers.<br>
-Compulsary fields, like Question and Answer should not be left blank.</p>
+Compulsary fields, like Question and Answer should not be left blank.<br>
+folder should not already exist within the model.</p>
 </li>
 <li>
 <p>Test case: <code>import Blood.csv</code><br>
@@ -502,16 +504,16 @@ flashcard application</p>
 </li>
 <li>
 <p>Test case: <code>export 1</code><br>
-Prerequisities: You must have at least one folder existing in the application.<br>
+Prerequisites: You must have at least one folder existing in the application.<br>
    Expected: The command box outputs a message "Successfully exported card folders" and project root directory should contain a <code>x.csv</code> file where <code>x</code> is the name of the first folder in the application.</p>
 </li>
 <li>
 <p>Test case: <code>export 1 2 3</code><br>
-Prerequisities: You must have at least 3 card folder existing in the application.<br>
+Prerequisites: You must have at least 3 card folders existing in the application.<br>
    Expected: The same message output in the command box as the previous test case and the corresponding files <code>x1.csv</code>, <code>x2.csv</code> and <code>x3.csv</code> created in project root directory, where <code>x1</code>, <code>x2</code>, <code>x3</code> corresponds to the name of the first, second and third folder</p>
 </li>
 <li>
-<p>Other incorrect cd commands to try: <code>export</code>, <code>export -1</code>, <code>export 12 13 14</code>, where <code>12</code> <code>13</code> and <code>14</code> are non existsnt card folder indexes.</p>
+<p>Other incorrect commands to try: <code>export</code>, <code>export -1</code>, <code>export 12 13 14</code>, where <code>12</code> <code>13</code> and <code>14</code> are non existent card folder indexes.</p>
 </li>
 </ol>
 </div>
@@ -609,4 +611,4 @@ and Storage class can focus on managing the internal card folder data (.json fil
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 12:37:58 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 14:37:16 UTC</div></div></div></body></html>
