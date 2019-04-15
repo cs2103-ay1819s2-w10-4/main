@@ -132,13 +132,12 @@
 <li><a href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">F.1. Launch and Shutdown</a></li>
-<li><a href="#starting-a-test-session">F.2. Starting a test session</a></li>
+<li><a href="#starting-and-ending-a-test-session">F.2. Starting and ending a test session</a></li>
 <li><a href="#answerquestionintest">F.3. Answering a question in a test session</a></li>
 <li><a href="#navigating-to-the-next-question-in-a-test-session">F.4. Navigating to the next question in a test session</a></li>
-<li><a href="#ending-a-test-session">F.5. Ending a test session</a></li>
-<li><a href="#folder-operations">F.6. Folder operations</a></li>
-<li><a href="#navigating-in-and-out-of-folders">F.7. Navigating in and out of folders</a></li>
-<li><a href="#saving-data">F.8. Saving data</a></li>
+<li><a href="#folder-operations">F.5. Folder operations</a></li>
+<li><a href="#navigating-in-and-out-of-folders">F.6. Navigating in and out of folders</a></li>
+<li><a href="#saving-data">F.7. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -471,7 +470,7 @@ The following class plays an important role at the architecture level:</p>
 <div class="title">Figure 4. Structure of the UI Component</div>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/ui/Ui.java"><code>Ui.java</code></a></p>
+<p><strong>API</strong> : <a href="https://github.com/cs2103-ay1819s2-w10-4/main/blob/master/src/main/java/seedu/knowitall/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
 <p><code>UI</code> consists of a <code>MainWindow</code> made up of many parts as seen above e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>CardMainScreen</code>,
@@ -506,8 +505,7 @@ For example, the layout of the <a href="https://github.com/cs2103-ay1819s2-w10-4
 <div class="title">Figure 5. Structure of the Logic Component</div>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> :
-<a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/logic/Logic.java"><code>Logic.java</code></a></p>
+<p><strong>API</strong> : <a href="https://github.com/cs2103-ay1819s2-w10-4/main/blob/master/src/main/java/seedu/knowitall/logic/Logic.java"><code>Logic.java</code></a></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -547,7 +545,7 @@ For example, the layout of the <a href="https://github.com/cs2103-ay1819s2-w10-4
 <div class="title">Figure 7. Structure of the Model Component</div>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/model/Model.java"><code>Model.java</code></a></p>
+<p><strong>API</strong> : <a href="https://github.com/cs2103-ay1819s2-w10-4/main/blob/master/src/main/java/seedu/knowitall/model/Model.java"><code>Model.java</code></a></p>
 </div>
 <div class="paragraph">
 <p>The <code>Model</code>,</p>
@@ -595,7 +593,7 @@ As a more OOP model, we can change the <code>Card</code> implementation to be th
 <div class="title">Figure 8. Structure of the Storage Component</div>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/cs2103-ay1819s2-w10-4/main/src/main/java/seedu/knowitall/storage/Storage.java"><code>Storage.java</code></a></p>
+<p><strong>API</strong> : <a href="https://github.com/cs2103-ay1819s2-w10-4/main/blob/master/src/main/java/seedu/knowitall/storage/Storage.java"><code>Storage.java</code></a></p>
 </div>
 <div class="paragraph">
 <p>The <code>Storage</code> component,</p>
@@ -1625,7 +1623,7 @@ If the path provided by the Model Component is invalid, the Storage component th
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Evaluation</strong>: While in the long-run, the first alternative appears to better decision, time limitations make the Alternative 2 good enough for most practical use cases. The saved time was used to implement other features.</p>
+<p><strong>Evaluation</strong>: While in the long-run, the first alternative appears to better decision, time limitations make Alternative 2 good enough for most practical use cases. The saved time was used to implement other features.</p>
 </div>
 </div>
 <div class="sect4">
@@ -1835,7 +1833,7 @@ session.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>A boolean variable to indicate if the user has already execute a valid answer command for the current card.</p>
+<p>A boolean variable to indicate if the user has already executed a valid answer command for the current card.</p>
 </li>
 <li>
 <p>Related methods:</p>
@@ -1882,7 +1880,7 @@ in the test session.</p>
 </li>
 <li>
 <p><strong>Alternative 2</strong>: No introduction of <code>currentTestedCard</code> as using the <code>currentTestedCardIndex</code> suffices. Every time a
-card is needed, can simply reference it using <code>currentTestedCardFolder.getIndex(currentTestedCardIndex)</code>.</p>
+card is needed, can simply reference it using <code>currentTestedCardFolder#getIndex(currentTestedCardIndex)</code>.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1898,9 +1896,9 @@ possible violation of the Law of Demeter where an object should only interact wi
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Evaluation of the 2 alternatives</strong>:
-We went with alternative 1 since not a large amount of memory is taken up with just 1 extra card stored. As there will
-be a number of references to the <code>currentTestedCard</code>, it will be better to store them somewhere. Abiding by the Law
+<p><strong>Evaluation</strong>:
+We went with Alternative 1 since not a large amount of memory is taken up with just 1 extra card stored. As there will
+be several references to the <code>currentTestedCard</code>, it will be better to store them somewhere. Abiding by the Law
 of Demeter, <code>currentTestedCard</code> object will not be interacting with <code>currentTestedCardFolder</code>,  limiting its
 knowledge of that object which is encouraged according to the Principle of Least Knowledge.</p>
 </div>
@@ -1927,7 +1925,7 @@ the cards in it.</p>
 </div>
 <h6 id="ui-2" class="discrete">UI</h6>
 <div class="paragraph">
-<p>To update the change in the <code>UI</code> to reflect that the user is a test session (app goes to full screen with question of
+<p>To update the change in the UI to reflect that the user is a test session (app goes to full screen with question of
 the current card presented), the following methods are introduced.</p>
 </div>
 <div class="ulist">
@@ -1946,7 +1944,7 @@ is now presented to the user.</p>
 <div class="paragraph">
 <p>To illustrate how the <code>UI</code>, <code>Model</code> and <code>Logic</code> components interact, below is a walkthrough of a typical usage scenario of
 the test command.
-<a href="#testcommandsequencediagram">Figure 12, &#8220;Component interactions for a <code>test</code> command&#8221;</a> is a sequence diagram that summarises <code>Model</code> and <code>Logic</code> interactions, namely steps 1 to 7.</p>
+<a href="#testcommandsequencediagram">Figure 12, &#8220;Component interactions for a test command&#8221;</a> is a sequence diagram that summarises <code>Model</code> and <code>Logic</code> interactions, namely steps 1 to 7.</p>
 </div>
 <div class="paragraph">
 <p><strong>Step 1</strong>. User is inside a folder and wants to begin a test session on the current folder by executing the command
@@ -1959,7 +1957,7 @@ this case a <code>TestCommand</code>. The object is returned to the <code>LogicM
 <div class="paragraph">
 <p><strong>Step 3</strong>. The <code>LogicManager</code> executes the <code>TestCommand</code>, storing the result and then transferring control to the
 Model component, with <code>Model#getState()</code> to check that user is inside a folder and is not already in a test session.
-(This is omitted from <a href="#testcommandsequencediagram">Figure 12, &#8220;Component interactions for a <code>test</code> command&#8221;</a> for simplicity.)</p>
+(This is omitted from <a href="#testcommandsequencediagram">Figure 12, &#8220;Component interactions for a test command&#8221;</a> for simplicity.)</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1968,7 +1966,7 @@ Model component, with <code>Model#getState()</code> to check that user is inside
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the user is not inside a folder, this <code>test</code> command would be rendered invalid. Step 4 would not proceed and an
+If the user is not inside a folder, this test command would be rendered invalid. Step 4 would not proceed and an
 error message is displayed.
 </td>
 </tr>
@@ -2014,8 +2012,8 @@ card in the folder as <code>currentTestedCardIndex</code> is set to 0.</p>
 </ol>
 </div>
 <div class="paragraph">
-<p><strong>Step 5</strong>. For <code>TestCommand</code> to obtain the first card to present in the test session, <code>ModelManager#getCurrentTestedCard</code> is
-invoked and the <code>Card</code>, <code>c</code>, is returned.</p>
+<p><strong>Step 5</strong>. For <code>TestCommand</code> to obtain the first card to present in the test session,
+<code>ModelManager#getCurrentTestedCard()</code> is invoked and the <code>Card</code>, <code>c</code>, is returned.</p>
 </div>
 <div class="paragraph">
 <p><strong>Step 6</strong>. With control now transferred back to the logic unit, <code>TestCommand</code> creates a <code>CommandResult</code> object, <code>r</code> with the type <code>START_TEST_SESSION</code>, and
@@ -2036,7 +2034,7 @@ user.</p>
 <div class="content">
 <img src="images/TestCommandSequenceDiagram.png" alt="TestCommandSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 12. Component interactions for a <code>test</code> command</div>
+<div class="title">Figure 12. Component interactions for a test command</div>
 </div>
 <h6 id="exampleusageofendcommand" class="discrete">Example Usage of end command</h6>
 <div class="paragraph">
@@ -2098,20 +2096,21 @@ back (the screen the user was seeing before entering the test session) to the us
 <ul>
 <li>
 <p><strong>Alternative 1 (current choice)</strong>: <code>test</code> is executed when inside a folder. The user does not have to specify the
-folder index and <code>test</code> would just immediately display the first card in the this current folder.</p>
+folder index and <code>test</code> would just immediately display the first card in this current folder.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: The most logical way of carrying out a test session is where user is in the folder that he or she wants to be tested on. Lesser dependency on entering and exiting folder methods.</p>
+<p>Pros: The most logical way of carrying out a test session is when the user is in the folder that he or she wants to
+be tested on. Lesser dependency on entering and exiting folder methods.</p>
 </li>
 <li>
-<p>Cons: Requires the extra step of entering the folder before it can actually test the folder. User may actually see the questions before the test session.</p>
+<p>Cons: Requires the extra step of entering the folder before it can test the folder. User may actually see the questions before the test session.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2</strong>: <code>test</code> is executed when outside a folder, in the home directory. <code>test</code> command would require a
+<p><strong>Alternative 2</strong>: <code>test</code> is executed when outside a folder, in the home directory. Test command would require a
 folder index, e.g <code>test 1</code> to test the first folder. Implementation of getting the card from the folder would rely on
 enter folder command as well.</p>
 <div class="ulist">
@@ -2120,8 +2119,10 @@ enter folder command as well.</p>
 <p>Pros: Fast way to enter test session from home directory</p>
 </li>
 <li>
-<p>Cons: Not logical for test to be called from home directory which should only allow folder operations. Test will
-then have to implicitly enter the folder to get access to the cards in it in order to display them, creating a dependency between test and enter folder command.
+<p>Cons: Not logical for <code>test</code> to be called from inside the home directory which should only allow folder operations.
+<code>test</code> will then have to implicitly enter the folder to gain access to the cards in it in order to display them,
+creating a
+dependency between the test and enter folder commands.
 Similar issue will arise for the end test session command where user will need to implicitly exit the folder.</p>
 </li>
 </ul>
@@ -2130,8 +2131,9 @@ Similar issue will arise for the end test session command where user will need t
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Evaluation of the two alternatives</strong>:
-Overall, alternative 1 is a better choice following the Single Level of Abstraction Principle(SLAP) where a function should not mix different levels of abstractions. We can then better achieve higher cohesion and lower coupling.
+<p><strong>Evaluation</strong>:
+Overall, Alternative 1 is a better choice following the Single Level of Abstraction Principle(SLAP) where a function
+should not mix different levels of abstractions. We can then better achieve higher cohesion and lower coupling.
 Also, user being able to see the questions before the test session is not a big issue since the answer will not be shown unless user selects the card.</p>
 </div>
 </div>
@@ -2173,7 +2175,7 @@ Comparison is not case-sensitive
 <div class="ulist">
 <ul>
 <li>
-<p><code>ModelManager#AnswerCommand#createScoredCard(Card cardToMark, boolean markCorrect)</code> - creates a new card with the
+<p><code>ModelManager#createScoredCard(Card cardToMark, boolean markCorrect)</code> - creates a new card with the
 updated score.</p>
 </li>
 </ul>
@@ -2185,18 +2187,12 @@ updated score.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>MainWindow#handleCorrectAnswer()</code> - invokes <code>TestSession#handleCorrectAnswer()</code></p>
+<p><code>MainWindow#handleCorrectAnswer()</code> - updates current <code>TestSession</code> page to green colour background with correct
+answer and correct answer description.</p>
 </li>
 <li>
-<p><code>MainWindow#handleWrongAnswer()</code> - invokes <code>TestSession#handleWrongAnswer()</code></p>
-</li>
-<li>
-<p><code>TestSession#handleCorrectAnswer()</code> - updates current <code>TestSession</code> page to green colour background with correct
-answer and correct answer description</p>
-</li>
-<li>
-<p><code>TestSession#handleWrongAnswer()</code> - updates current <code>TestSession</code> page to red colour background with correct answer
-and wrong answer description</p>
+<p><code>MainWindow#handleWrongAnswer()</code> - updates current <code>TestSession</code> page to red colour background with correct answer
+and wrong answer description.</p>
 </li>
 </ul>
 </div>
@@ -2207,9 +2203,8 @@ and wrong answer description</p>
 to 8.</p>
 </div>
 <div class="paragraph">
-<p><strong>Step 1</strong>. User is in a test session and wants to answer the question on the card currently presented by executing a
-<code>ans
- four</code>.</p>
+<p><strong>Step 1</strong>. User is in a test session and wants to answer the question on the card currently presented by executing
+<code>ans four</code>.</p>
 </div>
 <div class="paragraph">
 <p><strong>Step 2</strong>. An <code>AnswerCommand</code> object is created and <code>LogicManager</code> executes the <code>AnswerCommand</code>, storing the result and
@@ -2363,7 +2358,7 @@ proceed. Instead, step 3 and onwards of the <a href="#exampleusageofendcommand">
 </li>
 <li>
 <p>Case 2: Method returns true.
-For <code>NextCommand</code> to obtain the next card to present in the test session, <code>ModelManager#getCurrentTestedCard</code> is
+For <code>NextCommand</code> to obtain the next card to present in the test session, <code>ModelManager#getCurrentTestedCard()</code> is
 invoked and the <code>Card</code>, <code>c</code>, is returned.</p>
 </li>
 </ul>
@@ -2425,8 +2420,8 @@ to the user.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Evaluation of the two alternatives</strong>:
-With our target audience in mind, alternative 1 is the more user friendly and intuitive way to handle this scenario.</p>
+<p><strong>Evaluation</strong>:
+With our target audience in mind, Alternative 1 is the more user friendly and intuitive way to handle this scenario.</p>
 </div>
 </div>
 </div>
@@ -3749,7 +3744,7 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="starting-a-test-session"><a class="link" href="#starting-a-test-session">F.2. Starting a test session</a></h3>
+<h3 id="starting-and-ending-a-test-session"><a class="link" href="#starting-and-ending-a-test-session">F.2. Starting and ending a test session</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3776,6 +3771,28 @@ remains the same (still in folder).</p>
 in a test session or in report display)<br>
    Expected: The error <code>Command can only be executed in folder</code> is shown in the status message. Status bar
    remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Ends a current test session</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Enter a test session by typing <code>test</code> when inside a folder. Display area enters fullscreen and
+lowest scoring flashcard question and hints are displayed. Tester can also be in any state in the test session</p>
+</li>
+<li>
+<p>Test case: <code>end</code><br>
+Expected: Ends the current test session, where the display area exits fullscreen and be back inside the folder. <code>End
+Test Session</code> is shown on the status message and status bar shows that tester is back inside the folder.</p>
+</li>
+<li>
+<p>Test case: <code>end</code> when not inside a test or report (prerequisite not fulfilled, like being in the home directory or
+in a folder)<br>
+  Expected: The error <code>This command is not valid outside a test or report</code> is shown in the status message. Status bar
+  remains the same.</p>
 </li>
 </ol>
 </div>
@@ -3860,36 +3877,7 @@ Expected: The error <code>Next command is valid only when this question has been
 </div>
 </div>
 <div class="sect2">
-<h3 id="ending-a-test-session"><a class="link" href="#ending-a-test-session">F.5. Ending a test session</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Ends a current test session</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: Enter a test session by typing <code>test</code> when inside a folder. Display area enters fullscreen and
-lowest scoring flashcard question and hints are displayed. Tester can also be in any state in the test session</p>
-</li>
-<li>
-<p>Test case: <code>end</code><br>
-Expected: Ends the current test session, where the display area exits fullscreen and be back inside the folder. <code>End
-Test Session</code> is shown on the status message and status bar shows that tester is back inside the folder.</p>
-</li>
-<li>
-<p>Test case: <code>end</code> when not inside a test or report (prerequisite not fulfilled, like being in the home directory or
-in a folder)<br>
-  Expected: The error <code>This command is not valid outside a test or report</code> is shown in the status message. Status bar
-  remains the same.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="folder-operations"><a class="link" href="#folder-operations">F.6. Folder operations</a></h3>
+<h3 id="folder-operations"><a class="link" href="#folder-operations">F.5. Folder operations</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3988,7 +3976,7 @@ Expected: The json with the original name of the edited folder is no longer pres
 </div>
 </div>
 <div class="sect2">
-<h3 id="navigating-in-and-out-of-folders"><a class="link" href="#navigating-in-and-out-of-folders">F.7. Navigating in and out of folders</a></h3>
+<h3 id="navigating-in-and-out-of-folders"><a class="link" href="#navigating-in-and-out-of-folders">F.6. Navigating in and out of folders</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4039,7 +4027,7 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">F.8. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">F.7. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4064,4 +4052,4 @@ Expected: The valid json files have folders with their corresponding names prese
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 03:20:42 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 03:59:27 UTC</div></div></div></body></html>
