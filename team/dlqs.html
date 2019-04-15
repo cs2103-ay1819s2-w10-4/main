@@ -11,7 +11,7 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>Know-It-All is a flashcard application that helps students manage, store, and use flash cards effectively. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
-My major roles included the report feature and ability to record score.</p>
+My major roles included the report feature and ability to record score. To see directly what code I contributed, a <a href="https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=dlqs">summary</a> provided by Reposense is available here.</p>
 </div>
 </div>
 </div>
@@ -31,40 +31,33 @@ My major roles included the report feature and ability to record score.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added the <strong>ability to generate scoring report for card folder</strong></p>
+<p><strong>Major enhancement</strong>: added the <strong>ability to generate test scoring report for card folder</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: Averages the card scores of all cards in the folder after a test session, called the folder score, and generates a report for that folder that shows the change in past folder scores.
-There is also a line showing percentage change in folder score as well as the lowest scoring questions in the current folder. An example is shown below.</p>
+<p>What it does: Records the number of questions correctly answered after a test session, called the test score, and generates a report for that folder that shows the change in (past) test scores.
+There is also a line showing percentage change in test score as well as the lowest individual scoring cards in the current folder.
+ Test scores are only recorded if at least 1/4 of the questions in the folder are attempted. An example is shown below.</p>
 </li>
-</ul>
-</div>
+<li>
+<p><span class="image"><img src="../images/ReportDisplay.png" alt="ReportDisplay" width="790"></span></p>
 </li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/ReportDisplay.png" alt="ReportDisplay" width="790">
-</div>
-</div>
-<div class="ulist">
-<ul>
 <li>
 <p>Justification: This feature improves the product significantly because a user can see the outcome of the spaced-repetition technique employed by Know-It-All. They are able to track their average score over time, per folder, so that
-they are able tell which folders they score well and not so well for. This lets them know which folder they need to practice more on.</p>
+they are able tell which folders they score well and not so well for. This lets them know which folder they need to practice more on.
+ Also, the minimum number of questions required to be answered is so that the user do not get their accidental test attempts recorded.</p>
 </li>
 <li>
-<p>Highlights: This enhancement has a graph showing the last 10 test session scores. The color of the folder score change
+<p>Highlights: This enhancement has a graph showing a maximum of the 10 test session scores. The color of the folder score change
 also changes based on whether it was a positive, same or negative change.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to sort by scoring performance</strong></p>
 </li>
 </ul>
 </div>
 </li>
+<li>
+<p><strong>Major enhancement</strong>: added <strong>the ability to sort by scoring performance</strong></p>
+<div class="ulist">
+<ul>
 <li>
 <p>What it does: allows the user to sort the cards by scoring performance. Other features can make use of this feature by using any appropriate comparator.</p>
 </li>
@@ -74,8 +67,10 @@ This feature also improves the product significantly because many other features
 </li>
 <li>
 <p>Highlights: This enhancement affects the existing list. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changing the way cards are naturally ordered.</p>
-<div class="ulist">
-<ul>
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p><strong>Minor enhancement</strong>: Added State to Model Component&#8217;s to represent user&#8217;s "location" in the application. This removes edge cases of commands being executed illegally, i.e. where they otherwise shouldn&#8217;t be.</p>
 </li>
@@ -87,16 +82,14 @@ This feature also improves the product significantly because many other features
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
-</li>
-</ul>
-</div>
-</li>
+<div class="ulist">
+<ul>
 <li>
 <p>Enhancements to existing features:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Wrote additional tests for new features to increase coverage from 80% to 82% (Pull requests <a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/75">#75</a>)</p>
+<p>Wrote additional unit tests for new features, as well as system tests for Test and Report features, to increase coverage from 80% to 87% (Pull requests <a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/75">#75</a>, <a href="https://github.com/cs2103-ay1819s2-w10-4/main/pull/167">#167</a>)</p>
 </li>
 </ul>
 </div>
@@ -133,6 +126,9 @@ This feature also improves the product significantly because many other features
 </li>
 </ul>
 </div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -162,8 +158,8 @@ sessions are run for cards in a folder, the <a href="#testscore">test scores</a>
 <h4 id="display-a-test-score-report-code-report-code"><a class="link" href="#display-a-test-score-report-code-report-code">Display a test score report : <code>report</code></a></h4>
 <div class="paragraph">
 <p>Displays a full-screen <a href="#testscore">test score</a> report for the current folder.
-The report comprises a graph showing the last 10 <a href="#testscore">test scores</a>,
-the latest score change, and the top 3 lowest individual scoring cards and their individual <a href="#cardscore">card scores</a>.
+The report comprises a graph showing a maximum of the last 10 <a href="#testscore">test scores</a>,
+the latest score change, and a maximum of 3 lowest individual scoring cards and their individual <a href="#cardscore">card scores</a>.
 An example is shown below:</p>
 </div>
 <div class="imageblock">
@@ -171,6 +167,13 @@ An example is shown below:</p>
 <img src="../images/ReportDisplay.png" alt="ReportDisplay" width="790">
 </div>
 <div class="title">Figure 1. Report display</div>
+</div>
+<div class="paragraph">
+<p><strong>Displays response time for each card</strong> <code>Coming in v2.0</code></p>
+</div>
+<div class="paragraph">
+<p>With the timer feature coming in v2.0, we are also able to track the time taken to provide the correct response to the
+ question. This provides yet another metric, in addition to correctness, to judge your understanding of the topic.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>report</code></p>
@@ -194,7 +197,7 @@ This command is only valid inside a folder.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-There must be at least two test attempts for a graph to be drawn.
+There must be at least two test attempts for the line graph to be drawn.
 </td>
 </tr>
 </table>
@@ -243,18 +246,90 @@ to the project, namely how to pass results from Model into Ui and Model state th
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
-<p>The report feature is meant to provide the user with the ability to look back and compare their folder score from
-previous test sessions.</p>
+<p>The report feature is meant to provide the user with the ability to look back and compare their test score from
+previous test sessions. It makes use of Java FXML features to display scores in a user-friendly manner. The following
+methods are used to enter or exit the report display:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Model#enterReportDisplay()</code>&#8201;&#8212;&#8201;Enters the report display for this folder.</p>
+</li>
+<li>
+<p><code>Model#exitReportDisplay()</code>&#8201;&#8212;&#8201;Exits the report display back into the folder.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Here is a screenshot of how it looks:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../images/ReportDisplay.png" alt="ReportDisplay" width="800"></span></p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the report display is rendered.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user is in a folder and wishes to see a report by executing <code>report</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. A <code>ReportCommand</code> is created and executed by <code>LogicManager</code>. <code>Model#enterReportDisplay()</code> is called, which prepares
+the model for report by sorting the cards by lowest scores first. The state is also checked to make sure the user is in
+a folder.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. A <code>CommandResult</code> with type <code>ENTERED_REPORT</code> is returned by the <code>ReportCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>Below is a sequence diagram, summarizing the above operations.</p>
+</div>
+<div class="paragraph">
+<div class="title">Sequence Diagram for Report Command</div>
+<p><span class="image"><img src="../images/ReportCommandSequenceDiagram.png" alt="ReportCommandSequenceDiagram" width="800"></span></p>
+</div>
+<div class="paragraph">
+<p>Step 4. The <code>CommandResult</code> is passed to UI, which now has to render the new screen. It does so by getting the current
+ <code>CardFolder</code> from Model, then instantiating a <code>ReportDisplay</code> with it. <code>ReportDisplay</code> prepares several elements for
+ display by Java FXML, split by their content:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ReportDisplay#displayTitle()</code>&#8201;&#8212;&#8201;Displays title and how many test scores were recorded.</p>
+</li>
+<li>
+<p><code>ReportDisplay#displayGraph()</code>&#8201;&#8212;&#8201;Takes maximum of last 10 test scores from <code>CardFolder</code>, and
+adds them as points on the Java FXML <code>AreaChart</code>.</p>
+</li>
+<li>
+<p><code>ReportDisplay#displayQuestions()</code>&#8201;&#8212;&#8201;Displays maximum of 3 questions from <code>CardFolder</code> which have lowest the
+individual <a href="#cardscore">card scores</a>.</p>
+</li>
+<li>
+<p><code>ReportDisplay#displayTagline()</code>&#8201;&#8212;&#8201;Calculates change in test score from last and second last test session
+(if available) and formats it in a user-friendly manner.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Step 5. The <code>ReportDisplay</code> is rendered by <code>fullScreenPlaceholder</code>.</p>
+</div>
+<div class="paragraph">
+<p>Below is a sequence diagram summarizing steps 4 and 5. The interactions with Java FXML elements are omitted for clarity.</p>
+</div>
+<div class="paragraph">
+<div class="title">Sequence diagram for Report Display</div>
+<p><span class="image"><img src="../images/ReportDisplaySequenceDiagram.png" alt="ReportDisplaySequenceDiagram" width="800"></span></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-to-display-folder-scores"><a class="link" href="#aspect-how-to-display-folder-scores">Aspect: How to display folder scores</a></h5>
+<h5 id="aspect-how-to-display-test-scores"><a class="link" href="#aspect-how-to-display-test-scores">Aspect: How to display test scores</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Display previous folder scores in a graph and lowest scoring cards</p>
+<p><strong>Alternative 1 (current choice):</strong> Display previous test scores in a graph and lowest scoring cards</p>
 <div class="ulist">
 <ul>
 <li>
@@ -267,11 +342,11 @@ previous test sessions.</p>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Display previous folder scores in a graph</p>
+<p><strong>Alternative 2:</strong> Display previous test scores in a graph</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: More visual, easier to see change in folder score.</p>
+<p>Pros: More visual, easier to see change in test score.</p>
 </li>
 <li>
 <p>Cons: More performance and memory intensive as a graph needs to be rendered. Remedy: Display only last ten.</p>
@@ -280,7 +355,7 @@ previous test sessions.</p>
 </div>
 </li>
 <li>
-<p><strong>Alternative 3:</strong> List the previous folder scores</p>
+<p><strong>Alternative 3:</strong> List the previous test scores</p>
 <div class="ulist">
 <ul>
 <li>
@@ -297,7 +372,7 @@ they can tell where they need help.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-where-to-display-folder-scores"><a class="link" href="#aspect-where-to-display-folder-scores">Aspect: Where to display folder scores</a></h5>
+<h5 id="aspect-where-to-display-test-scores"><a class="link" href="#aspect-where-to-display-test-scores">Aspect: Where to display test scores</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -305,7 +380,7 @@ they can tell where they need help.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Works because the folder scores are scored by card folders.</p>
+<p>Pros: Works because the test scores are scored by card folders.</p>
 </li>
 <li>
 <p>Cons: Need to implement a new state for commands, because it should not be possible to do some e.g. add card while
@@ -394,6 +469,70 @@ is true at any point in time. E.g., only one of inFolder, inHomeDir, inTest&#823
 </li>
 </ul>
 </div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="manual-testing"><a class="link" href="#manual-testing">Manual testing</a></h3>
+
+</div>
+<div class="sect2">
+<h3 id="viewing-a-report-display"><a class="link" href="#viewing-a-report-display">Viewing a report display</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>View report display</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Enter a folder. The tester may want to ensure that they have at least two
+test attempts on this folder, as a line graph requires at least two points to be drawn. (If there are fewer than two
+ attempts, it is not a bug if no line is drawn.)</p>
+</li>
+<li>
+<p>Test case: <code>report</code><br>
+Expected: Enters report display, where the display area enters fullscreen. A graph is displayed showing maximum of
+last ten test scores for this folder. A list, maximum of the three lowest scoring questions, is displayed.
+<code>Report displayed</code> is shown on the status message and status bar shows that tester is in report display.</p>
+</li>
+<li>
+<p>Test case: Other invalid commands such <code>test</code>, <code>add</code>, or a second <code>report</code> command.<br>
+Expected: They should not be allowed. An error message will be displayed.</p>
+</li>
+<li>
+<p>Test case: <code>end</code><br>
+Expected: Ends the current report session, where the display area exits fullscreen and be back inside the folder. <code>End
+Report Session</code> is shown on the status message and status bar shows that tester is back inside the folder.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sorting-the-cards"><a class="link" href="#sorting-the-cards">Sorting the cards</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Sort</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Enter a folder. The tester may want to ensure that they have at least two
+cards in this folder, or else there is no way to tell if the sort happened.</p>
+</li>
+<li>
+<p>Test case: <code>sort</code><br>
+Expected: Sorts cards in non-descending percentage score. If card A is above card B, card A will not have a higher
+percentage score than card B.
+<code>Sorted flashcards with lowest score first</code> is shown on the status message.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
 <h3 id="uc06-display-report-for-a-folder" class="discrete">UC06 Display report for a folder</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
@@ -416,6 +555,4 @@ is true at any point in time. E.g., only one of inFolder, inHomeDir, inTest&#823
 </div>
 </div>
 </div>
-</div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 04:47:44 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 10:00:14 UTC</div></div></div></body></html>

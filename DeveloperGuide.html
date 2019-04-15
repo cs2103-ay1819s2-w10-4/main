@@ -135,9 +135,11 @@
 <li><a href="#starting-and-ending-a-test-session">F.2. Starting and ending a test session</a></li>
 <li><a href="#answerquestionintest">F.3. Answering a question in a test session</a></li>
 <li><a href="#navigating-to-the-next-question-in-a-test-session">F.4. Navigating to the next question in a test session</a></li>
-<li><a href="#folder-operations">F.5. Folder operations</a></li>
-<li><a href="#navigating-in-and-out-of-folders">F.6. Navigating in and out of folders</a></li>
-<li><a href="#saving-data">F.7. Saving data</a></li>
+<li><a href="#viewing-a-report-display">F.5. Viewing a report display</a></li>
+<li><a href="#sorting-the-cards">F.6. Sorting the cards</a></li>
+<li><a href="#folder-operations">F.7. Folder operations</a></li>
+<li><a href="#navigating-in-and-out-of-folders">F.8. Navigating in and out of folders</a></li>
+<li><a href="#saving-data">F.9. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -826,18 +828,90 @@ For example, 2 correct attempts and 4 total attempts becomes 0.5. When instantia
 <div class="sect3">
 <h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The report feature is meant to provide the user with the ability to look back and compare their folder score from
-previous test sessions.</p>
+<p>The report feature is meant to provide the user with the ability to look back and compare their test score from
+previous test sessions. It makes use of Java FXML features to display scores in a user-friendly manner. The following
+methods are used to enter or exit the report display:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Model#enterReportDisplay()</code>&#8201;&#8212;&#8201;Enters the report display for this folder.</p>
+</li>
+<li>
+<p><code>Model#exitReportDisplay()</code>&#8201;&#8212;&#8201;Exits the report display back into the folder.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Here is a screenshot of how it looks:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/ReportDisplay.png" alt="ReportDisplay" width="800"></span></p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the report display is rendered.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user is in a folder and wishes to see a report by executing <code>report</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. A <code>ReportCommand</code> is created and executed by <code>LogicManager</code>. <code>Model#enterReportDisplay()</code> is called, which prepares
+the model for report by sorting the cards by lowest scores first. The state is also checked to make sure the user is in
+a folder.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. A <code>CommandResult</code> with type <code>ENTERED_REPORT</code> is returned by the <code>ReportCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>Below is a sequence diagram, summarizing the above operations.</p>
+</div>
+<div class="paragraph">
+<div class="title">Sequence Diagram for Report Command</div>
+<p><span class="image"><img src="images/ReportCommandSequenceDiagram.png" alt="ReportCommandSequenceDiagram" width="800"></span></p>
+</div>
+<div class="paragraph">
+<p>Step 4. The <code>CommandResult</code> is passed to UI, which now has to render the new screen. It does so by getting the current
+ <code>CardFolder</code> from Model, then instantiating a <code>ReportDisplay</code> with it. <code>ReportDisplay</code> prepares several elements for
+ display by Java FXML, split by their content:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ReportDisplay#displayTitle()</code>&#8201;&#8212;&#8201;Displays title and how many test scores were recorded.</p>
+</li>
+<li>
+<p><code>ReportDisplay#displayGraph()</code>&#8201;&#8212;&#8201;Takes maximum of last 10 test scores from <code>CardFolder</code>, and
+adds them as points on the Java FXML <code>AreaChart</code>.</p>
+</li>
+<li>
+<p><code>ReportDisplay#displayQuestions()</code>&#8201;&#8212;&#8201;Displays maximum of 3 questions from <code>CardFolder</code> which have lowest the
+individual <a href="#cardscore">card scores</a>.</p>
+</li>
+<li>
+<p><code>ReportDisplay#displayTagline()</code>&#8201;&#8212;&#8201;Calculates change in test score from last and second last test session
+(if available) and formats it in a user-friendly manner.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Step 5. The <code>ReportDisplay</code> is rendered by <code>fullScreenPlaceholder</code>.</p>
+</div>
+<div class="paragraph">
+<p>Below is a sequence diagram summarizing steps 4 and 5. The interactions with Java FXML elements are omitted for clarity.</p>
+</div>
+<div class="paragraph">
+<div class="title">Sequence diagram for Report Display</div>
+<p><span class="image"><img src="images/ReportDisplaySequenceDiagram.png" alt="ReportDisplaySequenceDiagram" width="800"></span></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-to-display-folder-scores"><a class="link" href="#aspect-how-to-display-folder-scores">Aspect: How to display folder scores</a></h5>
+<h5 id="aspect-how-to-display-test-scores"><a class="link" href="#aspect-how-to-display-test-scores">Aspect: How to display test scores</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Display previous folder scores in a graph and lowest scoring cards</p>
+<p><strong>Alternative 1 (current choice):</strong> Display previous test scores in a graph and lowest scoring cards</p>
 <div class="ulist">
 <ul>
 <li>
@@ -850,11 +924,11 @@ previous test sessions.</p>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Display previous folder scores in a graph</p>
+<p><strong>Alternative 2:</strong> Display previous test scores in a graph</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: More visual, easier to see change in folder score.</p>
+<p>Pros: More visual, easier to see change in test score.</p>
 </li>
 <li>
 <p>Cons: More performance and memory intensive as a graph needs to be rendered. Remedy: Display only last ten.</p>
@@ -863,7 +937,7 @@ previous test sessions.</p>
 </div>
 </li>
 <li>
-<p><strong>Alternative 3:</strong> List the previous folder scores</p>
+<p><strong>Alternative 3:</strong> List the previous test scores</p>
 <div class="ulist">
 <ul>
 <li>
@@ -880,7 +954,7 @@ they can tell where they need help.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-where-to-display-folder-scores"><a class="link" href="#aspect-where-to-display-folder-scores">Aspect: Where to display folder scores</a></h5>
+<h5 id="aspect-where-to-display-test-scores"><a class="link" href="#aspect-where-to-display-test-scores">Aspect: Where to display test scores</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -888,7 +962,7 @@ they can tell where they need help.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Works because the folder scores are scored by card folders.</p>
+<p>Pros: Works because the test scores are scored by card folders.</p>
 </li>
 <li>
 <p>Cons: Need to implement a new state for commands, because it should not be possible to do some e.g. add card while
@@ -3676,7 +3750,7 @@ user experience is more engaging and scoring is more accurate as it is based on 
 sub-folders.</p>
 </div>
 <div class="paragraph">
-<p><a id="folderscore"></a> <strong>Folder Score</strong>: The average of all <a href="#cardscore">card scores</a> in a folder after a test session. This number is automatically recorded after each test session.</p>
+<p><a id="testscore"></a> <strong>Test score</strong>: The number of cards correctly answered over number of cards attempted during a test session. This number is automatically recorded after each test session.</p>
 </div>
 <div class="paragraph">
 <p><a id="homedirectory"></a> <strong>Home Directory</strong>: The home page where all the folders are listed. From here, users can enter folders to view cards.</p>
@@ -3877,7 +3951,65 @@ Expected: The error <code>Next command is valid only when this question has been
 </div>
 </div>
 <div class="sect2">
-<h3 id="folder-operations"><a class="link" href="#folder-operations">F.5. Folder operations</a></h3>
+<h3 id="viewing-a-report-display"><a class="link" href="#viewing-a-report-display">F.5. Viewing a report display</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>View report display</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Enter a folder. The tester may want to ensure that they have at least two
+test attempts on this folder, as a line graph requires at least two points to be drawn. (If there are fewer than two
+ attempts, it is not a bug if no line is drawn.)</p>
+</li>
+<li>
+<p>Test case: <code>report</code><br>
+Expected: Enters report display, where the display area enters fullscreen. A graph is displayed showing maximum of
+last ten test scores for this folder. A list, maximum of the three lowest scoring questions, is displayed.
+<code>Report displayed</code> is shown on the status message and status bar shows that tester is in report display.</p>
+</li>
+<li>
+<p>Test case: Other invalid commands such <code>test</code>, <code>add</code>, or a second <code>report</code> command.<br>
+Expected: They should not be allowed. An error message will be displayed.</p>
+</li>
+<li>
+<p>Test case: <code>end</code><br>
+Expected: Ends the current report session, where the display area exits fullscreen and be back inside the folder. <code>End
+Report Session</code> is shown on the status message and status bar shows that tester is back inside the folder.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sorting-the-cards"><a class="link" href="#sorting-the-cards">F.6. Sorting the cards</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Sort</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Enter a folder. The tester may want to ensure that they have at least two
+cards in this folder, or else there is no way to tell if the sort happened.</p>
+</li>
+<li>
+<p>Test case: <code>sort</code><br>
+Expected: Sorts cards in non-descending percentage score. If card A is above card B, card A will not have a higher
+percentage score than card B.
+<code>Sorted flashcards with lowest score first</code> is shown on the status message.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="folder-operations"><a class="link" href="#folder-operations">F.7. Folder operations</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3976,7 +4108,7 @@ Expected: The json with the original name of the edited folder is no longer pres
 </div>
 </div>
 <div class="sect2">
-<h3 id="navigating-in-and-out-of-folders"><a class="link" href="#navigating-in-and-out-of-folders">F.6. Navigating in and out of folders</a></h3>
+<h3 id="navigating-in-and-out-of-folders"><a class="link" href="#navigating-in-and-out-of-folders">F.8. Navigating in and out of folders</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4027,7 +4159,7 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">F.7. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">F.9. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4052,4 +4184,4 @@ Expected: The valid json files have folders with their corresponding names prese
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 04:47:43 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 10:00:14 UTC</div></div></div></body></html>
