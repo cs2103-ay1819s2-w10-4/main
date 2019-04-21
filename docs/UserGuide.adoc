@@ -417,7 +417,7 @@ Exporting flashcards is a great way to start sharing your flashcards with others
 The export command creates a csv file containing the flashcards from the specified folder in your project root directory.
 
 
-Format: `export FOLDER_INDEX FILENAME [MORE_INDEXES]`
+Format: `export FOLDER_INDEX [MORE_INDEXES]`
 
 [NOTE]
 The export command creates the new csv file in your project root directory.
